@@ -1,0 +1,28 @@
+@use "../variable" as *;
+
+.btn {
+  display: inline-block;
+  padding: 0.5rem 1.5rem;
+  text-transform: uppercase;
+  color: var(--font-primary);
+  background: transparent;
+  position: relative;
+  letter-spacing: 1.5px;
+  transition: $transition;
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: "";
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    border: 2px solid var(--font-primary);
+    background: transparent;
+  }
+  &:hover,
+  &.active {
+    background: var(--font-primary);
+    color: var(--body-background-primary);
+  }
+}

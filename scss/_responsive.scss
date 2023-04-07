@@ -1,0 +1,21 @@
+@media (min-width: 768px) {
+  body {
+    text-align: left !important;
+  }
+  .navbar-collapse {
+    background: transparent;
+  }
+}
+@media (max-width: 768px) {
+  #home {
+    .hero-title:nth-child(3) {
+      font-size: 1rem;
+    }
+  }
+  .nav-item {
+    padding: 0.8rem;
+  }
+  .description {
+    padding: 0;
+  }
+}

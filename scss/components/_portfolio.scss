@@ -1,0 +1,111 @@
+@use "../variable" as *;
+
+.portfolio-section {
+  .portfolio-nav {
+    list-style: none;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    .btn {
+      outline: none;
+      border: 0;
+      cursor: pointer;
+    }
+  }
+  .portfolio-items {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem 0;
+    grid-template-columns: repeat(auto-fit, max(264px));
+    white-space: nowrap;
+    gap: 1rem;
+    .portfolio-img {
+      width: 100%;
+      height: 310px;
+      object-position: top;
+      object-fit: cover;
+      transition: all 3s ease;
+    }
+    .item {
+      position: relative;
+      overflow: hidden;
+      .item-details {
+        display: none;
+      }
+      .overlay {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        bottom: -100%;
+        justify-content: center;
+        visibility: hidden;
+        background: rgba($color: #000000, $alpha: 0.5);
+        transition: $transition;
+      }
+      &:hover .portfolio-img {
+        object-position: bottom;
+      }
+      &:hover .overlay {
+        bottom: 0;
+        visibility: visible;
+      }
+      &.not-show {
+        display: none;
+      }
+      &.show {
+        display: block;
+        animation: portfolio-item 250ms forwards ease-in-out;
+      }
+    }
+  }
+}
+
+.preview {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  inset: 0;
+  background: rgba($color: #000000, $alpha: 0.5);
+  pointer-events: all;
+  z-index: 1000;
+  display: none;
+  .main-container {
+    width: 70%;
+    height: 80%;
+    background: var(--body-background-primary);
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    position: relative;
+  }
+  .description {
+    padding: 0;
+  }
+  .des-col {
+    width: 50%;
+  }
+  .preview-img-section {
+    width: 50%;
+    overflow-y: scroll;
+  }
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 0.8rem 1rem;
+  }
+}
+
+@keyframes portfolio-item {
+  0% {
+    opacity: 0;
+    transform: scale(0, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1, 1);
+  }
+}
