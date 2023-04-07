@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather website</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main>
+      <section>
+        <div class="container">
+          <div class="top-section">
+            <i class="bx bx-arrow-back back-btn"></i> Weather
+          </div>
+          <div class="input-section">
+            <p class="info"></p>
+            <input
+              type="text"
+              placeholder="Enter city name"
+              class="input-field"
+              spellcheck="false"
+              required
+            />
+            <div class="separator"></div>
+            <button type="button">My location</button>
+          </div>
+          <div class="data-section">
+            <img src="" alt="weather icon" class="weather-icon img-fluid" />
+            <div class="temp temp-data-1"></div>
+            <div class="weather-status"></div>
+            <div>
+              <i class="bx bx-map"></i>
+              <span class="location"></span>
+            </div>
+            <div class="bottom-section d-flex">
+              <div class="d-flex">
+                <i class="bx bxs-thermometer"></i>
+                <div>
+                  <h3 class="temp-data-2"></h3>
+                  <p class="status">Feels like</p>
+                </div>
+              </div>
+              <div class="d-flex">
+                <i class="bx bxs-droplet-half"></i>
+                <div>
+                  <h3 class="hume-data"></h3>
+                  <p class="status">Humidity</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="./main.js"></script>
+  </body>
+</html>
