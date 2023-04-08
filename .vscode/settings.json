@@ -3,5 +3,6 @@
   "workbench.colorTheme": "Learn with Sumit Theme - Dracula version",
   "workbench.iconTheme": "material-icon-theme",
   "editor.fontFamily": "Fira code",
-  "editor.fontLigatures": true
+  "editor.fontLigatures": true,
+  "files.autoSave": "onFocusChange"
 }
