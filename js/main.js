@@ -69,7 +69,7 @@ const createPreviewElement = (img, title, des, link, mainElement) => {
   preTitle.innerText = title;
   preDescription.innerText = des;
   button.innerText = "live preview";
-  button.href = link;
+  button.href = window.location.href + link;
   button.setAttribute("target", "_blank");
 
   previewBox.appendChild(container);
