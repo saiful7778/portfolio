@@ -1,0 +1,111 @@
+// ========== import file ==========
+@use "../frameworkVariables" as *;
+
+// ========== container ==========
+.container,
+.container-fluid {
+  width: 100%;
+  padding-right: calc($gutter-x * 0.5);
+  padding-left: calc($gutter-x * 0.5);
+  margin-right: auto;
+  margin-left: auto;
+}
+// ========== responsive container ==========
+@mixin resContainer($containerBreakpoint) {
+  @if $containerBreakpoint == sm {
+    // small screen
+    @media (min-width: 576px) {
+      .container {
+        max-width: 540px;
+      }
+    }
+    // medium screen
+    @media (min-width: 768px) {
+      .container {
+        max-width: 720px;
+      }
+    }
+    // large screen
+    @media (min-width: 992px) {
+      .container {
+        max-width: 960px;
+      }
+    }
+    // extra large
+    @media (min-width: 1200px) {
+      .container {
+        max-width: 1140px;
+      }
+    }
+    // extra extra large
+    @media (min-width: 1400px) {
+      .container {
+        max-width: 1320px;
+      }
+    }
+  } @else if $containerBreakpoint == md {
+    // medium screen
+    @media (min-width: 768px) {
+      .container {
+        max-width: 720px;
+      }
+    }
+    // large screen
+    @media (min-width: 992px) {
+      .container {
+        max-width: 960px;
+      }
+    }
+    // extra large
+    @media (min-width: 1200px) {
+      .container {
+        max-width: 1140px;
+      }
+    }
+    // extra extra large
+    @media (min-width: 1400px) {
+      .container {
+        max-width: 1320px;
+      }
+    }
+  } @else if $containerBreakpoint == lg {
+    // large screen
+    @media (min-width: 992px) {
+      .container {
+        max-width: 960px;
+      }
+    }
+    // extra large
+    @media (min-width: 1200px) {
+      .container {
+        max-width: 1140px;
+      }
+    }
+    // extra extra large
+    @media (min-width: 1400px) {
+      .container {
+        max-width: 1320px;
+      }
+    }
+  } @else if $containerBreakpoint == xl {
+    // extra large
+    @media (min-width: 1200px) {
+      .container {
+        max-width: 1140px;
+      }
+    }
+    // extra extra large
+    @media (min-width: 1400px) {
+      .container {
+        max-width: 1320px;
+      }
+    }
+  } @else if $containerBreakpoint == xxl {
+    // extra extra large
+    @media (min-width: 1400px) {
+      .container {
+        max-width: 1320px;
+      }
+    }
+  }
+}

@@ -1,0 +1,201 @@
+// ========== import file ==========
+@use "../variable" as *;
+
+// ========== Navbar ==========
+.navbar {
+  padding: 1rem;
+  background: transparent;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  &.sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 0;
+    background: var(--sticky-navbar-background-color);
+    transition: $transition;
+    filter: drop-shadow(0px 5px 10px rgba(0, 0, 0, 0.5));
+    z-index: 100;
+  }
+  & > .container,
+  & > .container-fluid {
+    display: flex;
+    flex-wrap: inherit;
+    align-items: center;
+    // justify-content: space-between;
+  }
+  .navbar-brand {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    letter-spacing: -1px;
+    margin-right: 1rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--first-font-color);
+  }
+  .navbar-collapse {
+    flex-basis: 100%;
+    flex-grow: 1;
+    .navbar-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      .nav-item {
+        .nav-link {
+          padding: 1rem 0;
+          display: block;
+          text-align: center;
+          font-weight: 700;
+          margin: 0 0.8rem;
+          color: var(--first-font-color);
+          opacity: 1;
+        }
+      }
+    }
+  }
+  .navbar-toggler {
+    display: inline-block;
+    cursor: pointer;
+    padding: 0.5rem;
+    background: transparent;
+    border: 0;
+    outline: none;
+    border-radius: 0;
+    margin-left: auto;
+    .bar {
+      width: $bar-width;
+      height: 4px;
+      border-radius: 4px;
+      background: var(--first-font-color);
+      margin: 2px 0;
+      float: right;
+      transition: $transition;
+      &:nth-child(2) {
+        width: 70%;
+      }
+      &:nth-child(3) {
+        width: 50%;
+      }
+    }
+    &.change .bar:first-child {
+      transform: translate(0, $bar-translate-X) rotate(-$bar-rotate);
+      width: $bar-width;
+    }
+    &.change .bar:nth-child(2) {
+      opacity: 0;
+    }
+    &.change .bar:last-child {
+      transform: translate(0, -$bar-translate-X) rotate($bar-rotate);
+      width: $bar-width;
+    }
+  }
+  .collapse:not(.show) {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-link {
+    transition: none;
+  }
+}
+
+@mixin resNavbar {
+  .navbar {
+    margin-bottom: -88px;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    .navbar-collapse {
+      display: flex !important;
+      flex-basis: auto;
+      justify-content: flex-end;
+      .navbar-nav {
+        flex-direction: row;
+        gap: 1rem;
+        .nav-link {
+          padding: 0.5rem 1rem;
+          opacity: 0.75;
+          font-weight: 500 !important;
+          position: relative;
+          text-transform: capitalize;
+          transition: $transition;
+          &::before,
+          &::after {
+            position: absolute;
+            display: inline-block;
+            bottom: 25%;
+            transition: $transition;
+            font-size: 1.2rem;
+            opacity: 0;
+            color: var(--first-font-color);
+            visibility: hidden;
+          }
+          &::before {
+            content: "{";
+            left: -25px;
+          }
+          &::after {
+            content: "}";
+            right: -25px;
+          }
+          &:hover::before {
+            left: -15px;
+            opacity: 1;
+            visibility: visible;
+          }
+          &:hover::after {
+            right: -15px;
+            opacity: 1;
+            visibility: visible;
+          }
+          &.active::before,
+          &.active::after {
+            opacity: 1;
+            visibility: visible;
+          }
+          &.active::before {
+            left: -15px;
+          }
+          &.active::after {
+            right: -15px;
+          }
+          &:hover,
+          &.active {
+            opacity: 1;
+          }
+        }
+      }
+    }
+    .dropdown-has {
+      position: relative;
+      .dropdown-menu {
+        position: absolute;
+        top: 50px;
+        right: -50px;
+        width: fit-content;
+        height: fit-content;
+        background: var(--sticky-navbar-background-color);
+        list-style: none;
+        display: none;
+        .nav-item {
+          padding: 0 1rem;
+        }
+      }
+      &:hover {
+        .dropdown-menu {
+          display: block;
+        }
+      }
+    }
+    .navbar-toggler {
+      display: none;
+    }
+  }
+}
