@@ -74,6 +74,11 @@
   pointer-events: all;
   z-index: 1000;
   display: none;
+  &.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   .main-container {
     width: 70%;
     height: 90%;

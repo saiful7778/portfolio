@@ -1,8 +1,8 @@
 @use "./themes" as *;
 @use "./variable" as *;
 @use "./Framework" as *;
-@use "./utility" as *;
 @use "./section" as *;
+@use "./utility" as *;
 @use "./components" as *;
 @use "./responsive" as *;
 
@@ -52,6 +52,12 @@ textarea {
   border: 2px solid var(--font-primary);
   outline: none;
   margin: 1rem 0;
+}
+.top-btn {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  padding: 0.5rem 1rem;
 }
 
 footer {
