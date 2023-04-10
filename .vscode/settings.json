@@ -1,8 +1,0 @@
-{
-  "editor.formatOnSave": true,
-  "workbench.colorTheme": "Learn with Sumit Theme - Dracula version",
-  "workbench.iconTheme": "vscode-icons",
-  "editor.fontFamily": "Fira code",
-  "editor.fontLigatures": true,
-  "files.autoSave": "onFocusChange"
-}
