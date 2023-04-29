@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zosia Blog in wordpress</title>
+    <script
+      src="https://kit.fontawesome.com/0c708457ce.js"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      body {
+        width: 100%;
+        height: 100dvh;
+        overflow: hidden;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: #e0e0e0;
+      }
+      main {
+        width: 100%;
+        height: 100%;
+      }
+      .top-section {
+        width: 100%;
+        border: 1px solid #424242;
+        background: #fff;
+        text-align: center;
+      }
+      i {
+        padding: 1rem;
+        margin: 0 0.5rem;
+        cursor: pointer;
+      }
+      .back-btn {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        background: #151515;
+        color: #fff;
+        padding: 0.5rem 1.5rem;
+        text-decoration: underline;
+        outline: none;
+        border: 0;
+        font-size: 1.2rem;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="top-section">
+      <i class="desktop fa-solid fa-display"></i>
+      <i class="tablet fa-solid fa-tablet-screen-button"></i>
+      <i class="mobile fa-solid fa-mobile-screen-button"></i>
+    </div>
+    <main oncontextmenu="return false">
+      <iframe
+        id="iframe"
+        src="https://www.3forty.media/zosia/demo/"
+        frameborder="0"
+        width="100%"
+        height="100%"
+      ></iframe>
+    </main>
+
+    <button class="back-btn" onclick="window.history.back()">Go back</button>
+    <script>
+      const desktopBtn = document.querySelector(".desktop"),
+        tabletBtn = document.querySelector(".tablet"),
+        mobileBtn = document.querySelector(".mobile"),
+        main = document.querySelector("main");
+
+      desktopBtn.addEventListener("click", () => {
+        main.style.width = "100%";
+      });
+      tabletBtn.addEventListener("click", () => {
+        main.style.width = "768px";
+      });
+      mobileBtn.addEventListener("click", () => {
+        main.style.width = "576px";
+      });
+    </script>
+  </body>
+</html>
