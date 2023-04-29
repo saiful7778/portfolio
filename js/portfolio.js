@@ -4,9 +4,10 @@ const portfolioNavbar = portfolioSection.querySelectorAll(
   ".portfolio-nav .btn"
 );
 const portfolioItems = portfolioSection.querySelectorAll(
-  ".portfolio-items .item"
+  ".portfolio-items .portfolio-item"
 );
 const showBtns = portfolioSection.querySelectorAll(".overlay .btn");
+const portfolioTitle = portfolioSection.querySelectorAll(".item-title");
 let previewItems;
 let closeBtn;
 
@@ -31,15 +32,15 @@ const createPreviewElement = (img, title, des, link, mainElement) => {
   closBtn.type = "button";
   preTitle.className = "preview-title title";
   preDescription.className = "description";
-  button.className = "btn";
+  button.className = "btn live-preview";
+  button.setAttribute("href", `${link}`);
+  // button.setAttribute("target", `_blank`);
 
   previewImage.src = img;
   closBtn.innerHTML = `<i class="fa-solid fa-xmark"></i>`;
-  preTitle.innerText = title;
+  preTitle.innerHTML = title;
   preDescription.innerHTML = des;
   button.innerText = "live preview";
-  button.href = window.location.href + link;
-  button.setAttribute("target", "_blank");
 
   previewBox.appendChild(container);
   container.appendChild(imgCol);
@@ -56,9 +57,9 @@ const createPreviewElement = (img, title, des, link, mainElement) => {
 portfolioItems.forEach((item) => {
   createPreviewElement(
     item.querySelector(".portfolio-img").src,
-    item.querySelector(".item-title").innerHTML,
-    item.querySelector(".item-description").innerHTML,
-    item.querySelector(".item-link").innerHTML,
+    item.querySelector(".preview-item-title").innerHTML,
+    item.querySelector(".preview-item-description").innerHTML,
+    item.querySelector(".preview-item-link").innerHTML,
     portfolioSection
   );
 });
@@ -93,9 +94,6 @@ showBtns.forEach((btn, idx) => {
   btn.addEventListener("click", () => {
     previewItems.forEach((ele) => ele.classList.remove("active"));
     previewItems[idx].classList.add("active");
-    // previewItems[
-    //   idx
-    // ].style = `display: flex; justify-content: center; align-items: center`;
   });
 });
 

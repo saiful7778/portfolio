@@ -1,5 +1,6 @@
 @use "../variable" as *;
 
+// portfolio section styles
 .portfolio-section {
   .portfolio-nav {
     list-style: none;
@@ -20,51 +21,63 @@
     grid-template-columns: repeat(auto-fit, max(264px));
     white-space: nowrap;
     gap: 1rem;
+  }
+}
+
+// single portfolio item styles
+.portfolio-item {
+  .item {
+    width: 270px;
+    height: 300px;
+    position: relative;
+    overflow: hidden;
     .portfolio-img {
       width: 100%;
-      height: 310px;
+      height: 100%;
       object-position: top;
       object-fit: cover;
       transition: all 3s ease;
     }
-    .item {
-      position: relative;
-      overflow: hidden;
-      .item-details {
-        display: none;
-      }
+    .overlay {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      bottom: -100%;
+      justify-content: center;
+      visibility: hidden;
+      background: rgba($color: #000000, $alpha: 0.7);
+      transition: $transition;
+    }
+    &:hover {
       .overlay {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        left: 0;
-        bottom: -100%;
-        justify-content: center;
-        visibility: hidden;
-        background: rgba($color: #000000, $alpha: 0.5);
-        transition: $transition;
-      }
-      &:hover .portfolio-img {
-        object-position: bottom;
-      }
-      &:hover .overlay {
         bottom: 0;
         visibility: visible;
       }
-      &.not-show {
-        display: none;
-      }
-      &.show {
-        display: block;
-        animation: portfolio-item 250ms forwards ease-in-out;
+      .portfolio-img {
+        object-position: bottom;
       }
     }
   }
+  .item-details {
+    .item-title {
+      font-size: 1.2rem;
+      font-weight: 400;
+    }
+  }
+  .preview-item-details {
+    display: none;
+  }
+  &.not-show {
+    display: none;
+  }
+  &.show {
+    display: block;
+    animation: portfolio-item 250ms forwards ease-in-out;
+  }
 }
-.preview-title {
-  font-size: 2.5rem;
-  padding-right: 2.5rem;
-}
+
+// preview items
 .preview {
   position: fixed;
   width: 100%;
@@ -90,23 +103,27 @@
     gap: 1rem;
     position: relative;
   }
-  .description {
-    padding: 0;
-    margin-top: 1rem;
-    margin-bottom: 2rem;
-  }
-  .des-col {
-    width: 50%;
-  }
   .preview-img-section {
     width: 50%;
     overflow-y: scroll;
   }
-  .close-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    padding: 0.8rem 1rem;
+  .des-col {
+    width: 50%;
+    .preview-title {
+      font-size: 2.1rem;
+      padding-right: 2.5rem;
+    }
+    .description {
+      padding: 0;
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+    }
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      padding: 0.8rem 1rem;
+    }
   }
 }
 
