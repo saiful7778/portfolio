@@ -482,6 +482,7 @@ body {
 }
 .preview .des-col {
   width: 50%;
+  overflow-y: scroll;
 }
 .preview .des-col .preview-title {
   font-size: 2.1rem;
@@ -499,6 +500,21 @@ body {
   padding: 0.8rem 1rem;
 }
 
+@media (max-width: 576px) {
+  .preview .main-container {
+    width: 100%;
+  }
+  .preview .close-btn {
+    top: -40px !important;
+  }
+  .preview .des-col {
+    padding: 1rem;
+  }
+  .preview .preview-title {
+    font-size: 1.5rem !important;
+    padding: 0 !important;
+  }
+}
 @keyframes portfolio-item {
   0% {
     opacity: 0;

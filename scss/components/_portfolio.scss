@@ -109,6 +109,7 @@
   }
   .des-col {
     width: 50%;
+    overflow-y: scroll;
     .preview-title {
       font-size: 2.1rem;
       padding-right: 2.5rem;
@@ -123,6 +124,24 @@
       top: 10px;
       right: 10px;
       padding: 0.8rem 1rem;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .preview {
+    .main-container {
+      width: 100%;
+    }
+    .close-btn {
+      top: -40px !important;
+    }
+    .des-col {
+      padding: 1rem;
+    }
+    .preview-title {
+      font-size: 1.5rem !important;
+      padding: 0 !important;
     }
   }
 }
