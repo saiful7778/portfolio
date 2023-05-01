@@ -15,7 +15,6 @@
   }
   .portfolio-items {
     display: grid;
-    align-items: center;
     justify-content: center;
     margin: 2rem 0;
     grid-template-columns: repeat(auto-fit, max(264px));
@@ -26,6 +25,7 @@
 
 // single portfolio item styles
 .portfolio-item {
+  white-space: normal;
   .item {
     width: 270px;
     height: 300px;

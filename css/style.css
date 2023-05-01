@@ -380,6 +380,17 @@ body {
   background: var(--body-background-secondary);
 }
 
+.dropdown-menu {
+  display: block;
+  position: relative;
+  list-style: none;
+}
+.dropdown-menu a {
+  display: block;
+  padding: 1rem;
+  text-decoration: none;
+}
+
 .portfolio-section .portfolio-nav {
   list-style: none;
   gap: 1rem;
@@ -393,7 +404,6 @@ body {
 }
 .portfolio-section .portfolio-items {
   display: grid;
-  align-items: center;
   justify-content: center;
   margin: 2rem 0;
   grid-template-columns: repeat(auto-fit, 264px);
@@ -401,6 +411,9 @@ body {
   gap: 1rem;
 }
 
+.portfolio-item {
+  white-space: normal;
+}
 .portfolio-item .item {
   width: 270px;
   height: 300px;
@@ -531,6 +544,34 @@ body {
   }
   .navbar-collapse {
     background: transparent;
+  }
+  .dropdown-has {
+    position: relative;
+  }
+  .dropdown-has:hover .dropdown-menu {
+    display: block;
+  }
+  .dropdown-has .dropdown-menu {
+    display: none;
+    position: absolute;
+    list-style: none;
+    white-space: nowrap;
+    height: -moz-fit-content;
+    height: fit-content;
+    border-radius: 5px;
+  }
+  .dropdown-has .dropdown-menu li {
+    background-color: #121212;
+    border-bottom: 1px solid #424242;
+    border-radius: 5px;
+  }
+  .dropdown-has .dropdown-menu li:hover {
+    background: #424242;
+  }
+  .dropdown-has .dropdown-menu li a {
+    display: inline-block;
+    padding: 0.5rem 1.5rem;
+    text-decoration: none;
   }
 }
 @media (max-width: 768px) {
@@ -774,6 +815,9 @@ textarea {
   padding: 0.5rem 1rem;
 }
 
+footer {
+  background-color: #121212 !important;
+}
 footer a {
   letter-spacing: 3px;
 }

@@ -22,3 +22,14 @@
 .navbar-collapse {
   background: var(--body-background-secondary);
 }
+
+.dropdown-menu {
+  display: block;
+  position: relative;
+  list-style: none;
+  a {
+    display: block;
+    padding: 1rem;
+    text-decoration: none;
+  }
+}

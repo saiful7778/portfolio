@@ -5,6 +5,35 @@
   .navbar-collapse {
     background: transparent;
   }
+  .dropdown-has {
+    position: relative;
+    &:hover {
+      .dropdown-menu {
+        display: block;
+      }
+    }
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      list-style: none;
+      white-space: nowrap;
+      height: fit-content;
+      border-radius: 5px;
+      li {
+        background-color: #121212;
+        border-bottom: 1px solid #424242;
+        border-radius: 5px;
+        &:hover {
+          background: #424242;
+        }
+        a {
+          display: inline-block;
+          padding: 0.5rem 1.5rem;
+          text-decoration: none;
+        }
+      }
+    }
+  }
 }
 @media (max-width: 768px) {
   #home {
