@@ -5,6 +5,7 @@ module.exports = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
     "./node_modules/keep-react/**/*.{js,jsx,ts,tsx}",
+    "./src/theme.js",
   ],
   theme: {
     extend: {
