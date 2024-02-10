@@ -7,11 +7,13 @@ export const metadata = {
 
 const AboutPage = () => {
   return (
-    <SectionTitle
-      title="About myself"
-      text="Crafting Seamless Experiences, One Line of Code at a Time."
-      blob={true}
-    />
+    <>
+      <SectionTitle
+        title="About myself"
+        text="Crafting Seamless Experiences, One Line of Code at a Time."
+        blob={true}
+      />
+    </>
   );
 };
 
