@@ -36,3 +36,7 @@
   opacity: 1;
   transform: scale(1);
 }
+
+.link {
+  @apply text-blue-500 underline;
+}
