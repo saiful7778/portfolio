@@ -3,6 +3,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.swal2-popup {
+  @apply border border-gray-700 bg-gray-800 text-gray-50 shadow-md;
+}
+
 .nav-link {
   @apply relative capitalize duration-200;
 }

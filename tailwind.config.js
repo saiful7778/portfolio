@@ -6,6 +6,7 @@ module.exports = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
     "./node_modules/keep-react/**/*.{js,jsx,ts,tsx}",
     "./src/theme.js",
+    "./src/lib/config/Alert.config.js",
   ],
   theme: {
     extend: {
