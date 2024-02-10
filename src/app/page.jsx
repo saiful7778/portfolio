@@ -1,7 +1,5 @@
-import Image from "next/image";
-
 const HomePage = () => {
-  return <div className="">Home page</div>;
+  return <div>HomePage</div>;
 };
 
 export default HomePage;
