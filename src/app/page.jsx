@@ -1,6 +1,6 @@
 import Navbar from "@/components/Navbar";
 
-const HomePage = () => {
+const HomePage = async () => {
   return (
     <>
       <header className="p-2">
