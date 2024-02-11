@@ -101,17 +101,18 @@ const AddProjectForm = () => {
       return;
     }
     try {
-      const projectTime = date.getTime();
-      const ImageName = thumbnailImg.name.toLowerCase().split(" ").join("_");
-
-      const thumbnailLink = await imageUpload(thumbnailImg.image, ImageName);
+      const projectTime = date.toISOString();
 
       const slug = e.title.toLowerCase().split(" ").join("_");
+      const thumbnailLink = await imageUpload(
+        thumbnailImg.image,
+        thumbnailImg.name,
+      );
 
       const projectData = {
         thumbnail: {
           url: thumbnailLink?.data?.url,
-          alt: e.title + " " + thumbnailImg.alt,
+          alt: e.title + ", " + thumbnailImg.alt,
         },
         title: e.title,
         slug,
@@ -122,7 +123,7 @@ const AddProjectForm = () => {
         des: description,
         projectTime,
       };
-      await create("/api/project", projectData);
+      await create("/api/data/project", projectData);
       Alert.fire({
         icon: "success",
         title: "Project is created!",

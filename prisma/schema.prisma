@@ -23,3 +23,18 @@ enum Role {
   user
   admin
 }
+
+model project {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  thumbnail   Json
+  title       String
+  slug        String   @unique
+  status      String
+  githubLink  String
+  liveLink    String
+  shortDes    String
+  des         String
+  projectTime DateTime
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
