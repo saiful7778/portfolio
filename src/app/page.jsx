@@ -4,7 +4,7 @@ import Link from "next/link";
 // components
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import Avatar from "@/components/Avater";
+import Avatar from "@/components/Avatar";
 import Banner from "./sections/Banner";
 // others
 import { authOptions } from "./api/auth/[...nextauth]/route";

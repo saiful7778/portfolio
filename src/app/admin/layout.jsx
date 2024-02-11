@@ -1,3 +1,4 @@
+import Topbar from "@/components/Topbar";
 import SessionContext from "@/context/SessionContext";
 import StateProvider from "@/context/StateContext";
 
@@ -9,7 +10,10 @@ export const metadata = {
 const AdminLayout = ({ children }) => {
   return (
     <StateProvider>
-      <SessionContext>{children}</SessionContext>
+      <SessionContext>
+        <Topbar />
+        {children}
+      </SessionContext>
     </StateProvider>
   );
 };
