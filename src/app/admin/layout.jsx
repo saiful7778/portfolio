@@ -1,3 +1,4 @@
+import SessionContext from "@/context/SessionContext";
 import StateProvider from "@/context/StateContext";
 
 export const metadata = {
@@ -6,7 +7,11 @@ export const metadata = {
 };
 
 const AdminLayout = ({ children }) => {
-  return <StateProvider>{children}</StateProvider>;
+  return (
+    <StateProvider>
+      <SessionContext>{children}</SessionContext>
+    </StateProvider>
+  );
 };
 
 export default AdminLayout;
