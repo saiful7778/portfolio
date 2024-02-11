@@ -6,7 +6,7 @@ export async function read(apiRoute) {
     const res = await fetch(url + apiRoute);
     const resData = await res.json();
     if (!resData.success) {
-      throw new Error(resData.message);
+      throw new Error(resData?.message);
     }
     return resData.data;
   } catch (err) {
