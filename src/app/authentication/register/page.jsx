@@ -131,7 +131,7 @@ const RegisterPage = () => {
             />
           )}
           <Button
-            variant="primary"
+            variant="confirm"
             className="inline-flex w-full items-center justify-center"
             disabled={spinner}
             type="submit"
