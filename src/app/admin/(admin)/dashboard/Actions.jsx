@@ -21,6 +21,7 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import imageUpload from "@/lib/imageUpload";
 import { update } from "@/lib/CRUD/update";
 import { deleteData } from "@/lib/CRUD/delete";
+import revalidate from "@/lib/revalidate";
 // other
 import Alert from "@/lib/config/Alert.config";
 import { userSchema } from "@/schemas/user";
@@ -65,6 +66,7 @@ const Actions = ({ userData }) => {
       });
       try {
         await deleteData("/api/data/user", userData.id);
+        revalidate("allUser");
         Alert.fire({
           icon: "success",
           title: "User is deleted!",
@@ -187,7 +189,7 @@ const Actions = ({ userData }) => {
         {updateImg ? (
           <div className="flex flex-col items-center gap-2">
             <Image
-              src={userData.image?.url}
+              src={userData.image}
               width={150}
               height={150}
               alt={`${userData.name} image`}
@@ -244,6 +246,7 @@ const Actions = ({ userData }) => {
 const updateUser = async (userData) => {
   try {
     await update("/api/data/user", userData);
+    revalidate("allUser");
     Alert.fire({
       icon: "success",
       title: "User details is updated!",
