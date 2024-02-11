@@ -3,7 +3,7 @@ import NextAuth from "next-auth";
 import { connectToDB } from "@/lib/server-helper";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import prisma from "../../../../../prisma";
-import bcrypt from "bcryptjs";
+import { compare } from "bcrypt";
 
 export const authOptions = {
   adapter: PrismaAdapter(prisma),
@@ -25,7 +25,7 @@ export const authOptions = {
 
           if (!user?.hashedPassword) return null;
 
-          const isCorrect = await bcrypt.compare(
+          const isCorrect = await compare(
             credentials.password,
             user.hashedPassword,
           );
