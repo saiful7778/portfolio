@@ -1,6 +1,6 @@
-// next.js packages
-import Link from "next/link";
+// next.js package
 import { getServerSession } from "next-auth";
+import Link from "next/link";
 // components
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -26,7 +26,7 @@ const HomePage = async () => {
       {session && (
         <div className="fixed bottom-3 right-0 z-50 rounded-l-full border border-gray-700 bg-gray-800 p-2">
           <Link className="block h-8" href="/admin/dashboard">
-            <Avatar size="sm" photoURL={session.user.image} />
+            <Avatar size="sm" photoURL={session.user.image.url} />
           </Link>
         </div>
       )}
