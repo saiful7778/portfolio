@@ -8,7 +8,7 @@ import Button from "./utilities/Button";
 import { IoImageOutline } from "react-icons/io5";
 // others
 import cn from "@/lib/cn";
-import { focus } from "@/theme";
+import { focus, input } from "@/theme";
 import Alert from "@/lib/config/Alert.config";
 
 const style = {
@@ -19,9 +19,6 @@ const style = {
     sm: "px-2 py-1 text-xs",
     md: "px-4 py-1 text-base",
     lg: "px-5 py-2 text-base",
-  },
-  input: {
-    base: "w-full mt-2 appearance-none rounded-md border border-gray-700 bg-gray-900 px-3 py-2 text-sm placeholder:text-gray-500",
   },
 };
 
@@ -109,14 +106,14 @@ const ImageUpload = ({ handleImageData, imageData }) => {
       {showImage && (
         <>
           <input
-            className={cn(style.input.base, focus.base)}
+            className={cn(input.base, focus.base)}
             value={imageData.name}
             onChange={(e) => handleImageData({ name: e.target.value })}
             placeholder="Image title"
             name="imgTitle"
           />
           <input
-            className={cn(style.input.base, focus.base)}
+            className={cn(input.base, focus.base)}
             value={imageData.alt}
             onChange={(e) => handleImageData({ alt: e.target.value })}
             placeholder="Alt"

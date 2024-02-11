@@ -1,4 +1,5 @@
 import cn from "@/lib/cn";
+import { focus } from "@/theme";
 import { useField } from "formik";
 
 const style = {
@@ -8,10 +9,6 @@ const style = {
     xs: "min-w-52",
     sm: "min-w-64",
     md: "min-w-80",
-  },
-  focus: {
-    base: "focus:outline-dashed focus:outline-2 focus:outline-offset-2 focus:outline-sky-500",
-    error: "focus:outline-red-600",
   },
 };
 
@@ -29,12 +26,12 @@ const Select = ({
       <select
         className={cn(
           style.base,
-          style.focus.base,
+          focus.base,
           size === "xs" && style.size.xs,
           size === "sm" && style.size.sm,
           size === "md" && style.size.md,
           error && touched && style.error,
-          error && touched && style.focus.error,
+          error && touched && focus.error,
           (error && touched) || field.value || "text-gray-500",
           className,
         )}

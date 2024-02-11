@@ -1,11 +1,6 @@
 import cn from "@/lib/cn";
-import { focus } from "@/theme";
+import { focus, input } from "@/theme";
 import { useField } from "formik";
-
-const style = {
-  base: "w-full appearance-none rounded-md border border-gray-700 bg-gray-900 px-3 py-2 text-sm placeholder:text-gray-500",
-  error: "border-red-600 placeholder:text-red-500",
-};
 
 const Input = ({ className, ...props }) => {
   const [field, { touched, error }] = useField(props);
@@ -14,9 +9,9 @@ const Input = ({ className, ...props }) => {
     <div className={className}>
       <input
         className={cn(
-          style.base,
+          input.base,
           focus.base,
-          error && touched && style.error,
+          error && touched && input.error,
           error && touched && focus.error,
           className,
         )}

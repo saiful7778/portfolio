@@ -1,11 +1,6 @@
 import { useField } from "formik";
 import cn from "@/lib/cn";
-import { focus } from "@/theme";
-
-const style = {
-  base: "w-full appearance-none rounded border border-gray-700 bg-gray-900 px-3 py-2 text-sm placeholder:text-gray-500",
-  error: "border-red-600 text-red-600 placeholder:text-red-500",
-};
+import { focus, input } from "@/theme";
 
 const Textarea = ({ textLimit, ...props }) => {
   const [field, { touched, error }] = useField(props);
@@ -17,9 +12,9 @@ const Textarea = ({ textLimit, ...props }) => {
       <div className="relative">
         <textarea
           className={cn(
-            style.base,
+            input.base,
             focus.base,
-            error && touched && style.error,
+            error && touched && input.error,
             error && touched && focus.error,
           )}
           maxLength={textLimit}
