@@ -44,7 +44,7 @@ const TableDataRow = ({ inputData, count }) => {
       <Table.cell className="text-center font-semibold">{count}</Table.cell>
       <Table.cell>
         <div className="flex items-center gap-2">
-          <Avatar size="sm" photoURL={image?.url} />
+          <Avatar size="sm" photoURL={image} />
           <div>
             <div className="font-semibold leading-tight">{name}</div>
             <div className="text-xs text-gray-400">

@@ -26,7 +26,7 @@ const HomePage = async () => {
       {session && (
         <div className="fixed bottom-3 right-0 z-50 rounded-l-full border border-gray-700 bg-gray-800 p-2">
           <Link className="block h-8" href="/admin/dashboard">
-            <Avatar size="sm" photoURL={session.user.image.url} />
+            <Avatar size="sm" photoURL={session.user.image} />
           </Link>
         </div>
       )}

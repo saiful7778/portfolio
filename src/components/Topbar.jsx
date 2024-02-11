@@ -47,7 +47,7 @@ const Topbar = () => {
           className="border border-gray-700 !bg-gray-800 !px-2 !py-2 text-xs"
         >
           <Popover.Action className="h-8">
-            <Avatar size="sm" photoURL={data?.user?.image.url} />
+            <Avatar size="sm" photoURL={data?.user?.image} />
           </Popover.Action>
           <Popover.Container className="!mt-0 !block">
             <ul>

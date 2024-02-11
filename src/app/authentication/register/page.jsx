@@ -80,10 +80,7 @@ const RegisterPage = () => {
           name: e.fullName,
           email: e.email,
           password: e.password,
-          image: {
-            url: data?.data?.thumb?.url,
-            deleteUrl: data?.data?.delete_url,
-          },
+          image: data?.data?.thumb?.url,
         };
         await createUser(userData);
       } else {
@@ -91,7 +88,6 @@ const RegisterPage = () => {
           name: e.fullName,
           email: e.email,
           password: e.password,
-          image: null,
         };
         await createUser(userData);
       }
