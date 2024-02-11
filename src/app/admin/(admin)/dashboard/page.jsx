@@ -12,7 +12,9 @@ export const metadata = {
 };
 
 const DashboardPage = async () => {
-  const users = await read("/api/data/users", ["allUser"]);
+  const users = await read("/api/data/users", ["allUser"], {
+    cache: "no-cache",
+  });
 
   const renderUser = users.map((user, idx) => (
     <TableDataRow key={user.name} inputData={user} count={idx + 1} />

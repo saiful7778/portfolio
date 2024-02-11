@@ -13,7 +13,9 @@ export const metadata = {
 };
 
 const AllProjectsPage = async () => {
-  const projects = await read("/api/data/projects", ["allProject"]);
+  const projects = await read("/api/data/projects", ["allProject"], {
+    cache: "no-cache",
+  });
 
   const renderProjects = projects.map((project, idx) => (
     <TableDataRow key={"project" + idx} inputData={project} count={idx + 1} />
