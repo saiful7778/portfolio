@@ -1,3 +1,4 @@
+import Sidebar from "@/components/Sidebar";
 import Topbar from "@/components/Topbar";
 import SessionContext from "@/context/SessionContext";
 import StateProvider from "@/context/StateContext";
@@ -12,6 +13,9 @@ const AdminLayout = ({ children }) => {
     <StateProvider>
       <SessionContext>
         <Topbar />
+        <aside>
+          <Sidebar />
+        </aside>
         {children}
       </SessionContext>
     </StateProvider>
