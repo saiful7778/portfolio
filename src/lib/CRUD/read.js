@@ -8,7 +8,7 @@ export async function read(apiRoute) {
     if (!resData.success) {
       throw new Error(resData.message);
     }
-    return resData;
+    return resData.data;
   } catch (err) {
     throw new Error(err);
   }
