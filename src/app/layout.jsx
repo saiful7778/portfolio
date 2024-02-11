@@ -12,7 +12,7 @@ const RootLayout = ({ children }) => {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="bg-dark relative min-h-screen w-full overflow-x-hidden text-gray-50">
+        <div className="relative min-h-screen w-full overflow-x-hidden bg-dark text-gray-50">
           {children}
         </div>
       </body>
