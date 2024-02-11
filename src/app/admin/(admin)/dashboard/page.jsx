@@ -4,6 +4,8 @@ import { read } from "@/lib/CRUD/read";
 import Actions from "./Actions";
 import moment from "moment";
 
+export const dynamic = "force-dynamic";
+
 export const metadata = {
   title: "Deshboard - admin - portfolio",
   description: "This is dashboard page of Saiful Islam portfolio website.",
