@@ -1,8 +1,10 @@
 import Avatar from "@/components/Avatar";
 import Table from "@/components/table";
-import { read } from "@/lib/CRUD/read";
 import Actions from "./Actions";
 import moment from "moment";
+import { connectToDB } from "@/lib/server-helper";
+import prisma from "../../../../../prisma";
+import ErrorDataShow from "@/components/ErrorDataShow";
 
 export const dynamic = "force-dynamic";
 
@@ -11,10 +13,39 @@ export const metadata = {
   description: "This is dashboard page of Saiful Islam portfolio website.",
 };
 
+async function getUsers() {
+  try {
+    await connectToDB();
+    const users = await prisma.user.findMany();
+    if (!users) {
+      return {
+        success: false,
+        message: "No data available",
+      };
+    }
+    return {
+      success: true,
+      data: users,
+    };
+  } catch (err) {
+    console.log(err);
+    return {
+      success: false,
+      message: err,
+    };
+  } finally {
+    await prisma.$disconnect();
+  }
+}
+
 const DashboardPage = async () => {
-  const users = await read("/api/data/users", ["allUser"], {
-    cache: "no-cache",
-  });
+  const res = await getUsers();
+
+  if (!res.success) {
+    return <ErrorDataShow error={res?.message} />;
+  }
+
+  const { data: users } = res;
 
   const renderUser = users.map((user, idx) => (
     <TableDataRow key={user.name} inputData={user} count={idx + 1} />

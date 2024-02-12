@@ -66,7 +66,7 @@ const Actions = ({ userData }) => {
       });
       try {
         await deleteData("/api/data/user", userData.id);
-        revalidate("allUser");
+        revalidate("/admin/dashboard");
         Alert.fire({
           icon: "success",
           title: "User is deleted!",
@@ -119,7 +119,7 @@ const Actions = ({ userData }) => {
             id: userData.id,
             email: userData.email,
           },
-          data: { ...e, image: { url: data?.data?.thumb?.url } },
+          data: { ...e, image: data?.data?.thumb?.url },
         });
       } else {
         await updateUser({
@@ -246,7 +246,7 @@ const Actions = ({ userData }) => {
 const updateUser = async (userData) => {
   try {
     await update("/api/data/user", userData);
-    revalidate("allUser");
+    revalidate("/admin/dashboard");
     Alert.fire({
       icon: "success",
       title: "User details is updated!",
