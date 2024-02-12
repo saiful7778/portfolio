@@ -6,6 +6,7 @@ import { hash } from "bcrypt";
 export async function POST(req) {
   try {
     const { name, email, password, image } = await req.json();
+
     if (!name || !email || !password) {
       return NextResponse.json(
         { success: false, message: "Invalid data" },

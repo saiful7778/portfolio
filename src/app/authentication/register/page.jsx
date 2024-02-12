@@ -88,7 +88,7 @@ const RegisterPage = () => {
           name: e.fullName,
           email: e.email,
           password: e.password,
-          image: null,
+          image: "",
         };
         await createUser(userData);
       }
