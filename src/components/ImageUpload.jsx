@@ -53,7 +53,7 @@ const ImageUpload = ({ handleImageData, imageData }) => {
   };
 
   return (
-    <div className="mx-auto my-4 max-w-96">
+    <div className="mx-auto my-4 max-w-96 space-y-2">
       <div className="flex flex-col items-center justify-center gap-3 rounded-md border-2 border-dashed border-gray-700 p-4">
         {showImage ? (
           <>
