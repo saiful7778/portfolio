@@ -1,8 +1,10 @@
 import Table from "@/components/table";
-import { read } from "@/lib/CRUD/read";
 import moment from "moment";
 import Link from "next/link";
 import Actions from "./Actions";
+import { connectToDB } from "@/lib/server-helper";
+import prisma from "../../../../../../prisma";
+import ErrorDataShow from "@/components/ErrorDataShow";
 
 export const dynamic = "force-dynamic";
 
@@ -12,10 +14,39 @@ export const metadata = {
     "This is the all projects management admin page of Saiful Islam portfolio website.",
 };
 
+async function getProjects() {
+  try {
+    await connectToDB();
+    const projects = await prisma.project.findMany();
+    if (!projects) {
+      return {
+        success: false,
+        message: "No data available",
+      };
+    }
+    return {
+      success: true,
+      data: projects,
+    };
+  } catch (err) {
+    console.log(err);
+    return {
+      success: false,
+      message: err,
+    };
+  } finally {
+    await prisma.$disconnect();
+  }
+}
+
 const AllProjectsPage = async () => {
-  const projects = await read("/api/data/projects", ["allProject"], {
-    cache: "no-cache",
-  });
+  const res = await getProjects();
+
+  if (!res.success) {
+    return <ErrorDataShow error={res?.message} />;
+  }
+
+  const { data: projects } = res;
 
   const renderProjects = projects.map((project, idx) => (
     <TableDataRow key={"project" + idx} inputData={project} count={idx + 1} />

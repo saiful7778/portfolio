@@ -6,9 +6,19 @@ import Button from "@/components/utilities/Button";
 import { FaTrashCan } from "react-icons/fa6";
 import { CiEdit } from "react-icons/ci";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import Alert from "@/lib/config/Alert.config";
 
 const Actions = ({ projectId }) => {
-  console.log(projectId);
+  const handleDelete = async () => {
+    const { isConfirmed } = await Alert.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it!",
+    });
+  };
+  const handleUpdate = async () => {};
   return (
     <>
       <Popover
@@ -25,7 +35,10 @@ const Actions = ({ projectId }) => {
         <Popover.Container className="!mt-0 !block">
           <ul>
             <li>
-              <button className="flex w-full items-center justify-between gap-4 rounded px-2 py-1 hover:bg-gray-700">
+              <button
+                onClick={handleDelete}
+                className="flex w-full items-center justify-between gap-4 rounded px-2 py-1 hover:bg-gray-700"
+              >
                 <span>Delete</span>
                 <span>
                   <FaTrashCan />
@@ -33,7 +46,10 @@ const Actions = ({ projectId }) => {
               </button>
             </li>
             <li>
-              <button className="flex w-full items-center justify-between gap-4 rounded px-2 py-1 hover:bg-gray-700">
+              <button
+                onClick={handleUpdate}
+                className="flex w-full items-center justify-between gap-4 rounded px-2 py-1 hover:bg-gray-700"
+              >
                 <span>Edit</span>
                 <span>
                   <CiEdit strokeWidth={1} />
