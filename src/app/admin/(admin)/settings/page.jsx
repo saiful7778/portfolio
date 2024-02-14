@@ -1,7 +1,5 @@
-import getServerUrl from "@/lib/getServerUrl";
 const SettingsPage = () => {
-  const url = getServerUrl();
-  return <div>URL: {url}</div>;
+  return <div>Settings</div>;
 };
 
 export default SettingsPage;
