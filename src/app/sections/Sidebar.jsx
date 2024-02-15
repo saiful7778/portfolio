@@ -128,7 +128,7 @@ const SidebarDropdown = ({ children, path, title, icon, textShow }) => {
       ) : (
         <div
           className={cn(
-            "absolute left-full top-0 z-[200] ml-1 w-24 whitespace-nowrap",
+            "absolute left-full top-0 z-[200] w-24 whitespace-nowrap",
             dropdownOpen
               ? "visible opacity-100"
               : "invisible opacity-0 group-hover:visible group-hover:opacity-100",

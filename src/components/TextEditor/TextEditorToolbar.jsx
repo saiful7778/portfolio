@@ -65,6 +65,9 @@ const TextEditorToolbar = ({ editor }) => {
   const handleItalic = () => {
     editor.chain().focus().toggleItalic().run();
   };
+  const handleMark = () => {
+    editor.chain().focus().toggleHighlight().run();
+  };
 
   const handleCode = () => {
     editor.chain().focus().toggleCode().run();
@@ -136,6 +139,13 @@ const TextEditorToolbar = ({ editor }) => {
         onClick={handleItalic}
       >
         <FaItalic />
+      </Tool>
+      <Tool
+        tag="highlight"
+        isActive={editor.isActive("highlight")}
+        onClick={handleMark}
+      >
+        M
       </Tool>
       <div className="w-[1px] bg-gray-600"></div>
       <Tool

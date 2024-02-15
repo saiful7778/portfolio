@@ -111,6 +111,10 @@
   content: attr(data-placeholder);
 }
 
+.tiptap p:not(.is-editor-empty) {
+  @apply my-2;
+}
+
 pre {
   background: #0d0d0d;
   border-radius: 0.5rem;

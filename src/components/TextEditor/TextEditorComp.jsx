@@ -5,6 +5,7 @@ import Placeholder from "@tiptap/extension-placeholder";
 import StarterKit from "@tiptap/starter-kit";
 import TextEditorToolbar from "./TextEditorToolbar";
 import BaseHeading from "@tiptap/extension-heading";
+import Highlight from "@tiptap/extension-highlight";
 import BulletList from "@tiptap/extension-bullet-list";
 import OrderedList from "@tiptap/extension-ordered-list";
 import CodeBlock from "@tiptap/extension-code-block";
@@ -13,6 +14,7 @@ import CharacterCount from "@tiptap/extension-character-count";
 import { mergeAttributes } from "@tiptap/core";
 import Link from "@tiptap/extension-link";
 import { focus, input } from "@/theme";
+import { useState } from "react";
 
 const style = {
   base: "h-[600px] overflow-auto",
@@ -44,6 +46,7 @@ const Heading = BaseHeading.configure({ levels: [1, 2, 3, 4, 5, 6] }).extend({
 
 const TextEditorComp = ({ placeholder = "Write....", onChange }) => {
   const limit = 2000;
+  const [data, setdata] = useState("");
 
   const editor = useEditor({
     extensions: [
@@ -59,6 +62,11 @@ const TextEditorComp = ({ placeholder = "Write....", onChange }) => {
         placeholder,
       }),
       Heading,
+      Highlight.configure({
+        HTMLAttributes: {
+          class: "bg-yellow-300 rounded-sm px-0.5 mx-0.5",
+        },
+      }),
       CharacterCount.configure({
         limit: limit,
       }),
@@ -86,6 +94,7 @@ const TextEditorComp = ({ placeholder = "Write....", onChange }) => {
     },
     onUpdate({ editor }) {
       onChange(editor.getHTML());
+      setdata(editor.getHTML());
     },
   });
 
@@ -97,6 +106,7 @@ const TextEditorComp = ({ placeholder = "Write....", onChange }) => {
       <TextEditorToolbar editor={editor} />
       <div className="relative">
         <EditorContent editor={editor} />
+        <div>{JSON.stringify(data)}</div>
         <div className="absolute bottom-1 right-1.5 z-50 text-xs text-gray-400">
           {editor.storage.characterCount.characters()}/{limit}
         </div>
