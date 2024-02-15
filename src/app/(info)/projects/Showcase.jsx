@@ -38,13 +38,23 @@ const Showcase = async () => {
 
   const { data: projects } = res;
 
-  const renderAllProjects = projects.map((project, idx) => {
+  if (projects.length < 1) {
+    return <EmptyData />;
+  }
+
+  const allProject = [];
+  for (let x of projects) {
+    if (x.status === "published") {
+      allProject.push(x);
+    }
+  }
+  const renderAllProjects = allProject.map((project, idx) => {
     if (project.status === "published") {
       return <ProjectItem key={"project" + idx} projectData={project} />;
     }
   });
 
-  if (projects.length < 1 && renderAllProjects.length < 1) {
+  if (renderAllProjects.length < 1) {
     return <EmptyData />;
   }
 
