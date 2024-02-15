@@ -57,6 +57,7 @@ const SingleProject = async ({ params }) => {
           className="mx-auto"
           src={url}
           alt={alt}
+          title={title}
           width={1080}
           height={720}
         />
@@ -82,7 +83,7 @@ const SingleProject = async ({ params }) => {
         <div className="text-sm text-gray-500">Short description:</div>
         <p>{shortDes}</p>
       </div>
-      <div>
+      <div className="paragraph">
         <div className="text-sm text-gray-500">Description:</div>
         {parse(des)}
       </div>

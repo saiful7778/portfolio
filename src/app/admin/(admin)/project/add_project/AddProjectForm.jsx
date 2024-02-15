@@ -112,7 +112,7 @@ const AddProjectForm = () => {
       const projectData = {
         thumbnail: {
           url: thumbnailLink?.data?.url,
-          alt: e.title + ", " + thumbnailImg.alt,
+          alt: thumbnailImg.alt,
         },
         title: e.title,
         slug,

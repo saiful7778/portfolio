@@ -111,8 +111,11 @@
   content: attr(data-placeholder);
 }
 
-.tiptap p:not(.is-editor-empty) {
-  @apply my-2;
+.tiptap > p:not(.is-editor-empty) {
+  @apply my-4;
+}
+.paragraph > p {
+  @apply my-4;
 }
 
 pre {

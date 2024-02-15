@@ -106,7 +106,6 @@ const TextEditorComp = ({ placeholder = "Write....", onChange }) => {
       <TextEditorToolbar editor={editor} />
       <div className="relative">
         <EditorContent editor={editor} />
-        <div>{JSON.stringify(data)}</div>
         <div className="absolute bottom-1 right-1.5 z-50 text-xs text-gray-400">
           {editor.storage.characterCount.characters()}/{limit}
         </div>
