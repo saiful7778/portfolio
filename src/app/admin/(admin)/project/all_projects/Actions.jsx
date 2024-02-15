@@ -48,7 +48,7 @@ const Actions = ({ projectId, slug }) => {
           text: err,
         });
       }
-      revalidate("/admin/all_projects");
+      revalidate("/admin/project/all_projects");
     }
   };
 

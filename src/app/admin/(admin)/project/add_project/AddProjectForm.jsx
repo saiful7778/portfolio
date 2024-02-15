@@ -21,8 +21,11 @@ import create from "@/lib/CRUD/create";
 // others
 import Alert from "@/lib/config/Alert.config";
 import { addProjectSchema } from "@/schemas/project";
+import { useRouter } from "next/navigation";
+import revalidate from "@/lib/revalidate";
 
 const AddProjectForm = () => {
+  const router = useRouter();
   const recaptchaRef = useRef(null);
   const { showReCaptcha } = useStateData();
   const [spinner, setSpinner] = useState(false);
@@ -128,6 +131,8 @@ const AddProjectForm = () => {
         icon: "success",
         title: "Project is created!",
       });
+      revalidate("/admin/project/all_projects");
+      router.push("/admin/project/all_projects");
       reset();
     } catch (err) {
       console.error(err);

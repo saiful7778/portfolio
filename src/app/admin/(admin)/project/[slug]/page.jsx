@@ -3,6 +3,8 @@ import Image from "next/image";
 import parse from "html-react-parser";
 import getProject from "@/lib/DB/getProject";
 import ErrorDataShow from "@/components/ErrorDataShow";
+import Button from "@/components/utilities/Button";
+import DeleteProject from "./DeleteProject";
 
 export async function generateMetadata({ params }) {
   const res = await getProject(params?.slug);
@@ -27,9 +29,11 @@ const SingleProject = async ({ params }) => {
   }
 
   const {
+    id,
     title,
     createdAt,
     updatedAt,
+    slug,
     projectTime,
     shortDes,
     thumbnail: { url, alt },
@@ -39,7 +43,7 @@ const SingleProject = async ({ params }) => {
   const timeAgo = moment(createdAt).fromNow();
   const createdTime = moment(createdAt).format("Do MMM YY, h:mm a");
   const updatedTime = moment(updatedAt).format("Do MMM YY, h:mm a");
-  const projectCreateTime = moment(projectTime).format("Do MMM YY, h:mm a");
+  const projectCreateTime = moment(projectTime).format("Do MMM YY");
 
   return (
     <div className="mx-auto w-4/5 space-y-4">
@@ -55,6 +59,18 @@ const SingleProject = async ({ params }) => {
         <p className="text-xs italic text-gray-500">Alt text: {alt}</p>
       </figure>
       <h1 className="text-3xl font-bold">{title}</h1>
+      <div className="flex items-center gap-2">
+        <Button
+          href={{
+            pathname: `/admin/project/update/${slug}`,
+            query: { projectId: id },
+          }}
+          variant="confirm"
+        >
+          Update
+        </Button>
+        <DeleteProject projectId={id} />
+      </div>
       <div className="text-sm">
         <div>
           <span className="text-gray-500">Project created time:</span>{" "}

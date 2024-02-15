@@ -18,6 +18,7 @@ import { useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import updateUser from "./update";
 import { useRouter } from "next/navigation";
+import revalidate from "@/lib/revalidate";
 
 const UpdateProjectForm = ({ projectData }) => {
   const {
@@ -41,7 +42,7 @@ const UpdateProjectForm = ({ projectData }) => {
   const recaptchaRef = useRef(null);
   const { showReCaptcha } = useStateData();
   const [spinner, setSpinner] = useState(false);
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState(des);
   const [date, setDate] = useState(projectData.projectTime);
   // Image data
   const [thumbnailImg, setThumbnailImg] = useState({
@@ -239,6 +240,7 @@ const updateUserData = async (id, userData, router) => {
     icon: "success",
     title: "Project is updated!",
   });
+  revalidate("/admin/project/all_projects");
   router.push("/admin/project/all_projects");
   return true;
 };

@@ -19,7 +19,6 @@ export default async function updateUser({ query, data }) {
     const project = await prisma.project.update({
       where: {
         id: query.id,
-        email: query.email,
       },
       data: data,
     });
