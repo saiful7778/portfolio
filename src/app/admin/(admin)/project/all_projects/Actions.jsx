@@ -1,4 +1,5 @@
 "use client";
+import { useRouter } from "next/navigation";
 // components
 import { Popover } from "keep-react";
 import Button from "@/components/utilities/Button";
@@ -11,7 +12,9 @@ import Alert from "@/lib/config/Alert.config";
 import deleteProject from "./delete";
 import revalidate from "@/lib/revalidate";
 
-const Actions = ({ projectId }) => {
+const Actions = ({ projectId, slug }) => {
+  const router = useRouter();
+
   const handleDelete = async () => {
     const { isConfirmed } = await Alert.fire({
       title: "Are you sure?",
@@ -48,7 +51,11 @@ const Actions = ({ projectId }) => {
       revalidate("/admin/all_projects");
     }
   };
-  const handleUpdate = async () => {};
+
+  const handleUpdate = () => {
+    router.push(`/admin/project/update/${slug}?projectId=${projectId}`);
+  };
+
   return (
     <>
       <Popover

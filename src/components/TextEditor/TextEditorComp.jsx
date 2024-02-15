@@ -14,7 +14,6 @@ import CharacterCount from "@tiptap/extension-character-count";
 import { mergeAttributes } from "@tiptap/core";
 import Link from "@tiptap/extension-link";
 import { focus, input } from "@/theme";
-import { useState } from "react";
 
 const style = {
   base: "h-[600px] overflow-auto",
@@ -44,9 +43,12 @@ const Heading = BaseHeading.configure({ levels: [1, 2, 3, 4, 5, 6] }).extend({
   },
 });
 
-const TextEditorComp = ({ placeholder = "Write....", onChange }) => {
+const TextEditorComp = ({
+  placeholder = "Write....",
+  onChange,
+  content = "",
+}) => {
   const limit = 5000;
-  const [data, setdata] = useState("");
 
   const editor = useEditor({
     extensions: [
@@ -92,9 +94,9 @@ const TextEditorComp = ({ placeholder = "Write....", onChange }) => {
         class: cn(input.base, style.base, focus.base),
       },
     },
+    content,
     onUpdate({ editor }) {
       onChange(editor.getHTML());
-      setdata(editor.getHTML());
     },
   });
 
