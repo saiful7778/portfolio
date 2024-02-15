@@ -76,19 +76,19 @@ const AllProjectsPage = async () => {
 };
 
 const TableDataRow = ({ inputData, count }) => {
-  const { id, title, createdAt, updatedAt, shortDes, status } = inputData || {};
+  const { id, title, slug, createdAt, updatedAt, shortDes, status } =
+    inputData || {};
 
   const createdTime = moment(createdAt).format("Do MMM YY, h:mm a");
   const updatedTime = moment(updatedAt).format("Do MMM YY, h:mm a");
 
-  const titleLink = title.split(" ").join("_").toLowerCase();
   return (
     <Table.row>
       <Table.cell className="text-center font-semibold">{count}</Table.cell>
       <Table.cell>
         <Link
           href={{
-            pathname: `/admin/project/${titleLink}`,
+            pathname: `/admin/project/${slug}`,
             query: { projectId: id },
           }}
           className="hover:text-blue-500 hover:underline"
@@ -124,7 +124,7 @@ const TableDataRow = ({ inputData, count }) => {
       </Table.cell>
       <Table.cell>
         <div className="flex items-center justify-center">
-          <Actions projectId={id} />
+          <Actions projectId={id} slug={slug} />
         </div>
       </Table.cell>
     </Table.row>

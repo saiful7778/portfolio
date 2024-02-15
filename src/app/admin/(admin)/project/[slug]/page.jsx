@@ -1,32 +1,18 @@
-import { connectToDB } from "@/lib/server-helper";
 import moment from "moment";
-import prisma from "../../../../../../prisma";
 import Image from "next/image";
 import parse from "html-react-parser";
-
-async function getProject(slug) {
-  try {
-    await connectToDB();
-    const project = await prisma.project.findFirst({
-      where: {
-        slug,
-      },
-    });
-    if (!project) {
-      throw new Error("This project not available.");
-    }
-    return project;
-  } catch (err) {
-    console.log(err);
-    throw new Error(err);
-  } finally {
-    await prisma.$disconnect();
-  }
-}
+import getProject from "@/lib/DB/getProject";
+import ErrorDataShow from "@/components/ErrorDataShow";
 
 export async function generateMetadata({ params }) {
-  const projectData = await getProject(params?.slug);
-  const { title, shortDes } = projectData;
+  const res = await getProject(params?.slug);
+  if (!res.success) {
+    return {
+      title: "Error project - admin - portfolio",
+      description: "There was an error to get this project data",
+    };
+  }
+  const { title, shortDes } = res.data;
   return {
     title: `${title} - project`,
     description: shortDes,
@@ -34,7 +20,12 @@ export async function generateMetadata({ params }) {
 }
 
 const SingleProject = async ({ params }) => {
-  const projectData = await getProject(params?.slug);
+  const res = await getProject(params?.slug);
+
+  if (!res.success) {
+    return <ErrorDataShow error={res?.message} />;
+  }
+
   const {
     title,
     createdAt,
@@ -43,7 +34,7 @@ const SingleProject = async ({ params }) => {
     shortDes,
     thumbnail: { url, alt },
     des,
-  } = projectData;
+  } = res.data;
 
   const timeAgo = moment(createdAt).fromNow();
   const createdTime = moment(createdAt).format("Do MMM YY, h:mm a");
