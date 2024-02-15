@@ -129,7 +129,7 @@ const TextEditorToolbar = ({ editor }) => {
   };
 
   return (
-    <div className="mb-2 flex w-full gap-2 rounded border border-gray-600 p-2">
+    <div className="mb-2 flex w-full flex-wrap gap-2 rounded border border-gray-600 p-2">
       <Tool tag="bold" isActive={editor.isActive("bold")} onClick={handleBold}>
         <FaBold />
       </Tool>

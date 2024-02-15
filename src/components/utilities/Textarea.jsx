@@ -2,7 +2,7 @@ import { useField } from "formik";
 import cn from "@/lib/cn";
 import { focus, input } from "@/theme";
 
-const Textarea = ({ textLimit, ...props }) => {
+const Textarea = ({ className, textLimit, ...props }) => {
   const [field, { touched, error }] = useField(props);
 
   let text = field.value.length || 0;
@@ -16,6 +16,7 @@ const Textarea = ({ textLimit, ...props }) => {
             focus.base,
             error && touched && input.error,
             error && touched && focus.error,
+            className,
           )}
           maxLength={textLimit}
           {...field}

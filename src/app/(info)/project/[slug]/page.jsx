@@ -41,7 +41,7 @@ const SingleProject = async ({ params }) => {
   const timeAgo = moment(createdAt).fromNow();
 
   return (
-    <div className="mx-auto w-4/5 space-y-4">
+    <div className="mx-auto w-full space-y-4 md:w-4/5">
       <figure>
         <Image
           className="mx-auto"

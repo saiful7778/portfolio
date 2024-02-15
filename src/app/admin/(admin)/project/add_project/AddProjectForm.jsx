@@ -131,8 +131,8 @@ const AddProjectForm = () => {
         icon: "success",
         title: "Project is created!",
       });
-      revalidate("/admin/project/all_projects");
       router.push("/admin/project/all_projects");
+      revalidate("/admin/project/all_projects");
       reset();
     } catch (err) {
       console.error(err);
@@ -161,7 +161,7 @@ const AddProjectForm = () => {
             setDate={setDate}
             label="Project start date"
           />
-          <div className="flex w-full gap-2">
+          <div className="flex w-full flex-col gap-2 md:flex-row">
             <Input
               type="text"
               className="flex-1"
@@ -180,10 +180,10 @@ const AddProjectForm = () => {
             <Input type="url" placeholder="Project Live Link" name="liveLink" />
           </div>
           <Textarea
+            className="h-24"
             placeholder="Short Description"
             name="shortDes"
             textLimit={100}
-            row={1}
           />
           <TextEditor
             placeholder="Project Description"
