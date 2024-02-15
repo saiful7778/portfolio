@@ -12,10 +12,10 @@ import TextAlign from "@tiptap/extension-text-align";
 import CharacterCount from "@tiptap/extension-character-count";
 import { mergeAttributes } from "@tiptap/core";
 import Link from "@tiptap/extension-link";
-import { focus } from "@/theme";
+import { focus, input } from "@/theme";
 
 const style = {
-  base: "w-full h-[600px] overflow-auto rounded border border-gray-700 bg-gray-900 px-3 py-2 text-sm",
+  base: "h-[600px] overflow-auto",
 };
 
 const classes = {
@@ -23,9 +23,11 @@ const classes = {
   2: "text-3xl font-bold",
   3: "text-2xl font-bold",
   4: "text-xl font-bold",
+  5: "text-lg font-bold",
+  6: "text-base font-bold",
 };
 
-const Heading = BaseHeading.configure({ levels: [1, 2, 3, 4] }).extend({
+const Heading = BaseHeading.configure({ levels: [1, 2, 3, 4, 5, 6] }).extend({
   renderHTML({ node, HTMLAttributes }) {
     const hasLevel = this.options.levels.includes(node.attrs.level);
     const level = hasLevel ? node.attrs.level : this.options.levels[0];
@@ -79,7 +81,7 @@ const TextEditorComp = ({ placeholder = "Write....", onChange }) => {
     ],
     editorProps: {
       attributes: {
-        class: cn(style.base, focus.base),
+        class: cn(input.base, style.base, focus.base),
       },
     },
     onUpdate({ editor }) {

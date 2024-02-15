@@ -25,6 +25,7 @@ const Select = ({
     <div>
       <select
         className={cn(
+          "select",
           style.base,
           focus.base,
           size === "xs" && style.size.xs,

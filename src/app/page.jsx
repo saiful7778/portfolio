@@ -18,7 +18,7 @@ const HomePage = async () => {
         <Banner />
       </header>
       <main className="my-16 p-2">
-        <h1>Saiful Islam</h1>
+        <h1 className="text-3xl font-bold">Saiful Islam</h1>
       </main>
       <footer>
         <Footer />

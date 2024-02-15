@@ -1,6 +1,13 @@
 import cn from "@/lib/cn";
 // icons
-import { LuHeading1, LuHeading2, LuHeading3, LuHeading4 } from "react-icons/lu";
+import {
+  LuHeading1,
+  LuHeading2,
+  LuHeading3,
+  LuHeading4,
+  LuHeading5,
+  LuHeading6,
+} from "react-icons/lu";
 import {
   FaBold,
   FaItalic,
@@ -21,6 +28,7 @@ import { useCallback } from "react";
 // others
 import Alert from "@/lib/config/Alert.config";
 import Button from "../utilities/Button";
+import { input } from "@/theme";
 
 const style = {
   base: "cursor-pointer rounded w-7 h-7 inline-flex items-center justify-center font-semibold shadow border border-gray-50 duration-200 active:focus:scale-95 disabled:cursor-not-allowed disabled:opacity-50",
@@ -103,6 +111,12 @@ const TextEditorToolbar = ({ editor }) => {
   };
   const handleHeading4 = () => {
     editor.chain().focus().toggleHeading({ level: 4 }).run();
+  };
+  const handleHeading5 = () => {
+    editor.chain().focus().toggleHeading({ level: 5 }).run();
+  };
+  const handleHeading6 = () => {
+    editor.chain().focus().toggleHeading({ level: 6 }).run();
   };
 
   const handleUndo = () => {
@@ -221,6 +235,20 @@ const TextEditorToolbar = ({ editor }) => {
         onClick={handleHeading4}
       >
         <LuHeading4 />
+      </Tool>
+      <Tool
+        tag="heading 5"
+        isActive={editor.isActive("heading", { level: 5 })}
+        onClick={handleHeading5}
+      >
+        <LuHeading5 />
+      </Tool>
+      <Tool
+        tag="heading 6"
+        isActive={editor.isActive("heading", { level: 6 })}
+        onClick={handleHeading6}
+      >
+        <LuHeading6 />
       </Tool>
       <div className="w-[1px] bg-gray-600"></div>
       <Tool
