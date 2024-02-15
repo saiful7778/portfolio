@@ -2,8 +2,8 @@
 import { getServerSession } from "next-auth";
 import Link from "next/link";
 // components
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import Navbar from "./sections/Navbar";
+import Footer from "./sections/Footer";
 import Avatar from "@/components/Avatar";
 import Banner from "./sections/Banner";
 // others

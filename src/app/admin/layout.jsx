@@ -1,5 +1,5 @@
-import Sidebar from "@/components/Sidebar";
-import Topbar from "@/components/Topbar";
+import Sidebar from "../sections/Sidebar";
+import Topbar from "../sections/Topbar";
 import SessionContext from "@/context/SessionContext";
 import StateProvider from "@/context/StateContext";
 

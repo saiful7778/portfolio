@@ -9,9 +9,9 @@ import { usePathname } from "next/navigation";
 import { LuMenu } from "react-icons/lu";
 import { RxCross2 } from "react-icons/rx";
 // components
-import Button from "./utilities/Button";
+import Button from "@/components/utilities/Button";
 // assets
-import profileImage from "../../public/saiful_image.png";
+import profileImage from "../../../public/saiful_image.png";
 // others
 import cn from "@/lib/cn";
 import { navLinks } from "@/staticData";

@@ -4,7 +4,7 @@ import Link from "next/link";
 // icons
 import { FaFacebook, FaLinkedin, FaGithub } from "react-icons/fa6";
 // assets
-import profile from "../../public/saiful_image.png";
+import profile from "../../../public/saiful_image.png";
 // others
 import { navLinks } from "@/staticData";
 

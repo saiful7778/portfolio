@@ -28,7 +28,6 @@ import { useCallback } from "react";
 // others
 import Alert from "@/lib/config/Alert.config";
 import Button from "../utilities/Button";
-import { input } from "@/theme";
 
 const style = {
   base: "cursor-pointer rounded w-7 h-7 inline-flex items-center justify-center font-semibold shadow border border-gray-50 duration-200 active:focus:scale-95 disabled:cursor-not-allowed disabled:opacity-50",

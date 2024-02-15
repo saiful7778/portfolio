@@ -6,14 +6,14 @@ import Image from "next/image";
 import { signOut, useSession } from "next-auth/react";
 import useStateData from "@/hooks/useStateData";
 // components
-import Button from "./utilities/Button";
-import Avatar from "./Avatar";
+import Button from "@/components/utilities/Button";
+import Avatar from "@/components/Avatar";
 import { Popover } from "keep-react";
-import Spinner from "./Spinner";
+import Spinner from "@/components/Spinner";
 // icons
 import { LuMenuSquare } from "react-icons/lu";
 // assets
-import profileImage from "../../public/saiful_image.png";
+import profileImage from "../../../public/saiful_image.png";
 
 const Topbar = () => {
   const { handleSidebar } = useStateData();
