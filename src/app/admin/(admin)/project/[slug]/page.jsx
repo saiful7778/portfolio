@@ -51,9 +51,9 @@ const SingleProject = async ({ params }) => {
   const projectCreateTime = moment(projectTime).format("Do MMM YY, h:mm a");
 
   return (
-    <div>
-      <Image src={url} alt={alt} width={720} height={600} />
-      <h1>{title}</h1>
+    <div className="mx-auto w-4/5">
+      <Image className="mx-auto" src={url} alt={alt} width={720} height={600} />
+      <h1 className="text-center text-3xl font-bold">{title}</h1>
       <div>
         <div>
           <span className="font-semibold text-gray-500">Time ago:</span>{" "}

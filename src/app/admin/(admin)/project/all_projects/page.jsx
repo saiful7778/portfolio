@@ -1,10 +1,11 @@
-import Table from "@/components/table";
-import moment from "moment";
 import Link from "next/link";
+import moment from "moment";
 import Actions from "./Actions";
 import { connectToDB } from "@/lib/server-helper";
 import prisma from "../../../../../../prisma";
+import Table from "@/components/table";
 import ErrorDataShow from "@/components/ErrorDataShow";
+import EmptyData from "@/components/EmptyData";
 
 export const dynamic = "force-dynamic";
 
@@ -47,6 +48,10 @@ const AllProjectsPage = async () => {
   }
 
   const { data: projects } = res;
+
+  if (projects.length < 1) {
+    return <EmptyData />;
+  }
 
   const renderProjects = projects.map((project, idx) => (
     <TableDataRow key={"project" + idx} inputData={project} count={idx + 1} />

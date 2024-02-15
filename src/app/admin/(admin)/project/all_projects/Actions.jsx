@@ -6,7 +6,10 @@ import Button from "@/components/utilities/Button";
 import { FaTrashCan } from "react-icons/fa6";
 import { CiEdit } from "react-icons/ci";
 import { BsThreeDotsVertical } from "react-icons/bs";
+// others
 import Alert from "@/lib/config/Alert.config";
+import deleteProject from "./delete";
+import revalidate from "@/lib/revalidate";
 
 const Actions = ({ projectId }) => {
   const handleDelete = async () => {
@@ -17,6 +20,33 @@ const Actions = ({ projectId }) => {
       showCancelButton: true,
       confirmButtonText: "Yes, delete it!",
     });
+    if (isConfirmed) {
+      Alert.fire({
+        didOpen: () => {
+          Alert.showLoading();
+        },
+      });
+      try {
+        const res = await deleteProject(projectId);
+        if (res.success) {
+          Alert.fire({
+            icon: "success",
+            title: "Project is deleted!",
+          });
+        } else {
+          Alert.fire({
+            icon: "error",
+            text: res.message,
+          });
+        }
+      } catch (err) {
+        Alert.fire({
+          icon: "error",
+          text: err,
+        });
+      }
+      revalidate("/admin/all_projects");
+    }
   };
   const handleUpdate = async () => {};
   return (
