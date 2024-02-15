@@ -51,32 +51,41 @@ const SingleProject = async ({ params }) => {
   const projectCreateTime = moment(projectTime).format("Do MMM YY, h:mm a");
 
   return (
-    <div className="mx-auto w-4/5">
-      <Image className="mx-auto" src={url} alt={alt} width={720} height={600} />
-      <h1 className="text-center text-3xl font-bold">{title}</h1>
-      <div>
+    <div className="mx-auto w-4/5 space-y-4">
+      <figure>
+        <Image
+          className="mx-auto"
+          src={url}
+          alt={alt}
+          width={1080}
+          height={720}
+        />
+        <p className="text-xs italic text-gray-500">Alt text: {alt}</p>
+      </figure>
+      <h1 className="text-3xl font-bold">{title}</h1>
+      <div className="text-sm">
         <div>
-          <span className="font-semibold text-gray-500">Time ago:</span>{" "}
-          {timeAgo}
-        </div>
-        <div>
-          <span className="font-semibold text-gray-500">
-            Project crate time:
-          </span>{" "}
+          <span className="text-gray-500">Project created time:</span>{" "}
           {projectCreateTime}
         </div>
         <div>
-          <span className="font-semibold text-gray-500">Create:</span>{" "}
-          {createdTime}
+          <span className="text-gray-500">Time ago:</span> {timeAgo}
         </div>
         <div>
-          <span className="font-semibold text-gray-500">Update:</span>{" "}
-          {updatedTime}
+          <span className="text-gray-500">Create:</span> {createdTime}
+        </div>
+        <div>
+          <span className="text-gray-500">Update:</span> {updatedTime}
         </div>
       </div>
-
-      <p>{shortDes}</p>
-      <div>{parse(des)}</div>
+      <div>
+        <div className="text-sm text-gray-500">Short description:</div>
+        <p>{shortDes}</p>
+      </div>
+      <div>
+        <div className="text-sm text-gray-500">Description:</div>
+        {parse(des)}
+      </div>
     </div>
   );
 };

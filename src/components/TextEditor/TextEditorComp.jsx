@@ -92,7 +92,6 @@ const TextEditorComp = ({ placeholder = "Write....", onChange }) => {
   if (!editor) {
     return null;
   }
-
   return (
     <div>
       <TextEditorToolbar editor={editor} />
