@@ -82,7 +82,7 @@ const TextEditorComp = ({
       }),
       OrderedList.configure({
         HTMLAttributes: {
-          class: "list-decimal ml-2",
+          class: "list-decimal ml-5",
         },
       }),
       CodeBlock.configure({
