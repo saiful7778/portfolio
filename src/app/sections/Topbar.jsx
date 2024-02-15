@@ -53,12 +53,12 @@ const Topbar = () => {
             <ul>
               <li>
                 <div className="rounded px-2 py-1 hover:bg-gray-700">
-                  Name: {data?.user?.name}
+                  {data?.user?.name}
                 </div>
               </li>
               <li>
                 <div className="rounded px-2 py-1 hover:bg-gray-700">
-                  Email: {data?.user?.email}
+                  {data?.user?.email}
                 </div>
               </li>
               <li>

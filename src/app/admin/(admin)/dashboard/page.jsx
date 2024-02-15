@@ -5,6 +5,7 @@ import moment from "moment";
 import { connectToDB } from "@/lib/server-helper";
 import prisma from "../../../../../prisma";
 import ErrorDataShow from "@/components/ErrorDataShow";
+import EmptyData from "@/components/EmptyData";
 
 export const dynamic = "force-dynamic";
 
@@ -46,6 +47,10 @@ const DashboardPage = async () => {
   }
 
   const { data: users } = res;
+
+  if (users.length < 1) {
+    return <EmptyData />;
+  }
 
   const renderUser = users.map((user, idx) => (
     <TableDataRow key={user.name} inputData={user} count={idx + 1} />
