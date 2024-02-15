@@ -45,7 +45,7 @@ const Heading = BaseHeading.configure({ levels: [1, 2, 3, 4, 5, 6] }).extend({
 });
 
 const TextEditorComp = ({ placeholder = "Write....", onChange }) => {
-  const limit = 2000;
+  const limit = 5000;
   const [data, setdata] = useState("");
 
   const editor = useEditor({
