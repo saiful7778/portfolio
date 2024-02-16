@@ -3,7 +3,7 @@ import Button from "@/components/utilities/Button";
 import Alert from "@/lib/config/Alert.config";
 import deleteProject from "../all_projects/delete";
 import { useRouter } from "next/navigation";
-import { revalidatePath } from "next/cache";
+import revalidate from "@/lib/revalidate";
 
 const DeleteProject = ({ projectId }) => {
   const router = useRouter();
@@ -41,7 +41,7 @@ const DeleteProject = ({ projectId }) => {
           text: err,
         });
       }
-      revalidatePath("/admin/project/all_projects");
+      revalidate("/admin/project/all_projects");
       router.push("/admin/project/all_projects");
     }
   };

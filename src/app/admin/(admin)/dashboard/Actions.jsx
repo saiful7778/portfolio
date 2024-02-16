@@ -27,7 +27,7 @@ import reCaptcha from "@/lib/reCaptcha";
 // other
 import Alert from "@/lib/config/Alert.config";
 import { userSchema } from "@/schemas/user";
-import { revalidatePath } from "next/cache";
+import revalidate from "@/lib/revalidate";
 
 const Actions = ({ userData }) => {
   const { data, status } = useSession();
@@ -75,7 +75,7 @@ const Actions = ({ userData }) => {
       });
       try {
         await deleteData("/api/data/user", userData.id);
-        revalidatePath("/admin/dashboard");
+        revalidate("/admin/dashboard");
         Alert.fire({
           icon: "success",
           title: "User is deleted!",
@@ -271,7 +271,7 @@ const Actions = ({ userData }) => {
 const updateUser = async (userData) => {
   try {
     await update("/api/data/user", userData);
-    revalidatePath("/admin/dashboard");
+    revalidate("/admin/dashboard");
     Alert.fire({
       icon: "success",
       title: "User details is updated!",
