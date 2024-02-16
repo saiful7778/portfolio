@@ -6,10 +6,13 @@ export const StateContext = createContext(null);
 
 const StateProvider = ({ children }) => {
   const [sidebar, setSidebar] = useState(true);
+  const [reFetch, setReFetch] = useState(false);
   const [showReCaptcha, setShowReCaptcha] = useState({
     show: "off",
     page: [],
   });
+
+  const handleReFetch = () => setReFetch((l) => !l);
 
   useEffect(() => {
     (async () => {
@@ -31,7 +34,7 @@ const StateProvider = ({ children }) => {
         });
       }
     })();
-  }, []);
+  }, [reFetch]);
 
   const handleShowReCaptcha = () => setShowReCaptcha((prop) => !prop);
 
@@ -44,6 +47,7 @@ const StateProvider = ({ children }) => {
         handleSidebar,
         showReCaptcha,
         handleShowReCaptcha,
+        handleReFetch,
       }}
     >
       {children}

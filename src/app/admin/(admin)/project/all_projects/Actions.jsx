@@ -10,7 +10,7 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 // others
 import Alert from "@/lib/config/Alert.config";
 import deleteProject from "./delete";
-import revalidate from "@/lib/revalidate";
+import { revalidatePath } from "next/cache";
 
 const Actions = ({ projectId, slug }) => {
   const router = useRouter();
@@ -48,7 +48,7 @@ const Actions = ({ projectId, slug }) => {
           text: err,
         });
       }
-      revalidate("/admin/project/all_projects");
+      revalidatePath("/admin/project/all_projects");
     }
   };
 

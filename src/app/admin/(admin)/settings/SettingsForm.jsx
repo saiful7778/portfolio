@@ -6,9 +6,11 @@ import { Form, Formik } from "formik";
 import { useState } from "react";
 import ReCaptcha from "./components/ReCaptcha";
 import { dbWrite } from "@/db/dbWrite";
+import useStateData from "@/hooks/useStateData";
 
 const SettingsForm = ({ initialData }) => {
   const [spinner, setSpinner] = useState(false);
+  const { handleReFetch } = useStateData();
 
   const initialValues = initialData || {
     reCaptcha: "",
@@ -19,6 +21,7 @@ const SettingsForm = ({ initialData }) => {
     setSpinner(true);
     try {
       await dbWrite(e);
+      handleReFetch();
       setSpinner(false);
     } catch (err) {
       console.log(err);

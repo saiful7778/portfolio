@@ -18,7 +18,7 @@ import { useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import updateUser from "./update";
 import { useRouter } from "next/navigation";
-import revalidate from "@/lib/revalidate";
+import { revalidatePath } from "next/cache";
 
 const UpdateProjectForm = ({ projectData }) => {
   const {
@@ -245,7 +245,7 @@ const updateUserData = async (id, userData, router) => {
     title: "Project is updated!",
   });
   router.push("/admin/project/all_projects");
-  revalidate("/admin/project/all_projects");
+  revalidatePath("/admin/project/all_projects");
   return true;
 };
 

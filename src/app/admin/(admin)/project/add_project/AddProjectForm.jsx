@@ -22,7 +22,7 @@ import create from "@/lib/CRUD/create";
 import Alert from "@/lib/config/Alert.config";
 import { addProjectSchema } from "@/schemas/project";
 import { useRouter } from "next/navigation";
-import revalidate from "@/lib/revalidate";
+import { revalidatePath } from "next/cache";
 
 const AddProjectForm = () => {
   const router = useRouter();
@@ -136,7 +136,7 @@ const AddProjectForm = () => {
         title: "Project is created!",
       });
       router.push("/admin/project/all_projects");
-      revalidate("/admin/project/all_projects");
+      revalidatePath("/admin/project/all_projects");
       reset();
     } catch (err) {
       console.error(err);

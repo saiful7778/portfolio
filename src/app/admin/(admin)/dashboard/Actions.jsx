@@ -2,9 +2,11 @@
 // packages
 import { Form, Formik } from "formik";
 import Image from "next/image";
+import ReCAPTCHA from "react-google-recaptcha";
 // hooks
 import { useSession } from "next-auth/react";
-import { useState } from "react";
+import useStateData from "@/hooks/useStateData";
+import { useRef, useState } from "react";
 // components
 import { Popover } from "keep-react";
 import ImageUpload from "@/components/ImageUpload";
@@ -21,16 +23,23 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import imageUpload from "@/lib/imageUpload";
 import { update } from "@/lib/CRUD/update";
 import { deleteData } from "@/lib/CRUD/delete";
-import revalidate from "@/lib/revalidate";
+import reCaptcha from "@/lib/reCaptcha";
 // other
 import Alert from "@/lib/config/Alert.config";
 import { userSchema } from "@/schemas/user";
+import { revalidatePath } from "next/cache";
 
 const Actions = ({ userData }) => {
   const { data, status } = useSession();
   const [modal, setModal] = useState(false);
   const [spinner, setSpinner] = useState(false);
   const [updateImg, setUpdateImg] = useState(userData?.image ? true : false);
+  const { showReCaptcha } = useStateData();
+  const recaptchaRef = useRef(null);
+  const showReCaptchaState =
+    showReCaptcha.show === "on" ||
+    (showReCaptcha.show === "custom" &&
+      showReCaptcha.page.includes("userUpdate"));
   const [profileImg, setProfileImg] = useState({
     image: null,
     name: "",
@@ -66,7 +75,7 @@ const Actions = ({ userData }) => {
       });
       try {
         await deleteData("/api/data/user", userData.id);
-        revalidate("/admin/dashboard");
+        revalidatePath("/admin/dashboard");
         Alert.fire({
           icon: "success",
           title: "User is deleted!",
@@ -111,6 +120,15 @@ const Actions = ({ userData }) => {
   const handleUpdate = async (e, { resetForm }) => {
     setSpinner(true);
     const reset = handleReset(resetForm);
+    if (showReCaptchaState) {
+      const captcha = await reCaptcha(recaptchaRef, () => {
+        setSpinner(false);
+      });
+      if (!captcha) {
+        reset();
+        return;
+      }
+    }
     try {
       if (!updateImg && profileImg.image) {
         const data = await imageUpload(profileImg.image, profileImg.name);
@@ -227,6 +245,13 @@ const Actions = ({ userData }) => {
                 options={roleOptions}
               />
             </div>
+            {showReCaptchaState && (
+              <ReCAPTCHA
+                className="mt-2"
+                ref={recaptchaRef}
+                sitekey={process.env.NEXT_PUBLIC_SITE_KEY}
+              />
+            )}
             <Button
               className="mt-2"
               disabled={spinner}
@@ -246,7 +271,7 @@ const Actions = ({ userData }) => {
 const updateUser = async (userData) => {
   try {
     await update("/api/data/user", userData);
-    revalidate("/admin/dashboard");
+    revalidatePath("/admin/dashboard");
     Alert.fire({
       icon: "success",
       title: "User details is updated!",
