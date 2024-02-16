@@ -1,5 +1,12 @@
+import SettingsForm from "./SettingsForm";
+
+export const metadata = {
+  title: "Settings - admin - portfolio",
+  description: "This is settings page of Saiful Islam portfolio website.",
+};
+
 const SettingsPage = () => {
-  return <div>Settings</div>;
+  return <SettingsForm />;
 };
 
 export default SettingsPage;
