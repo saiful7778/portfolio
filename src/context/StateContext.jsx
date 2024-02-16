@@ -1,11 +1,37 @@
 "use client";
-import { createContext, useState } from "react";
+import dbReadServer from "@/db/dbReadServer";
+import { createContext, useEffect, useState } from "react";
 
 export const StateContext = createContext(null);
 
 const StateProvider = ({ children }) => {
   const [sidebar, setSidebar] = useState(true);
-  const [showReCaptcha, setShowReCaptcha] = useState(false);
+  const [showReCaptcha, setShowReCaptcha] = useState({
+    show: "off",
+    page: [],
+  });
+
+  useEffect(() => {
+    (async () => {
+      const data = await dbReadServer();
+      if (data.reCaptcha === "on") {
+        setShowReCaptcha({
+          show: "in",
+          page: [],
+        });
+      } else if (data.reCaptcha === "custom") {
+        setShowReCaptcha({
+          show: "custom",
+          page: data.reCaptchaOnPage,
+        });
+      } else {
+        setShowReCaptcha({
+          show: "off",
+          page: [],
+        });
+      }
+    })();
+  }, []);
 
   const handleShowReCaptcha = () => setShowReCaptcha((prop) => !prop);
 

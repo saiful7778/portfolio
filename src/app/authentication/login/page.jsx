@@ -20,6 +20,9 @@ import { loginSchema } from "@/schemas/authentication";
 const LoginPage = ({ searchParams }) => {
   const [spinner, setSpinner] = useState(false);
   const { showReCaptcha } = useStateData();
+  const showReCaptchaState =
+    showReCaptcha.show === "on" ||
+    (showReCaptcha.show === "custom" && showReCaptcha.page.includes("login"));
   const recaptchaRef = useRef(null);
 
   const initialValues = {
@@ -37,7 +40,7 @@ const LoginPage = ({ searchParams }) => {
   const submitData = async (e, { resetForm }) => {
     setSpinner(true);
     const reset = handleReset(resetForm);
-    if (showReCaptcha) {
+    if (showReCaptchaState) {
       const captcha = await reCaptcha(recaptchaRef, () => {
         setSpinner(false);
       });
@@ -71,7 +74,7 @@ const LoginPage = ({ searchParams }) => {
         <Form className="mt-4 space-y-2">
           <Input type="text" name="email" placeholder="Email address" />
           <Password placeholder="Password" name="password" />
-          {showReCaptcha && (
+          {showReCaptchaState && (
             <ReCAPTCHA
               ref={recaptchaRef}
               sitekey={process.env.NEXT_PUBLIC_SITE_KEY}

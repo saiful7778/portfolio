@@ -1,3 +1,4 @@
+import dbRead from "@/db/dbRead";
 import SettingsForm from "./SettingsForm";
 
 export const metadata = {
@@ -6,7 +7,8 @@ export const metadata = {
 };
 
 const SettingsPage = () => {
-  return <SettingsForm />;
+  const initialData = dbRead();
+  return <SettingsForm initialData={initialData} />;
 };
 
 export default SettingsPage;

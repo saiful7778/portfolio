@@ -41,6 +41,10 @@ const UpdateProjectForm = ({ projectData }) => {
   const [updateImage, setUpdateImage] = useState(false);
   const recaptchaRef = useRef(null);
   const { showReCaptcha } = useStateData();
+  const showReCaptchaState =
+    showReCaptcha.show === "on" ||
+    (showReCaptcha.show === "custom" &&
+      showReCaptcha.page.includes("projectUpdate"));
   const [spinner, setSpinner] = useState(false);
   const [description, setDescription] = useState(des);
   const [date, setDate] = useState(projectData.projectTime);
@@ -83,7 +87,7 @@ const UpdateProjectForm = ({ projectData }) => {
   const handleSubmit = async (e, { resetForm }) => {
     setSpinner(true);
     const reset = handleReset(resetForm);
-    if (showReCaptcha) {
+    if (showReCaptchaState) {
       const captcha = await reCaptcha(recaptchaRef, () => {
         setSpinner(false);
       });
@@ -207,7 +211,7 @@ const UpdateProjectForm = ({ projectData }) => {
             onChange={setDescription}
             content={des}
           />
-          {showReCaptcha && (
+          {showReCaptchaState && (
             <ReCAPTCHA
               ref={recaptchaRef}
               sitekey={process.env.NEXT_PUBLIC_SITE_KEY}

@@ -5,17 +5,25 @@ import { settingsSchema } from "@/schemas/settings";
 import { Form, Formik } from "formik";
 import { useState } from "react";
 import ReCaptcha from "./components/ReCaptcha";
+import { dbWrite } from "@/db/dbWrite";
 
-const SettingsForm = () => {
+const SettingsForm = ({ initialData }) => {
   const [spinner, setSpinner] = useState(false);
 
-  const initialValues = {
+  const initialValues = initialData || {
     reCaptcha: "",
     reCaptchaOnPage: [],
   };
 
   const handleSubmit = async (e) => {
-    console.log(e);
+    setSpinner(true);
+    try {
+      await dbWrite(e);
+      setSpinner(false);
+    } catch (err) {
+      console.log(err);
+      setSpinner(false);
+    }
   };
 
   return (

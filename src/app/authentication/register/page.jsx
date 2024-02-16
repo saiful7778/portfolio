@@ -27,6 +27,10 @@ const RegisterPage = () => {
   const recaptchaRef = useRef(null);
   const route = useRouter();
   const { showReCaptcha } = useStateData();
+  const showReCaptchaState =
+    showReCaptcha.show === "on" ||
+    (showReCaptcha.show === "custom" &&
+      showReCaptcha.page.includes("register"));
 
   // Image data
   const [profileImage, setProfileImage] = useState({
@@ -64,7 +68,7 @@ const RegisterPage = () => {
   const submitData = async (e, { resetForm }) => {
     setSpinner(true);
     const reset = handleReset(resetForm);
-    if (showReCaptcha) {
+    if (showReCaptchaState) {
       const captcha = await reCaptcha(recaptchaRef, () => {
         setSpinner(false);
       });
@@ -121,7 +125,7 @@ const RegisterPage = () => {
           <Input type="text" name="email" placeholder="Email address" />
           <Password placeholder="Password" name="password" />
           <Password placeholder="Confirm password" name="confirmPassword" />
-          {showReCaptcha && (
+          {showReCaptchaState && (
             <ReCAPTCHA
               ref={recaptchaRef}
               sitekey={process.env.NEXT_PUBLIC_SITE_KEY}
