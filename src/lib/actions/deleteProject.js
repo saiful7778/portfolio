@@ -1,12 +1,12 @@
 "use server";
 import { connectToDB } from "@/lib/server-helper";
-import prisma from "../../../../../../prisma";
+import prisma from "../../../prisma";
 
-export default async function deleteProject(projectID) {
+export default async function deleteProject(id) {
   try {
     await connectToDB();
     const exitProject = await prisma.project.findFirst({
-      where: { id: projectID },
+      where: { id },
     });
     if (!exitProject) {
       return {
@@ -15,7 +15,7 @@ export default async function deleteProject(projectID) {
       };
     }
     const data = await prisma.project.delete({
-      where: { id: projectID },
+      where: { id },
     });
     return {
       success: true,

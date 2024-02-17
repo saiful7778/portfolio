@@ -9,8 +9,8 @@ import { CiEdit } from "react-icons/ci";
 import { BsThreeDotsVertical } from "react-icons/bs";
 // others
 import Alert from "@/lib/config/Alert.config";
-import deleteProject from "./delete";
 import revalidate from "@/lib/revalidate";
+import deleteProject from "@/lib/actions/deleteProject";
 
 const Actions = ({ projectId, slug }) => {
   const router = useRouter();
