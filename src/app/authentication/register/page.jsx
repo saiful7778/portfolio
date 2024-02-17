@@ -86,7 +86,7 @@ const RegisterPage = () => {
           password: e.password,
           image: data?.data?.thumb?.url,
         };
-        await createUserData(userData, route);
+        await createUserData(userData, route, reset);
       } else {
         const userData = {
           name: e.fullName,
@@ -94,9 +94,8 @@ const RegisterPage = () => {
           password: e.password,
           image: "",
         };
-        await createUserData(userData, route);
+        await createUserData(userData, route, reset);
       }
-      reset();
     } catch (err) {
       console.error(err);
       Alert.fire({
@@ -153,15 +152,17 @@ const RegisterPage = () => {
   );
 };
 
-const createUserData = async (userData, route) => {
+const createUserData = async (userData, route, reset) => {
   const res = await createUser(userData);
   if (!res.success) {
     Alert.fire({
       icon: "error",
       text: res.message,
     });
+    reset();
     return;
   }
+  reset();
   const { isConfirmed } = await Alert.fire({
     icon: "success",
     title: "Account is created!",

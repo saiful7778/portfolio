@@ -86,7 +86,7 @@ const Actions = ({ userData }) => {
         },
       });
       try {
-        const res = deleteUser(userData.id);
+        const res = await deleteUser(userData.id);
         if (!res.success) {
           Alert.fire({
             icon: "error",
