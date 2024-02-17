@@ -61,10 +61,7 @@ const TableDataRow = ({ inputData, count }) => {
       <Table.cell className="text-center font-semibold">{count}</Table.cell>
       <Table.cell>
         <Link
-          href={{
-            pathname: `/admin/project/${slug}`,
-            query: { projectId: id },
-          }}
+          href={`/admin/project/${slug}`}
           className="hover:text-blue-500 hover:underline"
         >
           {title}
