@@ -14,6 +14,7 @@ import CharacterCount from "@tiptap/extension-character-count";
 import { mergeAttributes } from "@tiptap/core";
 import Link from "@tiptap/extension-link";
 import { focus, input } from "@/theme";
+import { useField } from "formik";
 
 const style = {
   base: "h-[600px] overflow-auto",
@@ -43,11 +44,11 @@ const Heading = BaseHeading.configure({ levels: [1, 2, 3, 4, 5, 6] }).extend({
   },
 });
 
-const TextEditorComp = ({
-  placeholder = "Write....",
-  onChange,
-  content = "",
-}) => {
+const TextEditorComp = ({ name, placeholder = "Write....", content = "" }) => {
+  const formik = useField({ name });
+  const { error } = formik[1];
+  const { setValue } = formik[2];
+
   const limit = 5000;
 
   const editor = useEditor({
@@ -96,7 +97,7 @@ const TextEditorComp = ({
     },
     content,
     onUpdate({ editor }) {
-      onChange(editor.getHTML());
+      setValue(editor.getHTML());
     },
   });
 
@@ -112,6 +113,7 @@ const TextEditorComp = ({
           {editor.storage.characterCount.characters()}/{limit}
         </div>
       </div>
+      {error ? <p className="mt-1 text-xs text-red-500">{error}</p> : null}
     </div>
   );
 };
