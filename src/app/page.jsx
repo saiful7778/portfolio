@@ -1,5 +1,4 @@
 // next.js package
-import { getServerSession } from "next-auth";
 import Link from "next/link";
 // components
 import Navbar from "./sections/Navbar";
@@ -7,10 +6,10 @@ import Footer from "./sections/Footer";
 import Avatar from "@/components/Avatar";
 import Banner from "./sections/Banner";
 // others
-import { authOptions } from "./api/auth/[...nextauth]/route";
+import getAuth from "@/hooks/getAuth";
 
 const HomePage = async () => {
-  const session = await getServerSession(authOptions);
+  const session = await getAuth();
   return (
     <>
       <header className="p-2">
