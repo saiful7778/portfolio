@@ -17,12 +17,12 @@ import TextEditor from "@/components/TextEditor";
 // libs
 import imageUpload from "@/lib/imageUpload";
 import reCaptcha from "@/lib/reCaptcha";
-import create from "@/lib/CRUD/create";
 // others
 import Alert from "@/lib/config/Alert.config";
 import { addProjectSchema } from "@/schemas/project";
 import { useRouter } from "next/navigation";
 import revalidate from "@/lib/revalidate";
+import addProject from "@/lib/actions/addProject";
 
 const AddProjectForm = () => {
   const router = useRouter();
@@ -130,7 +130,14 @@ const AddProjectForm = () => {
         des: description,
         projectTime,
       };
-      await create("/api/data/project", projectData);
+      const res = await addProject(projectData);
+      if (!res.success) {
+        Alert.fire({
+          icon: "error",
+          text: res?.message,
+        });
+        return;
+      }
       Alert.fire({
         icon: "success",
         title: "Project is created!",
