@@ -11,7 +11,7 @@ export default async function reCaptcha(recaptchaRef, confirmCaptcha) {
     return false;
   }
   try {
-    const res = await fetch("/captcha/verify", {
+    const res = await fetch("/api/captcha/verify", {
       method: "POST",
       headers: {
         "content-type": "application/json",

@@ -108,7 +108,7 @@ const UpdateProjectForm = ({ projectData }) => {
           return;
         }
         const data = await imageUpload(thumbnailImg.image, thumbnailImg.name);
-        const res = await updateProjectData(
+        await updateProjectData(
           id,
           {
             ...e,
@@ -118,13 +118,10 @@ const UpdateProjectForm = ({ projectData }) => {
             thumbnail: { url: data?.data?.thumb?.url, alt: thumbnailImg.alt },
           },
           router,
+          reset,
         );
-        if (!res) {
-          reset();
-          return;
-        }
       } else {
-        const res = await updateProjectData(
+        await updateProjectData(
           id,
           {
             ...e,
@@ -133,11 +130,8 @@ const UpdateProjectForm = ({ projectData }) => {
             slug,
           },
           router,
+          reset,
         );
-        if (!res) {
-          reset();
-          return;
-        }
       }
     } catch (err) {
       console.error(err);
@@ -230,22 +224,22 @@ const UpdateProjectForm = ({ projectData }) => {
   );
 };
 
-const updateProjectData = async (id, userData, router) => {
+const updateProjectData = async (id, userData, router, reset) => {
   const res = await updateProject(id, userData);
   if (!res.success) {
     Alert.fire({
       icon: "error",
       text: res.message,
     });
-    return false;
+    return;
   }
   Alert.fire({
     icon: "success",
     title: "Project is updated!",
   });
+  reset();
   revalidate("/admin/project/all_projects");
   router.push("/admin/project/all_projects");
-  return true;
 };
 
 export default UpdateProjectForm;

@@ -12,7 +12,7 @@ const Modal = ({ openModal, closeModal, modalTitle, children }) => {
         data-testid="modal"
         hidden={!openModal}
       >
-        <div className="relative max-h-96 w-full max-w-xl animate-keep-bounce overflow-auto rounded border border-gray-700 bg-gray-800 p-3 shadow">
+        <div className="relative max-h-96 w-full max-w-xl overflow-auto rounded border border-gray-700 bg-gray-800 p-3 shadow">
           <div className="flex items-center justify-between gap-2">
             {modalTitle && (
               <h4 className="text-xl font-semibold">{modalTitle}</h4>

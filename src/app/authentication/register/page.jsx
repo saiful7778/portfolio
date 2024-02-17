@@ -17,10 +17,10 @@ import Password from "@/components/utilities/Password";
 // api operations
 import reCaptcha from "@/lib/reCaptcha";
 import imageUpload from "@/lib/imageUpload";
-import create from "@/lib/CRUD/create";
 // others
 import { registerSchema } from "@/schemas/authentication";
 import Alert from "@/lib/config/Alert.config";
+import createUser from "@/lib/actions/createUser";
 
 const RegisterPage = () => {
   const [spinner, setSpinner] = useState(false);
@@ -86,7 +86,7 @@ const RegisterPage = () => {
           password: e.password,
           image: data?.data?.thumb?.url,
         };
-        await createUser(userData);
+        await createUserData(userData, route);
       } else {
         const userData = {
           name: e.fullName,
@@ -94,9 +94,8 @@ const RegisterPage = () => {
           password: e.password,
           image: "",
         };
-        await createUser(userData);
+        await createUserData(userData, route);
       }
-      route.push("/");
       reset();
     } catch (err) {
       console.error(err);
@@ -154,15 +153,27 @@ const RegisterPage = () => {
   );
 };
 
-const createUser = async (userData) => {
-  try {
-    await create("/api/auth/register", userData);
+const createUserData = async (userData, route) => {
+  const res = await createUser(userData);
+  if (!res.success) {
     Alert.fire({
-      icon: "success",
-      title: "Account is created!",
+      icon: "error",
+      text: res.message,
     });
-  } catch (err) {
-    throw new Error(err);
+    return;
+  }
+  const { isConfirmed } = await Alert.fire({
+    icon: "success",
+    title: "Account is created!",
+    text: "Do you want to login",
+    showCancelButton: true,
+    confirmButtonText: "Yes",
+    cancelButtonText: "No",
+  });
+  if (isConfirmed) {
+    route.push("/authentication/login");
+  } else {
+    route.push("/");
   }
 };
 

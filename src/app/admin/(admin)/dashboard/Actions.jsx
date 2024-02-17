@@ -21,14 +21,13 @@ import { CiEdit } from "react-icons/ci";
 import { BsThreeDotsVertical } from "react-icons/bs";
 // api op
 import imageUpload from "@/lib/imageUpload";
-
-import { update } from "@/lib/CRUD/update";
-import { deleteData } from "@/lib/CRUD/delete";
+import revalidate from "@/lib/revalidate";
 import reCaptcha from "@/lib/reCaptcha";
 // other
 import Alert from "@/lib/config/Alert.config";
 import { userSchema } from "@/schemas/user";
-import revalidate from "@/lib/revalidate";
+import updateUser from "@/lib/actions/updateUser";
+import deleteUser from "@/lib/actions/deleteUser";
 
 const Actions = ({ userData }) => {
   const { data, status } = useSession();
@@ -53,6 +52,18 @@ const Actions = ({ userData }) => {
     setProfileImg({ ...profileImg, ...imageData });
   };
 
+  const handleModal = () => setModal((l) => !l);
+
+  const userDataInitialValues = {
+    name: userData.name,
+    role: userData.role,
+  };
+
+  const roleOptions = [
+    { value: "user", text: "User" },
+    { value: "admin", text: "Admin" },
+  ];
+
   const handleDelete = async () => {
     if (status === "authenticated" && userData.email === data?.user?.email) {
       Alert.fire({
@@ -75,11 +86,18 @@ const Actions = ({ userData }) => {
         },
       });
       try {
-        await deleteData("/api/data/user", userData.id);
+        const res = deleteUser(userData.id);
+        if (!res.success) {
+          Alert.fire({
+            icon: "error",
+            text: res.message,
+          });
+          return;
+        }
         revalidate("/admin/dashboard");
         Alert.fire({
           icon: "success",
-          title: "User is deleted!",
+          title: "User is deleted",
         });
       } catch (err) {
         console.error(err);
@@ -90,18 +108,6 @@ const Actions = ({ userData }) => {
       }
     }
   };
-
-  const handleModal = () => setModal((l) => !l);
-
-  const userDataInitialValues = {
-    name: userData.name,
-    role: userData.role,
-  };
-
-  const roleOptions = [
-    { value: "user", text: "User" },
-    { value: "admin", text: "Admin" },
-  ];
 
   const handleReset = (resetForm) => {
     return () => {
@@ -133,21 +139,12 @@ const Actions = ({ userData }) => {
     try {
       if (!updateImg && profileImg.image) {
         const data = await imageUpload(profileImg.image, profileImg.name);
-        await updateUser({
-          query: {
-            id: userData.id,
-            email: userData.email,
-          },
-          data: { ...e, image: data?.data?.thumb?.url },
+        await updateUserData(userData.id, userData.email, {
+          ...e,
+          image: data?.data?.thumb?.url,
         });
       } else {
-        await updateUser({
-          query: {
-            id: userData.id,
-            email: userData.email,
-          },
-          data: e,
-        });
+        await updateUserData(userData.id, userData.email, e);
       }
       reset();
     } catch (err) {
@@ -269,17 +266,20 @@ const Actions = ({ userData }) => {
   );
 };
 
-const updateUser = async (userData) => {
-  try {
-    await update("/api/data/user", userData);
-    revalidate("/admin/dashboard");
+const updateUserData = async (id, email, data) => {
+  const res = await updateUser(id, email, data);
+  if (!res.success) {
     Alert.fire({
-      icon: "success",
-      title: "User details is updated!",
+      icon: "error",
+      text: res.message,
     });
-  } catch (err) {
-    throw new Error(err);
+    return;
   }
+  Alert.fire({
+    icon: "success",
+    title: "User is updated!",
+  });
+  revalidate("/admin/dashboard");
 };
 
 export default Actions;
