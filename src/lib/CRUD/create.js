@@ -7,12 +7,8 @@ export default async function create(apiRoute, data) {
       },
       body: JSON.stringify(data),
     });
-    const resData = await res.json();
-    if (!resData.success) {
-      throw new Error(resData?.message);
-    }
-    return resData;
+    return res.json();
   } catch (err) {
-    throw new Error(err);
+    return err;
   }
 }
