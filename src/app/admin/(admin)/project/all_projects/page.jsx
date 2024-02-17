@@ -1,11 +1,10 @@
 import Link from "next/link";
 import moment from "moment";
 import Actions from "./Actions";
-import { connectToDB } from "@/lib/server-helper";
-import prisma from "../../../../../../prisma";
 import Table from "@/components/table";
 import ErrorDataShow from "@/components/ErrorDataShow";
 import EmptyData from "@/components/EmptyData";
+import getProjects from "@/lib/DB/getProjects";
 
 export const dynamic = "force-dynamic";
 
@@ -14,31 +13,6 @@ export const metadata = {
   description:
     "This is the all projects management admin page of Saiful Islam portfolio website.",
 };
-
-async function getProjects() {
-  try {
-    await connectToDB();
-    const projects = await prisma.project.findMany();
-    if (!projects) {
-      return {
-        success: false,
-        message: "No data available",
-      };
-    }
-    return {
-      success: true,
-      data: projects,
-    };
-  } catch (err) {
-    console.log(err);
-    return {
-      success: false,
-      message: err,
-    };
-  } finally {
-    await prisma.$disconnect();
-  }
-}
 
 const AllProjectsPage = async () => {
   const res = await getProjects();

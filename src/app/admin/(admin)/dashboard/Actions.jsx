@@ -21,6 +21,7 @@ import { CiEdit } from "react-icons/ci";
 import { BsThreeDotsVertical } from "react-icons/bs";
 // api op
 import imageUpload from "@/lib/imageUpload";
+
 import { update } from "@/lib/CRUD/update";
 import { deleteData } from "@/lib/CRUD/delete";
 import reCaptcha from "@/lib/reCaptcha";
