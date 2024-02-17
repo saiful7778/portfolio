@@ -4,6 +4,7 @@ import moment from "moment";
 import Image from "next/image";
 import parse from "html-react-parser";
 import Link from "next/link";
+import EmptyData from "@/components/EmptyData";
 
 export async function generateMetadata({ params }) {
   const res = await getProject(params?.slug);
@@ -13,7 +14,13 @@ export async function generateMetadata({ params }) {
       description: "There was an error to get this project data",
     };
   }
-  const { title, shortDes } = res.data;
+  const { title, shortDes, status } = res.data;
+  if (status === "private") {
+    return {
+      title: "There was no available",
+      description: "There was no available.",
+    };
+  }
   return {
     title: `${title} - project`,
     description: shortDes,
@@ -25,6 +32,10 @@ const SingleProject = async ({ params }) => {
 
   if (!res.success) {
     return <ErrorDataShow error={res?.message} />;
+  }
+
+  if (res.data.status === "private") {
+    return <EmptyData />;
   }
 
   const {
