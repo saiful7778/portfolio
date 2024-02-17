@@ -243,8 +243,8 @@ const updateProjectData = async (id, userData, router) => {
     icon: "success",
     title: "Project is updated!",
   });
-  router.push("/admin/project/all_projects");
   revalidate("/admin/project/all_projects");
+  router.push("/admin/project/all_projects");
   return true;
 };
 
