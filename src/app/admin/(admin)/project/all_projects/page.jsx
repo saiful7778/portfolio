@@ -68,7 +68,12 @@ const TableDataRow = ({ inputData, count }) => {
         </Link>
       </Table.cell>
       <Table.cell>
-        <p className="text-xs text-gray-400">{shortDes}</p>
+        <p className="text-xs text-gray-400">
+          {shortDes}
+          <Link className="link ml-1" target="_blank" href={`/project/${slug}`}>
+            live view
+          </Link>
+        </p>
       </Table.cell>
       <Table.cell>
         <div className="flex items-center justify-center">

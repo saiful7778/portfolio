@@ -1,6 +1,7 @@
 import ErrorDataShow from "@/components/ErrorDataShow";
 import getProject from "@/lib/DB/getProject";
 import UpdateProjectForm from "./UpdateProjectForm";
+import Link from "next/link";
 
 export async function generateMetadata({ params, searchParams }) {
   const res = await getProject(params?.slug);
@@ -36,7 +37,13 @@ const UpdateProject = async ({ params, searchParams }) => {
 
   return (
     <div className="rounded border border-gray-700 bg-gray-800 p-4 shadow">
-      <h2 className="mb-2 text-xl font-bold">Update: {res.data.title}</h2>
+      <Link
+        href={`/project/${res.data.slug}`}
+        className="text-xl font-bold hover:text-blue-600 hover:underline"
+        target="_blank"
+      >
+        Update: {res.data.title}
+      </Link>
       <UpdateProjectForm
         projectData={{ id: searchParams.projectId, ...res.data }}
       />

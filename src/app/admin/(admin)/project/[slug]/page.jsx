@@ -70,6 +70,9 @@ const SingleProject = async ({ params }) => {
           Update
         </Button>
         <DeleteProject projectId={id} />
+        <Button variant="primary" href={`/project/${slug}`}>
+          Live link
+        </Button>
       </div>
       <div className="text-sm">
         <div>

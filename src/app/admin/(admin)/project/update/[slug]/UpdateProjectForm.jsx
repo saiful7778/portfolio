@@ -163,7 +163,7 @@ const UpdateProjectForm = ({ projectData }) => {
           imageData={thumbnailImg}
         />
       ) : (
-        <div className="mb-2 flex flex-col items-center gap-2">
+        <div className="my-2 flex flex-col items-center gap-2">
           <Image
             className="mx-auto"
             src={url}
