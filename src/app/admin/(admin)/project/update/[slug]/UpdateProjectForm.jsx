@@ -12,19 +12,22 @@ import Alert from "@/lib/config/Alert.config";
 import imageUpload from "@/lib/imageUpload";
 import reCaptcha from "@/lib/reCaptcha";
 import { addProjectSchema } from "@/schemas/project";
-import { Form, Formik } from "formik";
+import { Form, Formik, useField } from "formik";
 import Image from "next/image";
 import { useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useRouter } from "next/navigation";
 import revalidate from "@/lib/revalidate";
 import updateProject from "@/lib/actions/updateProject";
+import InputRef from "@/components/utilities/InputRef";
+import CheckboxItem from "@/components/utilities/CheckboxItem";
 
 const UpdateProjectForm = ({ projectData }) => {
   const {
     id,
     title,
     status,
+    slug,
     githubLink,
     liveLink,
     shortDes,
@@ -63,6 +66,8 @@ const UpdateProjectForm = ({ projectData }) => {
   const initialValues = {
     title: title,
     status: status,
+    editSlug: false,
+    slug: slug,
     githubLink: githubLink,
     liveLink: liveLink,
     shortDes: shortDes,
@@ -97,7 +102,6 @@ const UpdateProjectForm = ({ projectData }) => {
     }
     try {
       const projectTime = date.toISOString();
-      const slug = e.title.toLowerCase().split(" ").join("_");
       if (updateImage) {
         if (!thumbnailImg.image) {
           Alert.fire({
@@ -111,8 +115,13 @@ const UpdateProjectForm = ({ projectData }) => {
         await updateProjectData(
           id,
           {
-            ...e,
-            slug,
+            title: e.title,
+            slug: e.slug,
+            status: e.status,
+            githubLink: e.githubLink,
+            liveLink: e.liveLink,
+            shortDes: e.shortDes,
+            des: e.des,
             projectTime,
             thumbnail: { url: data?.data?.thumb?.url, alt: thumbnailImg.alt },
           },
@@ -123,9 +132,14 @@ const UpdateProjectForm = ({ projectData }) => {
         await updateProjectData(
           id,
           {
-            ...e,
+            title: e.title,
+            slug: e.slug,
+            status: e.status,
+            githubLink: e.githubLink,
+            liveLink: e.liveLink,
+            shortDes: e.shortDes,
+            des: e.des,
             projectTime,
-            slug,
           },
           router,
           reset,
@@ -192,6 +206,7 @@ const UpdateProjectForm = ({ projectData }) => {
               options={statusOptions}
             />
           </div>
+          <CheckBox />
           <div className="grid grid-cols-2 gap-2 max-md:grid-cols-1">
             <Input type="url" placeholder="Github Link" name="githubLink" />
             <Input type="url" placeholder="Project Live Link" name="liveLink" />
@@ -238,6 +253,27 @@ const updateProjectData = async (id, userData, router, reset) => {
   reset();
   revalidate("/admin/project/all_projects");
   router.push("/admin/project/all_projects");
+};
+
+const CheckBox = () => {
+  const [{ value }] = useField("editSlug");
+  return (
+    <>
+      <CheckboxItem name="editSlug" id="editSlug" label="Custom slug" />
+      {value && (
+        <InputRef
+          refName="title"
+          customFunction={(inputData) =>
+            inputData.toLowerCase().replace(/\s/g, "_").replace(/-/g, "")
+          }
+          type="text"
+          placeholder="Slug"
+          name="slug"
+          maxLength={50}
+        />
+      )}
+    </>
+  );
 };
 
 export default UpdateProjectForm;
