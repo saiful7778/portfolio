@@ -46,7 +46,6 @@ const UpdateProjectForm = ({ projectData }) => {
     (showReCaptcha.show === "custom" &&
       showReCaptcha.page.includes("projectUpdate"));
   const [spinner, setSpinner] = useState(false);
-  const [description, setDescription] = useState(des);
   const [date, setDate] = useState(projectData.projectTime);
   // Image data
   const [thumbnailImg, setThumbnailImg] = useState({
@@ -67,6 +66,7 @@ const UpdateProjectForm = ({ projectData }) => {
     githubLink: githubLink,
     liveLink: liveLink,
     shortDes: shortDes,
+    des: des,
   };
 
   const handleReset = (resetForm) => {
@@ -114,7 +114,6 @@ const UpdateProjectForm = ({ projectData }) => {
             ...e,
             slug,
             projectTime,
-            des: description,
             thumbnail: { url: data?.data?.thumb?.url, alt: thumbnailImg.alt },
           },
           router,
@@ -125,7 +124,6 @@ const UpdateProjectForm = ({ projectData }) => {
           id,
           {
             ...e,
-            des: description,
             projectTime,
             slug,
           },
@@ -205,8 +203,8 @@ const UpdateProjectForm = ({ projectData }) => {
             textLimit={100}
           />
           <TextEditor
+            name="des"
             placeholder="Project Description"
-            onChange={setDescription}
             content={des}
           />
           {showReCaptchaState && (

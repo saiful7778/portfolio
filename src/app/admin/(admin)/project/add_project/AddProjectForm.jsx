@@ -49,7 +49,6 @@ const AddProjectForm = () => {
 
   // project data
   const [date, setDate] = useState(new Date());
-  const [description, setDescription] = useState("");
 
   const statusOptions = [
     { value: "published", text: "Published" },
@@ -62,13 +61,13 @@ const AddProjectForm = () => {
     githubLink: "",
     liveLink: "",
     shortDes: "",
+    des: "",
   };
 
   const handleReset = (resetForm) => {
     return () => {
       resetForm();
       setSpinner(false);
-      setDescription("");
       handleThumbnailImage({
         image: null,
         name: "",
@@ -99,14 +98,6 @@ const AddProjectForm = () => {
       setSpinner(false);
       return;
     }
-    if (!description) {
-      Alert.fire({
-        icon: "warning",
-        text: "Please add description!",
-      });
-      setSpinner(false);
-      return;
-    }
     try {
       const projectTime = date.toISOString();
 
@@ -127,7 +118,7 @@ const AddProjectForm = () => {
         githubLink: e.githubLink,
         liveLink: e.liveLink,
         shortDes: e.shortDes,
-        des: description,
+        des: e.des,
         projectTime,
       };
       const res = await createProject(projectData);
@@ -196,10 +187,7 @@ const AddProjectForm = () => {
             name="shortDes"
             textLimit={100}
           />
-          <TextEditor
-            placeholder="Project Description"
-            onChange={setDescription}
-          />
+          <TextEditor name="des" placeholder="Project Description" />
           {showReCaptchaState && (
             <ReCAPTCHA
               ref={recaptchaRef}

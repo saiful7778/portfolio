@@ -21,4 +21,5 @@ export const addProjectSchema = yup.object().shape({
     .string()
     .max(100, "This is too much long!")
     .required("Short description is required"),
+  des: yup.string().required("Description is required."),
 });
