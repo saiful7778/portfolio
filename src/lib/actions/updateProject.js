@@ -2,26 +2,28 @@
 import prisma from "../../../prisma";
 import { connectToDB } from "../server-helper";
 
-export default async function addProject(projectData) {
+export default async function updateProject(id, data) {
   try {
     await connectToDB();
-    const exist = await prisma.project.findUnique({
-      where: {
-        slug: projectData.slug,
-      },
+    const existProject = await prisma.project.findFirst({
+      where: { id },
     });
-    if (exist) {
+    if (!existProject) {
       return {
         success: false,
-        message: "Project is already exist",
+        message: "No data available",
       };
     }
-    const data = await prisma.project.create({
-      data: projectData,
+
+    const project = await prisma.project.update({
+      where: {
+        id,
+      },
+      data: data,
     });
     return {
       success: true,
-      data,
+      data: project,
     };
   } catch (err) {
     console.log(err);

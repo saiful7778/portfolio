@@ -3,7 +3,8 @@
 import { useRef, useState } from "react";
 import { Form, Formik } from "formik";
 import ReCAPTCHA from "react-google-recaptcha";
-// custom hooks
+// hooks
+import { useRouter } from "next/navigation";
 import useStateData from "@/hooks/useStateData";
 // Components
 import Input from "@/components/utilities/Input";
@@ -17,12 +18,11 @@ import TextEditor from "@/components/TextEditor";
 // libs
 import imageUpload from "@/lib/imageUpload";
 import reCaptcha from "@/lib/reCaptcha";
-// others
-import Alert from "@/lib/config/Alert.config";
-import { addProjectSchema } from "@/schemas/project";
-import { useRouter } from "next/navigation";
+import createProject from "@/lib/actions/createProject";
 import revalidate from "@/lib/revalidate";
-import addProject from "@/lib/actions/addProject";
+import Alert from "@/lib/config/Alert.config";
+// others
+import { addProjectSchema } from "@/schemas/project";
 
 const AddProjectForm = () => {
   const router = useRouter();
@@ -130,7 +130,7 @@ const AddProjectForm = () => {
         des: description,
         projectTime,
       };
-      const res = await addProject(projectData);
+      const res = await createProject(projectData);
       if (!res.success) {
         Alert.fire({
           icon: "error",
@@ -142,8 +142,8 @@ const AddProjectForm = () => {
         icon: "success",
         title: "Project is created!",
       });
-      revalidate("/admin/project/all_projects");
       router.push("/admin/project/all_projects");
+      revalidate("/admin/project/all_projects");
       reset();
     } catch (err) {
       console.error(err);

@@ -31,17 +31,17 @@ const Actions = ({ projectId, slug }) => {
       });
       try {
         const res = await deleteProject(projectId);
-        if (res.success) {
-          Alert.fire({
-            icon: "success",
-            title: "Project is deleted!",
-          });
-        } else {
+        if (!res.success) {
           Alert.fire({
             icon: "error",
             text: res.message,
           });
+          return;
         }
+        Alert.fire({
+          icon: "success",
+          title: "Project is deleted!",
+        });
       } catch (err) {
         Alert.fire({
           icon: "error",

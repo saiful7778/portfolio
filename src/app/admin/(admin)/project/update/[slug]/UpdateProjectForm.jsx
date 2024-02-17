@@ -16,9 +16,9 @@ import { Form, Formik } from "formik";
 import Image from "next/image";
 import { useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
-import updateUser from "./update";
 import { useRouter } from "next/navigation";
 import revalidate from "@/lib/revalidate";
+import updateProject from "@/lib/actions/updateProject";
 
 const UpdateProjectForm = ({ projectData }) => {
   const {
@@ -73,7 +73,6 @@ const UpdateProjectForm = ({ projectData }) => {
     return () => {
       resetForm();
       setSpinner(false);
-      setDescription("");
       handleThumbnailImage({
         image: null,
         name: "",
@@ -109,7 +108,7 @@ const UpdateProjectForm = ({ projectData }) => {
           return;
         }
         const data = await imageUpload(thumbnailImg.image, thumbnailImg.name);
-        const res = await updateUserData(
+        const res = await updateProjectData(
           id,
           {
             ...e,
@@ -120,9 +119,12 @@ const UpdateProjectForm = ({ projectData }) => {
           },
           router,
         );
-        if (!res) return;
+        if (!res) {
+          reset();
+          return;
+        }
       } else {
-        const res = await updateUserData(
+        const res = await updateProjectData(
           id,
           {
             ...e,
@@ -132,9 +134,11 @@ const UpdateProjectForm = ({ projectData }) => {
           },
           router,
         );
-        if (!res) return;
+        if (!res) {
+          reset();
+          return;
+        }
       }
-      reset();
     } catch (err) {
       console.error(err);
       Alert.fire({
@@ -226,13 +230,8 @@ const UpdateProjectForm = ({ projectData }) => {
   );
 };
 
-const updateUserData = async (id, userData, router) => {
-  const res = await updateUser({
-    query: {
-      id,
-    },
-    data: userData,
-  });
+const updateProjectData = async (id, userData, router) => {
+  const res = await updateProject(id, userData);
   if (!res.success) {
     Alert.fire({
       icon: "error",
@@ -244,8 +243,8 @@ const updateUserData = async (id, userData, router) => {
     icon: "success",
     title: "Project is updated!",
   });
-  revalidate("/admin/project/all_projects");
   router.push("/admin/project/all_projects");
+  revalidate("/admin/project/all_projects");
   return true;
 };
 
