@@ -9,6 +9,8 @@ export const addProjectSchema = yup.object().shape({
     .string()
     .required("Status is required")
     .oneOf(["published", "private"]),
+  editSlug: yup.boolean(),
+  slug: yup.string().required("Slug is required"),
   githubLink: yup
     .string()
     .url("Enter a valid URL")

@@ -1,7 +1,7 @@
 "use client";
 // packages
 import { useRef, useState } from "react";
-import { Form, Formik } from "formik";
+import { Form, Formik, useField } from "formik";
 import ReCAPTCHA from "react-google-recaptcha";
 // hooks
 import { useRouter } from "next/navigation";
@@ -23,15 +23,19 @@ import revalidate from "@/lib/revalidate";
 import Alert from "@/lib/config/Alert.config";
 // others
 import { addProjectSchema } from "@/schemas/project";
+import InputRef from "@/components/utilities/InputRef";
+import CheckboxItem from "@/components/utilities/CheckboxItem";
 
 const AddProjectForm = () => {
   const router = useRouter();
   const recaptchaRef = useRef(null);
+
   const { showReCaptcha } = useStateData();
   const showReCaptchaState =
     showReCaptcha.show === "on" ||
     (showReCaptcha.show === "custom" &&
       showReCaptcha.page.includes("projectAdd"));
+
   const [spinner, setSpinner] = useState(false);
 
   // Image data
@@ -58,6 +62,8 @@ const AddProjectForm = () => {
   const projectInitialValues = {
     title: "",
     status: "",
+    editSlug: false,
+    slug: "",
     githubLink: "",
     liveLink: "",
     shortDes: "",
@@ -101,7 +107,6 @@ const AddProjectForm = () => {
     try {
       const projectTime = date.toISOString();
 
-      const slug = e.title.toLowerCase().split(" ").join("_");
       const thumbnailLink = await imageUpload(
         thumbnailImg.image,
         thumbnailImg.name,
@@ -113,7 +118,7 @@ const AddProjectForm = () => {
           alt: thumbnailImg.alt,
         },
         title: e.title,
-        slug,
+        slug: e.slug,
         status: e.status,
         githubLink: e.githubLink,
         liveLink: e.liveLink,
@@ -177,6 +182,7 @@ const AddProjectForm = () => {
               options={statusOptions}
             />
           </div>
+          <CheckBox />
           <div className="grid grid-cols-2 gap-2 max-md:grid-cols-1">
             <Input type="url" placeholder="Github Link" name="githubLink" />
             <Input type="url" placeholder="Project Live Link" name="liveLink" />
@@ -199,6 +205,27 @@ const AddProjectForm = () => {
           </Button>
         </Form>
       </Formik>
+    </>
+  );
+};
+
+const CheckBox = () => {
+  const [{ value }] = useField("editSlug");
+  return (
+    <>
+      <CheckboxItem name="editSlug" id="editSlug" label="Custom slug" />
+      {value && (
+        <InputRef
+          refName="title"
+          customFunction={(inputData) =>
+            inputData.toLowerCase().replace(/\s/g, "_").replace(/-/g, "")
+          }
+          type="text"
+          placeholder="Slug"
+          name="slug"
+          maxLength={50}
+        />
+      )}
     </>
   );
 };

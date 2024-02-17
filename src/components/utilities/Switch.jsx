@@ -1,5 +1,3 @@
-"use client";
-import { useState } from "react";
 import cn from "@/lib/cn";
 
 const switchStyle = {
@@ -16,32 +14,23 @@ const switchStyle = {
 };
 
 const Switch = ({ state, onChange }) => {
-  const [toggle, setToggle] = useState(state || false);
-
-  const handleClick = () => {
-    if (typeof onChange !== "undefined") {
-      onChange();
-    }
-    setToggle((prop) => !prop);
-  };
-
   return (
     <button
       className={cn(
         switchStyle.base,
-        toggle ? switchStyle.state.onClick : switchStyle.state.offClick,
+        state ? switchStyle.state.onClick : switchStyle.state.offClick,
       )}
-      onClick={handleClick}
+      onClick={onChange}
       role="switch"
       type="button"
-      aria-checked={toggle}
-      data-headlessui-state={`${toggle ? "checked" : ""}`}
-      title={toggle ? "on" : "off"}
+      aria-checked={state}
+      data-headlessui-state={`${state ? "checked" : ""}`}
+      title={state ? "on" : "off"}
     >
       <span
         className={cn(
           switchStyle.pointer.base,
-          toggle ? switchStyle.pointer.on : switchStyle.pointer.off,
+          state ? switchStyle.pointer.on : switchStyle.pointer.off,
         )}
       ></span>
     </button>
