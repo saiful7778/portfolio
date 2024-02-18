@@ -1,20 +1,19 @@
 import ErrorDataShow from "@/components/ErrorDataShow";
-import getProject from "@/lib/DB/getProject";
 import moment from "moment";
 import Image from "next/image";
 import parse from "html-react-parser";
-import Link from "next/link";
 import EmptyData from "@/components/EmptyData";
+import getBlog from "@/lib/DB/getBlog";
 
 export async function generateMetadata({ params }) {
-  const res = await getProject(params?.slug);
+  const res = await getBlog(params?.slug);
   if (!res.success) {
     return {
-      title: "Error project",
-      description: "There was an error to get this project data",
+      title: "Error blog",
+      description: "There was an error to get this blog data",
     };
   }
-  const { title, shortDes, status } = res.data;
+  const { title, status } = res.data;
   if (status === "private") {
     return {
       title: "There was no available",
@@ -22,13 +21,13 @@ export async function generateMetadata({ params }) {
     };
   }
   return {
-    title: `${title} - project`,
-    description: shortDes,
+    title: `${title} - blog`,
+    description: `This is "${title}" blog`,
   };
 }
 
-const SingleProject = async ({ params }) => {
-  const res = await getProject(params?.slug);
+const SingleBlog = async ({ params }) => {
+  const res = await getBlog(params?.slug);
 
   if (!res.success) {
     return <ErrorDataShow error={res?.message} />;
@@ -40,15 +39,11 @@ const SingleProject = async ({ params }) => {
 
   const {
     title,
-    projectTime,
     createdAt,
-    thumbnail: { url, alt },
-    githubLink,
-    liveLink,
     des,
+    thumbnail: { url, alt },
   } = res.data;
 
-  const projectCreateTime = moment(projectTime).format("Do MMM YY");
   const timeAgo = moment(createdAt).fromNow();
 
   return (
@@ -68,28 +63,10 @@ const SingleProject = async ({ params }) => {
         <div>
           <span className="text-gray-500">Project posted:</span> {timeAgo}
         </div>
-        <div>
-          <span className="text-gray-500">Project created time:</span>{" "}
-          {projectCreateTime}
-        </div>
-      </div>
-      <div className="text-sm">
-        <div>
-          <span className="text-gray-500">Github link:</span>{" "}
-          <Link className="link" href={githubLink} target="_blank">
-            {githubLink}
-          </Link>
-        </div>
-        <div>
-          <span className="text-gray-500">Project live link:</span>{" "}
-          <Link className="link" href={liveLink} target="_blank">
-            {liveLink}
-          </Link>
-        </div>
       </div>
       <div className="paragraph">{parse(des)}</div>
     </div>
   );
 };
 
-export default SingleProject;
+export default SingleBlog;

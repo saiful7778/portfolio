@@ -6,6 +6,21 @@ import parse from "html-react-parser";
 import Button from "@/components/utilities/Button";
 import DeleteBlog from "./DeleteBlog";
 
+export async function generateMetadata({ params }) {
+  const res = await getBlog(params?.slug);
+  if (!res.success) {
+    return {
+      title: "Error blog - admin - portfolio",
+      description: "There was an error to get this blog data",
+    };
+  }
+  const { title } = res.data;
+  return {
+    title: `${title} - blog`,
+    description: `This is "${title}" blog`,
+  };
+}
+
 const SingleBlog = async ({ params }) => {
   const res = await getBlog(params?.slug);
 
