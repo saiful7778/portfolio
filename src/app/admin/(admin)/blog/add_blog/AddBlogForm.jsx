@@ -8,6 +8,11 @@ import Input from "@/components/utilities/Input";
 import InputRef from "@/components/utilities/InputRef";
 import Select from "@/components/utilities/Select";
 import useStateData from "@/hooks/useStateData";
+import createBlog from "@/lib/actions/createBlog";
+import Alert from "@/lib/config/Alert.config";
+import imageUpload from "@/lib/imageUpload";
+import reCaptcha from "@/lib/reCaptcha";
+import revalidate from "@/lib/revalidate";
 import { addBlogSchema } from "@/schemas/blog";
 import { Form, Formik, useField } from "formik";
 import { useRouter } from "next/navigation";
@@ -50,8 +55,79 @@ const AddBlogForm = () => {
     { value: "private", text: "Private" },
   ];
 
+  const handleReset = (resetForm) => {
+    return () => {
+      resetForm();
+      setSpinner(false);
+      handleThumbnailImage({
+        image: null,
+        name: "",
+        size: "",
+        type: "",
+        alt: "",
+      });
+    };
+  };
+
   const handleSubmit = async (e, { resetForm }) => {
-    console.log(e);
+    setSpinner(true);
+    const reset = handleReset(resetForm);
+    if (showReCaptchaState) {
+      const captcha = await reCaptcha(recaptchaRef, () => {
+        setSpinner(false);
+      });
+      if (!captcha) {
+        reset();
+        return;
+      }
+    }
+    if (!thumbnailImg) {
+      Alert.fire({
+        icon: "warning",
+        text: "Please select an thumbnail image!",
+      });
+      setSpinner(false);
+      return;
+    }
+    try {
+      const thumbnailLink = await imageUpload(
+        thumbnailImg.image,
+        thumbnailImg.name,
+      );
+
+      const blogData = {
+        thumbnail: {
+          url: thumbnailLink?.data?.url,
+          alt: thumbnailImg.alt,
+        },
+        title: e.title,
+        slug: e.slug,
+        status: e.status,
+        des: e.des,
+      };
+      const res = await createBlog(blogData);
+      if (!res.success) {
+        Alert.fire({
+          icon: "error",
+          text: res?.message,
+        });
+        return;
+      }
+      Alert.fire({
+        icon: "success",
+        title: "blog is created!",
+      });
+      router.push("/admin/blog/all_blogs");
+      revalidate("/admin/blog/all_blogs");
+      reset();
+    } catch (err) {
+      console.error(err);
+      Alert.fire({
+        icon: "error",
+        text: err,
+      });
+      reset();
+    }
   };
 
   return (
