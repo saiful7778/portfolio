@@ -11,6 +11,7 @@ import { IoSettingsOutline } from "react-icons/io5";
 import { GoProjectSymlink } from "react-icons/go";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { IoIosArrowDown } from "react-icons/io";
+import { BsFileEarmarkPostFill } from "react-icons/bs";
 
 const Sidebar = () => {
   const { sidebar } = useStateData();
@@ -41,6 +42,19 @@ const Sidebar = () => {
           </SidebarDropdownItem>
           <SidebarDropdownItem path="/admin/project/all_projects">
             All Projects
+          </SidebarDropdownItem>
+        </SidebarDropdown>
+        <SidebarDropdown
+          path="/admin/blog"
+          textShow={sidebar}
+          icon={<BsFileEarmarkPostFill />}
+          title="Blog"
+        >
+          <SidebarDropdownItem path="/admin/blog/add_blog">
+            Add Blog
+          </SidebarDropdownItem>
+          <SidebarDropdownItem path="/admin/blog/all_blogs">
+            All Blogs
           </SidebarDropdownItem>
         </SidebarDropdown>
         <hr className="border-gray-700" />
