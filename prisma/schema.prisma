@@ -44,3 +44,14 @@ model settings {
   reCaptcha       String
   reCaptchaOnPage String[]
 }
+
+model blog {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  thumbnail Json
+  title     String
+  slug      String   @unique
+  status    String
+  des       String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
