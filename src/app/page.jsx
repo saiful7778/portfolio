@@ -7,6 +7,7 @@ import Avatar from "@/components/Avatar";
 import Banner from "./sections/Banner";
 // others
 import getAuth from "@/hooks/getAuth";
+import Skills from "./sections/Skills";
 
 const HomePage = async () => {
   const session = await getAuth();
@@ -17,7 +18,7 @@ const HomePage = async () => {
         <Banner />
       </header>
       <main className="my-16 p-2">
-        <h1 className="text-3xl font-bold">Saiful Islam</h1>
+        <Skills />
       </main>
       <footer>
         <Footer />
