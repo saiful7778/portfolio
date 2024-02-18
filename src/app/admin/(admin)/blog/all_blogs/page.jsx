@@ -6,6 +6,8 @@ import moment from "moment";
 import Link from "next/link";
 import Actions from "./Actions";
 
+export const dynamic = "force-dynamic";
+
 export const metadata = {
   title: "All Blogs - admin - portfolio",
   description:

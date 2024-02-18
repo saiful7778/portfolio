@@ -1,13 +1,16 @@
+"use client";
 // components
+import { createPortal } from "react-dom";
 import Button from "./utilities/Button";
 // icons
 import { RxCross2 } from "react-icons/rx";
 
 const Modal = ({ openModal, closeModal, modalTitle, children }) => {
   return (
-    openModal && (
+    openModal &&
+    createPortal(
       <div
-        className="fixed inset-0 z-[150] flex h-screen w-full items-center justify-center bg-gray-900/70"
+        className="fixed inset-0 z-[150] flex h-screen w-full items-center justify-center bg-gray-900/70 text-white"
         role="dialog"
         data-testid="modal"
         hidden={!openModal}
@@ -28,7 +31,8 @@ const Modal = ({ openModal, closeModal, modalTitle, children }) => {
           </div>
           {children}
         </div>
-      </div>
+      </div>,
+      document.body,
     )
   );
 };

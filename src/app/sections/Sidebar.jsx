@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import useStateData from "@/hooks/useStateData";
 // icons
-import { IoSettingsOutline } from "react-icons/io5";
+import { IoSettingsOutline, IoMailUnreadOutline } from "react-icons/io5";
 import { GoProjectSymlink } from "react-icons/go";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { IoIosArrowDown } from "react-icons/io";
@@ -57,6 +57,13 @@ const Sidebar = () => {
             All Blogs
           </SidebarDropdownItem>
         </SidebarDropdown>
+        <SidebarItem
+          path="/admin/contacts"
+          textShow={sidebar}
+          icon={<IoMailUnreadOutline />}
+        >
+          Contacts
+        </SidebarItem>
         <hr className="border-gray-700" />
         <SidebarItem
           path="/admin/settings"

@@ -2,19 +2,19 @@
 import { connectToDB } from "@/lib/server-helper";
 import prisma from "../../../prisma";
 
-export default async function deleteBlog(id) {
+export default async function deleteContact(id) {
   try {
     await connectToDB();
-    const existBlog = await prisma.blog.findFirst({
+    const exitContact = await prisma.contact.findFirst({
       where: { id },
     });
-    if (!existBlog) {
+    if (!exitContact) {
       return {
         success: false,
-        message: "Blog doesn't exist",
+        message: "contact doesn't exist",
       };
     }
-    const data = await prisma.blog.delete({
+    const data = await prisma.contact.delete({
       where: { id },
     });
     return {
