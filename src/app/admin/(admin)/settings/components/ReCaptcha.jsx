@@ -18,6 +18,7 @@ const ReCaptcha = () => {
     { value: "projectUpdate", text: "Update project" },
     { value: "blogUpdate", text: "Update blog" },
     { value: "userUpdate", text: "Update user" },
+    { value: "contactPage", text: "Contact page" },
     { value: "register", text: "Register" },
     { value: "login", text: "Login" },
   ];

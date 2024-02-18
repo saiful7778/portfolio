@@ -72,7 +72,7 @@ const LoginPage = ({ searchParams }) => {
         onSubmit={submitData}
       >
         <Form className="mt-4 space-y-2">
-          <Input type="text" name="email" placeholder="Email address" />
+          <Input type="email" name="email" placeholder="Email address" />
           <Password placeholder="Password" name="password" />
           {showReCaptchaState && (
             <ReCAPTCHA

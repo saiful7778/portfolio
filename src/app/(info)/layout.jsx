@@ -1,9 +1,10 @@
+import StateProvider from "@/context/StateContext";
 import Footer from "../sections/Footer";
 import Navbar from "../sections/Navbar";
 
 const InfoLayout = ({ children }) => {
   return (
-    <>
+    <StateProvider>
       <header className="p-2">
         <Navbar />
       </header>
@@ -11,7 +12,7 @@ const InfoLayout = ({ children }) => {
       <footer>
         <Footer />
       </footer>
-    </>
+    </StateProvider>
   );
 };
 

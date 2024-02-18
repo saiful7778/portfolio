@@ -1,4 +1,5 @@
 import SectionTitle from "@/components/SectionTitle";
+import ContactForm from "./ContactForm";
 
 export const metadata = {
   title: "Contact me - Saiful Islam Portfolio",
@@ -13,6 +14,7 @@ const Blog = () => {
         text="Fill free to say anything"
         blob={true}
       />
+      <ContactForm />
     </>
   );
 };

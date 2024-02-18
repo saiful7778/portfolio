@@ -18,15 +18,16 @@ const StateProvider = ({ children }) => {
     (async () => {
       const res = await getSettings();
       if (res.success) {
-        if (res.data[0].reCaptcha === "on") {
+        const data = res.data[0];
+        if (data.reCaptcha === "on") {
           setShowReCaptcha({
             show: "on",
             page: [],
           });
-        } else if (res.data[0].reCaptcha === "custom") {
+        } else if (data.reCaptcha === "custom") {
           setShowReCaptcha({
             show: "custom",
-            page: res.data[0].reCaptchaOnPage,
+            page: data.reCaptchaOnPage,
           });
         } else {
           setShowReCaptcha({
