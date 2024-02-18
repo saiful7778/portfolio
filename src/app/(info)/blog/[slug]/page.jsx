@@ -61,7 +61,7 @@ const SingleBlog = async ({ params }) => {
       <h1 className="text-3xl font-bold">{title}</h1>
       <div className="text-sm">
         <div>
-          <span className="text-gray-500">Project posted:</span> {timeAgo}
+          <span className="text-gray-500">Blog posted:</span> {timeAgo}
         </div>
       </div>
       <div className="paragraph">{parse(des)}</div>

@@ -24,7 +24,7 @@ const Showcase = async () => {
   }
   const renderAllblogs = allblog.map((blog, idx) => {
     if (blog.status === "published") {
-      return <BlogItem key={"blog" + idx} projectData={blog} />;
+      return <BlogItem key={"blog" + idx} blogData={blog} />;
     }
   });
 

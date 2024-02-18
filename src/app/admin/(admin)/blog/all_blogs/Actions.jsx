@@ -4,10 +4,15 @@ import { CiEdit } from "react-icons/ci";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { Popover } from "keep-react";
 import Button from "@/components/utilities/Button";
+import { useRouter } from "next/navigation";
 
 const Actions = ({ blogId, slug }) => {
+  const router = useRouter();
+
   const handleDelete = () => {};
-  const handleUpdate = () => {};
+  const handleUpdate = () => {
+    router.push(`/admin/blog/update/${slug}?blogId=${blogId}`);
+  };
 
   return (
     <>
