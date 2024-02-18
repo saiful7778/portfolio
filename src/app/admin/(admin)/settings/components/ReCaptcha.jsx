@@ -14,6 +14,7 @@ const ReCaptcha = () => {
   const selectOptions = [
     { value: "projectComment", text: "Project public comment" },
     { value: "projectAdd", text: "Add project" },
+    { value: "blogAdd", text: "Add blog" },
     { value: "projectUpdate", text: "Update project" },
     { value: "userUpdate", text: "Update user" },
     { value: "register", text: "Register" },
