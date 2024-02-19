@@ -2,15 +2,17 @@
 import cn from "@/lib/cn";
 import { useEditor, EditorContent } from "@tiptap/react";
 import Placeholder from "@tiptap/extension-placeholder";
+import Document from "@tiptap/extension-document";
 import StarterKit from "@tiptap/starter-kit";
 import TextEditorToolbar from "./TextEditorToolbar";
 import BaseHeading from "@tiptap/extension-heading";
 import Highlight from "@tiptap/extension-highlight";
 import BulletList from "@tiptap/extension-bullet-list";
 import OrderedList from "@tiptap/extension-ordered-list";
-import CodeBlock from "@tiptap/extension-code-block";
 import TextAlign from "@tiptap/extension-text-align";
 import CharacterCount from "@tiptap/extension-character-count";
+import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
+import { common, createLowlight } from "lowlight";
 import { mergeAttributes } from "@tiptap/core";
 import Link from "@tiptap/extension-link";
 import { focus, input } from "@/theme";
@@ -19,9 +21,9 @@ import { useField } from "formik";
 const style = {
   base: "h-[600px] overflow-auto",
 };
+const lowlight = createLowlight(common);
 
 const classes = {
-  1: "text-4xl font-bold",
   2: "text-3xl font-bold",
   3: "text-2xl font-bold",
   4: "text-xl font-bold",
@@ -29,7 +31,7 @@ const classes = {
   6: "text-base font-bold",
 };
 
-const Heading = BaseHeading.configure({ levels: [1, 2, 3, 4, 5, 6] }).extend({
+const Heading = BaseHeading.configure({ levels: [2, 3, 4, 5, 6] }).extend({
   renderHTML({ node, HTMLAttributes }) {
     const hasLevel = this.options.levels.includes(node.attrs.level);
     const level = hasLevel ? node.attrs.level : this.options.levels[0];
@@ -54,6 +56,7 @@ const TextEditorComp = ({ name, placeholder = "Write....", content = "" }) => {
   const editor = useEditor({
     extensions: [
       StarterKit,
+      Document,
       Link.configure({
         openOnClick: false,
         autolink: true,
@@ -86,8 +89,8 @@ const TextEditorComp = ({ name, placeholder = "Write....", content = "" }) => {
           class: "list-decimal ml-5",
         },
       }),
-      CodeBlock.configure({
-        languageClassPrefix: "language-js",
+      CodeBlockLowlight.configure({
+        lowlight,
       }),
     ],
     editorProps: {
@@ -105,7 +108,7 @@ const TextEditorComp = ({ name, placeholder = "Write....", content = "" }) => {
     return null;
   }
   return (
-    <div>
+    <>
       <TextEditorToolbar editor={editor} />
       <div className="relative">
         <EditorContent editor={editor} />
@@ -114,7 +117,7 @@ const TextEditorComp = ({ name, placeholder = "Write....", content = "" }) => {
         </div>
       </div>
       {error ? <p className="mt-1 text-xs text-red-500">{error}</p> : null}
-    </div>
+    </>
   );
 };
 
