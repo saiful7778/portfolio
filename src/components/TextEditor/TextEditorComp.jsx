@@ -5,6 +5,7 @@ import Placeholder from "@tiptap/extension-placeholder";
 import Document from "@tiptap/extension-document";
 import StarterKit from "@tiptap/starter-kit";
 import TextEditorToolbar from "./TextEditorToolbar";
+import Image from "@tiptap/extension-image";
 import BaseHeading from "@tiptap/extension-heading";
 import Highlight from "@tiptap/extension-highlight";
 import BulletList from "@tiptap/extension-bullet-list";
@@ -12,6 +13,7 @@ import OrderedList from "@tiptap/extension-ordered-list";
 import TextAlign from "@tiptap/extension-text-align";
 import CharacterCount from "@tiptap/extension-character-count";
 import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
+import ImageResize from "tiptap-extension-resize-image";
 import { common, createLowlight } from "lowlight";
 import { mergeAttributes } from "@tiptap/core";
 import Link from "@tiptap/extension-link";
@@ -68,6 +70,14 @@ const TextEditorComp = ({ name, placeholder = "Write....", content = "" }) => {
         placeholder,
       }),
       Heading,
+      ImageResize.configure({
+        HTMLAttributes: {
+          class: "Image",
+        },
+      }),
+      Image.configure({
+        allowBase64: true,
+      }),
       Highlight.configure({
         HTMLAttributes: {
           class: "bg-yellow-300 rounded-sm px-0.5 mx-0.5",

@@ -22,7 +22,7 @@ const style = {
   },
 };
 
-const ImageUpload = ({ handleImageData, imageData }) => {
+const ImageUpload = ({ handleImageData, imageData, handleRenderImage }) => {
   const inputId = useId();
   const [showImage, setShowImage] = useState(null);
 
@@ -38,6 +38,9 @@ const ImageUpload = ({ handleImageData, imageData }) => {
         type: imageObj.type,
       });
       const localUrl = URL.createObjectURL(imageObj);
+      if (typeof handleRenderImage !== "undefined") {
+        handleRenderImage(localUrl);
+      }
       setShowImage(localUrl);
     }
   };
@@ -88,7 +91,7 @@ const ImageUpload = ({ handleImageData, imageData }) => {
                 type="file"
                 name="imageUpload"
                 onChange={handleImage}
-                accept=".png,.jpeg,.jpg"
+                accept="image/*"
                 hidden={true}
               />
               <div>
@@ -106,6 +109,7 @@ const ImageUpload = ({ handleImageData, imageData }) => {
       {showImage && (
         <>
           <input
+            type="text"
             className={cn(input.base, focus.base)}
             value={imageData.name}
             onChange={(e) => handleImageData({ name: e.target.value })}
@@ -113,11 +117,28 @@ const ImageUpload = ({ handleImageData, imageData }) => {
             name="imgTitle"
           />
           <input
+            type="text"
             className={cn(input.base, focus.base)}
             value={imageData.alt}
             onChange={(e) => handleImageData({ alt: e.target.value })}
             placeholder="Alt"
             name="alt"
+          />
+          <input
+            type="number"
+            className={cn(input.base, focus.base)}
+            value={imageData.width}
+            onChange={(e) => handleImageData({ width: e.target.value })}
+            placeholder="Width"
+            name="width"
+          />
+          <input
+            type="number"
+            className={cn(input.base, focus.base)}
+            value={imageData.height}
+            onChange={(e) => handleImageData({ height: e.target.value })}
+            placeholder="Height"
+            name="height"
           />
         </>
       )}

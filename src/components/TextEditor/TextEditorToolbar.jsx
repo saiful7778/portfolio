@@ -7,6 +7,7 @@ import Alert from "@/lib/config/Alert.config";
 import Button from "../utilities/Button";
 import Tool from "./Tool";
 import { TextAlign, TextHtmlFormat, TextList } from "./ToolsComp";
+import ImageUploadTool from "./ImageUploadTool";
 
 const TextEditorToolbar = ({ editor }) => {
   const handleSetLink = useCallback(async () => {
@@ -126,6 +127,7 @@ const TextEditorToolbar = ({ editor }) => {
         <IoMdRedo />
       </Tool>
       <div className="w-[1px] bg-gray-600"></div>
+      <ImageUploadTool editor={editor} />
       <Button
         onClick={() => editor.commands.clearContent()}
         size="sm"

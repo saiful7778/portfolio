@@ -12,7 +12,7 @@ const AdminLayout = ({ children }) => {
   return (
     <StateProvider>
       <SessionContext>
-        {/* <Topbar /> */}
+        <Topbar />
         <aside>
           <Sidebar />
         </aside>
