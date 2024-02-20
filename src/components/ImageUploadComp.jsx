@@ -1,0 +1,195 @@
+"use client";
+import cn from "@/lib/cn";
+import { focus, input } from "@/theme";
+import { IoImageOutline } from "react-icons/io5";
+import Button from "./utilities/Button";
+import Image from "next/image";
+import { useId, useState } from "react";
+
+const style = {
+  base: "rounded font-semibold cursor-pointer shadow",
+  outline:
+    "border border-gray-50 text-white hover:bg-gray-50 hover:text-accent-color",
+  size: {
+    main: {
+      sm: "max-w-sm",
+      md: "max-w-md",
+      lg: "max-w-2xl",
+    },
+    image: {
+      sm: {
+        width: 368,
+        height: 207,
+      },
+      md: {
+        width: 432,
+        height: 243,
+      },
+      lg: {
+        width: 656,
+        height: 369,
+      },
+    },
+    button: {
+      sm: "px-2 py-1 text-xs",
+      md: "px-4 py-1 text-base",
+      lg: "px-5 py-2 text-base",
+    },
+  },
+};
+
+const ImageUploadComp = ({ size = "md" }) => {
+  const inputId = useId();
+  const [showImage, setShowImage] = useState(null);
+  const [errorStatus, setErrorStatus] = useState("");
+  const [img, setImg] = useState({
+    image: null,
+    name: "",
+    size: "",
+    type: "",
+    alt: "",
+  });
+
+  //functions
+  const handleRemoveImage = () => {
+    setShowImage(null);
+    setImg({
+      image: null,
+      name: "",
+      size: "",
+      type: "",
+      alt: "",
+    });
+  };
+  const handleUploadImage = () => {};
+
+  const handleShowImage = (e) => {
+    const imageObj = e.target.files[0];
+    if (imageObj) {
+      const imageSize = convertFileSize(imageObj.size);
+      if (!imageSize) {
+        setErrorStatus("File size too much big!");
+        return;
+      }
+      setImg({
+        image: imageObj,
+        name: imageObj.name,
+        size: imageSize,
+        type: imageObj.type,
+        alt: "",
+      });
+      const localUrl = URL.createObjectURL(imageObj);
+      setShowImage(localUrl);
+    }
+  };
+
+  return (
+    <div className={cn("mx-auto my-4 w-full space-y-2", style.size.main[size])}>
+      <div className="flex flex-col items-center justify-center gap-3 rounded-md border-2 border-dashed border-gray-700 p-4">
+        {showImage ? (
+          <>
+            <div className="relative overflow-hidden">
+              <Image
+                className="aspect-video object-cover object-center"
+                src={showImage}
+                alt="uploaded image"
+                width={style.size.image[size].width}
+                height={style.size.image[size].height}
+              />
+              <div className="absolute inset-0 z-10 flex h-full w-full flex-col justify-end gap-1 bg-gradient-to-b from-transparent via-gray-800/60 to-gray-800/90 p-2 text-xs font-medium">
+                <div>Name: {img.name}</div>
+                <div>Size: {img.size}</div>
+                <div>Type: {img.type}</div>
+                <div>
+                  Alt:{" "}
+                  {img.alt || (
+                    <span className="italic text-gray-400">Empty</span>
+                  )}
+                </div>
+              </div>
+            </div>
+            {errorStatus && (
+              <p className="mt-1 text-xs text-red-500">{errorStatus}</p>
+            )}
+            <input
+              type="text"
+              className={cn(
+                input.base,
+                focus.base,
+                size === "sm" && "px-2 py-1",
+              )}
+              value={img.name}
+              onChange={(e) => setImg({ ...img, name: e.target.value })}
+              placeholder="Image title"
+              name="imgTitle"
+            />
+            <input
+              type="text"
+              className={cn(
+                input.base,
+                focus.base,
+                size === "sm" && "px-2 py-1",
+              )}
+              value={img.alt}
+              onChange={(e) => setImg({ ...img, alt: e.target.value })}
+              placeholder="Alt"
+              name="imgAlt"
+            />
+            <div className="flex items-center justify-center gap-2">
+              <Button size="sm" onClick={handleRemoveImage} variant="cancel">
+                Remove
+              </Button>
+              <Button size="sm" onClick={handleUploadImage} variant="confirm">
+                Upload
+              </Button>
+            </div>
+          </>
+        ) : (
+          <>
+            <span>
+              <IoImageOutline size={50} />
+            </span>
+            <h6 className="text-xl font-medium">Choose an image</h6>
+            <p className="text-sm text-gray-500">Files: png, jpeg, jpg</p>
+            <label htmlFor={inputId}>
+              <input
+                id={inputId}
+                type="file"
+                name="imageUpload"
+                onChange={handleShowImage}
+                accept="image/*"
+                hidden={true}
+              />
+              <div>
+                <span
+                  className={cn(
+                    style.base,
+                    style.size.button[size],
+                    style.outline,
+                  )}
+                >
+                  Choose image
+                </span>
+              </div>
+            </label>
+            <p className="text-sm text-gray-500">Maximum: 5MB</p>
+          </>
+        )}
+      </div>
+    </div>
+  );
+};
+
+function convertFileSize(inputSize) {
+  if (inputSize > 0 && inputSize <= 1000) {
+    return `${inputSize} b`;
+  } else if (inputSize <= 1000000) {
+    return `${inputSize / 1000} kB`;
+  } else if (inputSize > 1000000 && inputSize <= 5000000) {
+    return `${inputSize / 1000000} MB`;
+  } else {
+    return false;
+  }
+}
+
+export default ImageUploadComp;
