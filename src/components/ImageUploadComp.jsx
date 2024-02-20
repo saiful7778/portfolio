@@ -84,6 +84,11 @@ const ImageUploadComp = ({ size = "md", folder, setImageData }) => {
       onProgressChange: (progress) => setProgress(progress),
     });
     setUploadingStatus("uploaded");
+    setImageData({
+      status: "uploaded",
+      url: "",
+      alt: "",
+    });
     setTempLink(res.url);
   };
 
@@ -93,7 +98,7 @@ const ImageUploadComp = ({ size = "md", folder, setImageData }) => {
       url: tempLink,
     });
     setImageData({
-      status: "uploaded",
+      status: "confirm",
       url: tempLink,
       alt: img.alt,
     });
@@ -127,6 +132,11 @@ const ImageUploadComp = ({ size = "md", folder, setImageData }) => {
         alt: "",
       });
       const localUrl = URL.createObjectURL(imageObj);
+      setImageData({
+        status: "selected",
+        url: "",
+        alt: "",
+      });
       setShowImage(localUrl);
     }
   };

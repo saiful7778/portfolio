@@ -9,6 +9,7 @@ const ImageUploadPage = () => {
     url: "",
     alt: "",
   });
+  console.log(thumbnailImage);
   return (
     <div>
       <ImageUploadComp
