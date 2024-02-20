@@ -9,7 +9,7 @@ const style = {
   lg: "h-12 w-12",
 };
 
-const Avatar = ({ className, photoURL, size = "md" }) => {
+const Avatar = ({ className, photoURL, size = "md", alt = "user image" }) => {
   const imgSize =
     size === "sm" ? 32 : size === "md" ? 40 : size === "lg" ? 48 : 0;
   return (
@@ -28,7 +28,7 @@ const Avatar = ({ className, photoURL, size = "md" }) => {
           src={photoURL}
           width={imgSize}
           height={imgSize}
-          alt="user image"
+          alt={alt}
         />
       ) : (
         <FaUserAstronaut size={20} />
