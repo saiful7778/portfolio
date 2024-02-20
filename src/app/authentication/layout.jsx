@@ -1,3 +1,4 @@
+import { EdgeStoreProvider } from "@/context/EdgeStoreContext";
 import StateProvider from "@/context/StateContext";
 
 export const metadata = {
@@ -8,10 +9,12 @@ export const metadata = {
 
 export default function AuthenticationLayout({ children }) {
   return (
-    <StateProvider>
-      <main className="bg-dark relative min-h-screen w-full overflow-x-hidden p-2 text-gray-50">
-        <div className="mx-auto my-16 w-full max-w-sm">{children}</div>
-      </main>
-    </StateProvider>
+    <EdgeStoreProvider>
+      <StateProvider>
+        <main className="relative min-h-screen w-full overflow-x-hidden bg-dark p-2 text-gray-50">
+          <div className="mx-auto my-16 w-full max-w-sm">{children}</div>
+        </main>
+      </StateProvider>
+    </EdgeStoreProvider>
   );
 }
