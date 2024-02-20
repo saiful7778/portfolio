@@ -38,7 +38,7 @@ const style = {
   },
 };
 
-const ImageUploadComp = ({ size = "md" }) => {
+const ImageUploadComp = ({ size = "md", folder }) => {
   const inputId = useId();
   const [showImage, setShowImage] = useState(null);
   const [errorStatus, setErrorStatus] = useState("");
@@ -62,6 +62,9 @@ const ImageUploadComp = ({ size = "md" }) => {
     });
   };
   const handleUploadImage = () => {};
+
+  const handleConfirm = () => {};
+  const handleDelete = () => {};
 
   const handleShowImage = (e) => {
     const imageObj = e.target.files[0];
@@ -157,10 +160,10 @@ const ImageUploadComp = ({ size = "md" }) => {
                   </div>
                 </div>
                 <div className="inline-flex items-center gap-2">
-                  <Button variant="confirm" size="sm">
+                  <Button onClick={handleConfirm} variant="confirm" size="sm">
                     Confirm
                   </Button>
-                  <Button variant="cancel" size="sm">
+                  <Button onClick={handleDelete} variant="cancel" size="sm">
                     Delete
                   </Button>
                   {/* <span>45%</span> */}

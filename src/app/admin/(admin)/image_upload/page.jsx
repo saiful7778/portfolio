@@ -7,7 +7,7 @@ const ImageUploadPage = () => {
   const [thumbnailImage, setThumbnailImage] = useState({});
   return (
     <div>
-      <ImageUploadComp size="lg" />
+      <ImageUploadComp size="lg" folder="project" />
     </div>
   );
 };
