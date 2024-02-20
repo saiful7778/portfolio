@@ -1,3 +1,4 @@
+import { EdgeStoreProvider } from "@/context/EdgeStoreContext";
 import Sidebar from "../sections/Sidebar";
 import Topbar from "../sections/Topbar";
 import SessionContext from "@/context/SessionContext";
@@ -10,15 +11,17 @@ export const metadata = {
 
 const AdminLayout = ({ children }) => {
   return (
-    <StateProvider>
-      <SessionContext>
-        <Topbar />
-        <aside>
-          <Sidebar />
-        </aside>
-        {children}
-      </SessionContext>
-    </StateProvider>
+    <EdgeStoreProvider>
+      <StateProvider>
+        <SessionContext>
+          <Topbar />
+          <aside>
+            <Sidebar />
+          </aside>
+          {children}
+        </SessionContext>
+      </StateProvider>
+    </EdgeStoreProvider>
   );
 };
 

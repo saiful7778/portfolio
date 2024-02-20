@@ -1,5 +1,5 @@
 "use client";
-import ImageUpload from "@/components/ImageUpload";
+import ImageUploadComp from "@/components/ImageUploadComp";
 import Spinner from "@/components/Spinner";
 import TextEditor from "@/components/TextEditor";
 import Button from "@/components/utilities/Button";
@@ -10,7 +10,6 @@ import Select from "@/components/utilities/Select";
 import useStateData from "@/hooks/useStateData";
 import createBlog from "@/lib/actions/createBlog";
 import Alert from "@/lib/config/Alert.config";
-import imageUpload from "@/lib/imageUpload";
 import reCaptcha from "@/lib/reCaptcha";
 import revalidate from "@/lib/revalidate";
 import { addBlogSchema } from "@/schemas/blog";
@@ -31,16 +30,10 @@ const AddBlogForm = () => {
   const [spinner, setSpinner] = useState(false);
   // Image data
   const [thumbnailImg, setThumbnailImg] = useState({
-    image: null,
-    name: "",
-    size: "",
-    type: "",
+    status: "",
+    url: "",
     alt: "",
   });
-
-  const handleThumbnailImage = (imageData) => {
-    setThumbnailImg({ ...thumbnailImg, ...imageData });
-  };
 
   const blogInitialValues = {
     title: "",
@@ -59,11 +52,9 @@ const AddBlogForm = () => {
     return () => {
       resetForm();
       setSpinner(false);
-      handleThumbnailImage({
-        image: null,
-        name: "",
-        size: "",
-        type: "",
+      setThumbnailImg({
+        status: "",
+        url: "",
         alt: "",
       });
     };
@@ -81,23 +72,32 @@ const AddBlogForm = () => {
         return;
       }
     }
-    if (!thumbnailImg) {
+    if (!thumbnailImg.status) {
       Alert.fire({
         icon: "warning",
         text: "Please select an thumbnail image!",
       });
       setSpinner(false);
       return;
+    } else if (thumbnailImg.status === "selected") {
+      Alert.fire({
+        icon: "warning",
+        text: "Please upload this thumbnail image!",
+      });
+      setSpinner(false);
+      return;
+    } else if (thumbnailImg.status === "uploaded") {
+      Alert.fire({
+        icon: "warning",
+        text: "Please confirm this thumbnail image!",
+      });
+      setSpinner(false);
+      return;
     }
     try {
-      const thumbnailLink = await imageUpload(
-        thumbnailImg.image,
-        thumbnailImg.name,
-      );
-
       const blogData = {
         thumbnail: {
-          url: thumbnailLink?.data?.url,
+          url: thumbnailImg.url,
           alt: thumbnailImg.alt,
         },
         title: e.title,
@@ -132,10 +132,7 @@ const AddBlogForm = () => {
 
   return (
     <>
-      <ImageUpload
-        handleImageData={handleThumbnailImage}
-        imageData={thumbnailImg}
-      />
+      <ImageUploadComp setImageData={setThumbnailImg} folder="blog" size="lg" />
       <Formik
         initialValues={blogInitialValues}
         validationSchema={addBlogSchema}
