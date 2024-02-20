@@ -261,8 +261,8 @@ const updateProjectData = async (id, userData, router, reset) => {
     title: "Project is updated!",
   });
   reset();
-  revalidate("/admin/project/all_projects");
   router.push("/admin/project/all_projects");
+  revalidate("/admin/project/all_projects");
 };
 
 export default UpdateProjectForm;

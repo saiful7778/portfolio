@@ -226,8 +226,8 @@ const UpdateBlogData = async (id, userData, router, reset) => {
     title: "Blog is updated!",
   });
   reset();
-  revalidate("/admin/blog/all_blogs");
   router.push("/admin/blog/all_blogs");
+  revalidate("/admin/blog/all_blogs");
 };
 
 export default UpdateBlogForm;
