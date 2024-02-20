@@ -1,5 +1,4 @@
 "use client";
-import ImageUpload from "@/components/ImageUpload";
 import Spinner from "@/components/Spinner";
 import TextEditor from "@/components/TextEditor";
 import Button from "@/components/utilities/Button";
@@ -7,18 +6,17 @@ import Input from "@/components/utilities/Input";
 import Select from "@/components/utilities/Select";
 import useStateData from "@/hooks/useStateData";
 import Alert from "@/lib/config/Alert.config";
-import imageUpload from "@/lib/imageUpload";
 import reCaptcha from "@/lib/reCaptcha";
-import { Form, Formik, useField } from "formik";
+import { Form, Formik } from "formik";
 import Image from "next/image";
 import { useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useRouter } from "next/navigation";
 import revalidate from "@/lib/revalidate";
-import InputRef from "@/components/utilities/InputRef";
-import CheckboxItem from "@/components/utilities/CheckboxItem";
 import { addBlogSchema } from "@/schemas/blog";
 import updateBlog from "@/lib/actions/updateBlog";
+import EditSlug from "@/components/EditSlug";
+import ImageUploadComp from "@/components/ImageUploadComp";
 
 const UpdateBlogForm = ({ blogData }) => {
   const {
@@ -48,16 +46,10 @@ const UpdateBlogForm = ({ blogData }) => {
   const [spinner, setSpinner] = useState(false);
   // Image data
   const [thumbnailImg, setThumbnailImg] = useState({
-    image: null,
-    name: "",
-    size: "",
-    type: "",
+    status: "",
+    url: "",
     alt: "",
   });
-
-  const handleThumbnailImage = (imageData) => {
-    setThumbnailImg({ ...thumbnailImg, ...imageData });
-  };
 
   const initialValues = {
     title: title,
@@ -71,11 +63,9 @@ const UpdateBlogForm = ({ blogData }) => {
     return () => {
       resetForm();
       setSpinner(false);
-      handleThumbnailImage({
-        image: null,
-        name: "",
-        size: "",
-        type: "",
+      setThumbnailImg({
+        status: "",
+        url: "",
         alt: "",
       });
     };
@@ -95,15 +85,28 @@ const UpdateBlogForm = ({ blogData }) => {
     }
     try {
       if (updateImage) {
-        if (!thumbnailImg.image) {
+        if (!thumbnailImg.status) {
           Alert.fire({
             icon: "warning",
             text: "Please select an thumbnail image!",
           });
           setSpinner(false);
           return;
+        } else if (thumbnailImg.status === "selected") {
+          Alert.fire({
+            icon: "warning",
+            text: "Please upload this thumbnail image!",
+          });
+          setSpinner(false);
+          return;
+        } else if (thumbnailImg.status === "uploaded") {
+          Alert.fire({
+            icon: "warning",
+            text: "Please confirm this thumbnail image!",
+          });
+          setSpinner(false);
+          return;
         }
-        const data = await imageUpload(thumbnailImg.image, thumbnailImg.name);
         await UpdateBlogData(
           id,
           {
@@ -111,7 +114,7 @@ const UpdateBlogForm = ({ blogData }) => {
             slug: e.slug,
             status: e.status,
             des: e.des,
-            thumbnail: { url: data?.data?.thumb?.url, alt: thumbnailImg.alt },
+            thumbnail: { url: thumbnailImg.url, alt: thumbnailImg.alt },
           },
           router,
           reset,
@@ -142,9 +145,10 @@ const UpdateBlogForm = ({ blogData }) => {
   return (
     <>
       {updateImage ? (
-        <ImageUpload
-          handleImageData={handleThumbnailImage}
-          imageData={thumbnailImg}
+        <ImageUploadComp
+          size="lg"
+          setImageData={setThumbnailImg}
+          folder="blog"
         />
       ) : (
         <div className="my-2 flex flex-col items-center gap-2">
@@ -153,8 +157,8 @@ const UpdateBlogForm = ({ blogData }) => {
             src={url}
             alt={alt}
             title={title}
-            width={600}
-            height={337}
+            width={656}
+            height={369}
           />
           <Button
             onClick={() => setUpdateImage((l) => !l)}
@@ -185,7 +189,13 @@ const UpdateBlogForm = ({ blogData }) => {
               options={statusOptions}
             />
           </div>
-          <CheckBox />
+          <EditSlug
+            checkboxName="editSlug"
+            checkboxLabel="Custom slug"
+            refName="title"
+            inputName="slug"
+            inputPlaceholder="Slug"
+          />
           <TextEditor
             name="des"
             placeholder="Blog description...."
@@ -222,27 +232,6 @@ const UpdateBlogData = async (id, userData, router, reset) => {
   reset();
   revalidate("/admin/blog/all_blogs");
   router.push("/admin/blog/all_blogs");
-};
-
-const CheckBox = () => {
-  const [{ value }] = useField("editSlug");
-  return (
-    <>
-      <CheckboxItem name="editSlug" id="editSlug" label="Custom slug" />
-      {value && (
-        <InputRef
-          refName="title"
-          customFunction={(inputData) =>
-            inputData.toLowerCase().replace(/\s/g, "_").replace(/-/g, "")
-          }
-          type="text"
-          placeholder="Slug"
-          name="slug"
-          maxLength={50}
-        />
-      )}
-    </>
-  );
 };
 
 export default UpdateBlogForm;
