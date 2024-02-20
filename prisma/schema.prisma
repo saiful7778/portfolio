@@ -14,7 +14,7 @@ model user {
   hashedPassword String
   emailVerified  Boolean  @default(false)
   role           Role     @default(user)
-  image          String   @default("")
+  image          Json
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 }

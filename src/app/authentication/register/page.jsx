@@ -11,12 +11,11 @@ import { useRouter } from "next/navigation";
 // components
 import Button from "@/components/utilities/Button";
 import Input from "@/components/utilities/Input";
-import ImageUpload from "@/components/ImageUpload";
+import ImageUploadComp from "@/components/ImageUploadComp";
 import Spinner from "@/components/Spinner";
 import Password from "@/components/utilities/Password";
 // api operations
 import reCaptcha from "@/lib/reCaptcha";
-import imageUpload from "@/lib/imageUpload";
 // others
 import { registerSchema } from "@/schemas/authentication";
 import Alert from "@/lib/config/Alert.config";
@@ -34,15 +33,10 @@ const RegisterPage = () => {
 
   // Image data
   const [profileImage, setProfileImage] = useState({
-    image: null,
-    name: "",
-    size: "",
-    type: "",
+    status: "",
+    url: "",
     alt: "",
   });
-  const handleProfileImage = (imageData) => {
-    setProfileImage({ ...profileImage, ...imageData });
-  };
 
   const initialValues = {
     fullName: "",
@@ -55,11 +49,9 @@ const RegisterPage = () => {
     return () => {
       resetForm();
       setSpinner(false);
-      handleProfileImage({
-        image: null,
-        name: "",
-        size: "",
-        type: "",
+      setProfileImage({
+        status: "",
+        url: "",
         alt: "",
       });
     };
@@ -78,13 +70,15 @@ const RegisterPage = () => {
       }
     }
     try {
-      if (profileImage?.image) {
-        const data = await imageUpload(profileImage.image, profileImage.name);
+      if (profileImage.status === "confirm") {
         const userData = {
           name: e.fullName,
           email: e.email,
           password: e.password,
-          image: data?.data?.thumb?.url,
+          image: {
+            url: profileImage.url,
+            alt: profileImage.alt,
+          },
         };
         await createUserData(userData, route, reset);
       } else {
@@ -92,7 +86,10 @@ const RegisterPage = () => {
           name: e.fullName,
           email: e.email,
           password: e.password,
-          image: "",
+          image: {
+            url: null,
+            alt: null,
+          },
         };
         await createUserData(userData, route, reset);
       }
@@ -109,10 +106,7 @@ const RegisterPage = () => {
   return (
     <div className="rounded-md border border-gray-700 bg-slate-800 p-4 shadow-lg">
       <h3 className="text-center text-3xl font-bold">Register</h3>
-      <ImageUpload
-        handleImageData={handleProfileImage}
-        imageData={profileImage}
-      />
+      <ImageUploadComp setImageData={setProfileImage} folder="authentication" />
       <Formik
         initialValues={initialValues}
         validationSchema={registerSchema}

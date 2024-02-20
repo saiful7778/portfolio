@@ -74,8 +74,15 @@ const DashboardPage = async () => {
 };
 
 const TableDataRow = ({ inputData, count }) => {
-  const { name, email, image, role, emailVerified, createdAt, updatedAt } =
-    inputData || "";
+  const {
+    name,
+    email,
+    image: { url, alt },
+    role,
+    emailVerified,
+    createdAt,
+    updatedAt,
+  } = inputData || "";
   const createdTime = moment(createdAt).format("Do MMM YY, h:mm a");
   const updatedTime = moment(updatedAt).format("Do MMM YY, h:mm a");
 
@@ -84,7 +91,7 @@ const TableDataRow = ({ inputData, count }) => {
       <Table.cell className="text-center font-semibold">{count}</Table.cell>
       <Table.cell>
         <div className="flex items-center gap-2">
-          <Avatar size="sm" photoURL={image} />
+          <Avatar size="sm" photoURL={url} alt={alt} />
           <div>
             <div className="font-semibold leading-tight">{name}</div>
             <div className="text-xs text-gray-400">

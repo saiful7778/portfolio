@@ -48,7 +48,6 @@ const ImageUploadComp = ({ size = "md", folder, setImageData }) => {
   const [errorStatus, setErrorStatus] = useState("");
   const [img, setImg] = useState({
     image: null,
-    name: "",
     size: "",
     type: "",
     alt: "",
@@ -112,6 +111,11 @@ const ImageUploadComp = ({ size = "md", folder, setImageData }) => {
     });
     handleRemoveImage();
     setUploadingStatus("");
+    setImageData({
+      status: "",
+      url: "",
+      alt: "",
+    });
     setSpinner(false);
     setUploading(false);
   };
@@ -176,10 +180,7 @@ const ImageUploadComp = ({ size = "md", folder, setImageData }) => {
                     <div className="text-lg font-semibold">Uploading....</div>
                   ) : (
                     <div>
-                      <div className="leading-tight">
-                        {img.name}.
-                        {img.type.replace("image/", "").toLowerCase()}
-                      </div>
+                      <div className="leading-tight">{img.name}</div>
                       <div className="text-xs leading-tight text-gray-400">
                         Uploaded{" "}
                         {uploadingStatus === "confirm" && (
@@ -228,18 +229,6 @@ const ImageUploadComp = ({ size = "md", folder, setImageData }) => {
               </div>
             ) : (
               <>
-                <input
-                  type="text"
-                  className={cn(
-                    input.base,
-                    focus.base,
-                    size === "sm" && "px-2 py-1",
-                  )}
-                  value={img.name}
-                  onChange={(e) => setImg({ ...img, name: e.target.value })}
-                  placeholder="Image title"
-                  name="imgTitle"
-                />
                 <input
                   type="text"
                   className={cn(

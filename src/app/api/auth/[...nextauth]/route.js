@@ -31,7 +31,12 @@ export const authOptions = {
           );
 
           if (isCorrect) {
-            return user;
+            return {
+              name: user.name,
+              email: user.email,
+              role: user.role,
+              image: user.image.url,
+            };
           }
           return null;
         } catch (err) {
