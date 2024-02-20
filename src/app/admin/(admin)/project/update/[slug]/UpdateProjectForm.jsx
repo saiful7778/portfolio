@@ -1,6 +1,5 @@
 "use client";
 import DatePickerComp from "@/components/DatePicker";
-import ImageUpload from "@/components/ImageUpload";
 import Spinner from "@/components/Spinner";
 import TextEditor from "@/components/TextEditor";
 import Button from "@/components/utilities/Button";
@@ -9,18 +8,17 @@ import Select from "@/components/utilities/Select";
 import Textarea from "@/components/utilities/Textarea";
 import useStateData from "@/hooks/useStateData";
 import Alert from "@/lib/config/Alert.config";
-import imageUpload from "@/lib/imageUpload";
 import reCaptcha from "@/lib/reCaptcha";
 import { addProjectSchema } from "@/schemas/project";
-import { Form, Formik, useField } from "formik";
+import { Form, Formik } from "formik";
 import Image from "next/image";
 import { useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useRouter } from "next/navigation";
 import revalidate from "@/lib/revalidate";
 import updateProject from "@/lib/actions/updateProject";
-import InputRef from "@/components/utilities/InputRef";
-import CheckboxItem from "@/components/utilities/CheckboxItem";
+import EditSlug from "@/components/EditSlug";
+import ImageUploadComp from "@/components/ImageUploadComp";
 
 const UpdateProjectForm = ({ projectData }) => {
   const {
@@ -52,16 +50,10 @@ const UpdateProjectForm = ({ projectData }) => {
   const [date, setDate] = useState(projectData.projectTime);
   // Image data
   const [thumbnailImg, setThumbnailImg] = useState({
-    image: null,
-    name: "",
-    size: "",
-    type: "",
+    status: "",
+    url: "",
     alt: "",
   });
-
-  const handleThumbnailImage = (imageData) => {
-    setThumbnailImg({ ...thumbnailImg, ...imageData });
-  };
 
   const initialValues = {
     title: title,
@@ -78,11 +70,9 @@ const UpdateProjectForm = ({ projectData }) => {
     return () => {
       resetForm();
       setSpinner(false);
-      handleThumbnailImage({
-        image: null,
-        name: "",
-        size: "",
-        type: "",
+      setThumbnailImg({
+        status: "",
+        url: "",
         alt: "",
       });
     };
@@ -103,15 +93,28 @@ const UpdateProjectForm = ({ projectData }) => {
     try {
       const projectTime = date.toISOString();
       if (updateImage) {
-        if (!thumbnailImg.image) {
+        if (!thumbnailImg.status) {
           Alert.fire({
             icon: "warning",
             text: "Please select an thumbnail image!",
           });
           setSpinner(false);
           return;
+        } else if (thumbnailImg.status === "selected") {
+          Alert.fire({
+            icon: "warning",
+            text: "Please upload this thumbnail image!",
+          });
+          setSpinner(false);
+          return;
+        } else if (thumbnailImg.status === "uploaded") {
+          Alert.fire({
+            icon: "warning",
+            text: "Please confirm this thumbnail image!",
+          });
+          setSpinner(false);
+          return;
         }
-        const data = await imageUpload(thumbnailImg.image, thumbnailImg.name);
         await updateProjectData(
           id,
           {
@@ -123,7 +126,7 @@ const UpdateProjectForm = ({ projectData }) => {
             shortDes: e.shortDes,
             des: e.des,
             projectTime,
-            thumbnail: { url: data?.data?.thumb?.url, alt: thumbnailImg.alt },
+            thumbnail: { url: thumbnailImg.url, alt: thumbnailImg.alt },
           },
           router,
           reset,
@@ -158,9 +161,10 @@ const UpdateProjectForm = ({ projectData }) => {
   return (
     <>
       {updateImage ? (
-        <ImageUpload
-          handleImageData={handleThumbnailImage}
-          imageData={thumbnailImg}
+        <ImageUploadComp
+          setImageData={setThumbnailImg}
+          size="lg"
+          folder="project"
         />
       ) : (
         <div className="my-2 flex flex-col items-center gap-2">
@@ -169,8 +173,8 @@ const UpdateProjectForm = ({ projectData }) => {
             src={url}
             alt={alt}
             title={title}
-            width={600}
-            height={337}
+            width={656}
+            height={369}
           />
           <Button
             onClick={() => setUpdateImage((l) => !l)}
@@ -206,7 +210,13 @@ const UpdateProjectForm = ({ projectData }) => {
               options={statusOptions}
             />
           </div>
-          <CheckBox />
+          <EditSlug
+            checkboxName="editSlug"
+            checkboxLabel="Custom slug"
+            refName="title"
+            inputName="slug"
+            inputPlaceholder="Slug"
+          />
           <div className="grid grid-cols-2 gap-2 max-md:grid-cols-1">
             <Input type="url" placeholder="Github Link" name="githubLink" />
             <Input type="url" placeholder="Project Live Link" name="liveLink" />
@@ -253,27 +263,6 @@ const updateProjectData = async (id, userData, router, reset) => {
   reset();
   revalidate("/admin/project/all_projects");
   router.push("/admin/project/all_projects");
-};
-
-const CheckBox = () => {
-  const [{ value }] = useField("editSlug");
-  return (
-    <>
-      <CheckboxItem name="editSlug" id="editSlug" label="Custom slug" />
-      {value && (
-        <InputRef
-          refName="title"
-          customFunction={(inputData) =>
-            inputData.toLowerCase().replace(/\s/g, "_").replace(/-/g, "")
-          }
-          type="text"
-          placeholder="Slug"
-          name="slug"
-          maxLength={50}
-        />
-      )}
-    </>
-  );
 };
 
 export default UpdateProjectForm;

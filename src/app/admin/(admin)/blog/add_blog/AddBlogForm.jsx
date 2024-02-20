@@ -1,20 +1,18 @@
 "use client";
+import EditSlug from "@/components/EditSlug";
 import ImageUploadComp from "@/components/ImageUploadComp";
 import Spinner from "@/components/Spinner";
 import TextEditor from "@/components/TextEditor";
 import Button from "@/components/utilities/Button";
-import CheckboxItem from "@/components/utilities/CheckboxItem";
 import Input from "@/components/utilities/Input";
-import InputRef from "@/components/utilities/InputRef";
 import Select from "@/components/utilities/Select";
 import useStateData from "@/hooks/useStateData";
 import createBlog from "@/lib/actions/createBlog";
-import cn from "@/lib/cn";
 import Alert from "@/lib/config/Alert.config";
 import reCaptcha from "@/lib/reCaptcha";
 import revalidate from "@/lib/revalidate";
 import { addBlogSchema } from "@/schemas/blog";
-import { Form, Formik, useField } from "formik";
+import { Form, Formik } from "formik";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
@@ -155,7 +153,13 @@ const AddBlogForm = () => {
               options={statusOptions}
             />
           </div>
-          <CheckBox />
+          <EditSlug
+            checkboxName="editSlug"
+            checkboxLabel="Custom slug"
+            refName="title"
+            inputName="slug"
+            inputPlaceholder="Slug"
+          />
           <TextEditor name="des" placeholder="Blog description...." />
           {showReCaptchaState && (
             <ReCAPTCHA
@@ -168,35 +172,6 @@ const AddBlogForm = () => {
           </Button>
         </Form>
       </Formik>
-    </>
-  );
-};
-
-const CheckBox = () => {
-  const [{ value }] = useField("editSlug");
-  return (
-    <>
-      <CheckboxItem name="editSlug" id="editSlug" label="Custom slug" />
-      <div
-        className={cn(
-          "grid transition-all duration-300 ease-in-out",
-          value
-            ? "mt-1 grid-rows-[1fr] opacity-100"
-            : "grid-rows-[0fr] opacity-0",
-        )}
-      >
-        <InputRef
-          refName="title"
-          className="overflow-hidden"
-          customFunction={(inputData) =>
-            inputData.toLowerCase().replace(/\s/g, "_").replace(/-/g, "")
-          }
-          type="text"
-          placeholder="Slug"
-          name="slug"
-          maxLength={50}
-        />
-      </div>
     </>
   );
 };

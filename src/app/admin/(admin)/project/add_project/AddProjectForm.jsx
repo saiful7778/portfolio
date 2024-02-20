@@ -1,7 +1,7 @@
 "use client";
 // packages
 import { useRef, useState } from "react";
-import { Form, Formik, useField } from "formik";
+import { Form, Formik } from "formik";
 import ReCAPTCHA from "react-google-recaptcha";
 // hooks
 import { useRouter } from "next/navigation";
@@ -15,6 +15,7 @@ import ImageUploadComp from "@/components/ImageUploadComp";
 import Spinner from "@/components/Spinner";
 import DatePickerComp from "@/components/DatePicker";
 import TextEditor from "@/components/TextEditor";
+import EditSlug from "@/components/EditSlug";
 // libs
 import reCaptcha from "@/lib/reCaptcha";
 import createProject from "@/lib/actions/createProject";
@@ -22,9 +23,6 @@ import revalidate from "@/lib/revalidate";
 import Alert from "@/lib/config/Alert.config";
 // others
 import { addProjectSchema } from "@/schemas/project";
-import InputRef from "@/components/utilities/InputRef";
-import CheckboxItem from "@/components/utilities/CheckboxItem";
-import cn from "@/lib/cn";
 
 const AddProjectForm = () => {
   const router = useRouter();
@@ -185,7 +183,13 @@ const AddProjectForm = () => {
               options={statusOptions}
             />
           </div>
-          <CheckBox />
+          <EditSlug
+            checkboxName="editSlug"
+            checkboxLabel="Custom slug"
+            refName="title"
+            inputName="slug"
+            inputPlaceholder="Slug"
+          />
           <div className="grid grid-cols-2 gap-2 max-md:grid-cols-1">
             <Input type="url" placeholder="Github Link" name="githubLink" />
             <Input type="url" placeholder="Project Live Link" name="liveLink" />
@@ -208,35 +212,6 @@ const AddProjectForm = () => {
           </Button>
         </Form>
       </Formik>
-    </>
-  );
-};
-
-const CheckBox = () => {
-  const [{ value }] = useField("editSlug");
-  return (
-    <>
-      <CheckboxItem name="editSlug" id="editSlug" label="Custom slug" />
-      <div
-        className={cn(
-          "grid transition-all duration-300 ease-in-out",
-          value
-            ? "mt-1 grid-rows-[1fr] opacity-100"
-            : "grid-rows-[0fr] opacity-0",
-        )}
-      >
-        <InputRef
-          refName="title"
-          className="overflow-hidden"
-          customFunction={(inputData) =>
-            inputData.toLowerCase().replace(/\s/g, "_").replace(/-/g, "")
-          }
-          type="text"
-          placeholder="Slug"
-          name="slug"
-          maxLength={50}
-        />
-      </div>
     </>
   );
 };
