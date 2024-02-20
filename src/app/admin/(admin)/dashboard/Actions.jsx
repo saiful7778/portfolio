@@ -9,7 +9,6 @@ import useStateData from "@/hooks/useStateData";
 import { useRef, useState } from "react";
 // components
 import { Popover } from "keep-react";
-import ImageUpload from "@/components/ImageUpload";
 import Button from "@/components/utilities/Button";
 import Input from "@/components/utilities/Input";
 import Spinner from "@/components/Spinner";
@@ -20,7 +19,6 @@ import { FaTrashCan } from "react-icons/fa6";
 import { CiEdit } from "react-icons/ci";
 import { BsThreeDotsVertical } from "react-icons/bs";
 // api op
-import imageUpload from "@/lib/imageUpload";
 import revalidate from "@/lib/revalidate";
 import reCaptcha from "@/lib/reCaptcha";
 // other
@@ -28,29 +26,25 @@ import Alert from "@/lib/config/Alert.config";
 import { userSchema } from "@/schemas/user";
 import updateUser from "@/lib/actions/updateUser";
 import deleteUser from "@/lib/actions/deleteUser";
+import ImageUploadComp from "@/components/ImageUploadComp";
 
 const Actions = ({ userData }) => {
   const { data, status } = useSession();
   const [modal, setModal] = useState(false);
   const [spinner, setSpinner] = useState(false);
-  const [updateImg, setUpdateImg] = useState(userData?.image ? true : false);
+  const [updateImg, setUpdateImg] = useState(userData.image.url ? true : false);
   const { showReCaptcha } = useStateData();
   const recaptchaRef = useRef(null);
   const showReCaptchaState =
     showReCaptcha.show === "on" ||
     (showReCaptcha.show === "custom" &&
       showReCaptcha.page.includes("userUpdate"));
+
   const [profileImg, setProfileImg] = useState({
-    image: null,
-    name: "",
-    size: "",
-    type: "",
+    status: "",
+    url: "",
     alt: "",
   });
-
-  const handleProfileImg = (imageData) => {
-    setProfileImg({ ...profileImg, ...imageData });
-  };
 
   const handleModal = () => setModal((l) => !l);
 
@@ -114,11 +108,9 @@ const Actions = ({ userData }) => {
       resetForm();
       setSpinner(false);
       setModal(false);
-      handleProfileImg({
-        image: null,
-        name: "",
-        size: "",
-        type: "",
+      setProfileImg({
+        status: "",
+        url: "",
         alt: "",
       });
     };
@@ -137,11 +129,13 @@ const Actions = ({ userData }) => {
       }
     }
     try {
-      if (!updateImg && profileImg.image) {
-        const data = await imageUpload(profileImg.image, profileImg.name);
+      if (!updateImg && profileImg.status === "confirm") {
         await updateUserData(userData.id, userData.email, {
           ...e,
-          image: data?.data?.thumb?.url,
+          image: {
+            url: profileImg.url,
+            alt: profileImg.alt,
+          },
         });
       } else {
         await updateUserData(userData.id, userData.email, e);
@@ -205,7 +199,7 @@ const Actions = ({ userData }) => {
         {updateImg ? (
           <div className="flex flex-col items-center gap-2">
             <Image
-              src={userData.image}
+              src={userData.image.url}
               width={150}
               height={150}
               alt={`${userData.name} image`}
@@ -219,9 +213,9 @@ const Actions = ({ userData }) => {
             </Button>
           </div>
         ) : (
-          <ImageUpload
-            handleImageData={handleProfileImg}
-            imageData={profileImg}
+          <ImageUploadComp
+            setImageData={setProfileImg}
+            folder="authentication"
           />
         )}
         <Formik
