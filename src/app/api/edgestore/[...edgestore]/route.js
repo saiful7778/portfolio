@@ -15,6 +15,7 @@ const edgeStoreRouter = es.router({
         type: z.enum(["project", "blog"]),
       }),
     )
+    .path(({ input }) => [{ type: input.type }])
     .beforeDelete(() => {
       return true;
     }),
