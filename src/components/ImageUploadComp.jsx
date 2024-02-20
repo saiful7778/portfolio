@@ -111,6 +111,7 @@ const ImageUploadComp = ({ size = "md" }) => {
             {errorStatus && (
               <p className="mt-1 text-xs text-red-500">{errorStatus}</p>
             )}
+
             <input
               type="text"
               className={cn(
@@ -146,6 +147,32 @@ const ImageUploadComp = ({ size = "md" }) => {
           </>
         ) : (
           <>
+            <div className="w-full rounded-md border border-gray-700 p-2">
+              <div className="flex items-center justify-between">
+                <div>
+                  {/* <div className="text-lg font-semibold">Uploading....</div> */}
+                  <div className="leading-tight">filename.jpeg</div>
+                  <div className="text-xs leading-tight text-gray-400">
+                    Uploaded
+                  </div>
+                </div>
+                <div className="inline-flex items-center gap-2">
+                  <Button variant="confirm" size="sm">
+                    Confirm
+                  </Button>
+                  <Button variant="cancel" size="sm">
+                    Delete
+                  </Button>
+                  {/* <span>45%</span> */}
+                </div>
+              </div>
+              <div className="mt-2 h-1.5 w-full overflow-hidden rounded-md border border-gray-400 transition-all duration-200">
+                <div
+                  className="h-1.5 bg-gray-400"
+                  style={{ width: `${45}%` }}
+                ></div>
+              </div>
+            </div>
             <span>
               <IoImageOutline size={50} />
             </span>
@@ -173,6 +200,9 @@ const ImageUploadComp = ({ size = "md" }) => {
               </div>
             </label>
             <p className="text-sm text-gray-500">Maximum: 5MB</p>
+            {errorStatus && (
+              <p className="mt-1 text-xs text-red-500">{errorStatus}</p>
+            )}
           </>
         )}
       </div>
