@@ -10,6 +10,11 @@ export const addBlogSchema = yup.object().shape({
     .required("Status is required")
     .oneOf(["published", "private"]),
   editSlug: yup.boolean(),
-  slug: yup.string().required("Slug is required"),
+  slug: yup.string().when("editSlug", ([editSlug], schema) => {
+    if (editSlug) {
+      return schema.required("Slug is required");
+    }
+    return schema;
+  }),
   des: yup.string().required("Description is required."),
 });

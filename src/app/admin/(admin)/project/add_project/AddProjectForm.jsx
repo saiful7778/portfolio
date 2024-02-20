@@ -10,13 +10,12 @@ import useStateData from "@/hooks/useStateData";
 import Input from "@/components/utilities/Input";
 import Button from "@/components/utilities/Button";
 import Textarea from "@/components/utilities/Textarea";
-import ImageUpload from "@/components/ImageUpload";
 import Select from "@/components/utilities/Select";
+import ImageUploadComp from "@/components/ImageUploadComp";
 import Spinner from "@/components/Spinner";
 import DatePickerComp from "@/components/DatePicker";
 import TextEditor from "@/components/TextEditor";
 // libs
-import imageUpload from "@/lib/imageUpload";
 import reCaptcha from "@/lib/reCaptcha";
 import createProject from "@/lib/actions/createProject";
 import revalidate from "@/lib/revalidate";
@@ -25,6 +24,7 @@ import Alert from "@/lib/config/Alert.config";
 import { addProjectSchema } from "@/schemas/project";
 import InputRef from "@/components/utilities/InputRef";
 import CheckboxItem from "@/components/utilities/CheckboxItem";
+import cn from "@/lib/cn";
 
 const AddProjectForm = () => {
   const router = useRouter();
@@ -40,16 +40,10 @@ const AddProjectForm = () => {
 
   // Image data
   const [thumbnailImg, setThumbnailImg] = useState({
-    image: null,
-    name: "",
-    size: "",
-    type: "",
+    status: "",
+    url: "",
     alt: "",
   });
-
-  const handleThumbnailImage = (imageData) => {
-    setThumbnailImg({ ...thumbnailImg, ...imageData });
-  };
 
   // project data
   const [date, setDate] = useState(new Date());
@@ -74,11 +68,9 @@ const AddProjectForm = () => {
     return () => {
       resetForm();
       setSpinner(false);
-      handleThumbnailImage({
-        image: null,
-        name: "",
-        size: "",
-        type: "",
+      setThumbnailImg({
+        status: "",
+        url: "",
         alt: "",
       });
     };
@@ -96,10 +88,24 @@ const AddProjectForm = () => {
         return;
       }
     }
-    if (!thumbnailImg) {
+    if (!thumbnailImg.status) {
       Alert.fire({
         icon: "warning",
         text: "Please select an thumbnail image!",
+      });
+      setSpinner(false);
+      return;
+    } else if (thumbnailImg.status === "selected") {
+      Alert.fire({
+        icon: "warning",
+        text: "Please upload this thumbnail image!",
+      });
+      setSpinner(false);
+      return;
+    } else if (thumbnailImg.status === "uploaded") {
+      Alert.fire({
+        icon: "warning",
+        text: "Please confirm this thumbnail image!",
       });
       setSpinner(false);
       return;
@@ -107,14 +113,9 @@ const AddProjectForm = () => {
     try {
       const projectTime = date.toISOString();
 
-      const thumbnailLink = await imageUpload(
-        thumbnailImg.image,
-        thumbnailImg.name,
-      );
-
       const projectData = {
         thumbnail: {
-          url: thumbnailLink?.data?.url,
+          url: thumbnailImg.url,
           alt: thumbnailImg.alt,
         },
         title: e.title,
@@ -132,6 +133,7 @@ const AddProjectForm = () => {
           icon: "error",
           text: res?.message,
         });
+        setSpinner(false);
         return;
       }
       Alert.fire({
@@ -153,9 +155,10 @@ const AddProjectForm = () => {
 
   return (
     <>
-      <ImageUpload
-        handleImageData={handleThumbnailImage}
-        imageData={thumbnailImg}
+      <ImageUploadComp
+        setImageData={setThumbnailImg}
+        size="lg"
+        folder="project"
       />
       <Formik
         initialValues={projectInitialValues}
@@ -214,9 +217,17 @@ const CheckBox = () => {
   return (
     <>
       <CheckboxItem name="editSlug" id="editSlug" label="Custom slug" />
-      {value && (
+      <div
+        className={cn(
+          "grid transition-all duration-300 ease-in-out",
+          value
+            ? "mt-1 grid-rows-[1fr] opacity-100"
+            : "grid-rows-[0fr] opacity-0",
+        )}
+      >
         <InputRef
           refName="title"
+          className="overflow-hidden"
           customFunction={(inputData) =>
             inputData.toLowerCase().replace(/\s/g, "_").replace(/-/g, "")
           }
@@ -225,7 +236,7 @@ const CheckBox = () => {
           name="slug"
           maxLength={50}
         />
-      )}
+      </div>
     </>
   );
 };

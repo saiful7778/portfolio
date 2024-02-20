@@ -9,6 +9,7 @@ import InputRef from "@/components/utilities/InputRef";
 import Select from "@/components/utilities/Select";
 import useStateData from "@/hooks/useStateData";
 import createBlog from "@/lib/actions/createBlog";
+import cn from "@/lib/cn";
 import Alert from "@/lib/config/Alert.config";
 import reCaptcha from "@/lib/reCaptcha";
 import revalidate from "@/lib/revalidate";
@@ -111,6 +112,7 @@ const AddBlogForm = () => {
           icon: "error",
           text: res?.message,
         });
+        setSpinner(false);
         return;
       }
       Alert.fire({
@@ -175,9 +177,17 @@ const CheckBox = () => {
   return (
     <>
       <CheckboxItem name="editSlug" id="editSlug" label="Custom slug" />
-      {value && (
+      <div
+        className={cn(
+          "grid transition-all duration-300 ease-in-out",
+          value
+            ? "mt-1 grid-rows-[1fr] opacity-100"
+            : "grid-rows-[0fr] opacity-0",
+        )}
+      >
         <InputRef
           refName="title"
+          className="overflow-hidden"
           customFunction={(inputData) =>
             inputData.toLowerCase().replace(/\s/g, "_").replace(/-/g, "")
           }
@@ -186,7 +196,7 @@ const CheckBox = () => {
           name="slug"
           maxLength={50}
         />
-      )}
+      </div>
     </>
   );
 };
