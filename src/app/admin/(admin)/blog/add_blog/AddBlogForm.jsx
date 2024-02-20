@@ -1,6 +1,6 @@
 "use client";
 import EditSlug from "@/components/EditSlug";
-import ImageUploadComp from "@/components/ImageUploadComp";
+import ImageUpload from "@/components/ImageUpload";
 import Spinner from "@/components/Spinner";
 import TextEditor from "@/components/TextEditor";
 import Button from "@/components/utilities/Button";
@@ -132,7 +132,7 @@ const AddBlogForm = () => {
 
   return (
     <>
-      <ImageUploadComp setImageData={setThumbnailImg} folder="blog" size="lg" />
+      <ImageUpload setImageData={setThumbnailImg} folder="blog" size="lg" />
       <Formik
         initialValues={blogInitialValues}
         validationSchema={addBlogSchema}

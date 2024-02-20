@@ -11,7 +11,7 @@ import Input from "@/components/utilities/Input";
 import Button from "@/components/utilities/Button";
 import Textarea from "@/components/utilities/Textarea";
 import Select from "@/components/utilities/Select";
-import ImageUploadComp from "@/components/ImageUploadComp";
+import ImageUpload from "@/components/ImageUpload";
 import Spinner from "@/components/Spinner";
 import DatePickerComp from "@/components/DatePicker";
 import TextEditor from "@/components/TextEditor";
@@ -153,11 +153,7 @@ const AddProjectForm = () => {
 
   return (
     <>
-      <ImageUploadComp
-        setImageData={setThumbnailImg}
-        size="lg"
-        folder="project"
-      />
+      <ImageUpload setImageData={setThumbnailImg} size="lg" folder="project" />
       <Formik
         initialValues={projectInitialValues}
         validationSchema={addProjectSchema}

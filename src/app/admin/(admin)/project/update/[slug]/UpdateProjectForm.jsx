@@ -18,7 +18,7 @@ import { useRouter } from "next/navigation";
 import revalidate from "@/lib/revalidate";
 import updateProject from "@/lib/actions/updateProject";
 import EditSlug from "@/components/EditSlug";
-import ImageUploadComp from "@/components/ImageUploadComp";
+import ImageUpload from "@/components/ImageUpload";
 
 const UpdateProjectForm = ({ projectData }) => {
   const {
@@ -161,7 +161,7 @@ const UpdateProjectForm = ({ projectData }) => {
   return (
     <>
       {updateImage ? (
-        <ImageUploadComp
+        <ImageUpload
           setImageData={setThumbnailImg}
           size="lg"
           folder="project"

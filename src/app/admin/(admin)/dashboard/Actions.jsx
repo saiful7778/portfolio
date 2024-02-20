@@ -26,7 +26,7 @@ import Alert from "@/lib/config/Alert.config";
 import { userSchema } from "@/schemas/user";
 import updateUser from "@/lib/actions/updateUser";
 import deleteUser from "@/lib/actions/deleteUser";
-import ImageUploadComp from "@/components/ImageUploadComp";
+import ImageUpload from "@/components/ImageUpload";
 
 const Actions = ({ userData }) => {
   const { data, status } = useSession();
@@ -213,10 +213,7 @@ const Actions = ({ userData }) => {
             </Button>
           </div>
         ) : (
-          <ImageUploadComp
-            setImageData={setProfileImg}
-            folder="authentication"
-          />
+          <ImageUpload setImageData={setProfileImg} folder="authentication" />
         )}
         <Formik
           initialValues={userDataInitialValues}

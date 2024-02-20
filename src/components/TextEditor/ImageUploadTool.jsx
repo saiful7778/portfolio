@@ -2,43 +2,32 @@
 import { IoImageOutline } from "react-icons/io5";
 import Tool from "./Tool";
 import Modal from "../Modal";
-import ImageUpload from "../ImageUpload";
 import { useCallback, useState } from "react";
 import Button from "../utilities/Button";
+import ImageUpload from "../ImageUpload";
 
 const ImageUploadTool = ({ editor }) => {
   const [modal, setModal] = useState(false);
-  const [loadImage, setLoadImage] = useState(null);
   // Image data
   const [img, setImg] = useState({
-    image: null,
-    name: "",
-    size: "",
-    type: "",
+    status: "",
+    url: "",
     alt: "",
-    width: 0,
-    height: 0,
   });
-  const handleImage = (imageData) => {
-    setImg({ ...img, ...imageData });
-  };
 
   const handleUpload = useCallback(() => {
     setModal((l) => !l);
-    if (loadImage) {
+    if (img.status === "confirm") {
       editor
         .chain()
         .focus()
         .setImage({
-          src: loadImage,
+          src: img.url,
           alt: img.alt,
-          title: img.name,
-          width: img.width,
-          height: img.height,
         })
         .run();
     }
-  }, [editor, loadImage, img]);
+  }, [editor, img]);
 
   return (
     <>
@@ -50,11 +39,7 @@ const ImageUploadTool = ({ editor }) => {
         closeModal={() => setModal((l) => !l)}
         modalTitle="Image upload"
       >
-        <ImageUpload
-          handleImageData={handleImage}
-          imageData={img}
-          handleRenderImage={(imageData) => setLoadImage(imageData)}
-        />
+        <ImageUpload setImageData={setImg} size="sm" folder="editor" />
         <Button onClick={handleUpload} variant="confirm">
           Upload
         </Button>

@@ -16,7 +16,7 @@ import revalidate from "@/lib/revalidate";
 import { addBlogSchema } from "@/schemas/blog";
 import updateBlog from "@/lib/actions/updateBlog";
 import EditSlug from "@/components/EditSlug";
-import ImageUploadComp from "@/components/ImageUploadComp";
+import ImageUpload from "@/components/ImageUpload";
 
 const UpdateBlogForm = ({ blogData }) => {
   const {
@@ -145,11 +145,7 @@ const UpdateBlogForm = ({ blogData }) => {
   return (
     <>
       {updateImage ? (
-        <ImageUploadComp
-          size="lg"
-          setImageData={setThumbnailImg}
-          folder="blog"
-        />
+        <ImageUpload size="lg" setImageData={setThumbnailImg} folder="blog" />
       ) : (
         <div className="my-2 flex flex-col items-center gap-2">
           <Image

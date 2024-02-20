@@ -1,6 +1,6 @@
 "use client";
 
-import ImageUploadComp from "@/components/ImageUploadComp";
+import ImageUpload from "@/components/ImageUpload";
 import { useState } from "react";
 
 const ImageUploadPage = () => {
@@ -12,7 +12,7 @@ const ImageUploadPage = () => {
   console.log(thumbnailImage);
   return (
     <div>
-      <ImageUploadComp
+      <ImageUpload
         size="lg"
         folder="project"
         setImageData={setThumbnailImage}

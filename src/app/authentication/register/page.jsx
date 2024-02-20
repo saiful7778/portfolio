@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 // components
 import Button from "@/components/utilities/Button";
 import Input from "@/components/utilities/Input";
-import ImageUploadComp from "@/components/ImageUploadComp";
+import ImageUpload from "@/components/ImageUpload";
 import Spinner from "@/components/Spinner";
 import Password from "@/components/utilities/Password";
 // api operations
@@ -106,7 +106,7 @@ const RegisterPage = () => {
   return (
     <div className="rounded-md border border-gray-700 bg-slate-800 p-4 shadow-lg">
       <h3 className="text-center text-3xl font-bold">Register</h3>
-      <ImageUploadComp setImageData={setProfileImage} folder="authentication" />
+      <ImageUpload setImageData={setProfileImage} folder="authentication" />
       <Formik
         initialValues={initialValues}
         validationSchema={registerSchema}
