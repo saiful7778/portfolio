@@ -6,6 +6,7 @@ import Document from "@tiptap/extension-document";
 import StarterKit from "@tiptap/starter-kit";
 import TextEditorToolbar from "./TextEditorToolbar";
 import Image from "@tiptap/extension-image";
+import HardBreak from "@tiptap/extension-hard-break";
 import BaseHeading from "@tiptap/extension-heading";
 import Highlight from "@tiptap/extension-highlight";
 import BulletList from "@tiptap/extension-bullet-list";
@@ -19,6 +20,7 @@ import { mergeAttributes } from "@tiptap/core";
 import Link from "@tiptap/extension-link";
 import { focus, input } from "@/theme";
 import { useField } from "formik";
+import FloatingMenu from "./FloatingMenu";
 
 const style = {
   base: "h-[600px] overflow-auto",
@@ -49,7 +51,7 @@ const Heading = BaseHeading.configure({ levels: [2, 3, 4, 5, 6] }).extend({
 });
 
 const TextEditorComp = ({ name, placeholder = "Write....", content = "" }) => {
-  const formik = useField({ name });
+  const formik = useField(name);
   const { error } = formik[1];
   const { setValue } = formik[2];
 
@@ -59,6 +61,7 @@ const TextEditorComp = ({ name, placeholder = "Write....", content = "" }) => {
     extensions: [
       StarterKit,
       Document,
+      HardBreak,
       Link.configure({
         openOnClick: false,
         autolink: true,
@@ -110,7 +113,7 @@ const TextEditorComp = ({ name, placeholder = "Write....", content = "" }) => {
     },
     content,
     onUpdate({ editor }) {
-      setValue(editor.getHTML());
+      setValue(editor.getJSON());
     },
   });
 
@@ -121,6 +124,7 @@ const TextEditorComp = ({ name, placeholder = "Write....", content = "" }) => {
     <>
       <TextEditorToolbar editor={editor} />
       <div className="relative">
+        <FloatingMenu editor={editor} />
         <EditorContent editor={editor} />
         <div className="absolute bottom-1 right-1.5 z-50 text-xs text-gray-400">
           {editor.storage.characterCount.characters()}/{limit}
