@@ -2,9 +2,9 @@ import cn from "@/lib/cn";
 
 export const TableMain = ({ children }) => {
   return (
-    <div className="w-full overflow-x-auto border border-gray-700">
+    <div className="w-full overflow-auto border border-gray-700">
       <div className="relative">
-        <table className="w-full overflow-x-auto">{children}</table>
+        <table className="w-full overflow-auto">{children}</table>
       </div>
     </div>
   );
@@ -18,7 +18,7 @@ export const TableHead = ({ className, children }) => {
   return (
     <thead
       className={cn(
-        "border-y border-gray-700 bg-gray-800 text-xs font-normal text-metal-400",
+        "text-metal-400 border-y border-gray-700 bg-gray-800 text-xs font-normal",
         className,
       )}
     >
