@@ -4,7 +4,6 @@ module.exports = {
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./node_modules/keep-react/**/*.{js,jsx,ts,tsx}",
     "./src/theme.js",
     "./src/lib/config/Alert.config.js",
   ],
@@ -48,6 +47,5 @@ module.exports = {
       },
     },
   },
-  presets: [require("keep-react/preset")],
   plugins: [],
 };

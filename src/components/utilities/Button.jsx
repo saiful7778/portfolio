@@ -61,3 +61,5 @@ const Button = ({
 };
 
 export default Button;
+
+export { style as buttonStyle };

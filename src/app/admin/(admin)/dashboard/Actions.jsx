@@ -8,16 +8,13 @@ import { useSession } from "next-auth/react";
 import useStateData from "@/hooks/useStateData";
 import { useRef, useState } from "react";
 // components
-import { Popover } from "keep-react";
 import Button from "@/components/utilities/Button";
 import Input from "@/components/utilities/Input";
 import Spinner from "@/components/Spinner";
 import Select from "@/components/utilities/Select";
+import ImageUpload from "@/components/ImageUpload";
+import PopOver from "@/components/PopOver";
 import Modal from "@/components/Modal";
-// icons
-import { FaTrashCan } from "react-icons/fa6";
-import { CiEdit } from "react-icons/ci";
-import { BsThreeDotsVertical } from "react-icons/bs";
 // api op
 import revalidate from "@/lib/revalidate";
 import reCaptcha from "@/lib/reCaptcha";
@@ -26,7 +23,6 @@ import Alert from "@/lib/config/Alert.config";
 import { userSchema } from "@/schemas/user";
 import updateUser from "@/lib/actions/updateUser";
 import deleteUser from "@/lib/actions/deleteUser";
-import ImageUpload from "@/components/ImageUpload";
 
 const Actions = ({ userData }) => {
   const { data, status } = useSession();
@@ -153,49 +149,8 @@ const Actions = ({ userData }) => {
 
   return (
     <>
-      <Popover
-        showDismissIcon={false}
-        showArrow={false}
-        position="left"
-        className="border border-gray-700 !bg-gray-800 !px-2 !py-2 "
-      >
-        <Popover.Action>
-          <Button size="sm" variant="primary-outline" shape="icon-button">
-            <BsThreeDotsVertical size={15} />
-          </Button>
-        </Popover.Action>
-        <Popover.Container className="!mt-0 !block">
-          <ul>
-            <li>
-              <button
-                onClick={handleDelete}
-                className="flex w-full items-center justify-between gap-4 rounded px-2 py-1 hover:bg-gray-700"
-              >
-                <span>Delete</span>
-                <span>
-                  <FaTrashCan />
-                </span>
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={handleModal}
-                className="flex w-full items-center justify-between gap-4 rounded px-2 py-1 hover:bg-gray-700"
-              >
-                <span>Edit</span>
-                <span>
-                  <CiEdit strokeWidth={1} />
-                </span>
-              </button>
-            </li>
-          </ul>
-        </Popover.Container>
-      </Popover>
-      <Modal
-        openModal={modal}
-        closeModal={handleModal}
-        modalTitle={`Update ${userData.name}`}
-      >
+      <PopOver handleDelete={handleDelete} handleUpdate={handleModal} />
+      <Modal open={modal} close={handleModal} title={`Update ${userData.name}`}>
         {updateImg ? (
           <div className="flex flex-col items-center gap-2">
             <Image

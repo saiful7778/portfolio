@@ -10,11 +10,7 @@ const Details = ({ data }) => {
       <Button onClick={() => setModal((l) => !l)} variant="confirm" size="sm">
         Details
       </Button>
-      <Modal
-        openModal={modal}
-        closeModal={() => setModal((l) => !l)}
-        modalTitle="Details"
-      >
+      <Modal open={modal} close={() => setModal((l) => !l)} title="Details">
         <div>{data}</div>
       </Modal>
     </>
