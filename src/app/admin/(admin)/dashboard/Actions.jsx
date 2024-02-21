@@ -14,7 +14,7 @@ import Spinner from "@/components/Spinner";
 import Select from "@/components/utilities/Select";
 import ImageUpload from "@/components/ImageUpload";
 import PopOver from "@/components/PopOver";
-import ModalComp from "@/components/ModalComp";
+import Modal from "@/components/Modal";
 // api op
 import revalidate from "@/lib/revalidate";
 import reCaptcha from "@/lib/reCaptcha";
@@ -150,11 +150,7 @@ const Actions = ({ userData }) => {
   return (
     <>
       <PopOver handleDelete={handleDelete} handleUpdate={handleModal} />
-      <ModalComp
-        open={modal}
-        close={handleModal}
-        title={`Update ${userData.name}`}
-      >
+      <Modal open={modal} close={handleModal} title={`Update ${userData.name}`}>
         {updateImg ? (
           <div className="flex flex-col items-center gap-2">
             <Image
@@ -211,7 +207,7 @@ const Actions = ({ userData }) => {
             </Button>
           </Form>
         </Formik>
-      </ModalComp>
+      </Modal>
     </>
   );
 };

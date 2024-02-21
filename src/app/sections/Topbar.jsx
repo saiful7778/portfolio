@@ -8,12 +8,12 @@ import useStateData from "@/hooks/useStateData";
 // components
 import Button from "@/components/utilities/Button";
 import Avatar from "@/components/Avatar";
-import { Popover } from "keep-react";
 import Spinner from "@/components/Spinner";
 // icons
 import { LuMenuSquare } from "react-icons/lu";
 // assets
 import profileImage from "../../../public/saiful_image.png";
+import { Popover } from "@headlessui/react";
 
 const Topbar = () => {
   const { handleSidebar } = useStateData();
@@ -41,39 +41,29 @@ const Topbar = () => {
       {status === "loading" ? (
         <Spinner size={15} />
       ) : (
-        <Popover
-          showDismissIcon={false}
-          showArrow={false}
-          className="border border-gray-700 !bg-gray-800 !px-2 !py-2 text-xs"
-        >
-          <Popover.Action className="h-8">
-            <Avatar size="sm" photoURL={data?.user?.image} />
-          </Popover.Action>
-          <Popover.Container className="!mt-0 !block">
-            <ul>
-              <li>
-                <div className="rounded px-2 py-1 hover:bg-gray-700">
-                  {data?.user?.name}
-                </div>
-              </li>
-              <li>
-                <div className="rounded px-2 py-1 hover:bg-gray-700">
-                  {data?.user?.email}
-                </div>
-              </li>
-              <li>
-                <Button
-                  onClick={() => signOut()}
-                  className="mt-2 w-full"
-                  variant="cancel"
-                  size="sm"
-                >
-                  Log out
-                </Button>
-              </li>
-            </ul>
-          </Popover.Container>
-        </Popover>
+        <>
+          <Popover className="relative w-fit">
+            <Popover.Button className="h-8">
+              <Avatar size="sm" photoURL={data?.user?.image} />
+            </Popover.Button>
+            <Popover.Panel className="absolute right-0 top-full mt-1 overflow-hidden rounded border border-gray-700 bg-gray-800 px-2 py-1.5 text-xs">
+              <div className="rounded px-2 py-1 hover:bg-gray-700">
+                {data?.user?.name}
+              </div>
+              <div className="rounded px-2 py-1 hover:bg-gray-700">
+                {data?.user?.email}
+              </div>
+              <Button
+                onClick={() => signOut()}
+                className="mt-2 w-full"
+                variant="cancel"
+                size="sm"
+              >
+                Log out
+              </Button>
+            </Popover.Panel>
+          </Popover>
+        </>
       )}
     </div>
   );

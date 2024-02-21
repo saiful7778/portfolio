@@ -1,5 +1,5 @@
 "use client";
-import ModalComp from "@/components/ModalComp";
+import Modal from "@/components/Modal";
 import Button from "@/components/utilities/Button";
 import { useState } from "react";
 
@@ -10,9 +10,9 @@ const Details = ({ data }) => {
       <Button onClick={() => setModal((l) => !l)} variant="confirm" size="sm">
         Details
       </Button>
-      <ModalComp open={modal} close={() => setModal((l) => !l)} title="Details">
+      <Modal open={modal} close={() => setModal((l) => !l)} title="Details">
         <div>{data}</div>
-      </ModalComp>
+      </Modal>
     </>
   );
 };

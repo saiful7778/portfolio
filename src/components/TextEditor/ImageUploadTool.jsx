@@ -1,10 +1,10 @@
 "use client";
 import { IoImageOutline } from "react-icons/io5";
 import Tool from "./Tool";
-import Modal from "../Modal";
 import { useCallback, useState } from "react";
 import Button from "../utilities/Button";
 import ImageUpload from "../ImageUpload";
+import Modal from "../Modal";
 
 const ImageUploadTool = ({ editor }) => {
   const [modal, setModal] = useState(false);
@@ -35,9 +35,9 @@ const ImageUploadTool = ({ editor }) => {
         <IoImageOutline />
       </Tool>
       <Modal
-        openModal={modal}
-        closeModal={() => setModal((l) => !l)}
-        modalTitle="Image upload"
+        open={modal}
+        close={() => setModal((l) => !l)}
+        title="Image upload"
       >
         <ImageUpload setImageData={setImg} size="sm" folder="editor" />
         <Button onClick={handleUpload} variant="confirm">
