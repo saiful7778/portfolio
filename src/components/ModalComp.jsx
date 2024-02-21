@@ -30,7 +30,9 @@ const ModalComp = ({ open, title, description, close, children }) => {
             >
               <RxCross2 />
             </Button>
-            {title && <Dialog.Title>{title}</Dialog.Title>}
+            {title && (
+              <Dialog.Title className="text-xl font-bold">{title}</Dialog.Title>
+            )}
             {description && <Dialog.Title>{description}</Dialog.Title>}
             {children}
           </Dialog.Panel>
