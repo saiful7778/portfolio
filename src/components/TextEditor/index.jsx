@@ -1,5 +1,3 @@
-import TextEditorComp from "./TextEditorComp";
-
-const TextEditor = (props) => <TextEditorComp {...props} />;
+import TextEditor from "./TextEditorComp";
 
 export default TextEditor;
