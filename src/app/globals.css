@@ -113,9 +113,6 @@
 .tiptap > *:not(.is-editor-empty) {
   @apply mb-2;
 }
-.paragraph > * {
-  @apply mb-4;
-}
 
 pre {
   background: #0d0d0d;

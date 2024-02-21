@@ -113,7 +113,7 @@ const TextEditorComp = ({ name, placeholder = "Write....", content = "" }) => {
     },
     content,
     onUpdate({ editor }) {
-      setValue(editor.getJSON());
+      setValue(JSON.stringify(editor.getJSON()));
     },
   });
 

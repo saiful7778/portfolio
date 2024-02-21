@@ -102,7 +102,7 @@ const AddBlogForm = () => {
         title: e.title,
         slug: e.slug,
         status: e.status,
-        des: e.des,
+        des: JSON.parse(e.des),
       };
       const res = await createBlog(blogData);
       if (!res.success) {

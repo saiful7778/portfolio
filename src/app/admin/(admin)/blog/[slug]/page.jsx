@@ -2,9 +2,9 @@ import ErrorDataShow from "@/components/ErrorDataShow";
 import getBlog from "@/lib/DB/getBlog";
 import moment from "moment";
 import Image from "next/image";
-import parse from "html-react-parser";
 import Button from "@/components/utilities/Button";
 import DeleteBlog from "./DeleteBlog";
+import renderReactComponent from "@/lib/renderReactComponent";
 
 export async function generateMetadata({ params }) {
   const res = await getBlog(params?.slug);
@@ -84,7 +84,7 @@ const SingleBlog = async ({ params }) => {
       </div>
       <div className="paragraph">
         <div className="text-sm text-gray-500">Description:</div>
-        {parse(des)}
+        {renderReactComponent(des)}
       </div>
     </div>
   );

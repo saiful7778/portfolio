@@ -33,7 +33,7 @@ model project {
   githubLink  String
   liveLink    String
   shortDes    String
-  des         String
+  des         Json
   projectTime DateTime
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
@@ -51,7 +51,7 @@ model blog {
   title     String
   slug      String   @unique
   status    String
-  des       String
+  des       Json
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
