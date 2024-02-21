@@ -23,6 +23,8 @@ function renderContent(inputContent) {
         ));
       } else if (ele.type === "hardBreak") {
         return <br key={`${ele.type}-${idx}`} />;
+      } else {
+        return renderTag(ele, `${ele.type}-${idx}`);
       }
     });
   } else {
@@ -69,6 +71,12 @@ function renderAttrs(inputAttrs) {
 
 function renderTag(node, key) {
   switch (node.type) {
+    case "doc":
+      return (
+        <div className="space-y-4" key={key}>
+          {renderContent(node.content)}
+        </div>
+      );
     case "paragraph":
       return (
         <p key={key} {...renderAttrs(node.attrs)}>
@@ -180,9 +188,5 @@ function renderTag(node, key) {
 }
 
 export default function renderReactComponent(data) {
-  const allData = [];
-  data.forEach((ele, idx) => {
-    allData.push(renderTag(ele, `${ele.type}-${idx}`));
-  });
-  return allData;
+  return renderTag(data, "description");
 }
