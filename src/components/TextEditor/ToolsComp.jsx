@@ -10,6 +10,7 @@ import {
   AiOutlineAlignLeft,
   AiOutlineAlignCenter,
   AiOutlineAlignRight,
+  AiOutlineEnter,
 } from "react-icons/ai";
 import { FaParagraph } from "react-icons/fa";
 import { FaListUl, FaListOl } from "react-icons/fa";
@@ -163,6 +164,10 @@ export const TextStyle = ({ editor }) => {
     editor.chain().focus().toggleCode().run();
   };
 
+  const handleNewline = () => {
+    editor.chain().focus().setHardBreak().run();
+  };
+
   return (
     <>
       <Tool tag="bold" isActive={editor.isActive("bold")} onClick={handleBold}>
@@ -184,6 +189,9 @@ export const TextStyle = ({ editor }) => {
       </Tool>
       <Tool tag="code" isActive={editor.isActive("code")} onClick={handleCode}>
         <FaCode />
+      </Tool>
+      <Tool tag="new line" onClick={handleNewline}>
+        <AiOutlineEnter />
       </Tool>
     </>
   );

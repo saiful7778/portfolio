@@ -6,6 +6,7 @@ import Document from "@tiptap/extension-document";
 import StarterKit from "@tiptap/starter-kit";
 import TextEditorToolbar from "./TextEditorToolbar";
 import Image from "@tiptap/extension-image";
+import HardBreak from "@tiptap/extension-hard-break";
 import BaseHeading from "@tiptap/extension-heading";
 import Highlight from "@tiptap/extension-highlight";
 import BulletList from "@tiptap/extension-bullet-list";
@@ -60,6 +61,7 @@ const TextEditorComp = ({ name, placeholder = "Write....", content = "" }) => {
     extensions: [
       StarterKit,
       Document,
+      HardBreak,
       Link.configure({
         openOnClick: false,
         autolink: true,
