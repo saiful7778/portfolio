@@ -1,4 +1,4 @@
-import { FaBold, FaItalic, FaCode, FaLaptopCode } from "react-icons/fa";
+import { FaLaptopCode } from "react-icons/fa";
 import { IoMdUndo, IoMdRedo } from "react-icons/io";
 import { FaLink, FaLinkSlash } from "react-icons/fa6";
 import { useCallback } from "react";
@@ -6,7 +6,7 @@ import { useCallback } from "react";
 import Alert from "@/lib/config/Alert.config";
 import Button from "../utilities/Button";
 import Tool from "./Tool";
-import { TextAlign, TextHtmlFormat, TextList } from "./ToolsComp";
+import { TextAlign, TextHtmlFormat, TextList, TextStyle } from "./ToolsComp";
 import ImageUploadTool from "./ImageUploadTool";
 
 const TextEditorToolbar = ({ editor }) => {
@@ -32,21 +32,6 @@ const TextEditorToolbar = ({ editor }) => {
     return null;
   }
 
-  const handleBold = () => {
-    editor.chain().focus().toggleBold().run();
-  };
-
-  const handleItalic = () => {
-    editor.chain().focus().toggleItalic().run();
-  };
-  const handleMark = () => {
-    editor.chain().focus().toggleHighlight().run();
-  };
-
-  const handleCode = () => {
-    editor.chain().focus().toggleCode().run();
-  };
-
   const handleCodeBlock = () => {
     editor.chain().focus().toggleCodeBlock().run();
   };
@@ -63,30 +48,11 @@ const TextEditorToolbar = ({ editor }) => {
 
   return (
     <div className="mb-2 flex w-full flex-wrap gap-2 rounded border border-gray-600 p-2">
-      <Tool tag="bold" isActive={editor.isActive("bold")} onClick={handleBold}>
-        <FaBold />
-      </Tool>
-      <Tool
-        tag="italic"
-        isActive={editor.isActive("italic")}
-        onClick={handleItalic}
-      >
-        <FaItalic />
-      </Tool>
-      <Tool
-        tag="highlight"
-        isActive={editor.isActive("highlight")}
-        onClick={handleMark}
-      >
-        M
-      </Tool>
+      <TextStyle editor={editor} />
       <div className="w-[1px] bg-gray-600"></div>
       <TextAlign editor={editor} />
       <TextList editor={editor} />
       <div className="w-[1px] bg-gray-600"></div>
-      <Tool tag="code" isActive={editor.isActive("code")} onClick={handleCode}>
-        <FaCode />
-      </Tool>
       <Tool
         tag="code block"
         isActive={editor.isActive("codeBlock")}

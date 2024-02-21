@@ -13,6 +13,7 @@ import {
 } from "react-icons/ai";
 import { FaParagraph } from "react-icons/fa";
 import { FaListUl, FaListOl } from "react-icons/fa";
+import { FaBold, FaItalic, FaCode } from "react-icons/fa";
 
 export const TextHtmlFormat = ({ editor }) => {
   const handleParagraph = () => {
@@ -141,6 +142,48 @@ export const TextList = ({ editor }) => {
         onClick={handleOrderedList}
       >
         <FaListOl />
+      </Tool>
+    </>
+  );
+};
+
+export const TextStyle = ({ editor }) => {
+  const handleBold = () => {
+    editor.chain().focus().toggleBold().run();
+  };
+
+  const handleItalic = () => {
+    editor.chain().focus().toggleItalic().run();
+  };
+  const handleMark = () => {
+    editor.chain().focus().toggleHighlight().run();
+  };
+
+  const handleCode = () => {
+    editor.chain().focus().toggleCode().run();
+  };
+
+  return (
+    <>
+      <Tool tag="bold" isActive={editor.isActive("bold")} onClick={handleBold}>
+        <FaBold />
+      </Tool>
+      <Tool
+        tag="italic"
+        isActive={editor.isActive("italic")}
+        onClick={handleItalic}
+      >
+        <FaItalic />
+      </Tool>
+      <Tool
+        tag="highlight"
+        isActive={editor.isActive("highlight")}
+        onClick={handleMark}
+      >
+        M
+      </Tool>
+      <Tool tag="code" isActive={editor.isActive("code")} onClick={handleCode}>
+        <FaCode />
       </Tool>
     </>
   );
