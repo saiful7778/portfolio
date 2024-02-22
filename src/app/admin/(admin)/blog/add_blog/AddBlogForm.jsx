@@ -10,7 +10,6 @@ import useStateData from "@/hooks/useStateData";
 import createBlog from "@/lib/actions/createBlog";
 import Alert from "@/lib/config/Alert.config";
 import reCaptcha from "@/lib/reCaptcha";
-import revalidate from "@/lib/revalidate";
 import { addBlogSchema } from "@/schemas/blog";
 import { Form, Formik } from "formik";
 import { useRouter } from "next/navigation";
@@ -118,7 +117,6 @@ const AddBlogForm = () => {
         title: "blog is created!",
       });
       router.push("/admin/blog/all_blogs");
-      revalidate("/admin/blog/all_blogs");
       reset();
     } catch (err) {
       console.error(err);

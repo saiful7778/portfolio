@@ -43,6 +43,7 @@ model settings {
   id              String   @id @default(auto()) @map("_id") @db.ObjectId
   reCaptcha       String
   reCaptchaOnPage String[]
+  blockPage       String[]
 }
 
 model blog {

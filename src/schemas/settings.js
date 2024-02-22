@@ -8,4 +8,5 @@ export const settingsSchema = Yup.object().shape({
     }
     return schema;
   }),
+  blockPage: Yup.array(),
 });

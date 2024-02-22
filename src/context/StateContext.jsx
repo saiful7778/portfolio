@@ -11,6 +11,7 @@ const StateProvider = ({ children }) => {
     show: "off",
     page: [],
   });
+  const [blockPage, setBlockPage] = useState([]);
 
   const handleReFetch = () => setReFetch((l) => !l);
 
@@ -35,6 +36,9 @@ const StateProvider = ({ children }) => {
             page: [],
           });
         }
+        if (data.blockPage) {
+          setBlockPage(data.blockPage);
+        }
       }
     })();
   }, [reFetch]);
@@ -51,6 +55,7 @@ const StateProvider = ({ children }) => {
         showReCaptcha,
         handleShowReCaptcha,
         handleReFetch,
+        blockPage,
       }}
     >
       {children}

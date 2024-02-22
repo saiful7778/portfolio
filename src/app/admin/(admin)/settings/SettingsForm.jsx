@@ -9,6 +9,7 @@ import useStateData from "@/hooks/useStateData";
 import setSettings from "@/lib/DB/setSettings";
 import Alert from "@/lib/config/Alert.config";
 import revalidate from "@/lib/revalidate";
+import Blockpage from "./components/Blockpage";
 
 const SettingsForm = ({ initialData }) => {
   const [spinner, setSpinner] = useState(false);
@@ -17,6 +18,7 @@ const SettingsForm = ({ initialData }) => {
   const initialValues = {
     reCaptcha: initialData?.reCaptcha,
     reCaptchaOnPage: initialData?.reCaptchaOnPage,
+    blockPage: initialData?.blockPage,
   };
 
   const handleSubmit = async (e) => {
@@ -46,6 +48,7 @@ const SettingsForm = ({ initialData }) => {
     >
       <Form className="space-y-2">
         <ReCaptcha />
+        <Blockpage />
         <Button disabled={spinner} type="submit" size="sm" variant="confirm">
           {spinner ? <Spinner size={15} /> : "Submit"}
         </Button>

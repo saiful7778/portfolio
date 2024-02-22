@@ -19,7 +19,6 @@ import EditSlug from "@/components/EditSlug";
 // libs
 import reCaptcha from "@/lib/reCaptcha";
 import createProject from "@/lib/actions/createProject";
-import revalidate from "@/lib/revalidate";
 import Alert from "@/lib/config/Alert.config";
 // others
 import { addProjectSchema } from "@/schemas/project";
@@ -139,7 +138,6 @@ const AddProjectForm = () => {
         title: "Project is created!",
       });
       router.push("/admin/project/all_projects");
-      revalidate("/admin/project/all_projects");
       reset();
     } catch (err) {
       console.error(err);
