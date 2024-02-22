@@ -15,7 +15,6 @@ import Image from "next/image";
 import { useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useRouter } from "next/navigation";
-import revalidate from "@/lib/revalidate";
 import updateProject from "@/lib/actions/updateProject";
 import EditSlug from "@/components/EditSlug";
 import ImageUpload from "@/components/ImageUpload";
@@ -262,7 +261,6 @@ const updateProjectData = async (id, userData, router, reset) => {
   });
   reset();
   router.push("/admin/project/all_projects");
-  revalidate("/admin/project/all_projects");
 };
 
 export default UpdateProjectForm;

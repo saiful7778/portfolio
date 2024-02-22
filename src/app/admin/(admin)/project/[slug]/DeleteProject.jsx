@@ -2,7 +2,6 @@
 import Button from "@/components/utilities/Button";
 import Alert from "@/lib/config/Alert.config";
 import { useRouter } from "next/navigation";
-import revalidate from "@/lib/revalidate";
 import deleteProject from "@/lib/actions/deleteProject";
 
 const DeleteProject = ({ projectId }) => {
@@ -42,7 +41,6 @@ const DeleteProject = ({ projectId }) => {
         });
       }
       router.push("/admin/project/all_projects");
-      revalidate("/admin/project/all_projects");
     }
   };
   return (

@@ -12,7 +12,6 @@ import Image from "next/image";
 import { useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useRouter } from "next/navigation";
-import revalidate from "@/lib/revalidate";
 import { addBlogSchema } from "@/schemas/blog";
 import updateBlog from "@/lib/actions/updateBlog";
 import EditSlug from "@/components/EditSlug";
@@ -227,7 +226,6 @@ const UpdateBlogData = async (id, userData, router, reset) => {
   });
   reset();
   router.push("/admin/blog/all_blogs");
-  revalidate("/admin/blog/all_blogs");
 };
 
 export default UpdateBlogForm;

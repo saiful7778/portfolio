@@ -2,7 +2,6 @@
 import Button from "@/components/utilities/Button";
 import deleteBlog from "@/lib/actions/deleteBlog";
 import Alert from "@/lib/config/Alert.config";
-import revalidate from "@/lib/revalidate";
 import { useRouter } from "next/navigation";
 
 const DeleteBlog = ({ blogId }) => {
@@ -42,7 +41,6 @@ const DeleteBlog = ({ blogId }) => {
         });
       }
       router.push("/admin/blog/all_blogs");
-      revalidate("/admin/blog/all_blogs");
     }
   };
 
