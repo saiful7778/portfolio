@@ -2,9 +2,9 @@ import ErrorDataShow from "@/components/ErrorDataShow";
 import getProject from "@/lib/DB/getProject";
 import moment from "moment";
 import Image from "next/image";
-import parse from "html-react-parser";
 import Link from "next/link";
 import EmptyData from "@/components/EmptyData";
+import renderReactComponent from "@/lib/renderReactComponent";
 
 export async function generateMetadata({ params }) {
   const res = await getProject(params?.slug);
@@ -87,7 +87,7 @@ const SingleProject = async ({ params }) => {
           </Link>
         </div>
       </div>
-      <div className="paragraph">{parse(des)}</div>
+      {renderReactComponent(des)}
     </div>
   );
 };

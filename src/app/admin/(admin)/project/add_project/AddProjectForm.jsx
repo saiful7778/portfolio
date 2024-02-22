@@ -122,7 +122,7 @@ const AddProjectForm = () => {
         githubLink: e.githubLink,
         liveLink: e.liveLink,
         shortDes: e.shortDes,
-        des: e.des,
+        des: JSON.parse(e.des),
         projectTime,
       };
       const res = await createProject(projectData);

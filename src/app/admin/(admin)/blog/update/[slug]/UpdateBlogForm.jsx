@@ -56,7 +56,7 @@ const UpdateBlogForm = ({ blogData }) => {
     status: status,
     editSlug: false,
     slug: slug,
-    des: des,
+    des: JSON.stringify(des),
   };
 
   const handleReset = (resetForm) => {
@@ -113,7 +113,7 @@ const UpdateBlogForm = ({ blogData }) => {
             title: e.title,
             slug: e.slug,
             status: e.status,
-            des: e.des,
+            des: JSON.parse(e.des),
             thumbnail: { url: thumbnailImg.url, alt: thumbnailImg.alt },
           },
           router,
@@ -126,7 +126,7 @@ const UpdateBlogForm = ({ blogData }) => {
             title: e.title,
             slug: e.slug,
             status: e.status,
-            des: e.des,
+            des: JSON.parse(e.des),
           },
           router,
           reset,

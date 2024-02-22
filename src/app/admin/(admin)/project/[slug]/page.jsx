@@ -1,10 +1,10 @@
 import moment from "moment";
 import Image from "next/image";
-import parse from "html-react-parser";
 import getProject from "@/lib/DB/getProject";
 import ErrorDataShow from "@/components/ErrorDataShow";
 import Button from "@/components/utilities/Button";
 import DeleteProject from "./DeleteProject";
+import renderReactComponent from "@/lib/renderReactComponent";
 
 export async function generateMetadata({ params }) {
   const res = await getProject(params?.slug);
@@ -95,7 +95,7 @@ const SingleProject = async ({ params }) => {
       </div>
       <div className="paragraph">
         <div className="text-sm text-gray-500">Description:</div>
-        {parse(des)}
+        {renderReactComponent(des)}
       </div>
     </div>
   );

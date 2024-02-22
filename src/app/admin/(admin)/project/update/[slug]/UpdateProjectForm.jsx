@@ -63,7 +63,7 @@ const UpdateProjectForm = ({ projectData }) => {
     githubLink: githubLink,
     liveLink: liveLink,
     shortDes: shortDes,
-    des: des,
+    des: JSON.stringify(des),
   };
 
   const handleReset = (resetForm) => {
@@ -124,7 +124,7 @@ const UpdateProjectForm = ({ projectData }) => {
             githubLink: e.githubLink,
             liveLink: e.liveLink,
             shortDes: e.shortDes,
-            des: e.des,
+            des: JSON.parse(e.des),
             projectTime,
             thumbnail: { url: thumbnailImg.url, alt: thumbnailImg.alt },
           },
@@ -141,7 +141,7 @@ const UpdateProjectForm = ({ projectData }) => {
             githubLink: e.githubLink,
             liveLink: e.liveLink,
             shortDes: e.shortDes,
-            des: e.des,
+            des: JSON.parse(e.des),
             projectTime,
           },
           router,
