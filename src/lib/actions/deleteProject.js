@@ -9,24 +9,14 @@ export default async function deleteProject(id) {
       where: { id },
     });
     if (!exitProject) {
-      return {
-        success: false,
-        message: "Project doesn't exit",
-      };
+      throw new Error("Project doesn't exit");
     }
     const data = await prisma.project.delete({
       where: { id },
     });
-    return {
-      success: true,
-      data,
-    };
+    return data;
   } catch (err) {
-    console.log(err);
-    return {
-      success: false,
-      message: err,
-    };
+    throw new Error(err);
   } finally {
     await prisma.$disconnect();
   }

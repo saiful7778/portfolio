@@ -1,16 +1,9 @@
 import EmptyData from "@/components/EmptyData";
-import ErrorDataShow from "@/components/ErrorDataShow";
 import ProjectItem from "@/components/ProjectItem";
 import getProjects from "@/lib/DB/getProjects";
 
 const Showcase = async () => {
-  const res = await getProjects();
-
-  if (!res.success) {
-    return <ErrorDataShow error={res?.message} />;
-  }
-
-  const { data: projects } = res;
+  const projects = await getProjects();
 
   if (projects.length < 1) {
     return <EmptyData />;

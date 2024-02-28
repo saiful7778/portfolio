@@ -9,10 +9,7 @@ export default async function updateProject(id, data) {
       where: { id },
     });
     if (!existProject) {
-      return {
-        success: false,
-        message: "No data available",
-      };
+      throw new Error("No data available");
     }
 
     const project = await prisma.project.update({
@@ -21,16 +18,9 @@ export default async function updateProject(id, data) {
       },
       data: data,
     });
-    return {
-      success: true,
-      data: project,
-    };
+    return project;
   } catch (err) {
-    console.log(err);
-    return {
-      success: false,
-      message: err,
-    };
+    throw new Error(err);
   } finally {
     await prisma.$disconnect();
   }

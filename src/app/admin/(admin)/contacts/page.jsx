@@ -1,6 +1,5 @@
 import { connectToDB } from "@/lib/server-helper";
 import prisma from "../../../../../prisma";
-import ErrorDataShow from "@/components/ErrorDataShow";
 import EmptyData from "@/components/EmptyData";
 import Table from "@/components/table";
 import moment from "moment";
@@ -21,34 +20,18 @@ async function getContacts() {
     await connectToDB();
     const contacts = await prisma.contact.findMany();
     if (!contacts) {
-      return {
-        success: false,
-        message: "No data available",
-      };
+      throw new Error("No data available");
     }
-    return {
-      success: true,
-      data: contacts,
-    };
+    return contacts;
   } catch (err) {
-    console.log(err);
-    return {
-      success: false,
-      message: err,
-    };
+    throw new Error(err);
   } finally {
     await prisma.$disconnect();
   }
 }
 
 const Contacts = async () => {
-  const res = await getContacts();
-
-  if (!res.success) {
-    return <ErrorDataShow error={res?.message} />;
-  }
-
-  const { data: contacts } = res;
+  const contacts = await getContacts();
 
   if (contacts.length < 1) {
     return <EmptyData />;

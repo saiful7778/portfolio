@@ -5,19 +5,11 @@ import { connectToDB } from "../server-helper";
 export default async function createContact(contactData) {
   try {
     await connectToDB();
-    const data = await prisma.contact.create({
+    await prisma.contact.create({
       data: contactData,
     });
-    return {
-      success: true,
-      data,
-    };
   } catch (err) {
-    console.log(err);
-    return {
-      success: false,
-      message: err,
-    };
+    throw new Error(err);
   } finally {
     await prisma.$disconnect();
   }

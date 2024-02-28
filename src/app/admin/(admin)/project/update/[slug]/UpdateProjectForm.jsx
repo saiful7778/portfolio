@@ -18,6 +18,8 @@ import { useRouter } from "next/navigation";
 import updateProject from "@/lib/actions/updateProject";
 import EditSlug from "@/components/EditSlug";
 import ImageUpload from "@/components/ImageUpload";
+import revalidate from "@/lib/revalidate";
+import { useEdgeStore } from "@/context/EdgeStoreContext";
 
 const UpdateProjectForm = ({ projectData }) => {
   const {
@@ -32,6 +34,7 @@ const UpdateProjectForm = ({ projectData }) => {
     thumbnail: { url, alt },
   } = projectData;
   const router = useRouter();
+  const { edgestore } = useEdgeStore();
 
   const statusOptions = [
     { value: "published", text: "Published" },
@@ -49,7 +52,6 @@ const UpdateProjectForm = ({ projectData }) => {
   const [date, setDate] = useState(projectData.projectTime);
   // Image data
   const [thumbnailImg, setThumbnailImg] = useState({
-    status: "",
     url: "",
     alt: "",
   });
@@ -70,7 +72,6 @@ const UpdateProjectForm = ({ projectData }) => {
       resetForm();
       setSpinner(false);
       setThumbnailImg({
-        status: "",
         url: "",
         alt: "",
       });
@@ -92,28 +93,17 @@ const UpdateProjectForm = ({ projectData }) => {
     try {
       const projectTime = date.toISOString();
       if (updateImage) {
-        if (!thumbnailImg.status) {
+        if (!thumbnailImg.url) {
           Alert.fire({
             icon: "warning",
             text: "Please select an thumbnail image!",
           });
           setSpinner(false);
           return;
-        } else if (thumbnailImg.status === "selected") {
-          Alert.fire({
-            icon: "warning",
-            text: "Please upload this thumbnail image!",
-          });
-          setSpinner(false);
-          return;
-        } else if (thumbnailImg.status === "uploaded") {
-          Alert.fire({
-            icon: "warning",
-            text: "Please confirm this thumbnail image!",
-          });
-          setSpinner(false);
-          return;
         }
+        await edgestore.portfolioImages.confirmUpload({
+          url: thumbnailImg.url,
+        });
         await updateProjectData(
           id,
           {
@@ -247,19 +237,13 @@ const UpdateProjectForm = ({ projectData }) => {
 };
 
 const updateProjectData = async (id, userData, router, reset) => {
-  const res = await updateProject(id, userData);
-  if (!res.success) {
-    Alert.fire({
-      icon: "error",
-      text: res.message,
-    });
-    return;
-  }
+  await updateProject(id, userData);
   Alert.fire({
     icon: "success",
     title: "Project is updated!",
   });
   reset();
+  revalidate("/admin/project/all_projects");
   router.push("/admin/project/all_projects");
 };
 

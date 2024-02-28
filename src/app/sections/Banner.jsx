@@ -13,8 +13,8 @@ import graphic04 from "../../../public/graphic-icons/add.png";
 const Banner = () => {
   return (
     <div className="relative mx-auto my-20 flex w-full flex-col items-center justify-between gap-4 md:w-4/5 lg:flex-row">
-      <div className="bg-blue-blob absolute -left-96 top-0 z-0 h-[300px] w-[900px] rotate-45 rounded-full blur-[100px] filter"></div>
-      <div className="w-full lg:w-1/2">
+      <div className="absolute -left-96 top-0 z-0 h-[300px] w-[900px] rotate-45 rounded-full bg-blue-blob blur-[100px] filter"></div>
+      <div className="relative z-[1] w-full lg:w-1/2">
         <h2 className="text-2xl uppercase tracking-widest">
           Hi, I{`'`}m Saiful Islam
         </h2>
@@ -33,9 +33,8 @@ const Banner = () => {
           View all Projects
         </Button>
       </div>
-      <div className="relative w-full lg:w-1/2">
-        <div className="bg-red-blob absolute -right-96 top-28 z-0 h-[300px] w-[900px] -rotate-[20deg] rounded-full blur-[100px] filter"></div>
-        <div className="animate-float absolute left-0 top-0 z-10">
+      <div className="relative z-[1] w-full lg:w-1/2">
+        <div className="absolute left-0 top-0 z-10 animate-float">
           <Image
             className="select-none"
             src={graphic01}
@@ -44,7 +43,7 @@ const Banner = () => {
             alt="graphic"
           />
         </div>
-        <div className="animate-rotate absolute right-0 top-0 z-10">
+        <div className="absolute right-0 top-0 z-10 animate-rotate">
           <Image
             className="select-none"
             src={graphic02}
@@ -60,7 +59,7 @@ const Banner = () => {
           width={526}
           height={564}
         />
-        <div className="animate-rotate absolute bottom-0 left-0 z-10">
+        <div className="absolute bottom-0 left-0 z-10 animate-rotate">
           <Image
             className="select-none"
             src={graphic03}
@@ -69,7 +68,7 @@ const Banner = () => {
             alt="graphic"
           />
         </div>
-        <div className="animate-float absolute bottom-0 right-0 z-10">
+        <div className="absolute bottom-0 right-0 z-10 animate-float">
           <Image
             className="select-none"
             src={graphic04}
@@ -79,6 +78,7 @@ const Banner = () => {
           />
         </div>
       </div>
+      <div className="absolute -right-96 top-28 z-0 h-[300px] w-[900px] -rotate-[20deg] rounded-full bg-red-blob blur-[100px] filter"></div>
     </div>
   );
 };

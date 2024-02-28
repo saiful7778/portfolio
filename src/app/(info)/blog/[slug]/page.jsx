@@ -1,4 +1,3 @@
-import ErrorDataShow from "@/components/ErrorDataShow";
 import moment from "moment";
 import Image from "next/image";
 import EmptyData from "@/components/EmptyData";
@@ -6,34 +5,31 @@ import getBlog from "@/lib/DB/getBlog";
 import renderReactComponent from "@/lib/renderReactComponent";
 
 export async function generateMetadata({ params }) {
-  const res = await getBlog(params?.slug);
-  if (!res.success) {
+  try {
+    const blogData = await getBlog(params?.slug);
+    const { title, status } = blogData;
+    if (status === "private") {
+      return {
+        title: "There was no available",
+        description: "There was no available.",
+      };
+    }
+    return {
+      title: `${title} - blog`,
+      description: `This is "${title}" blog`,
+    };
+  } catch {
     return {
       title: "Error blog",
       description: "There was an error to get this blog data",
     };
   }
-  const { title, status } = res.data;
-  if (status === "private") {
-    return {
-      title: "There was no available",
-      description: "There was no available.",
-    };
-  }
-  return {
-    title: `${title} - blog`,
-    description: `This is "${title}" blog`,
-  };
 }
 
 const SingleBlog = async ({ params }) => {
-  const res = await getBlog(params?.slug);
+  const blogData = await getBlog(params?.slug);
 
-  if (!res.success) {
-    return <ErrorDataShow error={res?.message} />;
-  }
-
-  if (res.data.status === "private") {
+  if (blogData.status === "private") {
     return <EmptyData />;
   }
 
@@ -42,23 +38,27 @@ const SingleBlog = async ({ params }) => {
     createdAt,
     des,
     thumbnail: { url, alt },
-  } = res.data;
+  } = blogData;
 
   const timeAgo = moment(createdAt).fromNow();
 
   return (
-    <div className="mx-auto w-full space-y-4 md:w-4/5">
-      <figure>
+    <div className="mx-auto w-full max-w-xl space-y-4 lg:max-w-4xl">
+      <figure className="relative">
+        <div className="absolute -left-96 top-0 z-0 h-[200px] w-[500px] rotate-45 rounded-full bg-blue-blob blur-[80px] filter"></div>
+        <div className="absolute -left-96 bottom-0 z-0 h-[200px] w-[500px] -rotate-45 rounded-full bg-red-blob blur-[80px] filter"></div>
         <Image
-          className="mx-auto"
+          className="relative z-[1] mx-auto shadow"
           src={url}
           alt={alt}
           title={title}
-          width={1080}
-          height={720}
+          width={896}
+          height={504}
         />
+        <div className="absolute -right-96 top-0 z-0 h-[200px] w-[500px] -rotate-45 rounded-full bg-red-blob blur-[80px] filter"></div>
+        <div className="absolute -right-96 bottom-0 z-0 h-[200px] w-[500px] rotate-45 rounded-full  bg-blue-blob blur-[80px] filter"></div>
       </figure>
-      <h1 className="text-3xl font-bold">{title}</h1>
+      <h1 className="text-4xl font-bold">{title}</h1>
       <div className="text-sm">
         <div>
           <span className="text-gray-500">Blog posted:</span> {timeAgo}

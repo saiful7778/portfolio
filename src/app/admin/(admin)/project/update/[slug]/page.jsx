@@ -1,51 +1,47 @@
-import ErrorDataShow from "@/components/ErrorDataShow";
 import getProject from "@/lib/DB/getProject";
 import UpdateProjectForm from "./UpdateProjectForm";
 import Link from "next/link";
 
 export async function generateMetadata({ params, searchParams }) {
-  const res = await getProject(params?.slug);
-  if (!res.success) {
+  try {
+    if (typeof searchParams.projectId === "undefined") {
+      return {
+        title: "projectId search params is unavailable",
+        description: "There was an error to get this project data",
+      };
+    }
+    const projectData = await getProject(params?.slug);
+    const { title, shortDes } = projectData;
+    return {
+      title: `Update - ${title} - project`,
+      description: shortDes,
+    };
+  } catch {
     return {
       title: "Error project - admin - portfolio",
       description: "There was an error to get this project data",
     };
   }
-  if (typeof searchParams.projectId === "undefined") {
-    return {
-      title: "projectId search params is unavailable",
-      description: "There was an error to get this project data",
-    };
-  }
-  const { title, shortDes } = res.data;
-  return {
-    title: `Update - ${title} - project`,
-    description: shortDes,
-  };
 }
 
 const UpdateProject = async ({ params, searchParams }) => {
-  const res = await getProject(params?.slug);
-
-  if (!res.success) {
-    return <ErrorDataShow error={res?.message} />;
-  }
+  const projectData = await getProject(params?.slug);
 
   if (typeof searchParams.projectId === "undefined") {
-    return <ErrorDataShow error="projectId search params is unavailable" />;
+    throw new Error("projectId search params is unavailable");
   }
 
   return (
     <div className="rounded border border-gray-700 bg-gray-800 p-4 shadow">
       <Link
-        href={`/project/${res.data.slug}`}
+        href={`/project/${projectData.slug}`}
         className="text-xl font-bold hover:text-blue-600 hover:underline"
         target="_blank"
       >
-        Update: {res.data.title}
+        Update: {projectData.title}
       </Link>
       <UpdateProjectForm
-        projectData={{ id: searchParams.projectId, ...res.data }}
+        projectData={{ id: searchParams.projectId, ...projectData }}
       />
     </div>
   );

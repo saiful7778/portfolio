@@ -1,32 +1,28 @@
 import moment from "moment";
 import Image from "next/image";
 import getProject from "@/lib/DB/getProject";
-import ErrorDataShow from "@/components/ErrorDataShow";
 import Button from "@/components/utilities/Button";
 import DeleteProject from "./DeleteProject";
 import renderReactComponent from "@/lib/renderReactComponent";
 
 export async function generateMetadata({ params }) {
-  const res = await getProject(params?.slug);
-  if (!res.success) {
+  try {
+    const projectData = await getProject(params?.slug);
+    const { title, shortDes } = projectData;
+    return {
+      title: `${title} - project`,
+      description: shortDes,
+    };
+  } catch {
     return {
       title: "Error project - admin - portfolio",
       description: "There was an error to get this project data",
     };
   }
-  const { title, shortDes } = res.data;
-  return {
-    title: `${title} - project`,
-    description: shortDes,
-  };
 }
 
 const SingleProject = async ({ params }) => {
-  const res = await getProject(params?.slug);
-
-  if (!res.success) {
-    return <ErrorDataShow error={res?.message} />;
-  }
+  const projectData = await getProject(params?.slug);
 
   const {
     id,
@@ -38,7 +34,7 @@ const SingleProject = async ({ params }) => {
     shortDes,
     thumbnail: { url, alt },
     des,
-  } = res.data;
+  } = projectData;
 
   const timeAgo = moment(createdAt).fromNow();
   const createdTime = moment(createdAt).format("Do MMM YY, h:mm a");
@@ -46,15 +42,15 @@ const SingleProject = async ({ params }) => {
   const projectCreateTime = moment(projectTime).format("Do MMM YY");
 
   return (
-    <div className="mx-auto w-4/5 space-y-4">
+    <div className="mx-auto w-full max-w-4xl space-y-4">
       <figure>
         <Image
           className="mx-auto"
           src={url}
           alt={alt}
           title={title}
-          width={1080}
-          height={720}
+          width={896}
+          height={504}
         />
         <p className="text-xs italic text-gray-500">Alt text: {alt}</p>
       </figure>

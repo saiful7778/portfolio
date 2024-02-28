@@ -11,24 +11,14 @@ export default async function createProject(projectData) {
       },
     });
     if (exist) {
-      return {
-        success: false,
-        message: "Project is already exist",
-      };
+      throw new Error("Project is already exist");
     }
     const data = await prisma.project.create({
       data: projectData,
     });
-    return {
-      success: true,
-      data,
-    };
+    return data;
   } catch (err) {
-    console.log(err);
-    return {
-      success: false,
-      message: err,
-    };
+    throw new Error(err);
   } finally {
     await prisma.$disconnect();
   }

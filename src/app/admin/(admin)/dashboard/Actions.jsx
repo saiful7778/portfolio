@@ -23,8 +23,10 @@ import Alert from "@/lib/config/Alert.config";
 import { userSchema } from "@/schemas/user";
 import updateUser from "@/lib/actions/updateUser";
 import deleteUser from "@/lib/actions/deleteUser";
+import { useEdgeStore } from "@/context/EdgeStoreContext";
 
 const Actions = ({ userData }) => {
+  const { edgestore } = useEdgeStore();
   const { data, status } = useSession();
   const [modal, setModal] = useState(false);
   const [spinner, setSpinner] = useState(false);
@@ -37,7 +39,6 @@ const Actions = ({ userData }) => {
       showReCaptcha.page.includes("userUpdate"));
 
   const [profileImg, setProfileImg] = useState({
-    status: "",
     url: "",
     alt: "",
   });
@@ -76,14 +77,7 @@ const Actions = ({ userData }) => {
         },
       });
       try {
-        const res = await deleteUser(userData.id);
-        if (!res.success) {
-          Alert.fire({
-            icon: "error",
-            text: res.message,
-          });
-          return;
-        }
+        await deleteUser(userData.id);
         revalidate("/admin/dashboard");
         Alert.fire({
           icon: "success",
@@ -105,7 +99,6 @@ const Actions = ({ userData }) => {
       setSpinner(false);
       setModal(false);
       setProfileImg({
-        status: "",
         url: "",
         alt: "",
       });
@@ -125,7 +118,10 @@ const Actions = ({ userData }) => {
       }
     }
     try {
-      if (!updateImg && profileImg.status === "confirm") {
+      if (!updateImg && profileImg.url) {
+        await edgestore.portfolioImages.confirmUpload({
+          url: profileImg.url,
+        });
         await updateUserData(userData.id, userData.email, {
           ...e,
           image: {
@@ -213,14 +209,7 @@ const Actions = ({ userData }) => {
 };
 
 const updateUserData = async (id, email, data) => {
-  const res = await updateUser(id, email, data);
-  if (!res.success) {
-    Alert.fire({
-      icon: "error",
-      text: res.message,
-    });
-    return;
-  }
+  await updateUser(id, email, data);
   Alert.fire({
     icon: "success",
     title: "User is updated!",

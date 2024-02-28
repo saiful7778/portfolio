@@ -17,6 +17,7 @@ import updateBlog from "@/lib/actions/updateBlog";
 import EditSlug from "@/components/EditSlug";
 import ImageUpload from "@/components/ImageUpload";
 import revalidate from "@/lib/revalidate";
+import { useEdgeStore } from "@/context/EdgeStoreContext";
 
 const UpdateBlogForm = ({ blogData }) => {
   const {
@@ -28,6 +29,7 @@ const UpdateBlogForm = ({ blogData }) => {
     thumbnail: { url, alt },
   } = blogData;
   const router = useRouter();
+  const { edgestore } = useEdgeStore();
 
   const statusOptions = [
     { value: "published", text: "Published" },
@@ -91,6 +93,9 @@ const UpdateBlogForm = ({ blogData }) => {
           setSpinner(false);
           return;
         }
+        await edgestore.portfolioImages.confirmUpload({
+          url: thumbnailImg.url,
+        });
         await UpdateBlogData(
           id,
           {

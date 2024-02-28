@@ -339,7 +339,7 @@ const SkillItemImage = ({ src, alt, width, height }) => {
 
 const SkillItemContent = ({ children }) => {
   return (
-    <div className="invisible absolute left-1/2 top-full z-50 -translate-x-1/2 opacity-0 group-hover:visible group-hover:opacity-100">
+    <div className="invisible absolute left-1/2 top-full z-50 -translate-x-1/2 opacity-0 group-hover:visible group-hover:opacity-100 max-sm:hidden">
       <div className="m-2 w-80 rounded border border-gray-700 bg-gray-800/50 p-4 backdrop-blur-sm">
         {children}
       </div>

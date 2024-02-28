@@ -39,15 +39,15 @@ const SingleBlog = async ({ params }) => {
   const updatedTime = moment(updatedAt).format("Do MMM YY, h:mm a");
 
   return (
-    <div className="mx-auto w-4/5 space-y-4">
+    <div className="mx-auto w-full max-w-4xl space-y-4">
       <figure>
         <Image
           className="mx-auto"
           src={url}
           alt={alt}
           title={title}
-          width={1080}
-          height={720}
+          width={896}
+          height={504}
         />
         <p className="text-xs italic text-gray-500">Alt text: {alt}</p>
       </figure>

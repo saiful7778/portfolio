@@ -21,19 +21,13 @@ const Actions = ({ contactId }) => {
         },
       });
       try {
-        const res = await deleteContact(contactId);
-        if (!res.success) {
-          Alert.fire({
-            icon: "error",
-            text: res.message,
-          });
-          return;
-        }
+        await deleteContact(contactId);
         Alert.fire({
           icon: "success",
           title: "Contact details is deleted!",
         });
       } catch (err) {
+        console.error(err);
         Alert.fire({
           icon: "error",
           text: err,

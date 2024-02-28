@@ -17,9 +17,6 @@ async function getUsers() {
   try {
     await connectToDB();
     const users = await prisma.user.findMany();
-    if (!users) {
-      throw new Error("No data available");
-    }
     return users;
   } catch (err) {
     throw new Error(err);

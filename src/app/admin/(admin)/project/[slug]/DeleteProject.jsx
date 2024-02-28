@@ -3,6 +3,7 @@ import Button from "@/components/utilities/Button";
 import Alert from "@/lib/config/Alert.config";
 import { useRouter } from "next/navigation";
 import deleteProject from "@/lib/actions/deleteProject";
+import revalidate from "@/lib/revalidate";
 
 const DeleteProject = ({ projectId }) => {
   const router = useRouter();
@@ -22,14 +23,7 @@ const DeleteProject = ({ projectId }) => {
         },
       });
       try {
-        const res = await deleteProject(projectId);
-        if (!res.success) {
-          Alert.fire({
-            icon: "error",
-            text: res.message,
-          });
-          return;
-        }
+        await deleteProject(projectId);
         Alert.fire({
           icon: "success",
           title: "Project is deleted!",
@@ -40,6 +34,7 @@ const DeleteProject = ({ projectId }) => {
           text: err,
         });
       }
+      revalidate("/admin/project/all_projects");
       router.push("/admin/project/all_projects");
     }
   };

@@ -1,16 +1,9 @@
 import BlogItem from "@/components/BlogItem";
 import EmptyData from "@/components/EmptyData";
-import ErrorDataShow from "@/components/ErrorDataShow";
 import getBlogs from "@/lib/DB/getBlogs";
 
 const Showcase = async () => {
-  const res = await getBlogs();
-
-  if (!res.success) {
-    return <ErrorDataShow error={res?.message} />;
-  }
-
-  const { data: blogs } = res;
+  const blogs = await getBlogs();
 
   if (blogs.length < 1) {
     return <EmptyData />;

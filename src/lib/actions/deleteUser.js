@@ -9,24 +9,13 @@ export default async function deleteUser(id) {
       where: { id },
     });
     if (!existUser) {
-      return {
-        success: false,
-        message: "User doesn't exist",
-      };
+      throw new Error("User doesn't exist");
     }
-    const data = await prisma.user.delete({
+    await prisma.user.delete({
       where: { id },
     });
-    return {
-      success: true,
-      data,
-    };
   } catch (err) {
-    console.log(err);
-    return {
-      success: false,
-      message: err,
-    };
+    throw new Error(err);
   } finally {
     await prisma.$disconnect();
   }

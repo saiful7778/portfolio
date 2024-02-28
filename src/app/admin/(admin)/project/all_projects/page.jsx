@@ -2,7 +2,6 @@ import Link from "next/link";
 import moment from "moment";
 import Actions from "./Actions";
 import Table from "@/components/table";
-import ErrorDataShow from "@/components/ErrorDataShow";
 import EmptyData from "@/components/EmptyData";
 import getProjects from "@/lib/DB/getProjects";
 
@@ -15,13 +14,7 @@ export const metadata = {
 };
 
 const AllProjectsPage = async () => {
-  const res = await getProjects();
-
-  if (!res.success) {
-    return <ErrorDataShow error={res?.message} />;
-  }
-
-  const { data: projects } = res;
+  const projects = await getProjects();
 
   if (projects.length < 1) {
     return <EmptyData />;

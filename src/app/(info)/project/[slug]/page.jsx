@@ -1,4 +1,3 @@
-import ErrorDataShow from "@/components/ErrorDataShow";
 import getProject from "@/lib/DB/getProject";
 import moment from "moment";
 import Image from "next/image";
@@ -7,34 +6,31 @@ import EmptyData from "@/components/EmptyData";
 import renderReactComponent from "@/lib/renderReactComponent";
 
 export async function generateMetadata({ params }) {
-  const res = await getProject(params?.slug);
-  if (!res.success) {
+  try {
+    const projectData = await getProject(params?.slug);
+    const { title, shortDes, status } = projectData;
+    if (status === "private") {
+      return {
+        title: "There was no available",
+        description: "There was no available.",
+      };
+    }
+    return {
+      title: `${title} - project`,
+      description: shortDes,
+    };
+  } catch {
     return {
       title: "Error project",
       description: "There was an error to get this project data",
     };
   }
-  const { title, shortDes, status } = res.data;
-  if (status === "private") {
-    return {
-      title: "There was no available",
-      description: "There was no available.",
-    };
-  }
-  return {
-    title: `${title} - project`,
-    description: shortDes,
-  };
 }
 
 const SingleProject = async ({ params }) => {
-  const res = await getProject(params?.slug);
+  const projectData = await getProject(params?.slug);
 
-  if (!res.success) {
-    return <ErrorDataShow error={res?.message} />;
-  }
-
-  if (res.data.status === "private") {
+  if (projectData.status === "private") {
     return <EmptyData />;
   }
 
@@ -46,24 +42,28 @@ const SingleProject = async ({ params }) => {
     githubLink,
     liveLink,
     des,
-  } = res.data;
+  } = projectData;
 
   const projectCreateTime = moment(projectTime).format("Do MMM YY");
   const timeAgo = moment(createdAt).fromNow();
 
   return (
-    <div className="mx-auto w-full space-y-4 md:w-4/5">
-      <figure>
+    <div className="mx-auto w-full max-w-xl space-y-4 lg:max-w-4xl">
+      <figure className="relative">
+        <div className="absolute -left-96 top-0 z-0 h-[200px] w-[500px] rotate-45 rounded-full bg-blue-blob blur-[80px] filter"></div>
+        <div className="absolute -left-96 bottom-0 z-0 h-[200px] w-[500px] -rotate-45 rounded-full bg-red-blob blur-[80px] filter"></div>
         <Image
-          className="mx-auto"
+          className="relative z-[1] mx-auto shadow"
           src={url}
           alt={alt}
           title={title}
-          width={1080}
-          height={720}
+          width={896}
+          height={504}
         />
+        <div className="absolute -right-96 top-0 z-0 h-[200px] w-[500px] -rotate-45 rounded-full bg-red-blob blur-[80px] filter"></div>
+        <div className="absolute -right-96 bottom-0 z-0 h-[200px] w-[500px] rotate-45 rounded-full  bg-blue-blob blur-[80px] filter"></div>
       </figure>
-      <h1 className="text-3xl font-bold">{title}</h1>
+      <h1 className="text-4xl font-bold">{title}</h1>
       <div className="text-sm">
         <div>
           <span className="text-gray-500">Project posted:</span> {timeAgo}

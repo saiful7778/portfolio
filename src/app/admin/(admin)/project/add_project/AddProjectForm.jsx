@@ -22,10 +22,13 @@ import createProject from "@/lib/actions/createProject";
 import Alert from "@/lib/config/Alert.config";
 // others
 import { addProjectSchema } from "@/schemas/project";
+import revalidate from "@/lib/revalidate";
+import { useEdgeStore } from "@/context/EdgeStoreContext";
 
 const AddProjectForm = () => {
   const router = useRouter();
   const recaptchaRef = useRef(null);
+  const { edgestore } = useEdgeStore();
 
   const { showReCaptcha } = useStateData();
   const showReCaptchaState =
@@ -37,7 +40,6 @@ const AddProjectForm = () => {
 
   // Image data
   const [thumbnailImg, setThumbnailImg] = useState({
-    status: "",
     url: "",
     alt: "",
   });
@@ -66,7 +68,6 @@ const AddProjectForm = () => {
       resetForm();
       setSpinner(false);
       setThumbnailImg({
-        status: "",
         url: "",
         alt: "",
       });
@@ -85,31 +86,19 @@ const AddProjectForm = () => {
         return;
       }
     }
-    if (!thumbnailImg.status) {
+    if (!thumbnailImg.url) {
       Alert.fire({
         icon: "warning",
         text: "Please select an thumbnail image!",
       });
       setSpinner(false);
       return;
-    } else if (thumbnailImg.status === "selected") {
-      Alert.fire({
-        icon: "warning",
-        text: "Please upload this thumbnail image!",
-      });
-      setSpinner(false);
-      return;
-    } else if (thumbnailImg.status === "uploaded") {
-      Alert.fire({
-        icon: "warning",
-        text: "Please confirm this thumbnail image!",
-      });
-      setSpinner(false);
-      return;
     }
     try {
       const projectTime = date.toISOString();
-
+      await edgestore.portfolioImages.confirmUpload({
+        url: thumbnailImg.url,
+      });
       const projectData = {
         thumbnail: {
           url: thumbnailImg.url,
@@ -124,21 +113,14 @@ const AddProjectForm = () => {
         des: JSON.parse(e.des),
         projectTime,
       };
-      const res = await createProject(projectData);
-      if (!res.success) {
-        Alert.fire({
-          icon: "error",
-          text: res?.message,
-        });
-        setSpinner(false);
-        return;
-      }
+      await createProject(projectData);
       Alert.fire({
         icon: "success",
         title: "Project is created!",
       });
-      router.push("/admin/project/all_projects");
       reset();
+      revalidate("/admin/project/all_projects");
+      router.push("/admin/project/all_projects");
     } catch (err) {
       console.error(err);
       Alert.fire({

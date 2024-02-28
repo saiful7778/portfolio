@@ -56,21 +56,13 @@ const ContactForm = () => {
         subject: e.subject,
         details: e.details,
       };
-      const res = await createContact(contactData);
-      if (!res.success) {
-        Alert.fire({
-          icon: "error",
-          text: res?.message,
-        });
-        return;
-      }
+      await createContact(contactData);
       Alert.fire({
         icon: "success",
         title: "I shall respond very soon!",
       });
       reset();
     } catch (err) {
-      console.error(err);
       Alert.fire({
         icon: "error",
         text: err,

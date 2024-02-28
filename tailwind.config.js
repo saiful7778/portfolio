@@ -15,9 +15,9 @@ module.exports = {
       },
       backgroundImage: {
         "blue-blob":
-          "linear-gradient(180deg, rgba(84, 84, 212, 0.27) 0%, rgba(84, 84, 212, 0.11) 100%)",
+          "linear-gradient(180deg, rgba(84, 84, 212, 0.25) 0%, rgba(84, 84, 212, 0.15) 100%)",
         "red-blob":
-          "linear-gradient(180deg, rgba(251, 168, 28, 0.11) 0%, rgba(224, 86, 136, 0.06) 100%)",
+          "linear-gradient(180deg, rgba(251, 168, 28, 0.20) 0%, rgba(224, 86, 136, 0.10) 100%)",
       },
       animation: {
         spinner: "spin 1500ms linear infinite",
