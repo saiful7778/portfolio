@@ -67,6 +67,10 @@
   background-repeat: no-repeat;
 }
 
+input:-webkit-autofill {
+  -webkit-box-shadow: 0px 0px 0px 100px theme("colors.gray.900") inset;
+}
+
 .react-datepicker-wrapper {
   @apply w-fit;
 }
