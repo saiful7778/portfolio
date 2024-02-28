@@ -12,13 +12,10 @@ export default async function createUser(userData) {
       },
     });
     if (exist) {
-      return {
-        success: false,
-        message: "user is already exist!",
-      };
+      throw new Error("user is already exist!");
     }
     const hashedPassword = await hash(userData.password, 10);
-    const user = await prisma.user.create({
+    await prisma.user.create({
       data: {
         name: userData.name,
         email: userData.email,
@@ -26,16 +23,8 @@ export default async function createUser(userData) {
         image: userData.image,
       },
     });
-    return {
-      success: true,
-      data: user,
-    };
   } catch (err) {
-    console.log(err);
-    return {
-      success: false,
-      message: err,
-    };
+    throw new Error(err);
   } finally {
     await prisma.$disconnect();
   }

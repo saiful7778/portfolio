@@ -6,21 +6,11 @@ export default async function getBlogs() {
     await connectToDB();
     const blogs = await prisma.blog.findMany();
     if (!blogs) {
-      return {
-        success: false,
-        message: "No data available",
-      };
+      throw new Error("No data available");
     }
-    return {
-      success: true,
-      data: blogs,
-    };
+    return blogs;
   } catch (err) {
-    console.log(err);
-    return {
-      success: false,
-      message: err,
-    };
+    throw new Error(err);
   } finally {
     await prisma.$disconnect();
   }

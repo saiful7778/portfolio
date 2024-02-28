@@ -6,10 +6,12 @@ import TextEditor from "@/components/TextEditor";
 import Button from "@/components/utilities/Button";
 import Input from "@/components/utilities/Input";
 import Select from "@/components/utilities/Select";
+import { useEdgeStore } from "@/context/EdgeStoreContext";
 import useStateData from "@/hooks/useStateData";
 import createBlog from "@/lib/actions/createBlog";
 import Alert from "@/lib/config/Alert.config";
 import reCaptcha from "@/lib/reCaptcha";
+import revalidate from "@/lib/revalidate";
 import { addBlogSchema } from "@/schemas/blog";
 import { Form, Formik } from "formik";
 import { useRouter } from "next/navigation";
@@ -19,6 +21,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 const AddBlogForm = () => {
   const router = useRouter();
   const recaptchaRef = useRef(null);
+  const { edgestore } = useEdgeStore();
 
   const { showReCaptcha } = useStateData();
   const showReCaptchaState =
@@ -28,7 +31,6 @@ const AddBlogForm = () => {
   const [spinner, setSpinner] = useState(false);
   // Image data
   const [thumbnailImg, setThumbnailImg] = useState({
-    status: "",
     url: "",
     alt: "",
   });
@@ -51,7 +53,6 @@ const AddBlogForm = () => {
       resetForm();
       setSpinner(false);
       setThumbnailImg({
-        status: "",
         url: "",
         alt: "",
       });
@@ -70,29 +71,18 @@ const AddBlogForm = () => {
         return;
       }
     }
-    if (!thumbnailImg.status) {
+    if (!thumbnailImg.url) {
       Alert.fire({
-        icon: "warning",
-        text: "Please select an thumbnail image!",
-      });
-      setSpinner(false);
-      return;
-    } else if (thumbnailImg.status === "selected") {
-      Alert.fire({
-        icon: "warning",
-        text: "Please upload this thumbnail image!",
-      });
-      setSpinner(false);
-      return;
-    } else if (thumbnailImg.status === "uploaded") {
-      Alert.fire({
-        icon: "warning",
-        text: "Please confirm this thumbnail image!",
+        icon: "error",
+        text: "Please select and upload an image",
       });
       setSpinner(false);
       return;
     }
     try {
+      await edgestore.portfolioImages.confirmUpload({
+        url: thumbnailImg.url,
+      });
       const blogData = {
         thumbnail: {
           url: thumbnailImg.url,
@@ -103,21 +93,14 @@ const AddBlogForm = () => {
         status: e.status,
         des: JSON.parse(e.des),
       };
-      const res = await createBlog(blogData);
-      if (!res.success) {
-        Alert.fire({
-          icon: "error",
-          text: res?.message,
-        });
-        setSpinner(false);
-        return;
-      }
+      await createBlog(blogData);
       Alert.fire({
         icon: "success",
         title: "blog is created!",
       });
-      router.push("/admin/blog/all_blogs");
       reset();
+      revalidate("/admin/blog/all_blogs");
+      router.push("/admin/blog/all_blogs");
     } catch (err) {
       console.error(err);
       Alert.fire({

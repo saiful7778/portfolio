@@ -9,24 +9,14 @@ export default async function deleteBlog(id) {
       where: { id },
     });
     if (!existBlog) {
-      return {
-        success: false,
-        message: "Blog doesn't exist",
-      };
+      throw new Error("Blog doesn't exist");
     }
     const data = await prisma.blog.delete({
       where: { id },
     });
-    return {
-      success: true,
-      data,
-    };
+    return data;
   } catch (err) {
-    console.log(err);
-    return {
-      success: false,
-      message: err,
-    };
+    throw new Error(err);
   } finally {
     await prisma.$disconnect();
   }

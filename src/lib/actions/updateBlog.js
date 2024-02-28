@@ -9,28 +9,16 @@ export default async function updateBlog(id, data) {
       where: { id },
     });
     if (!existBlog) {
-      return {
-        success: false,
-        message: "No data available",
-      };
+      throw new Error("No data available");
     }
-
-    const blog = await prisma.blog.update({
+    await prisma.blog.update({
       where: {
         id,
       },
       data: data,
     });
-    return {
-      success: true,
-      data: blog,
-    };
   } catch (err) {
-    console.log(err);
-    return {
-      success: false,
-      message: err,
-    };
+    throw new Error(err);
   } finally {
     await prisma.$disconnect();
   }

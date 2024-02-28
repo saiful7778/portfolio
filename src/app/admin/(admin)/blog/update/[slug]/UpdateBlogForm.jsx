@@ -16,6 +16,7 @@ import { addBlogSchema } from "@/schemas/blog";
 import updateBlog from "@/lib/actions/updateBlog";
 import EditSlug from "@/components/EditSlug";
 import ImageUpload from "@/components/ImageUpload";
+import revalidate from "@/lib/revalidate";
 
 const UpdateBlogForm = ({ blogData }) => {
   const {
@@ -45,7 +46,6 @@ const UpdateBlogForm = ({ blogData }) => {
   const [spinner, setSpinner] = useState(false);
   // Image data
   const [thumbnailImg, setThumbnailImg] = useState({
-    status: "",
     url: "",
     alt: "",
   });
@@ -63,7 +63,6 @@ const UpdateBlogForm = ({ blogData }) => {
       resetForm();
       setSpinner(false);
       setThumbnailImg({
-        status: "",
         url: "",
         alt: "",
       });
@@ -84,24 +83,10 @@ const UpdateBlogForm = ({ blogData }) => {
     }
     try {
       if (updateImage) {
-        if (!thumbnailImg.status) {
+        if (!thumbnailImg.url) {
           Alert.fire({
             icon: "warning",
             text: "Please select an thumbnail image!",
-          });
-          setSpinner(false);
-          return;
-        } else if (thumbnailImg.status === "selected") {
-          Alert.fire({
-            icon: "warning",
-            text: "Please upload this thumbnail image!",
-          });
-          setSpinner(false);
-          return;
-        } else if (thumbnailImg.status === "uploaded") {
-          Alert.fire({
-            icon: "warning",
-            text: "Please confirm this thumbnail image!",
           });
           setSpinner(false);
           return;
@@ -212,19 +197,13 @@ const UpdateBlogForm = ({ blogData }) => {
 };
 
 const UpdateBlogData = async (id, userData, router, reset) => {
-  const res = await updateBlog(id, userData);
-  if (!res.success) {
-    Alert.fire({
-      icon: "error",
-      text: res.message,
-    });
-    return;
-  }
+  await updateBlog(id, userData);
   Alert.fire({
     icon: "success",
     title: "Blog is updated!",
   });
   reset();
+  revalidate("/admin/blog/all_blogs");
   router.push("/admin/blog/all_blogs");
 };
 

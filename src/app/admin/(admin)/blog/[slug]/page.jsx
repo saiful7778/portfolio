@@ -1,4 +1,3 @@
-import ErrorDataShow from "@/components/ErrorDataShow";
 import getBlog from "@/lib/DB/getBlog";
 import moment from "moment";
 import Image from "next/image";
@@ -7,26 +6,23 @@ import DeleteBlog from "./DeleteBlog";
 import renderReactComponent from "@/lib/renderReactComponent";
 
 export async function generateMetadata({ params }) {
-  const res = await getBlog(params?.slug);
-  if (!res.success) {
+  try {
+    const blogData = await getBlog(params?.slug);
+    const { title } = blogData;
+    return {
+      title: `${title} - blog`,
+      description: `This is "${title}" blog`,
+    };
+  } catch {
     return {
       title: "Error blog - admin - portfolio",
       description: "There was an error to get this blog data",
     };
   }
-  const { title } = res.data;
-  return {
-    title: `${title} - blog`,
-    description: `This is "${title}" blog`,
-  };
 }
 
 const SingleBlog = async ({ params }) => {
-  const res = await getBlog(params?.slug);
-
-  if (!res.success) {
-    return <ErrorDataShow error={res?.message} />;
-  }
+  const blogData = await getBlog(params?.slug);
 
   const {
     id,
@@ -36,7 +32,7 @@ const SingleBlog = async ({ params }) => {
     slug,
     des,
     thumbnail: { url, alt },
-  } = res.data;
+  } = blogData;
 
   const timeAgo = moment(createdAt).fromNow();
   const createdTime = moment(createdAt).format("Do MMM YY, h:mm a");

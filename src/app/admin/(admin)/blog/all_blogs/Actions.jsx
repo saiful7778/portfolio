@@ -23,25 +23,19 @@ const Actions = ({ blogId, slug }) => {
         },
       });
       try {
-        const res = await deleteBlog(blogId);
-        if (!res.success) {
-          Alert.fire({
-            icon: "error",
-            text: res.message,
-          });
-          return;
-        }
+        await deleteBlog(blogId);
         Alert.fire({
           icon: "success",
           title: "Blog is deleted!",
         });
+        revalidate("/admin/blog/all_blogs");
       } catch (err) {
+        console.error(err);
         Alert.fire({
           icon: "error",
           text: err,
         });
       }
-      revalidate("/admin/blog/all_blogs");
     }
   };
 

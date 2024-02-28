@@ -10,21 +10,11 @@ export default async function getBlog(slug) {
       },
     });
     if (!blog) {
-      return {
-        success: false,
-        message: "No data available",
-      };
+      throw new Error("No data available");
     }
-    return {
-      success: true,
-      data: blog,
-    };
+    return blog;
   } catch (err) {
-    console.log(err);
-    return {
-      success: false,
-      message: err,
-    };
+    throw new Error(err);
   } finally {
     await prisma.$disconnect();
   }

@@ -11,24 +11,14 @@ export default async function createBlog(blogData) {
       },
     });
     if (exist) {
-      return {
-        success: false,
-        message: "Blog is already exist",
-      };
+      throw new Error("Blog is already exist");
     }
     const data = await prisma.blog.create({
       data: blogData,
     });
-    return {
-      success: true,
-      data,
-    };
+    return data;
   } catch (err) {
-    console.log(err);
-    return {
-      success: false,
-      message: err,
-    };
+    throw new Error(err);
   } finally {
     await prisma.$disconnect();
   }
