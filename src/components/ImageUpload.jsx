@@ -6,6 +6,7 @@ import Button from "./utilities/Button";
 import Image from "next/image";
 import { useId, useState } from "react";
 import { useEdgeStore } from "@/context/EdgeStoreContext";
+import { EdgeStoreApiClientError } from "@edgestore/react/shared";
 import { GoVerified } from "react-icons/go";
 import Spinner from "./Spinner";
 
@@ -48,6 +49,7 @@ const ImageUploadComp = ({ size = "md", folder, setImageData }) => {
   const [errorStatus, setErrorStatus] = useState("");
   const [img, setImg] = useState({
     image: null,
+    name: "",
     size: "",
     type: "",
     alt: "",
@@ -74,36 +76,28 @@ const ImageUploadComp = ({ size = "md", folder, setImageData }) => {
   const handleUploadImage = async () => {
     setUploading(true);
     setUploadingStatus("uploading");
-    const res = await edgestore.portfolioImages.upload({
-      file: img.image,
-      input: { type: folder },
-      options: {
-        temporary: true,
-      },
-      onProgressChange: (progress) => setProgress(progress),
-    });
-    setUploadingStatus("uploaded");
-    setImageData({
-      status: "uploaded",
-      url: "",
-      alt: "",
-    });
-    setTempLink(res.url);
+    try {
+      const res = await edgestore.portfolioImages.upload({
+        file: img.image,
+        input: { type: folder },
+        options: {
+          temporary: true,
+        },
+        onProgressChange: (progress) => setProgress(progress),
+      });
+      setUploadingStatus("uploaded");
+      setImageData({
+        url: res.url,
+        alt: img.alt,
+      });
+      setTempLink(res.url);
+    } catch (err) {
+      if (err instanceof EdgeStoreApiClientError) {
+        console.error(err);
+      }
+    }
   };
 
-  const handleConfirm = async () => {
-    setSpinner(true);
-    await edgestore.portfolioImages.confirmUpload({
-      url: tempLink,
-    });
-    setImageData({
-      status: "confirm",
-      url: tempLink,
-      alt: img.alt,
-    });
-    setUploadingStatus("confirm");
-    setSpinner(false);
-  };
   const handleDelete = async () => {
     setSpinner(true);
     await edgestore.portfolioImages.delete({
@@ -112,7 +106,6 @@ const ImageUploadComp = ({ size = "md", folder, setImageData }) => {
     handleRemoveImage();
     setUploadingStatus("");
     setImageData({
-      status: "",
       url: "",
       alt: "",
     });
@@ -128,6 +121,17 @@ const ImageUploadComp = ({ size = "md", folder, setImageData }) => {
         setErrorStatus("File size too much big!");
         return;
       }
+      const fileDataType = [
+        "image/jpeg",
+        "image/png",
+        "image/gif",
+        "image/webp",
+        "image/x-icon",
+      ];
+      if (!fileDataType.includes(imageObj.type)) {
+        setErrorStatus("This file not supported!");
+        return;
+      }
       setImg({
         image: imageObj,
         name: imageObj.name,
@@ -137,7 +141,6 @@ const ImageUploadComp = ({ size = "md", folder, setImageData }) => {
       });
       const localUrl = URL.createObjectURL(imageObj);
       setImageData({
-        status: "selected",
         url: "",
         alt: "",
       });
@@ -181,40 +184,26 @@ const ImageUploadComp = ({ size = "md", folder, setImageData }) => {
                   ) : (
                     <div>
                       <div className="leading-tight">{img.name}</div>
-                      <div className="text-xs leading-tight text-gray-400">
-                        Uploaded{" "}
-                        {uploadingStatus === "confirm" && (
-                          <span className="ml-2">Confirmed</span>
-                        )}
+                      <div className="flex items-center gap-1 text-xs leading-tight text-gray-400">
+                        Uploaded
+                        <span>
+                          <GoVerified size={10} />
+                        </span>
                       </div>
                     </div>
                   )}
                   <div className="inline-flex items-center gap-2">
                     {uploadingStatus === "uploading" ? (
                       <span>{progress}%</span>
-                    ) : uploadingStatus === "uploaded" ? (
-                      <>
-                        <Button
-                          disabled={spinner}
-                          onClick={handleConfirm}
-                          variant="confirm"
-                          size="sm"
-                        >
-                          {spinner ? <Spinner size={15} /> : "Confirm"}
-                        </Button>
-                        <Button
-                          disabled={spinner}
-                          onClick={handleDelete}
-                          variant="cancel"
-                          size="sm"
-                        >
-                          {spinner ? <Spinner size={15} /> : "Delete"}
-                        </Button>
-                      </>
                     ) : (
-                      <div>
-                        <GoVerified size={25} />
-                      </div>
+                      <Button
+                        disabled={spinner}
+                        onClick={handleDelete}
+                        variant="cancel"
+                        size="sm"
+                      >
+                        {spinner ? <Spinner size={15} /> : "Delete"}
+                      </Button>
                     )}
                   </div>
                 </div>
@@ -261,6 +250,7 @@ const ImageUploadComp = ({ size = "md", folder, setImageData }) => {
             )}
           </>
         ) : (
+          // image select show
           <>
             <span>
               <IoImageOutline size={50} />
