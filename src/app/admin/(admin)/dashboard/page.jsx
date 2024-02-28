@@ -4,7 +4,6 @@ import Actions from "./Actions";
 import moment from "moment";
 import { connectToDB } from "@/lib/server-helper";
 import prisma from "../../../../../prisma";
-import ErrorDataShow from "@/components/ErrorDataShow";
 import EmptyData from "@/components/EmptyData";
 
 export const dynamic = "force-dynamic";
@@ -19,34 +18,18 @@ async function getUsers() {
     await connectToDB();
     const users = await prisma.user.findMany();
     if (!users) {
-      return {
-        success: false,
-        message: "No data available",
-      };
+      throw new Error("No data available");
     }
-    return {
-      success: true,
-      data: users,
-    };
+    return users;
   } catch (err) {
-    console.log(err);
-    return {
-      success: false,
-      message: err,
-    };
+    throw new Error(err);
   } finally {
     await prisma.$disconnect();
   }
 }
 
 const DashboardPage = async () => {
-  const res = await getUsers();
-
-  if (!res.success) {
-    return <ErrorDataShow error={res?.message} />;
-  }
-
-  const { data: users } = res;
+  const users = await getUsers();
 
   if (users.length < 1) {
     return <EmptyData />;
