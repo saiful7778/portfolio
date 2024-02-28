@@ -11,7 +11,6 @@ const Error = ({ error, reset }) => {
       <h2 className="text-2xl font-bold">
         Something went <span className="text-red-600">wrong!</span>
       </h2>
-      <div>{error}</div>
       <div>
         <Button onClick={() => reset()} variant="cancel">
           Refrash
