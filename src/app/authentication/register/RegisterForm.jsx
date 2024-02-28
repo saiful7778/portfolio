@@ -7,7 +7,6 @@ import { useRef, useState } from "react";
 import useStateData from "@/hooks/useStateData";
 // next.js packages
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 // components
 import Button from "@/components/utilities/Button";
 import Input from "@/components/utilities/Input";
@@ -20,11 +19,11 @@ import reCaptcha from "@/lib/reCaptcha";
 import { registerSchema } from "@/schemas/authentication";
 import Alert from "@/lib/config/Alert.config";
 import createUser from "@/lib/actions/createUser";
+import { signIn } from "next-auth/react";
 
 const RegisterForm = () => {
   const [spinner, setSpinner] = useState(false);
   const recaptchaRef = useRef(null);
-  const route = useRouter();
   const { showReCaptcha } = useStateData();
   const showReCaptchaState =
     showReCaptcha.show === "on" ||
@@ -33,7 +32,6 @@ const RegisterForm = () => {
 
   // Image data
   const [profileImage, setProfileImage] = useState({
-    status: "",
     url: "",
     alt: "",
   });
@@ -70,7 +68,7 @@ const RegisterForm = () => {
       }
     }
     try {
-      if (profileImage.status === "confirm") {
+      if (profileImage.url) {
         const userData = {
           name: e.fullName,
           email: e.email,
@@ -80,7 +78,7 @@ const RegisterForm = () => {
             alt: profileImage.alt,
           },
         };
-        await createUserData(userData, route, reset);
+        await createUserData(userData, reset);
       } else {
         const userData = {
           name: e.fullName,
@@ -91,7 +89,7 @@ const RegisterForm = () => {
             alt: null,
           },
         };
-        await createUserData(userData, route, reset);
+        await createUserData(userData, reset);
       }
     } catch (err) {
       console.error(err);
@@ -146,30 +144,19 @@ const RegisterForm = () => {
   );
 };
 
-const createUserData = async (userData, route, reset) => {
-  const res = await createUser(userData);
-  if (!res.success) {
-    Alert.fire({
-      icon: "error",
-      text: res.message,
-    });
-    reset();
-    return;
-  }
+const createUserData = async (userData, reset) => {
+  await createUser(userData);
   reset();
-  const { isConfirmed } = await Alert.fire({
+  Alert.fire({
     icon: "success",
     title: "Account is created!",
-    text: "Do you want to login",
-    showCancelButton: true,
-    confirmButtonText: "Yes",
-    cancelButtonText: "No",
   });
-  if (isConfirmed) {
-    route.push("/authentication/login");
-  } else {
-    route.push("/");
-  }
+  await signIn("credentials", {
+    email: userData.email,
+    password: userData.password,
+    redirect: true,
+    callbackUrl: "/",
+  });
 };
 
 export default RegisterForm;
