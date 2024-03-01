@@ -9,10 +9,11 @@ const Graphic03 = () => {
     visible: {
       pathLength: 1,
       transition: {
-        duration: 2,
+        duration: 8,
         ease: "easeInOut",
         repeat: Infinity,
         repeatType: "reverse",
+        delay: 1,
       },
     },
   };
