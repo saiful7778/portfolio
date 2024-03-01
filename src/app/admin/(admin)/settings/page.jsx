@@ -1,5 +1,4 @@
 import SettingsForm from "./SettingsForm";
-import ErrorDataShow from "@/components/ErrorDataShow";
 import prisma from "../../../../../prisma";
 import { connectToDB } from "@/lib/server-helper";
 
@@ -15,33 +14,20 @@ async function getSettings() {
     await connectToDB();
     const settings = await prisma.settings.findMany();
     if (!settings) {
-      return {
-        success: false,
-        message: "No data available",
-      };
+      throw new Error("No data available");
     }
-    return {
-      success: true,
-      data: settings,
-    };
+    return settings;
   } catch (err) {
-    console.log(err);
-    return {
-      success: false,
-      message: err,
-    };
+    throw new Error(err);
   } finally {
     await prisma.$disconnect();
   }
 }
 
 const SettingsPage = async () => {
-  const res = await getSettings();
-  if (!res.success) {
-    return <ErrorDataShow error={res?.message} />;
-  }
-  const { data } = res;
-  return <SettingsForm initialData={data[0]} />;
+  const settings = await getSettings();
+
+  return <SettingsForm initialData={settings[0]} />;
 };
 
 export default SettingsPage;

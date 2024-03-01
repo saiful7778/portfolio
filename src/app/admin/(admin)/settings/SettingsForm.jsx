@@ -23,18 +23,11 @@ const SettingsForm = ({ initialData }) => {
 
   const handleSubmit = async (e) => {
     setSpinner(true);
-    const res = await setSettings(initialData?.id, e);
-    if (!res.success) {
-      Alert.fire({
-        icon: "error",
-        text: res.message,
-      });
-    } else {
-      Alert.fire({
-        icon: "success",
-        title: "Settings is updated",
-      });
-    }
+    await setSettings(initialData?.id, e);
+    Alert.fire({
+      icon: "success",
+      title: "Settings is updated",
+    });
     revalidate("/admin/settings");
     handleReFetch();
     setSpinner(false);

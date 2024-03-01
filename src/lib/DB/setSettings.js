@@ -13,21 +13,11 @@ export default async function setSettings(id, data) {
       create: data,
     });
     if (!res) {
-      return {
-        success: false,
-        message: "Data can not created",
-      };
+      throw new Error("Data can not created");
     }
-    return {
-      success: true,
-      data: res,
-    };
+    return res;
   } catch (err) {
-    console.log(err);
-    return {
-      success: false,
-      message: err,
-    };
+    throw new Error(err);
   } finally {
     await prisma.$disconnect();
   }
