@@ -5,14 +5,14 @@ import Button from "@/components/utilities/Button";
 import AutoType from "@/components/AutoType";
 // assets
 import bannerProfile from "../../../public/banner_profile.png";
-import graphic01 from "../../../public/graphic-icons/Group 162527.png";
-import graphic02 from "../../../public/graphic-icons/Vector 13.png";
-import graphic03 from "../../../public/graphic-icons/Group 162526.png";
-import graphic04 from "../../../public/graphic-icons/add.png";
+import Graphic01 from "@/components/graphics/Graphic-01";
+import Graphic02 from "@/components/graphics/Graphic-02";
+import Graphic03 from "@/components/graphics/Graphic-03";
+import Graphic04 from "@/components/graphics/Graphic-04";
 
 const Banner = () => {
   return (
-    <div className="relative mx-auto my-20 flex w-full flex-col items-center justify-between gap-4 md:w-4/5 lg:flex-row">
+    <div className="relative mx-auto flex w-full max-w-7xl flex-col items-center justify-between gap-20 p-2 lg:flex-row">
       <div className="absolute -left-96 top-0 z-0 h-[300px] w-[900px] rotate-45 rounded-full bg-blue-blob blur-[100px] filter"></div>
       <div className="relative z-[1] w-full lg:w-1/2">
         <h2 className="text-2xl uppercase tracking-widest">
@@ -29,53 +29,29 @@ const Banner = () => {
           commitment to solving complex programming. My main target is to build
           a business management web app.
         </p>
-        <Button href="/projects" variant="primary-outline">
+        <Button href="/projects" variant="primary-outline" size="lg">
           View all Projects
         </Button>
       </div>
       <div className="relative z-[1] w-full lg:w-1/2">
-        <div className="absolute left-0 top-0 z-10 animate-float">
-          <Image
-            className="select-none"
-            src={graphic01}
-            width={60}
-            height={60}
-            alt="graphic"
-          />
+        <div className="absolute left-0 top-0 z-10">
+          <Graphic01 />
         </div>
-        <div className="absolute right-0 top-0 z-10 animate-rotate">
-          <Image
-            className="select-none"
-            src={graphic02}
-            width={60}
-            height={60}
-            alt="graphic"
-          />
+        <div className="absolute right-0 top-0 z-10">
+          <Graphic02 />
         </div>
         <Image
-          className="select-none"
+          className="mx-auto select-none"
           src={bannerProfile}
           alt="banner profile image"
-          width={526}
-          height={564}
+          width={500}
+          height={537}
         />
-        <div className="absolute bottom-0 left-0 z-10 animate-rotate">
-          <Image
-            className="select-none"
-            src={graphic03}
-            width={60}
-            height={60}
-            alt="graphic"
-          />
+        <div className="absolute bottom-0 left-0 z-10">
+          <Graphic03 />
         </div>
-        <div className="absolute bottom-0 right-0 z-10 animate-float">
-          <Image
-            className="select-none"
-            src={graphic04}
-            width={60}
-            height={60}
-            alt="graphic"
-          />
+        <div className="absolute bottom-0 right-0 z-10">
+          <Graphic04 />
         </div>
       </div>
       <div className="absolute -right-96 top-28 z-0 h-[300px] w-[900px] -rotate-[20deg] rounded-full bg-red-blob blur-[100px] filter"></div>

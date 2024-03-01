@@ -27,8 +27,8 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="w-full bg-gray-800/10 backdrop-blur">
-        <nav className="mx-auto flex w-full items-center justify-between gap-2 p-4 lg:w-4/5">
+      <nav className="w-full bg-gray-800/20 p-4 backdrop-blur">
+        <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-2">
           <Link href="/" className="flex items-center gap-2">
             <Image src={profileImage} width={30} height={30} alt="site logo" />
             <span className="text-2xl font-bold">Saiful Islam</span>
@@ -51,8 +51,8 @@ const Navbar = () => {
           >
             Contact me
           </Button>
-        </nav>
-      </div>
+        </div>
+      </nav>
       <div
         className={cn(
           "fixed top-0 z-[110] flex h-screen w-full max-w-xs flex-col items-center gap-2 bg-gray-800/70 p-4 shadow backdrop-blur duration-300",

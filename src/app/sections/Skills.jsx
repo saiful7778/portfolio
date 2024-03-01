@@ -1,5 +1,9 @@
+"use client";
 import Image from "next/image";
 import SectionTitle from "@/components/SectionTitle";
+
+import { motion } from "framer-motion";
+
 import gitLogo from "../../../public/graphic-icons/git.png";
 import nodeLogo from "../../../public/graphic-icons/node.png";
 import htmlLogo from "../../../public/graphic-icons/html.png";
@@ -34,6 +38,9 @@ const Skills = () => {
         <div className="m-1 flex items-end justify-center gap-1 md:m-4 md:gap-4">
           <SkillsItem>
             <SkillItemImage
+              x={-500}
+              y={-500}
+              rotate={-50}
               src={gitLogo}
               alt="git logo"
               width={30}
@@ -49,6 +56,9 @@ const Skills = () => {
           </SkillsItem>
           <SkillsItem>
             <SkillItemImage
+              x={-400}
+              y={-400}
+              rotate={-40}
               src={nodeLogo}
               alt="node logo"
               width={70}
@@ -65,6 +75,9 @@ const Skills = () => {
           </SkillsItem>
           <SkillsItem>
             <SkillItemImage
+              x={-300}
+              y={-300}
+              rotate={-30}
               src={htmlLogo}
               alt="html logo"
               width={80}
@@ -79,6 +92,9 @@ const Skills = () => {
           </SkillsItem>
           <SkillsItem>
             <SkillItemImage
+              x={300}
+              y={-300}
+              rotate={30}
               src={cssLogo}
               alt="css logo"
               width={80}
@@ -95,6 +111,9 @@ const Skills = () => {
           </SkillsItem>
           <SkillsItem>
             <SkillItemImage
+              x={400}
+              y={-400}
+              rotate={40}
               src={nextjsLogo}
               alt="next.js logo"
               width={70}
@@ -112,6 +131,9 @@ const Skills = () => {
           </SkillsItem>
           <SkillsItem>
             <SkillItemImage
+              x={500}
+              y={-500}
+              rotate={50}
               src={githubLogo}
               alt="github logo"
               width={30}
@@ -130,6 +152,9 @@ const Skills = () => {
           <div className="flex flex-col items-end gap-1 md:gap-4">
             <SkillsItem>
               <SkillItemImage
+                x={-500}
+                y={0}
+                rotate={-50}
                 src={reactRouterLogo}
                 alt="react router logo"
                 width={70}
@@ -147,6 +172,9 @@ const Skills = () => {
             </SkillsItem>
             <SkillsItem>
               <SkillItemImage
+                x={-400}
+                y={0}
+                rotate={-40}
                 src={reduxLogo}
                 alt="Redux logo"
                 width={70}
@@ -163,6 +191,9 @@ const Skills = () => {
           </div>
           <SkillsItem>
             <SkillItemImage
+              x={-300}
+              y={0}
+              rotate={-30}
               src={jsLogo}
               alt="javascript logo"
               width={110}
@@ -179,6 +210,9 @@ const Skills = () => {
           </SkillsItem>
           <SkillsItem>
             <SkillItemImage
+              x={400}
+              y={0}
+              rotate={30}
               src={reactLogo}
               alt="react.js logo"
               width={125}
@@ -196,6 +230,9 @@ const Skills = () => {
           <div className="flex flex-col items-end gap-1 md:gap-4">
             <SkillsItem>
               <SkillItemImage
+                x={500}
+                y={0}
+                rotate={40}
                 src={tenstackQueryLogo}
                 alt="tenstack query logo"
                 width={70}
@@ -211,6 +248,9 @@ const Skills = () => {
             </SkillsItem>
             <SkillsItem>
               <SkillItemImage
+                x={500}
+                y={0}
+                rotate={50}
                 src={stripeLogo}
                 alt="Stripe logo"
                 width={70}
@@ -229,6 +269,9 @@ const Skills = () => {
         <div className="m-1 flex items-start justify-center gap-1 md:m-4 md:gap-4">
           <SkillsItem>
             <SkillItemImage
+              x={-500}
+              y={500}
+              rotate={-50}
               src={sassLogo}
               alt="sass logo"
               width={30}
@@ -244,6 +287,9 @@ const Skills = () => {
           </SkillsItem>
           <SkillsItem>
             <SkillItemImage
+              x={-400}
+              y={400}
+              rotate={-40}
               src={jwtLogo}
               alt="jwt logo"
               width={50}
@@ -260,6 +306,9 @@ const Skills = () => {
           </SkillsItem>
           <SkillsItem>
             <SkillItemImage
+              x={-300}
+              y={300}
+              rotate={-30}
               src={firebaseLogo}
               alt="firebase logo"
               width={60}
@@ -274,6 +323,9 @@ const Skills = () => {
           </SkillsItem>
           <SkillsItem>
             <SkillItemImage
+              x={300}
+              y={300}
+              rotate={30}
               src={tailwindcssLogo}
               alt="React router logo"
               width={100}
@@ -290,6 +342,9 @@ const Skills = () => {
           </SkillsItem>
           <SkillsItem>
             <SkillItemImage
+              x={400}
+              y={400}
+              rotate={40}
               src={mongodbLogo}
               alt="mongodb logo"
               width={50}
@@ -305,6 +360,9 @@ const Skills = () => {
           </SkillsItem>
           <SkillsItem>
             <SkillItemImage
+              x={500}
+              y={500}
+              rotate={50}
               src={reCaptchaLogo}
               alt="reCaptcha logo"
               width={30}
@@ -326,15 +384,20 @@ const Skills = () => {
 };
 
 const SkillsItem = ({ children }) => {
-  return (
-    <div className="group relative inline-block w-fit rounded border border-gray-700/70 bg-slate-800 p-1 md:p-4">
-      {children}
-    </div>
-  );
+  return <div className="group relative">{children}</div>;
 };
 
-const SkillItemImage = ({ src, alt, width, height }) => {
-  return <Image src={src} alt={alt} width={width} height={height} />;
+const SkillItemImage = ({ src, alt, width, height, x, y, rotate }) => {
+  return (
+    <motion.div
+      className="inline-block w-fit rounded border border-gray-700/70 bg-slate-800 p-1 md:p-4"
+      initial={{ x, y, rotate, opacity: 0 }}
+      animate={{ x: 0, y: 0, rotate: 0, opacity: 1 }}
+      transition={{ duration: 2, ease: "easeInOut" }}
+    >
+      <Image src={src} alt={alt} width={width} height={height} />
+    </motion.div>
+  );
 };
 
 const SkillItemContent = ({ children }) => {

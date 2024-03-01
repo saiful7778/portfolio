@@ -21,16 +21,16 @@ module.exports = {
       },
       animation: {
         spinner: "spin 1500ms linear infinite",
-        rotate: "rotating 10s linear infinite",
+        "rotate-scale": "rotating-scaling 5s linear infinite",
         float: "floating 10s linear infinite",
       },
       keyframes: {
-        rotating: {
+        "rotating-scaling": {
           "0%, 100%": {
-            transform: "rotate(0deg)",
+            transform: "rotate(0deg) scale(0.7)",
           },
           "50%": {
-            transform: "rotate(20deg)",
+            transform: "rotate(40deg) scale(1)",
           },
         },
         floating: {
