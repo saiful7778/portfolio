@@ -5,7 +5,7 @@ import Navbar from "../sections/Navbar";
 const InfoLayout = ({ children }) => {
   return (
     <StateProvider>
-      <header className="p-2">
+      <header>
         <Navbar />
       </header>
       <main className="mt-16 p-2">{children}</main>

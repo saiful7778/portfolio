@@ -13,7 +13,7 @@ const HomePage = async () => {
   const session = await getAuth();
   return (
     <>
-      <header className="p-2">
+      <header>
         <Navbar />
         <Banner />
       </header>
