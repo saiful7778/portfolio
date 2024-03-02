@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+::-moz-selection {
+  @apply bg-accent-color text-blue-200;
+}
+
+::selection {
+  @apply bg-accent-color text-blue-200;
+}
+
 .swal2-popup {
   @apply border border-gray-700 bg-gray-800 text-gray-50 shadow-md;
 }

@@ -3,29 +3,29 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Fragment, useState } from "react";
 import SectionTitle from "@/components/SectionTitle";
-import gitLogo from "../../../public/graphic-icons/git.png";
-import nodeLogo from "../../../public/graphic-icons/node.png";
-import htmlLogo from "../../../public/graphic-icons/html.png";
-import cssLogo from "../../../public/graphic-icons/css.png";
-import nextjsLogo from "../../../public/graphic-icons/nextjs.png";
-import githubLogo from "../../../public/graphic-icons/github.png";
-import reactRouterLogo from "../../../public/graphic-icons/react-router.png";
-import reduxLogo from "../../../public/graphic-icons/redux.png";
-import jsLogo from "../../../public/graphic-icons/javascript.png";
-import reactLogo from "../../../public/graphic-icons/react.png";
-import tenstackQueryLogo from "../../../public/graphic-icons/tenstack-query.png";
-import stripeLogo from "../../../public/graphic-icons/stripe.png";
-import sassLogo from "../../../public/graphic-icons/sass.png";
-import jwtLogo from "../../../public/graphic-icons/jwt.png";
-import firebaseLogo from "../../../public/graphic-icons/firebase.png";
-import tailwindcssLogo from "../../../public/graphic-icons/tailwindcss.png";
-import mongodbLogo from "../../../public/graphic-icons/mongodb.png";
-import reCaptchaLogo from "../../../public/graphic-icons/RecaptchaLogo.png";
+import gitLogo from "../../../public/images/git.png";
+import nodeLogo from "../../../public/images/node.png";
+import htmlLogo from "../../../public/images/html.png";
+import cssLogo from "../../../public/images/css.png";
+import nextjsLogo from "../../../public/images/nextjs.png";
+import githubLogo from "../../../public/images/github.png";
+import reactRouterLogo from "../../../public/images/react-router.png";
+import reduxLogo from "../../../public/images/redux.png";
+import jsLogo from "../../../public/images/javascript.png";
+import reactLogo from "../../../public/images/react.png";
+import tenstackQueryLogo from "../../../public/images/tenstack-query.png";
+import stripeLogo from "../../../public/images/stripe.png";
+import sassLogo from "../../../public/images/sass.png";
+import jwtLogo from "../../../public/images/jwt.png";
+import firebaseLogo from "../../../public/images/firebase.png";
+import tailwindcssLogo from "../../../public/images/tailwindcss.png";
+import mongodbLogo from "../../../public/images/mongodb.png";
+import reCaptchaLogo from "../../../public/images/RecaptchaLogo.png";
 
 const data = [
   {
     image: { width: 30, height: 30, src: gitLogo, alt: "git logo" },
-    animate: { x: -500, y: -500, rotate: -50 },
+    animate: { x: -300, y: -300, rotate: -50 },
     details: {
       title: "Git",
       description:
@@ -70,7 +70,7 @@ const data = [
   },
   {
     image: { width: 30, height: 30, src: githubLogo, alt: "github logo" },
-    animate: { x: 500, y: -500, rotate: 50 },
+    animate: { x: 300, y: -300, rotate: 50 },
     details: {
       title: "Github",
       description:
@@ -84,7 +84,7 @@ const data = [
       src: reactRouterLogo,
       alt: "react router logo",
     },
-    animate: { x: -500, y: -100, rotate: -50 },
+    animate: { x: -400, y: -100, rotate: -50 },
     details: {
       title: "React router",
       description:
@@ -125,7 +125,7 @@ const data = [
       src: tenstackQueryLogo,
       alt: "tenstack query logo",
     },
-    animate: { x: 500, y: 0, rotate: 40 },
+    animate: { x: 400, y: 0, rotate: 40 },
     details: {
       title: "Tenstack query",
       description:
@@ -134,7 +134,7 @@ const data = [
   },
   {
     image: { width: 70, height: 70, src: stripeLogo, alt: "Stripe logo" },
-    animate: { x: 500, y: 0, rotate: 50 },
+    animate: { x: 400, y: 0, rotate: 50 },
     details: {
       title: "Stripe",
       description:
@@ -143,7 +143,7 @@ const data = [
   },
   {
     image: { width: 30, height: 30, src: sassLogo, alt: "sass logo" },
-    animate: { x: -500, y: 500, rotate: -50 },
+    animate: { x: -400, y: 400, rotate: -50 },
     details: {
       title: "Sass",
       description:
@@ -192,7 +192,7 @@ const data = [
   },
   {
     image: { width: 30, height: 30, src: reCaptchaLogo, alt: "reCaptcha logo" },
-    animate: { x: 500, y: 500, rotate: 50 },
+    animate: { x: 400, y: 400, rotate: 50 },
     details: {
       title: "Google reCaptcha",
       description:
@@ -209,6 +209,7 @@ const style = {
 
 const Skills = () => {
   const [selected, setSelected] = useState(null);
+  const [animation, setAnimation] = useState(false);
 
   const renderSection = data.map((ele, idx) => (
     <Fragment key={`skit${idx}`}>
@@ -221,6 +222,7 @@ const Skills = () => {
             id: `skit${idx}`,
           })
         }
+        animation={animation}
         animate={ele.animate}
         image={ele.image}
         details={ele.details}
@@ -236,7 +238,7 @@ const Skills = () => {
         blob={true}
       />
       <section className="relative mx-auto mb-16 w-fit">
-        <div className="absolute right-0 top-0 h-48 w-48 bg-amber-500/20 blur-3xl filter"></div>
+        <div className="absolute right-0 top-0 h-48 w-48 bg-amber-400/20 blur-3xl filter"></div>
         <div className="absolute left-1/2 top-1/2 h-80 w-80 -translate-x-1/2 -translate-y-1/2 animate-pulse bg-sky-700/40 blur-3xl filter"></div>
         <div className="absolute bottom-0 left-0 h-36 w-36 bg-red-600/50 blur-3xl filter"></div>
         {/* skill item section */}
@@ -256,7 +258,10 @@ const Skills = () => {
         <AnimatePresence>
           {selected && (
             <div
-              onClick={() => setSelected(null)}
+              onClick={() => {
+                setAnimation(true);
+                setSelected(null);
+              }}
               className="fixed inset-0 z-[110] flex h-screen w-full items-center justify-center bg-gray-900/70 text-white"
             >
               <motion.div
@@ -265,7 +270,7 @@ const Skills = () => {
                 className="relative m-2 w-full max-w-md overflow-auto rounded border border-gray-700 bg-gray-800/30 p-4 shadow backdrop-blur"
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, type: "spring", delay: 0.5 }}
+                transition={{ duration: 0.5, type: "spring" }}
               >
                 <Image
                   className="mx-auto w-fit"
@@ -287,7 +292,7 @@ const Skills = () => {
   );
 };
 
-const SkillItem = ({ animate, onClick, image, details, id }) => {
+const SkillItem = ({ animate, onClick, animation, image, details, id }) => {
   return (
     <motion.div
       onClick={onClick}
@@ -299,9 +304,9 @@ const SkillItem = ({ animate, onClick, image, details, id }) => {
         opacity: 0,
       }}
       layoutId={id}
-      animate={{ x: 0, y: 0, rotate: 0, opacity: 1 }}
-      exit={{ transition: { duration: 0.5 } }}
-      transition={{ duration: 3, ease: "easeInOut" }}
+      whileInView={{ x: 0, y: 0, rotate: 0, opacity: 1 }}
+      viewport={{ once: true, margin: "50% 0px -20% 0px" }}
+      transition={{ duration: animation ? 0.5 : 1, ease: "easeInOut" }}
       title={details.title}
     >
       <Image

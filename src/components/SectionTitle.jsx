@@ -1,3 +1,4 @@
+import Reval from "./Reval";
 import Graphic01 from "./graphics/Graphic-01";
 import Graphic04 from "./graphics/Graphic-04";
 
@@ -11,8 +12,12 @@ const SectionTitle = ({ title, text, blob }) => {
         <div className="absolute -left-20 top-0 z-10">
           <Graphic01 />
         </div>
-        <h3 className="text-6xl font-bold">{title}</h3>
-        <p className="leading-10 text-gray-400">{text}</p>
+        <Reval>
+          <h3 className="text-6xl font-bold">{title}</h3>
+        </Reval>
+        <Reval>
+          <p className="leading-10 text-gray-400">{text}</p>
+        </Reval>
         <div className="absolute -right-20 top-0 z-10">
           <Graphic04 />
         </div>

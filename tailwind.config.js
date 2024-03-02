@@ -22,7 +22,8 @@ module.exports = {
       animation: {
         spinner: "spin 1500ms linear infinite",
         "rotate-scale": "rotating-scaling 5s linear infinite",
-        float: "floating 10s linear infinite",
+        float: "floating 5s linear infinite",
+        flick: "flicking 2s linear infinite",
       },
       keyframes: {
         "rotating-scaling": {
@@ -37,11 +38,16 @@ module.exports = {
           "0%, 100%": {
             transform: "translate(0px, 0px) scale(1)",
           },
-          "25%": {
+          "50%": {
             transform: "translate(-10px, 10px) scale(1.1)",
           },
-          "75%": {
-            transform: "translate(10px, -10px) scale(0.9)",
+        },
+        flicking: {
+          "0%, 100%": {
+            transform: "rotate(0deg)",
+          },
+          "50%": {
+            transform: "rotate(10deg)",
           },
         },
       },

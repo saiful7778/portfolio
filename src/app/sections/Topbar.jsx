@@ -14,6 +14,7 @@ import { LuMenuSquare } from "react-icons/lu";
 // assets
 import profileImage from "../../../public/saiful_image.png";
 import { Popover } from "@headlessui/react";
+import moment from "moment";
 
 const Topbar = () => {
   const { handleSidebar } = useStateData();
@@ -46,12 +47,15 @@ const Topbar = () => {
             <Popover.Button className="h-8">
               <Avatar size="sm" photoURL={data?.user?.image} />
             </Popover.Button>
-            <Popover.Panel className="absolute right-0 top-full mt-1 overflow-hidden rounded border border-gray-700 bg-gray-800 px-2 py-1.5 text-xs">
+            <Popover.Panel className="absolute right-0 top-full mt-1 overflow-hidden whitespace-nowrap rounded border border-gray-700 bg-gray-800 px-2 py-1.5 text-xs">
               <div className="rounded px-2 py-1 hover:bg-gray-700">
                 {data?.user?.name}
               </div>
               <div className="rounded px-2 py-1 hover:bg-gray-700">
                 {data?.user?.email}
+              </div>
+              <div className="rounded px-2 py-1 hover:bg-gray-700">
+                Expair: {moment(data?.expires).fromNow()}
               </div>
               <Button
                 onClick={() => signOut()}
