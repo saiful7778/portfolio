@@ -10,7 +10,7 @@ const InputRef = ({ className, refName, customFunction, ...props }) => {
 
   useEffect(() => {
     setValue(customFunction(refField.value));
-  }, [refField.value]);
+  }, [refField.value, customFunction, setValue]);
 
   return (
     <div className={className}>

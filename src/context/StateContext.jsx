@@ -1,4 +1,5 @@
 "use client";
+import getSettings from "@/lib/DB/getSettings";
 import { createContext, useLayoutEffect, useState } from "react";
 
 export const StateContext = createContext(null);
@@ -16,19 +17,18 @@ const StateProvider = ({ children }) => {
 
   useLayoutEffect(() => {
     (async () => {
-      const res = await fetch("/api/settings");
-      const resData = await res.json();
-      const { data: settings } = resData;
-      if (settings) {
-        if (settings.reCaptcha === "on") {
+      const res = await getSettings();
+      if (res.success) {
+        const data = res.data[0];
+        if (data.reCaptcha === "on") {
           setShowReCaptcha({
             show: "on",
             page: [],
           });
-        } else if (settings.reCaptcha === "custom") {
+        } else if (data.reCaptcha === "custom") {
           setShowReCaptcha({
             show: "custom",
-            page: settings.reCaptchaOnPage,
+            page: data.reCaptchaOnPage,
           });
         } else {
           setShowReCaptcha({
@@ -36,8 +36,8 @@ const StateProvider = ({ children }) => {
             page: [],
           });
         }
-        if (settings.blockPage) {
-          setBlockPage(settings.blockPage);
+        if (data.blockPage) {
+          setBlockPage(data.blockPage);
         }
       }
     })();

@@ -1,5 +1,6 @@
+import { connectToDB } from "@/lib/server-helper";
 import SettingsForm from "./SettingsForm";
-import readData from "@/lib/settings/read";
+import prisma from "../../../../../prisma";
 
 export const dynamic = "force-dynamic";
 
@@ -8,10 +9,25 @@ export const metadata = {
   description: "This is settings page of Saiful Islam portfolio website.",
 };
 
-const SettingsPage = async () => {
-  const settings = await readData();
+async function getSettings() {
+  try {
+    await connectToDB();
+    const settings = await prisma.settings.findMany();
+    if (!settings) {
+      throw new Error("No data available");
+    }
+    return settings;
+  } catch (err) {
+    throw new Error(err);
+  } finally {
+    await prisma.$disconnect();
+  }
+}
 
-  return <SettingsForm initialData={settings} />;
+const SettingsPage = async () => {
+  const settings = await getSettings();
+
+  return <SettingsForm initialData={settings[0]} />;
 };
 
 export default SettingsPage;

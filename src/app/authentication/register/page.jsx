@@ -1,11 +1,11 @@
+import getSettings from "@/lib/DB/getSettings";
 import RegisterForm from "./RegisterForm";
 import { redirect } from "next/navigation";
-import readData from "@/lib/settings/read";
 
 const RegisterPage = async () => {
-  const data = await readData();
+  const res = await getSettings();
 
-  if (data.blockPage && data.blockPage.includes("registerPage")) {
+  if (res.data[0].blockPage && res.data[0].blockPage.includes("registerPage")) {
     redirect("/");
   }
 

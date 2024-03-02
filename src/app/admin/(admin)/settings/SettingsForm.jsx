@@ -9,7 +9,7 @@ import useStateData from "@/hooks/useStateData";
 import Alert from "@/lib/config/Alert.config";
 import revalidate from "@/lib/revalidate";
 import Blockpage from "./components/Blockpage";
-import writeData from "@/lib/settings/write";
+import setSettings from "@/lib/DB/setSettings";
 
 const SettingsForm = ({ initialData }) => {
   const [spinner, setSpinner] = useState(false);
@@ -23,7 +23,7 @@ const SettingsForm = ({ initialData }) => {
 
   const handleSubmit = async (e) => {
     setSpinner(true);
-    await writeData(e);
+    await setSettings(initialData?.id, e);
     Alert.fire({
       icon: "success",
       title: "Settings is updated",
