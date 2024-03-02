@@ -77,6 +77,11 @@ const Actions = ({ userData }) => {
         },
       });
       try {
+        if (userData?.image?.url) {
+          await edgestore.portfolioImages.delete({
+            url: userData?.image?.url,
+          });
+        }
         await deleteUser(userData.id);
         revalidate("/admin/dashboard");
         Alert.fire({
