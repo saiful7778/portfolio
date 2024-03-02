@@ -1,16 +1,11 @@
-import getSettings from "@/lib/DB/getSettings";
 import RegisterForm from "./RegisterForm";
-import ErrorDataShow from "@/components/ErrorDataShow";
 import { redirect } from "next/navigation";
+import readData from "@/lib/settings/read";
 
 const RegisterPage = async () => {
-  const res = await getSettings();
+  const data = await readData();
 
-  if (!res.success) {
-    return <ErrorDataShow error={res?.message} />;
-  }
-
-  if (res.data[0].blockPage && res.data[0].blockPage.includes("registerPage")) {
+  if (data.blockPage && data.blockPage.includes("registerPage")) {
     redirect("/");
   }
 

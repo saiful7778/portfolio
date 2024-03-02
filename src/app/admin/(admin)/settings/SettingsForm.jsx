@@ -6,10 +6,10 @@ import { Form, Formik } from "formik";
 import { useState } from "react";
 import ReCaptcha from "./components/ReCaptcha";
 import useStateData from "@/hooks/useStateData";
-import setSettings from "@/lib/DB/setSettings";
 import Alert from "@/lib/config/Alert.config";
 import revalidate from "@/lib/revalidate";
 import Blockpage from "./components/Blockpage";
+import writeData from "@/lib/settings/write";
 
 const SettingsForm = ({ initialData }) => {
   const [spinner, setSpinner] = useState(false);
@@ -23,7 +23,7 @@ const SettingsForm = ({ initialData }) => {
 
   const handleSubmit = async (e) => {
     setSpinner(true);
-    await setSettings(initialData?.id, e);
+    await writeData(e);
     Alert.fire({
       icon: "success",
       title: "Settings is updated",

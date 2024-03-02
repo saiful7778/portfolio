@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import prisma from "../../../../../prisma";
 
 export async function POST(req) {
   try {
@@ -30,7 +29,5 @@ export async function POST(req) {
       { success: false, message: "server error" },
       { status: 500 },
     );
-  } finally {
-    await prisma.$disconnect();
   }
 }

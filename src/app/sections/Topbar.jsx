@@ -55,7 +55,7 @@ const Topbar = () => {
                 {data?.user?.email}
               </div>
               <div className="rounded px-2 py-1 hover:bg-gray-700">
-                Expair: {moment(data?.expires).fromNow()}
+                Expair: {moment(data?.expires).format("Do MMM YY, h:mm a")}
               </div>
               <Button
                 onClick={() => signOut()}

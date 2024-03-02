@@ -1,0 +1,11 @@
+{
+  "reCaptcha": "custom",
+  "reCaptchaOnPage": [
+    "projectComment",
+    "register",
+    "contactPage"
+  ],
+  "blockPage": [
+    "registerPage"
+  ]
+}
