@@ -58,6 +58,8 @@ function inlineTag(type, inputData, key) {
           {inputData.text}
         </mark>
       );
+    case "strike":
+      return <s key={key}>{inputData.text}</s>;
   }
 }
 
