@@ -43,7 +43,7 @@ const AllProjectsPage = async () => {
 };
 
 const TableDataRow = ({ inputData, count }) => {
-  const { id, title, slug, createdAt, updatedAt, shortDes, status } =
+  const { id, title, slug, createdAt, updatedAt, thumbnail, shortDes, status } =
     inputData || {};
 
   const createdTime = moment(createdAt).format("Do MMM YY, h:mm a");
@@ -93,7 +93,7 @@ const TableDataRow = ({ inputData, count }) => {
       </Table.cell>
       <Table.cell>
         <div className="flex items-center justify-center">
-          <Actions projectId={id} slug={slug} />
+          <Actions projectId={id} thumbnail={thumbnail.url} slug={slug} />
         </div>
       </Table.cell>
     </Table.row>

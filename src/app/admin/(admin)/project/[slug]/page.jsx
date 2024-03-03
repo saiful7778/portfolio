@@ -65,7 +65,7 @@ const SingleProject = async ({ params }) => {
         >
           Update
         </Button>
-        <DeleteProject projectId={id} />
+        <DeleteProject projectId={id} thumbnail={url} />
         <Button variant="primary" href={`/project/${slug}`}>
           Live link
         </Button>

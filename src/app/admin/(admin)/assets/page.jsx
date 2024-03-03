@@ -35,7 +35,10 @@ const AssetsPage = async () => {
           width={200}
           height={150}
         />
-        <div className="invisible absolute inset-0 top-full flex h-full w-full flex-col items-end justify-end bg-gradient-to-b from-transparent to-gray-900 p-4 duration-300 group-hover:visible group-hover:top-0">
+        <div
+          className="invisible absolute inset-0 top-full flex h-full w-full flex-col items-end justify-end bg-gradient-to-b from-transparent to-gray-900 p-4 duration-300 group-hover:visible group-hover:top-0"
+          title={"alt: " + asset.alt}
+        >
           <Actions url={asset.url} id={asset.id} />
         </div>
       </figure>

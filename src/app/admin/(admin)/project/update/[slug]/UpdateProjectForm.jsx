@@ -101,6 +101,9 @@ const UpdateProjectForm = ({ projectData }) => {
           setSpinner(false);
           return;
         }
+        await edgestore.portfolioImages.delete({
+          url,
+        });
         await edgestore.portfolioImages.confirmUpload({
           url: thumbnailImg.url,
         });

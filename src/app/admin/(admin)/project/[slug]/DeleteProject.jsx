@@ -4,8 +4,10 @@ import Alert from "@/lib/config/Alert.config";
 import { useRouter } from "next/navigation";
 import deleteProject from "@/lib/actions/deleteProject";
 import revalidate from "@/lib/revalidate";
+import { useEdgeStore } from "@/context/EdgeStoreContext";
 
-const DeleteProject = ({ projectId }) => {
+const DeleteProject = ({ projectId, thumbnail }) => {
+  const { edgestore } = useEdgeStore();
   const router = useRouter();
 
   const handleDelete = async () => {
@@ -24,6 +26,9 @@ const DeleteProject = ({ projectId }) => {
       });
       try {
         await deleteProject(projectId);
+        await edgestore.portfolioImages.delete({
+          url: thumbnail,
+        });
         Alert.fire({
           icon: "success",
           title: "Project is deleted!",
