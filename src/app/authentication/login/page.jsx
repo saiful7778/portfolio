@@ -90,7 +90,7 @@ const LoginPage = ({ searchParams }) => {
           </Button>
         </Form>
       </Formik>
-      <p className="mt-4 text-center text-sm text-gray-300">
+      <p className="mt-2 text-center text-sm text-gray-300">
         Go back to{" "}
         <Link href="/" className="link">
           Home
