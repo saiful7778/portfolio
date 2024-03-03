@@ -20,11 +20,13 @@ import { registerSchema } from "@/schemas/authentication";
 import Alert from "@/lib/config/Alert.config";
 import createUser from "@/lib/actions/createUser";
 import { signIn } from "next-auth/react";
+import { useEdgeStore } from "@/context/EdgeStoreContext";
 
 const RegisterForm = () => {
   const [spinner, setSpinner] = useState(false);
   const recaptchaRef = useRef(null);
   const { showReCaptcha } = useStateData();
+  const { edgestore } = useEdgeStore();
   const showReCaptchaState =
     showReCaptcha.show === "on" ||
     (showReCaptcha.show === "custom" &&
@@ -69,6 +71,9 @@ const RegisterForm = () => {
     }
     try {
       if (profileImage.url) {
+        await edgestore.portfolioImages.confirmUpload({
+          url: profileImage.url,
+        });
         const userData = {
           name: e.fullName,
           email: e.email,
@@ -131,7 +136,7 @@ const RegisterForm = () => {
           </Button>
         </Form>
       </Formik>
-      <p className="mt-4 text-center text-sm text-gray-300">
+      <p className="mt-2 text-center text-sm text-gray-300">
         Go back to{" "}
         <Link href="/" className="link">
           Home
