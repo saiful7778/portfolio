@@ -41,7 +41,8 @@ const AllBlogs = async () => {
 };
 
 const TableDataRow = ({ inputData, count }) => {
-  const { id, title, slug, createdAt, updatedAt, status } = inputData || {};
+  const { id, title, slug, createdAt, updatedAt, status, thumbnail } =
+    inputData || {};
 
   const createdTime = moment(createdAt).format("Do MMM YY, h:mm a");
   const updatedTime = moment(updatedAt).format("Do MMM YY, h:mm a");
@@ -85,7 +86,7 @@ const TableDataRow = ({ inputData, count }) => {
       </Table.cell>
       <Table.cell>
         <div className="flex items-center justify-center">
-          <Actions blogId={id} slug={slug} />
+          <Actions blogId={id} slug={slug} thumbnail={thumbnail.url} />
         </div>
       </Table.cell>
     </Table.row>

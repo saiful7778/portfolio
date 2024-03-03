@@ -1,11 +1,13 @@
 "use client";
 import { useRouter } from "next/navigation";
 import revalidate from "@/lib/revalidate";
+import PopOver from "@/components/PopOver";
+import { useEdgeStore } from "@/context/EdgeStoreContext";
 import Alert from "@/lib/config/Alert.config";
 import deleteBlog from "@/lib/actions/deleteBlog";
-import PopOver from "@/components/PopOver";
 
-const Actions = ({ blogId, slug }) => {
+const Actions = ({ blogId, thumbnail, slug }) => {
+  const { edgestore } = useEdgeStore();
   const router = useRouter();
 
   const handleDelete = async () => {
@@ -24,6 +26,9 @@ const Actions = ({ blogId, slug }) => {
       });
       try {
         await deleteBlog(blogId);
+        await edgestore.portfolioImages.delete({
+          url: thumbnail,
+        });
         Alert.fire({
           icon: "success",
           title: "Blog is deleted!",

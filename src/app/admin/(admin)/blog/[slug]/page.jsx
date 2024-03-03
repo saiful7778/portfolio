@@ -62,7 +62,7 @@ const SingleBlog = async ({ params }) => {
         >
           Update
         </Button>
-        <DeleteBlog blogId={id} />
+        <DeleteBlog blogId={id} thumbnail={url} />
         <Button variant="primary" href={`/blog/${slug}`}>
           Live link
         </Button>
