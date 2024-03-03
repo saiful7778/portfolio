@@ -66,3 +66,10 @@ model contact {
   subject     String
   details     String
 }
+
+model images {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  url       String
+  alt       String?
+  createdAt DateTime @default(now())
+}

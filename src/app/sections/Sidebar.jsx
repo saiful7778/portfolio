@@ -12,6 +12,7 @@ import { GoProjectSymlink } from "react-icons/go";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { IoIosArrowDown } from "react-icons/io";
 import { BsFileEarmarkPostFill } from "react-icons/bs";
+import { FaRegImages } from "react-icons/fa";
 
 const Sidebar = () => {
   const { sidebar } = useStateData();
@@ -57,6 +58,13 @@ const Sidebar = () => {
             All Blogs
           </SidebarDropdownItem>
         </SidebarDropdown>
+        <SidebarItem
+          path="/admin/assets"
+          textShow={sidebar}
+          icon={<FaRegImages />}
+        >
+          Assets
+        </SidebarItem>
         <SidebarItem
           path="/admin/contacts"
           textShow={sidebar}
