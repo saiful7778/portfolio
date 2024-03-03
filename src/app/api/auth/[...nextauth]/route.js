@@ -53,26 +53,6 @@ export const authOptions = {
     maxAge: 4 * 60 * 60,
     updateAge: 3 * 60 * 60,
   },
-  cookies: {
-    sessionToken: {
-      name: "next-auth.session-token",
-      options: {
-        httpOnly: true,
-        sameSite: "lax",
-        path: "/",
-        secure: true,
-      },
-    },
-    csrfToken: {
-      name: "next-auth.csrf-token",
-      options: {
-        httpOnly: true,
-        sameSite: "lax",
-        path: "/",
-        secure: true,
-      },
-    },
-  },
   secret: process.env.NEXTAUTH_SECRET,
   debug: process.env.NODE_ENV === "development",
   pages: {
@@ -80,10 +60,16 @@ export const authOptions = {
   },
   callbacks: {
     async jwt({ token, user }) {
+      if (Date.now() >= token.exp * 1000) {
+        return null;
+      }
       if (user) token.role = user.role;
       return token;
     },
     async session({ session, token }) {
+      if (Date.now() >= token.exp * 1000) {
+        return null;
+      }
       if (session?.user) session.user.role = token.role;
       return session;
     },
