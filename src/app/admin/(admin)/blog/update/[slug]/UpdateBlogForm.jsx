@@ -93,6 +93,9 @@ const UpdateBlogForm = ({ blogData }) => {
           setSpinner(false);
           return;
         }
+        await edgestore.portfolioImages.delete({
+          url,
+        });
         await edgestore.portfolioImages.confirmUpload({
           url: thumbnailImg.url,
         });
