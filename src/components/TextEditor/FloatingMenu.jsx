@@ -7,8 +7,8 @@ const FloatingMenu = ({ editor }) => {
   }
   return (
     <BubbleMenu
-      className="flex items-center gap-1 border border-gray-700 bg-gray-800 p-1"
-      tippyOptions={{ duration: 100 }}
+      className="flex items-center gap-1 rounded border border-gray-700 bg-gray-900 p-1"
+      tippyOptions={{ duration: 500 }}
       editor={editor}
     >
       <TextStyle editor={editor} />

@@ -5,29 +5,35 @@ import { useCallback, useState } from "react";
 import Button from "../utilities/Button";
 import ImageUpload from "../ImageUpload";
 import Modal from "../Modal";
+import { useEdgeStore } from "@/context/EdgeStoreContext";
+import createImageData from "@/lib/actions/createImageData";
 
 const ImageUploadTool = ({ editor }) => {
   const [modal, setModal] = useState(false);
+  const { edgestore } = useEdgeStore();
   // Image data
   const [img, setImg] = useState({
-    status: "",
     url: "",
     alt: "",
   });
 
-  const handleUpload = useCallback(() => {
+  const handleUpload = useCallback(async () => {
     setModal((l) => !l);
-    if (img.status === "confirm") {
+    if (img.url) {
+      await edgestore.portfolioImages.confirmUpload({
+        url: img.url,
+      });
+      const data = await createImageData({ url: img.url, alt: img.alt });
       editor
         .chain()
         .focus()
         .setImage({
-          src: img.url,
-          alt: img.alt,
+          src: data.url,
+          alt: data.alt,
         })
         .run();
     }
-  }, [editor, img]);
+  }, [editor, img, edgestore]);
 
   return (
     <>
@@ -40,8 +46,8 @@ const ImageUploadTool = ({ editor }) => {
         title="Image upload"
       >
         <ImageUpload setImageData={setImg} size="sm" folder="editor" />
-        <Button onClick={handleUpload} variant="confirm">
-          Upload
+        <Button onClick={handleUpload} variant="confirm" size="sm">
+          Insert image
         </Button>
       </Modal>
     </>

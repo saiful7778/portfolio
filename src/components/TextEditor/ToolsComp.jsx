@@ -12,9 +12,15 @@ import {
   AiOutlineAlignRight,
   AiOutlineEnter,
 } from "react-icons/ai";
-import { FaParagraph } from "react-icons/fa";
-import { FaListUl, FaListOl } from "react-icons/fa";
-import { FaBold, FaItalic, FaCode } from "react-icons/fa";
+import {
+  FaParagraph,
+  FaListOl,
+  FaListUl,
+  FaBold,
+  FaItalic,
+  FaCode,
+  FaStrikethrough,
+} from "react-icons/fa";
 
 export const TextHtmlFormat = ({ editor }) => {
   const handleParagraph = () => {
@@ -149,6 +155,9 @@ export const TextList = ({ editor }) => {
 };
 
 export const TextStyle = ({ editor }) => {
+  if (!editor) {
+    return null;
+  }
   const handleBold = () => {
     editor.chain().focus().toggleBold().run();
   };
@@ -162,6 +171,9 @@ export const TextStyle = ({ editor }) => {
 
   const handleCode = () => {
     editor.chain().focus().toggleCode().run();
+  };
+  const handleStrike = () => {
+    editor.chain().focus().toggleStrike().run();
   };
 
   const handleNewline = () => {
@@ -189,6 +201,13 @@ export const TextStyle = ({ editor }) => {
       </Tool>
       <Tool tag="code" isActive={editor.isActive("code")} onClick={handleCode}>
         <FaCode />
+      </Tool>
+      <Tool
+        tag="strike"
+        isActive={editor.isActive("strike")}
+        onClick={handleStrike}
+      >
+        <FaStrikethrough />
       </Tool>
       <Tool tag="new line" onClick={handleNewline}>
         <AiOutlineEnter />

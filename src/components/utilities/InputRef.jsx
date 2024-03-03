@@ -10,7 +10,8 @@ const InputRef = ({ className, refName, customFunction, ...props }) => {
 
   useEffect(() => {
     setValue(customFunction(refField.value));
-  }, [refField.value, customFunction, setValue]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [refField.value]);
 
   return (
     <div className={className}>

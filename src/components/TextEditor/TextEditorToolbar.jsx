@@ -47,12 +47,12 @@ const TextEditorToolbar = ({ editor }) => {
   };
 
   return (
-    <div className="mb-2 flex w-full flex-wrap gap-2 rounded border border-gray-600 p-2">
+    <div className="mb-2 flex w-full flex-wrap gap-1 rounded border border-gray-700 bg-gray-900 p-1">
       <TextStyle editor={editor} />
-      <div className="w-[1px] bg-gray-600"></div>
+      <div className="w-[1px] bg-gray-700"></div>
       <TextAlign editor={editor} />
       <TextList editor={editor} />
-      <div className="w-[1px] bg-gray-600"></div>
+      <div className="w-[1px] bg-gray-700"></div>
       <Tool
         tag="code block"
         isActive={editor.isActive("codeBlock")}
@@ -61,6 +61,7 @@ const TextEditorToolbar = ({ editor }) => {
         <FaLaptopCode />
       </Tool>
       <Tool
+        className="relative"
         tag="set link"
         isActive={editor.isActive("link")}
         onClick={handleSetLink}
@@ -75,9 +76,9 @@ const TextEditorToolbar = ({ editor }) => {
       >
         <FaLinkSlash />
       </Tool>
-      <div className="w-[1px] bg-gray-600"></div>
+      <div className="w-[1px] bg-gray-700"></div>
       <TextHtmlFormat editor={editor} />
-      <div className="w-[1px] bg-gray-600"></div>
+      <div className="w-[1px] bg-gray-700"></div>
       <Tool
         tag="undo"
         onClick={handleUndo}
@@ -92,7 +93,7 @@ const TextEditorToolbar = ({ editor }) => {
       >
         <IoMdRedo />
       </Tool>
-      <div className="w-[1px] bg-gray-600"></div>
+      <div className="w-[1px] bg-gray-700"></div>
       <ImageUploadTool editor={editor} />
       <Button
         onClick={() => editor.commands.clearContent()}

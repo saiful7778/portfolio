@@ -90,10 +90,12 @@ const ImageUploadComp = ({ size = "md", folder, setImageData }) => {
         url: res.url,
         alt: img.alt,
       });
+      setErrorStatus("");
       setTempLink(res.url);
     } catch (err) {
       if (err instanceof EdgeStoreApiClientError) {
         console.error(err);
+        setErrorStatus(err);
       }
     }
   };
@@ -104,6 +106,7 @@ const ImageUploadComp = ({ size = "md", folder, setImageData }) => {
       url: tempLink,
     });
     handleRemoveImage();
+    setErrorStatus("");
     setUploadingStatus("");
     setImageData({
       url: "",
@@ -144,6 +147,7 @@ const ImageUploadComp = ({ size = "md", folder, setImageData }) => {
         url: "",
         alt: "",
       });
+      setErrorStatus("");
       setShowImage(localUrl);
     }
   };
@@ -178,12 +182,12 @@ const ImageUploadComp = ({ size = "md", folder, setImageData }) => {
             )}
             {uploading ? (
               <div className="w-full rounded-md border border-gray-700 p-2">
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between gap-2">
                   {uploadingStatus === "uploading" ? (
                     <div className="text-lg font-semibold">Uploading....</div>
                   ) : (
                     <div>
-                      <div className="leading-tight">{img.name}</div>
+                      <div className="text-sm leading-tight">{img.name}</div>
                       <div className="flex items-center gap-1 text-xs leading-tight text-gray-400">
                         Uploaded
                         <span>
@@ -192,7 +196,7 @@ const ImageUploadComp = ({ size = "md", folder, setImageData }) => {
                       </div>
                     </div>
                   )}
-                  <div className="inline-flex items-center gap-2">
+                  <div>
                     {uploadingStatus === "uploading" ? (
                       <span>{progress}%</span>
                     ) : (

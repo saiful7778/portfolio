@@ -42,32 +42,30 @@ const Topbar = () => {
       {status === "loading" ? (
         <Spinner size={15} />
       ) : (
-        <>
-          <Popover className="relative w-fit">
-            <Popover.Button className="h-8">
-              <Avatar size="sm" photoURL={data?.user?.image} />
-            </Popover.Button>
-            <Popover.Panel className="absolute right-0 top-full mt-1 overflow-hidden whitespace-nowrap rounded border border-gray-700 bg-gray-800 px-2 py-1.5 text-xs">
-              <div className="rounded px-2 py-1 hover:bg-gray-700">
-                {data?.user?.name}
-              </div>
-              <div className="rounded px-2 py-1 hover:bg-gray-700">
-                {data?.user?.email}
-              </div>
-              <div className="rounded px-2 py-1 hover:bg-gray-700">
-                Expair: {moment(data?.expires).format("Do MMM YY, h:mm a")}
-              </div>
-              <Button
-                onClick={() => signOut()}
-                className="mt-2 w-full"
-                variant="cancel"
-                size="sm"
-              >
-                Log out
-              </Button>
-            </Popover.Panel>
-          </Popover>
-        </>
+        <Popover className="relative w-fit">
+          <Popover.Button className="h-8">
+            <Avatar size="sm" photoURL={data?.user?.image} />
+          </Popover.Button>
+          <Popover.Panel className="absolute right-0 top-full z-50 mt-1 overflow-hidden whitespace-nowrap rounded border border-gray-700 bg-gray-800 px-2 py-1.5 text-xs">
+            <div className="rounded px-2 py-1 hover:bg-gray-700">
+              {data?.user?.name}
+            </div>
+            <div className="rounded px-2 py-1 hover:bg-gray-700">
+              {data?.user?.email}
+            </div>
+            <div className="rounded px-2 py-1 hover:bg-gray-700">
+              Expair: {moment(data?.expires).format("Do MMM YY, h:mm a")}
+            </div>
+            <Button
+              onClick={() => signOut()}
+              className="mt-2 w-full"
+              variant="cancel"
+              size="sm"
+            >
+              Log out
+            </Button>
+          </Popover.Panel>
+        </Popover>
       )}
     </div>
   );
