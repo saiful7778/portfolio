@@ -1,10 +1,10 @@
-import prisma from "../../../../../prisma";
 import EmptyData from "@/components/EmptyData";
 import Table from "@/components/table";
 import moment from "moment";
 import Actions from "./Actions";
 import Link from "next/link";
 import Details from "./Details";
+import getContacts from "@/lib/data/getContacts";
 
 export const dynamic = "force-dynamic";
 
@@ -13,18 +13,6 @@ export const metadata = {
   description:
     "This is the all contacts management admin page of Saiful Islam portfolio website.",
 };
-
-async function getContacts() {
-  try {
-    const contacts = await prisma.contact.findMany();
-    if (!contacts) {
-      throw new Error("No data available");
-    }
-    return contacts;
-  } catch (err) {
-    throw new Error(err);
-  }
-}
 
 const Contacts = async () => {
   const contacts = await getContacts();

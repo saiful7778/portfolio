@@ -1,16 +1,7 @@
-import prisma from "../../../../../prisma";
 import EmptyData from "@/components/EmptyData";
 import Image from "next/image";
 import Actions from "./Actions";
-
-async function getAssets() {
-  try {
-    const assets = await prisma.images.findMany();
-    return assets;
-  } catch (err) {
-    throw new Error(err);
-  }
-}
+import getAssets from "@/lib/data/getAssets";
 
 const AssetsPage = async () => {
   const assets = await getAssets();

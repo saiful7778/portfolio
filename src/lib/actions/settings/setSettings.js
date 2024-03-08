@@ -1,9 +1,9 @@
 "use server";
-import prisma from "../../../../prisma";
+import db from "@/lib/db";
 
 export default async function setSettings(id, data) {
   try {
-    const res = await prisma.settings.upsert({
+    const res = await db.settings.upsert({
       where: {
         id: id,
       },

@@ -11,7 +11,7 @@ export const metadata = {
 const SettingsPage = async () => {
   const settings = await getSettings();
 
-  return <SettingsForm initialData={settings[0]} />;
+  return <SettingsForm initialData={settings} />;
 };
 
 export default SettingsPage;

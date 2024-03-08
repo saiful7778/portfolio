@@ -1,15 +1,15 @@
 "use server";
-import prisma from "../../../../prisma";
+import db from "@/lib/db";
 
 export default async function updateBlog(id, data) {
   try {
-    const existBlog = await prisma.blog.findFirst({
+    const existBlog = await db.blog.findFirst({
       where: { id },
     });
     if (!existBlog) {
       throw new Error("No data available");
     }
-    await prisma.blog.update({
+    await db.blog.update({
       where: {
         id,
       },

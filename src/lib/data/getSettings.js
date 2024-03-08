@@ -1,23 +1,13 @@
-import prisma from "../../../prisma";
+import db from "@/lib/db";
 
 export default async function getSettings() {
   try {
-    const settings = await prisma.settings.findMany();
+    const settings = await db.settings.findMany();
     if (!settings) {
-      return {
-        success: false,
-        message: "No data available",
-      };
+      throw new Error("No data available");
     }
-    return {
-      success: true,
-      data: settings,
-    };
+    return settings[0];
   } catch (err) {
-    console.log(err);
-    return {
-      success: false,
-      message: err,
-    };
+    throw new Error(err);
   }
 }

@@ -1,8 +1,8 @@
-import prisma from "../../../prisma";
+import db from "@/lib/db";
 
 export default async function getBlog(slug) {
   try {
-    const blog = await prisma.blog.findFirst({
+    const blog = await db.blog.findFirst({
       where: {
         slug,
       },

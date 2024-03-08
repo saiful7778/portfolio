@@ -3,9 +3,9 @@ import RegisterForm from "./RegisterForm";
 import { redirect } from "next/navigation";
 
 const RegisterPage = async () => {
-  const res = await getSettings();
+  const settings = await getSettings();
 
-  if (res.data[0].blockPage && res.data[0].blockPage.includes("registerPage")) {
+  if (settings.blockPage && settings.blockPage.includes("registerPage")) {
     redirect("/");
   }
 

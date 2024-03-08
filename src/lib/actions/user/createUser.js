@@ -1,10 +1,10 @@
 "use server";
-import prisma from "../../../../prisma";
+import db from "@/lib/db";
 import { hash } from "bcrypt";
 
 export default async function createUser(userData) {
   try {
-    const exist = await prisma.user.findUnique({
+    const exist = await db.user.findUnique({
       where: {
         email: userData.email,
       },
@@ -13,7 +13,7 @@ export default async function createUser(userData) {
       throw new Error("user is already exist!");
     }
     const hashedPassword = await hash(userData.password, 10);
-    await prisma.user.create({
+    await db.user.create({
       data: {
         name: userData.name,
         email: userData.email,

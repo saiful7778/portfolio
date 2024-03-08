@@ -1,15 +1,15 @@
 "use server";
-import prisma from "../../../../prisma";
+import db from "@/lib/db";
 
 export default async function deleteBlog(id) {
   try {
-    const existBlog = await prisma.blog.findFirst({
+    const existBlog = await db.blog.findFirst({
       where: { id },
     });
     if (!existBlog) {
       throw new Error("Blog doesn't exist");
     }
-    const data = await prisma.blog.delete({
+    const data = await db.blog.delete({
       where: { id },
     });
     return data;

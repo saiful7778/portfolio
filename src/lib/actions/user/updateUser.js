@@ -1,15 +1,15 @@
 "use server";
-import prisma from "../../../../prisma";
+import db from "@/lib/db";
 
 export default async function updateUser(id, email, data) {
   try {
-    const existUser = await prisma.user.findFirst({
+    const existUser = await db.user.findFirst({
       where: { id, email },
     });
     if (!existUser) {
       throw new Error("User doesn't exist");
     }
-    await prisma.user.update({
+    await db.user.update({
       where: {
         id,
         email,

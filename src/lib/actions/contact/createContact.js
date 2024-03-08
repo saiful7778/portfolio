@@ -1,9 +1,9 @@
 "use server";
-import prisma from "../../../../prisma";
+import db from "@/lib/db";
 
 export default async function createContact(contactData) {
   try {
-    await prisma.contact.create({
+    await db.contact.create({
       data: contactData,
     });
   } catch (err) {

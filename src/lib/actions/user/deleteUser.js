@@ -1,15 +1,15 @@
 "use server";
-import prisma from "../../../../prisma";
+import db from "@/lib/db";
 
 export default async function deleteUser(id) {
   try {
-    const existUser = await prisma.user.findFirst({
+    const existUser = await db.user.findFirst({
       where: { id },
     });
     if (!existUser) {
       throw new Error("User doesn't exist");
     }
-    await prisma.user.delete({
+    await db.user.delete({
       where: { id },
     });
   } catch (err) {

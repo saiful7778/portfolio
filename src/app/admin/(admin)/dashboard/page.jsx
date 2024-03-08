@@ -2,8 +2,8 @@ import Avatar from "@/components/Avatar";
 import Table from "@/components/table";
 import Actions from "./Actions";
 import moment from "moment";
-import prisma from "../../../../../prisma";
 import EmptyData from "@/components/EmptyData";
+import getUsers from "@/lib/data/getUsers";
 
 export const dynamic = "force-dynamic";
 
@@ -11,15 +11,6 @@ export const metadata = {
   title: "Deshboard - admin - portfolio",
   description: "This is dashboard page of Saiful Islam portfolio website.",
 };
-
-async function getUsers() {
-  try {
-    const users = await prisma.user.findMany();
-    return users;
-  } catch (err) {
-    throw new Error(err);
-  }
-}
 
 const DashboardPage = async () => {
   const users = await getUsers();

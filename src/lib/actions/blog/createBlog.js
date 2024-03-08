@@ -1,9 +1,9 @@
 "use server";
-import prisma from "../../../../prisma";
+import db from "@/lib/db";
 
 export default async function createBlog(blogData) {
   try {
-    const exist = await prisma.blog.findUnique({
+    const exist = await db.blog.findUnique({
       where: {
         slug: blogData.slug,
       },
@@ -11,7 +11,7 @@ export default async function createBlog(blogData) {
     if (exist) {
       throw new Error("Blog is already exist");
     }
-    const data = await prisma.blog.create({
+    const data = await db.blog.create({
       data: blogData,
     });
     return data;

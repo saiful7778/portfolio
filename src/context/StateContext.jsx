@@ -17,18 +17,17 @@ const StateProvider = ({ children }) => {
 
   useLayoutEffect(() => {
     (async () => {
-      const res = await getSettings();
-      if (res.success) {
-        const data = res.data[0];
-        if (data.reCaptcha === "on") {
+      const settings = await getSettings();
+      if (settings) {
+        if (settings.reCaptcha === "on") {
           setShowReCaptcha({
             show: "on",
             page: [],
           });
-        } else if (data.reCaptcha === "custom") {
+        } else if (settings.reCaptcha === "custom") {
           setShowReCaptcha({
             show: "custom",
-            page: data.reCaptchaOnPage,
+            page: settings.reCaptchaOnPage,
           });
         } else {
           setShowReCaptcha({
@@ -36,8 +35,8 @@ const StateProvider = ({ children }) => {
             page: [],
           });
         }
-        if (data.blockPage) {
-          setBlockPage(data.blockPage);
+        if (settings.blockPage) {
+          setBlockPage(settings.blockPage);
         }
       }
     })();

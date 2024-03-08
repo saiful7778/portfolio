@@ -1,16 +1,16 @@
 "use server";
-import prisma from "../../../../prisma";
+import db from "@/lib/db";
 
 export default async function updateProject(id, data) {
   try {
-    const existProject = await prisma.project.findFirst({
+    const existProject = await db.findFirst({
       where: { id },
     });
     if (!existProject) {
       throw new Error("No data available");
     }
 
-    const project = await prisma.project.update({
+    const project = await db.update({
       where: {
         id,
       },

@@ -1,9 +1,9 @@
 "use server";
-import prisma from "../../../../prisma";
+import db from "@/lib/db";
 
 export default async function createProject(projectData) {
   try {
-    const exist = await prisma.project.findUnique({
+    const exist = await db.findUnique({
       where: {
         slug: projectData.slug,
       },
@@ -11,7 +11,7 @@ export default async function createProject(projectData) {
     if (exist) {
       throw new Error("Project is already exist");
     }
-    const data = await prisma.project.create({
+    const data = await db.create({
       data: projectData,
     });
     return data;

@@ -1,15 +1,15 @@
 "use server";
-import prisma from "../../../../prisma";
+import db from "@/lib/db";
 
 export default async function deleteContact(id) {
   try {
-    const exitContact = await prisma.contact.findFirst({
+    const exitContact = await db.contact.findFirst({
       where: { id },
     });
     if (!exitContact) {
       throw new Error("contact doesn't exist");
     }
-    const data = await prisma.contact.delete({
+    const data = await db.contact.delete({
       where: { id },
     });
     return data;

@@ -1,9 +1,9 @@
 "use server";
-import prisma from "../../../../prisma";
+import db from "@/lib/db";
 
 export default async function createImageData(imageData) {
   try {
-    const data = await prisma.images.create({
+    const data = await db.images.create({
       data: imageData,
     });
     return data;
