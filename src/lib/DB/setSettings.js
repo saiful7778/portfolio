@@ -1,10 +1,8 @@
 "use server";
 import prisma from "../../../prisma";
-import { connectToDB } from "../server-helper";
 
 export default async function setSettings(id, data) {
   try {
-    await connectToDB();
     const res = await prisma.settings.upsert({
       where: {
         id: id,
@@ -18,7 +16,5 @@ export default async function setSettings(id, data) {
     return res;
   } catch (err) {
     throw new Error(err);
-  } finally {
-    await prisma.$disconnect();
   }
 }

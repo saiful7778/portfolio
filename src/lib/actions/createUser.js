@@ -1,11 +1,9 @@
 "use server";
 import prisma from "../../../prisma";
-import { connectToDB } from "../server-helper";
 import { hash } from "bcrypt";
 
 export default async function createUser(userData) {
   try {
-    await connectToDB();
     const exist = await prisma.user.findUnique({
       where: {
         email: userData.email,
@@ -25,7 +23,5 @@ export default async function createUser(userData) {
     });
   } catch (err) {
     throw new Error(err);
-  } finally {
-    await prisma.$disconnect();
   }
 }

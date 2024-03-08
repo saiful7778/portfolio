@@ -1,10 +1,8 @@
 "use server";
 import prisma from "../../../prisma";
-import { connectToDB } from "../server-helper";
 
 export default async function deleteUser(id) {
   try {
-    await connectToDB();
     const existUser = await prisma.user.findFirst({
       where: { id },
     });
@@ -16,7 +14,5 @@ export default async function deleteUser(id) {
     });
   } catch (err) {
     throw new Error(err);
-  } finally {
-    await prisma.$disconnect();
   }
 }

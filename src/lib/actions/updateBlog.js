@@ -1,10 +1,8 @@
 "use server";
 import prisma from "../../../prisma";
-import { connectToDB } from "../server-helper";
 
 export default async function updateBlog(id, data) {
   try {
-    await connectToDB();
     const existBlog = await prisma.blog.findFirst({
       where: { id },
     });
@@ -19,7 +17,5 @@ export default async function updateBlog(id, data) {
     });
   } catch (err) {
     throw new Error(err);
-  } finally {
-    await prisma.$disconnect();
   }
 }

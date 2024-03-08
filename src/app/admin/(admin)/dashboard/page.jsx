@@ -2,7 +2,6 @@ import Avatar from "@/components/Avatar";
 import Table from "@/components/table";
 import Actions from "./Actions";
 import moment from "moment";
-import { connectToDB } from "@/lib/server-helper";
 import prisma from "../../../../../prisma";
 import EmptyData from "@/components/EmptyData";
 
@@ -15,13 +14,10 @@ export const metadata = {
 
 async function getUsers() {
   try {
-    await connectToDB();
     const users = await prisma.user.findMany();
     return users;
   } catch (err) {
     throw new Error(err);
-  } finally {
-    await prisma.$disconnect();
   }
 }
 

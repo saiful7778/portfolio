@@ -1,10 +1,8 @@
 "use server";
 import prisma from "../../../prisma";
-import { connectToDB } from "../server-helper";
 
 export default async function updateProject(id, data) {
   try {
-    await connectToDB();
     const existProject = await prisma.project.findFirst({
       where: { id },
     });
@@ -21,7 +19,5 @@ export default async function updateProject(id, data) {
     return project;
   } catch (err) {
     throw new Error(err);
-  } finally {
-    await prisma.$disconnect();
   }
 }

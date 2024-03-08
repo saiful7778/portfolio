@@ -1,10 +1,8 @@
 "use server";
 import prisma from "../../../prisma";
-import { connectToDB } from "../server-helper";
 
 export default async function getSettings() {
   try {
-    await connectToDB();
     const settings = await prisma.settings.findMany();
     if (!settings) {
       return {
@@ -22,7 +20,5 @@ export default async function getSettings() {
       success: false,
       message: err,
     };
-  } finally {
-    await prisma.$disconnect();
   }
 }

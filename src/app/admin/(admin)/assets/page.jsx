@@ -1,4 +1,3 @@
-import { connectToDB } from "@/lib/server-helper";
 import prisma from "../../../../../prisma";
 import EmptyData from "@/components/EmptyData";
 import Image from "next/image";
@@ -6,13 +5,10 @@ import Actions from "./Actions";
 
 async function getAssets() {
   try {
-    await connectToDB();
     const assets = await prisma.images.findMany();
     return assets;
   } catch (err) {
     throw new Error(err);
-  } finally {
-    await prisma.$disconnect();
   }
 }
 

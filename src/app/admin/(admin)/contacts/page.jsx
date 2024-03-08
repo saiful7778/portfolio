@@ -1,4 +1,3 @@
-import { connectToDB } from "@/lib/server-helper";
 import prisma from "../../../../../prisma";
 import EmptyData from "@/components/EmptyData";
 import Table from "@/components/table";
@@ -17,7 +16,6 @@ export const metadata = {
 
 async function getContacts() {
   try {
-    await connectToDB();
     const contacts = await prisma.contact.findMany();
     if (!contacts) {
       throw new Error("No data available");
@@ -25,8 +23,6 @@ async function getContacts() {
     return contacts;
   } catch (err) {
     throw new Error(err);
-  } finally {
-    await prisma.$disconnect();
   }
 }
 

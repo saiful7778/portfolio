@@ -1,4 +1,3 @@
-import { connectToDB } from "@/lib/server-helper";
 import SettingsForm from "./SettingsForm";
 import prisma from "../../../../../prisma";
 
@@ -11,7 +10,6 @@ export const metadata = {
 
 async function getSettings() {
   try {
-    await connectToDB();
     const settings = await prisma.settings.findMany();
     if (!settings) {
       throw new Error("No data available");
@@ -19,8 +17,6 @@ async function getSettings() {
     return settings;
   } catch (err) {
     throw new Error(err);
-  } finally {
-    await prisma.$disconnect();
   }
 }
 
