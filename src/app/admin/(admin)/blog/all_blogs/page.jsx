@@ -1,6 +1,6 @@
 import EmptyData from "@/components/EmptyData";
 import Table from "@/components/table";
-import getBlogs from "@/lib/DB/getBlogs";
+import getBlogs from "@/lib/data/getBlogs";
 import moment from "moment";
 import Link from "next/link";
 import Actions from "./Actions";

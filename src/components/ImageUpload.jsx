@@ -1,5 +1,5 @@
 "use client";
-import cn from "@/lib/cn";
+import cn from "@/lib/utils/cn";
 import { focus, input } from "@/theme";
 import { IoImageOutline } from "react-icons/io5";
 import Button from "./utilities/Button";

@@ -2,7 +2,7 @@
 import Button from "@/components/utilities/Button";
 import Alert from "@/lib/config/Alert.config";
 import { useRouter } from "next/navigation";
-import deleteProject from "@/lib/actions/deleteProject";
+import deleteProject from "@/lib/actions/project/deleteProject";
 import revalidate from "@/lib/revalidate";
 import { useEdgeStore } from "@/context/EdgeStoreContext";
 

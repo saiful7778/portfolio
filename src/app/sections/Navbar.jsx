@@ -13,7 +13,7 @@ import Button from "@/components/utilities/Button";
 // assets
 import profileImage from "../../../public/saiful_image.png";
 // others
-import cn from "@/lib/cn";
+import cn from "@/lib/utils/cn";
 import { navLinks } from "@/staticData";
 
 const Navbar = () => {

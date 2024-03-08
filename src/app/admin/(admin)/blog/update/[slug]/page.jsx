@@ -1,5 +1,5 @@
 import Link from "next/link";
-import getBlog from "@/lib/DB/getBlog";
+import getBlog from "@/lib/data/getBlog";
 import UpdateBlogForm from "./UpdateBlogForm";
 
 export async function generateMetadata({ params, searchParams }) {

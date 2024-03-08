@@ -15,7 +15,7 @@ import Image from "next/image";
 import { useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useRouter } from "next/navigation";
-import updateProject from "@/lib/actions/updateProject";
+import updateProject from "@/lib/actions/project/updateProject";
 import EditSlug from "@/components/EditSlug";
 import ImageUpload from "@/components/ImageUpload";
 import revalidate from "@/lib/revalidate";

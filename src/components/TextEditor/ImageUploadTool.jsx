@@ -6,7 +6,7 @@ import Button from "../utilities/Button";
 import ImageUpload from "../ImageUpload";
 import Modal from "../Modal";
 import { useEdgeStore } from "@/context/EdgeStoreContext";
-import createImageData from "@/lib/actions/createImageData";
+import createImageData from "@/lib/actions/image/createImageData";
 
 const ImageUploadTool = ({ editor }) => {
   const [modal, setModal] = useState(false);

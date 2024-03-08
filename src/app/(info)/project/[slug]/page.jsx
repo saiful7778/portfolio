@@ -1,4 +1,4 @@
-import getProject from "@/lib/DB/getProject";
+import getProject from "@/lib/data/getProject";
 import moment from "moment";
 import Image from "next/image";
 import Link from "next/link";

@@ -13,7 +13,7 @@ import { useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useRouter } from "next/navigation";
 import { addBlogSchema } from "@/schemas/blog";
-import updateBlog from "@/lib/actions/updateBlog";
+import updateBlog from "@/lib/actions/blog/updateBlog";
 import EditSlug from "@/components/EditSlug";
 import ImageUpload from "@/components/ImageUpload";
 import revalidate from "@/lib/revalidate";

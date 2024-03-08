@@ -5,7 +5,7 @@ import { buttonStyle } from "./utilities/Button";
 import { FaTrashCan } from "react-icons/fa6";
 import { CiEdit } from "react-icons/ci";
 import { focus } from "@/theme";
-import cn from "@/lib/cn";
+import cn from "@/lib/utils/cn";
 
 const PopOver = ({ handleDelete, handleUpdate }) => {
   return (

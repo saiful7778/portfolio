@@ -1,5 +1,5 @@
 "use client";
-import getSettings from "@/lib/DB/getSettings";
+import getSettings from "@/lib/actions/settings/getSettings";
 import { createContext, useLayoutEffect, useState } from "react";
 
 export const StateContext = createContext(null);

@@ -1,5 +1,5 @@
 "use client";
-import cn from "@/lib/cn";
+import cn from "@/lib/utils/cn";
 import useStateData from "@/hooks/useStateData";
 
 const ClientAdminLayout = ({ children }) => {

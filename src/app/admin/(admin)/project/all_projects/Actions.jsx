@@ -2,7 +2,7 @@
 import { useRouter } from "next/navigation";
 import Alert from "@/lib/config/Alert.config";
 import revalidate from "@/lib/revalidate";
-import deleteProject from "@/lib/actions/deleteProject";
+import deleteProject from "@/lib/actions/project/deleteProject";
 import PopOver from "@/components/PopOver";
 import { useEdgeStore } from "@/context/EdgeStoreContext";
 

@@ -1,4 +1,4 @@
-import cn from "@/lib/cn";
+import cn from "@/lib/utils/cn";
 
 const style = {
   base: "cursor-pointer rounded w-7 h-7 inline-flex items-center duration-200 justify-center font-semibold disabled:cursor-not-allowed disabled:opacity-50",

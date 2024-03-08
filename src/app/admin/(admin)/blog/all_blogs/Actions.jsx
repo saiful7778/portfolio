@@ -4,7 +4,7 @@ import revalidate from "@/lib/revalidate";
 import PopOver from "@/components/PopOver";
 import { useEdgeStore } from "@/context/EdgeStoreContext";
 import Alert from "@/lib/config/Alert.config";
-import deleteBlog from "@/lib/actions/deleteBlog";
+import deleteBlog from "@/lib/actions/blog/deleteBlog";
 
 const Actions = ({ blogId, thumbnail, slug }) => {
   const { edgestore } = useEdgeStore();

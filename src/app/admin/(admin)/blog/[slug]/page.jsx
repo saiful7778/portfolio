@@ -1,4 +1,4 @@
-import getBlog from "@/lib/DB/getBlog";
+import getBlog from "@/lib/data/getBlog";
 import moment from "moment";
 import Image from "next/image";
 import Button from "@/components/utilities/Button";

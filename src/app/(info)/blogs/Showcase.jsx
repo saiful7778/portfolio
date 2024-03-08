@@ -1,6 +1,6 @@
 import BlogItem from "@/components/BlogItem";
 import EmptyData from "@/components/EmptyData";
-import getBlogs from "@/lib/DB/getBlogs";
+import getBlogs from "@/lib/data/getBlogs";
 
 const Showcase = async () => {
   const blogs = await getBlogs();

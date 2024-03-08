@@ -1,7 +1,7 @@
 "use client";
 import Button from "@/components/utilities/Button";
 import { useEdgeStore } from "@/context/EdgeStoreContext";
-import deleteBlog from "@/lib/actions/deleteBlog";
+import deleteBlog from "@/lib/actions/blog/deleteBlog";
 import Alert from "@/lib/config/Alert.config";
 import revalidate from "@/lib/revalidate";
 import { useRouter } from "next/navigation";

@@ -1,5 +1,5 @@
 "use server";
-import prisma from "../../../prisma";
+import prisma from "../../../../prisma";
 import { hash } from "bcrypt";
 
 export default async function createUser(userData) {

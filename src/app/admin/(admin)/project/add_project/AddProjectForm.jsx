@@ -18,7 +18,7 @@ import TextEditor from "@/components/TextEditor";
 import EditSlug from "@/components/EditSlug";
 // libs
 import reCaptcha from "@/lib/reCaptcha";
-import createProject from "@/lib/actions/createProject";
+import createProject from "@/lib/actions/project/createProject";
 import Alert from "@/lib/config/Alert.config";
 // others
 import { addProjectSchema } from "@/schemas/project";

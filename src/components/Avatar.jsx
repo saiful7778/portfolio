@@ -1,5 +1,5 @@
 import { FaUserAstronaut } from "react-icons/fa6";
-import cn from "@/lib/cn";
+import cn from "@/lib/utils/cn";
 import Image from "next/image";
 
 const style = {

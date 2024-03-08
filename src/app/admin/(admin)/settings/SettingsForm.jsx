@@ -9,7 +9,7 @@ import useStateData from "@/hooks/useStateData";
 import Alert from "@/lib/config/Alert.config";
 import revalidate from "@/lib/revalidate";
 import Blockpage from "./components/Blockpage";
-import setSettings from "@/lib/DB/setSettings";
+import setSettings from "@/lib/actions/settings/setSettings";
 
 const SettingsForm = ({ initialData }) => {
   const [spinner, setSpinner] = useState(false);

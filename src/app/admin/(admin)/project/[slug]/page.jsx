@@ -1,6 +1,6 @@
 import moment from "moment";
 import Image from "next/image";
-import getProject from "@/lib/DB/getProject";
+import getProject from "@/lib/data/getProject";
 import Button from "@/components/utilities/Button";
 import DeleteProject from "./DeleteProject";
 import renderReactComponent from "@/lib/renderReactComponent";

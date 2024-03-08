@@ -3,7 +3,7 @@ import moment from "moment";
 import Actions from "./Actions";
 import Table from "@/components/table";
 import EmptyData from "@/components/EmptyData";
-import getProjects from "@/lib/DB/getProjects";
+import getProjects from "@/lib/data/getProjects";
 
 export const dynamic = "force-dynamic";
 

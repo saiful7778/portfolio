@@ -1,4 +1,4 @@
-import cn from "@/lib/cn";
+import cn from "@/lib/utils/cn";
 
 const switchStyle = {
   base: "relative inline-flex items-center rounded-full h-6 w-11 border",

@@ -1,6 +1,6 @@
 import EmptyData from "@/components/EmptyData";
 import ProjectItem from "@/components/ProjectItem";
-import getProjects from "@/lib/DB/getProjects";
+import getProjects from "@/lib/data/getProjects";
 
 const Showcase = async () => {
   const projects = await getProjects();

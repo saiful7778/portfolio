@@ -2,7 +2,7 @@
 import { useField } from "formik";
 import CheckboxItem from "./utilities/CheckboxItem";
 import InputRef from "./utilities/InputRef";
-import cn from "@/lib/cn";
+import cn from "@/lib/utils/cn";
 
 const EditSlug = ({
   checkboxName,

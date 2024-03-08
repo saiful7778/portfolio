@@ -1,4 +1,4 @@
-import getProject from "@/lib/DB/getProject";
+import getProject from "@/lib/data/getProject";
 import UpdateProjectForm from "./UpdateProjectForm";
 import Link from "next/link";
 

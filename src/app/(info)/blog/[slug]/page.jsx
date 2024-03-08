@@ -1,7 +1,7 @@
 import moment from "moment";
 import Image from "next/image";
 import EmptyData from "@/components/EmptyData";
-import getBlog from "@/lib/DB/getBlog";
+import getBlog from "@/lib/data/getBlog";
 import renderReactComponent from "@/lib/renderReactComponent";
 
 export async function generateMetadata({ params }) {

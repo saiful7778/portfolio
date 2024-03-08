@@ -1,4 +1,4 @@
-import getSettings from "@/lib/DB/getSettings";
+import getSettings from "@/lib/data/getSettings";
 import RegisterForm from "./RegisterForm";
 import { redirect } from "next/navigation";
 
