@@ -21,7 +21,7 @@ const TextEditor = ({ name, placeholder = "Write....", content = "" }) => {
   const { error } = formik[1];
   const { setValue } = formik[2];
 
-  const limit = 5000;
+  const limit = 10000;
 
   const editor = useEditor({
     extensions: extension({ placeholder, limit }),

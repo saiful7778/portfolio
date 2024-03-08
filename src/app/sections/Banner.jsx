@@ -34,7 +34,7 @@ const Banner = () => {
           </h1>
         </Reval>
         <Reval>
-          <p className="my-6 leading-6 text-gray-400">
+          <p className="my-6 text-base leading-6 text-gray-400">
             Experienced React.js developer, who build interactive web app for
             Business. Proficient in modern front-end technologies. with a
             commitment to solving complex programming. My main target is to

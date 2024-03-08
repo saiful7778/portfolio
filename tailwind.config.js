@@ -9,6 +9,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontSize: {
+        base: "clamp(0.5rem, 0.5vw + 1rem, 1rem)",
+      },
       colors: {
         dark: "#19191B",
         "accent-color": "#5454D4",

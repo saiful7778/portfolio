@@ -49,12 +49,18 @@ const LoginPage = ({ searchParams }) => {
         return;
       }
     }
-    await signIn("credentials", {
-      email: e.email,
-      password: e.password,
-      redirect: true,
-      callbackUrl: searchParams?.callbackUrl || "/admin/dashboard",
-    });
+    try {
+      await signIn("credentials", {
+        email: e.email,
+        password: e.password,
+        redirect: true,
+        callbackUrl: searchParams?.callbackUrl || "/admin/dashboard",
+      });
+    } catch (err) {
+      console.log(err);
+    } finally {
+      reset();
+    }
   };
 
   return (
