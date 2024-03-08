@@ -7,7 +7,7 @@ export default withAuth(
       req.nextUrl.pathname.startsWith("/admin") &&
       req.nextauth.token?.role !== "admin"
     ) {
-      return NextResponse.rewrite(new URL("/authentication/login", req.url));
+      return NextResponse.redirect(new URL("/authentication/login", req.url));
     }
   },
   {
