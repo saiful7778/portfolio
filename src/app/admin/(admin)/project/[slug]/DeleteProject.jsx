@@ -1,6 +1,6 @@
 "use client";
 import Button from "@/components/utilities/Button";
-import Alert from "@/lib/config/Alert.config";
+import Alert from "@/config/Alert.config";
 import { useRouter } from "next/navigation";
 import deleteProject from "@/lib/actions/project/deleteProject";
 import revalidate from "@/lib/revalidate";

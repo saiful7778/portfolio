@@ -9,7 +9,7 @@ import Select from "@/components/utilities/Select";
 import { useEdgeStore } from "@/context/EdgeStoreContext";
 import useStateData from "@/hooks/useStateData";
 import createBlog from "@/lib/actions/blog/createBlog";
-import Alert from "@/lib/config/Alert.config";
+import Alert from "@/config/Alert.config";
 import reCaptcha from "@/lib/reCaptcha";
 import revalidate from "@/lib/revalidate";
 import { addBlogSchema } from "@/schemas/blog";

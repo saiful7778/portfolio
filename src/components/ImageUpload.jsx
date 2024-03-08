@@ -1,6 +1,5 @@
 "use client";
 import cn from "@/lib/utils/cn";
-import { focus, input } from "@/theme";
 import { IoImageOutline } from "react-icons/io5";
 import Button from "./utilities/Button";
 import Image from "next/image";
@@ -9,6 +8,7 @@ import { useEdgeStore } from "@/context/EdgeStoreContext";
 import { EdgeStoreApiClientError } from "@edgestore/react/shared";
 import { GoVerified } from "react-icons/go";
 import Spinner from "./Spinner";
+import { focus, input } from "@/lib/styles";
 
 const style = {
   base: "rounded font-semibold cursor-pointer shadow",

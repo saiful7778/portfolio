@@ -1,7 +1,7 @@
 "use client";
 import Button from "@/components/utilities/Button";
 import deleteContact from "@/lib/actions/contact/deleteContact";
-import Alert from "@/lib/config/Alert.config";
+import Alert from "@/config/Alert.config";
 import revalidate from "@/lib/revalidate";
 import { FaTrashCan } from "react-icons/fa6";
 

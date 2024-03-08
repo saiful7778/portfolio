@@ -1,21 +1,20 @@
 "use client";
 import { Popover } from "@headlessui/react";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { buttonStyle } from "./utilities/Button";
 import { FaTrashCan } from "react-icons/fa6";
 import { CiEdit } from "react-icons/ci";
-import { focus } from "@/theme";
 import cn from "@/lib/utils/cn";
+import { focus, button } from "@/lib/styles";
 
 const PopOver = ({ handleDelete, handleUpdate }) => {
   return (
     <Popover className="relative w-fit">
       <Popover.Button
         className={cn(
-          buttonStyle.base,
-          buttonStyle.outline,
-          buttonStyle.size.sm,
-          buttonStyle.shape["icon-button"],
+          button.base,
+          button.outline,
+          button.size.sm,
+          button.shape["icon-button"],
           focus.base,
         )}
       >

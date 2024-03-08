@@ -5,7 +5,7 @@ import Button from "@/components/utilities/Button";
 import Input from "@/components/utilities/Input";
 import Select from "@/components/utilities/Select";
 import useStateData from "@/hooks/useStateData";
-import Alert from "@/lib/config/Alert.config";
+import Alert from "@/config/Alert.config";
 import reCaptcha from "@/lib/reCaptcha";
 import { Form, Formik } from "formik";
 import Image from "next/image";

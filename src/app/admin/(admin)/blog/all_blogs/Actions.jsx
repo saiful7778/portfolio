@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import revalidate from "@/lib/revalidate";
 import PopOver from "@/components/PopOver";
 import { useEdgeStore } from "@/context/EdgeStoreContext";
-import Alert from "@/lib/config/Alert.config";
+import Alert from "@/config/Alert.config";
 import deleteBlog from "@/lib/actions/blog/deleteBlog";
 
 const Actions = ({ blogId, thumbnail, slug }) => {

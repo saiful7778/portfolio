@@ -1,4 +1,4 @@
-import Alert from "./config/Alert.config";
+import Alert from "@/config/Alert.config";
 
 export default async function reCaptcha(recaptchaRef, confirmCaptcha) {
   const captchaValue = recaptchaRef.current.getValue();

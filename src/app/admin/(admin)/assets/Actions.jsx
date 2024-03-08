@@ -2,7 +2,7 @@
 import Button from "@/components/utilities/Button";
 import { useEdgeStore } from "@/context/EdgeStoreContext";
 import deleteImageData from "@/lib/actions/image/deleteImageData";
-import Alert from "@/lib/config/Alert.config";
+import Alert from "@/config/Alert.config";
 import revalidate from "@/lib/revalidate";
 import { FaTrashCan } from "react-icons/fa6";
 

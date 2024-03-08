@@ -1,6 +1,6 @@
 import { useField } from "formik";
 import cn from "@/lib/utils/cn";
-import { focus, input } from "@/theme";
+import { input, focus } from "@/lib/styles";
 
 const Textarea = ({ className, textLimit, ...props }) => {
   const [field, { touched, error }] = useField(props);

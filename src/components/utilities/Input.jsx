@@ -1,5 +1,5 @@
 import cn from "@/lib/utils/cn";
-import { focus, input } from "@/theme";
+import { input, focus } from "@/lib/styles";
 import { useField } from "formik";
 
 const Input = ({ className, ...props }) => {

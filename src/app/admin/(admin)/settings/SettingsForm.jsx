@@ -6,7 +6,7 @@ import { Form, Formik } from "formik";
 import { useState } from "react";
 import ReCaptcha from "./components/ReCaptcha";
 import useStateData from "@/hooks/useStateData";
-import Alert from "@/lib/config/Alert.config";
+import Alert from "@/config/Alert.config";
 import revalidate from "@/lib/revalidate";
 import Blockpage from "./components/Blockpage";
 import setSettings from "@/lib/actions/settings/setSettings";

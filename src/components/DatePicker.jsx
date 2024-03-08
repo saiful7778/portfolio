@@ -1,6 +1,6 @@
 "use client";
+import { focus } from "@/lib/styles";
 import cn from "@/lib/utils/cn";
-import { focus } from "@/theme";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 

@@ -3,7 +3,7 @@ import { IoMdUndo, IoMdRedo } from "react-icons/io";
 import { FaLink, FaLinkSlash } from "react-icons/fa6";
 import { useCallback } from "react";
 // others
-import Alert from "@/lib/config/Alert.config";
+import Alert from "@/config/Alert.config";
 import Button from "../utilities/Button";
 import Tool from "./Tool";
 import { TextAlign, TextHtmlFormat, TextList, TextStyle } from "./ToolsComp";

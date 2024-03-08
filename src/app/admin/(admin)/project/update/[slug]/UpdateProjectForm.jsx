@@ -7,7 +7,7 @@ import Input from "@/components/utilities/Input";
 import Select from "@/components/utilities/Select";
 import Textarea from "@/components/utilities/Textarea";
 import useStateData from "@/hooks/useStateData";
-import Alert from "@/lib/config/Alert.config";
+import Alert from "@/config/Alert.config";
 import reCaptcha from "@/lib/reCaptcha";
 import { addProjectSchema } from "@/schemas/project";
 import { Form, Formik } from "formik";

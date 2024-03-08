@@ -5,7 +5,7 @@ import Input from "@/components/utilities/Input";
 import Textarea from "@/components/utilities/Textarea";
 import useStateData from "@/hooks/useStateData";
 import createContact from "@/lib/actions/contact/createContact";
-import Alert from "@/lib/config/Alert.config";
+import Alert from "@/config/Alert.config";
 import reCaptcha from "@/lib/reCaptcha";
 import { contactSchema } from "@/schemas/contact";
 import { Form, Formik } from "formik";

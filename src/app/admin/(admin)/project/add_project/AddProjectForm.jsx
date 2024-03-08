@@ -19,7 +19,7 @@ import EditSlug from "@/components/EditSlug";
 // libs
 import reCaptcha from "@/lib/reCaptcha";
 import createProject from "@/lib/actions/project/createProject";
-import Alert from "@/lib/config/Alert.config";
+import Alert from "@/config/Alert.config";
 // others
 import { addProjectSchema } from "@/schemas/project";
 import revalidate from "@/lib/revalidate";

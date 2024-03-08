@@ -5,7 +5,7 @@ module.exports = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/theme.js",
-    "./src/lib/config/Alert.config.js",
+    "./src/config/Alert.config.js",
   ],
   theme: {
     extend: {

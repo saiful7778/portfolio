@@ -7,7 +7,7 @@ import {
   FloatingMenu,
 } from "@tiptap/react";
 import TextEditorToolbar from "./TextEditorToolbar";
-import { focus, input } from "@/theme";
+import { input, focus } from "@/lib/styles";
 import { useField } from "formik";
 import extension from "./TextEditorExtension";
 import { TextHtmlFormat, TextStyle } from "./ToolsComp";

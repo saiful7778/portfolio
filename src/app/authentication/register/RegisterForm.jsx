@@ -17,7 +17,7 @@ import Password from "@/components/utilities/Password";
 import reCaptcha from "@/lib/reCaptcha";
 // others
 import { registerSchema } from "@/schemas/authentication";
-import Alert from "@/lib/config/Alert.config";
+import Alert from "@/config/Alert.config";
 import createUser from "@/lib/actions/user/createUser";
 import { signIn } from "next-auth/react";
 import { useEdgeStore } from "@/context/EdgeStoreContext";

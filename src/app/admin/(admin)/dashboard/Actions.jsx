@@ -19,7 +19,7 @@ import Modal from "@/components/Modal";
 import revalidate from "@/lib/revalidate";
 import reCaptcha from "@/lib/reCaptcha";
 // other
-import Alert from "@/lib/config/Alert.config";
+import Alert from "@/config/Alert.config";
 import { userSchema } from "@/schemas/user";
 import updateUser from "@/lib/actions/user/updateUser";
 import deleteUser from "@/lib/actions/user/deleteUser";
