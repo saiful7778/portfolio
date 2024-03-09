@@ -3,11 +3,11 @@ import db from "@/lib/db";
 
 export default async function deleteContact(id) {
   try {
-    const exitContact = await db.contact.findFirst({
+    const exitContact = await db.contact.findUnique({
       where: { id },
     });
     if (!exitContact) {
-      throw new Error("contact doesn't exist");
+      throw "contact doesn't exist";
     }
     const data = await db.contact.delete({
       where: { id },

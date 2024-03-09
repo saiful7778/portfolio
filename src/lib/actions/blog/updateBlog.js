@@ -3,11 +3,11 @@ import db from "@/lib/db";
 
 export default async function updateBlog(id, data) {
   try {
-    const existBlog = await db.blog.findFirst({
+    const existBlog = await db.blog.findUnique({
       where: { id },
     });
     if (!existBlog) {
-      throw new Error("No data available");
+      throw "No data available";
     }
     await db.blog.update({
       where: {

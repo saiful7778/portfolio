@@ -11,7 +11,7 @@ export default async function setSettings(id, data) {
       create: data,
     });
     if (!res) {
-      throw new Error("Data can not created");
+      throw "Data can not created";
     }
     return res;
   } catch (err) {

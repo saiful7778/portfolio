@@ -7,7 +7,7 @@ export default async function updateUser(id, email, data) {
       where: { id, email },
     });
     if (!existUser) {
-      throw new Error("User doesn't exist");
+      throw "User doesn't exist";
     }
     await db.user.update({
       where: {

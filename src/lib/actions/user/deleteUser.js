@@ -3,11 +3,11 @@ import db from "@/lib/db";
 
 export default async function deleteUser(id) {
   try {
-    const existUser = await db.user.findFirst({
+    const existUser = await db.user.findUnique({
       where: { id },
     });
     if (!existUser) {
-      throw new Error("User doesn't exist");
+      throw "User doesn't exist";
     }
     await db.user.delete({
       where: { id },

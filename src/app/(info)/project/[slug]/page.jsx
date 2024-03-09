@@ -1,4 +1,4 @@
-import getProject from "@/lib/data/getProject";
+import { getProjectBySlug } from "@/lib/data/getProject";
 import moment from "moment";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,7 +7,7 @@ import renderReactComponent from "@/lib/renderReactComponent";
 
 export async function generateMetadata({ params }) {
   try {
-    const projectData = await getProject(params?.slug);
+    const projectData = await getProjectBySlug(params?.slug);
     const { title, shortDes, status } = projectData;
     if (status === "private") {
       return {
@@ -28,7 +28,7 @@ export async function generateMetadata({ params }) {
 }
 
 const SingleProject = async ({ params }) => {
-  const projectData = await getProject(params?.slug);
+  const projectData = await getProjectBySlug(params?.slug);
 
   if (projectData.status === "private") {
     return <EmptyData />;
@@ -48,7 +48,7 @@ const SingleProject = async ({ params }) => {
   const timeAgo = moment(createdAt).fromNow();
 
   return (
-    <article className="mx-auto w-full max-w-xl space-y-4 lg:max-w-4xl">
+    <article className="mx-auto mb-10 w-full max-w-xl space-y-4 lg:max-w-4xl">
       <figure className="relative">
         <div className="absolute -left-96 top-0 z-0 h-[200px] w-[500px] rotate-45 rounded-full bg-blue-blob blur-[80px] filter"></div>
         <div className="absolute -left-96 bottom-0 z-0 h-[200px] w-[500px] -rotate-45 rounded-full bg-red-blob blur-[80px] filter"></div>

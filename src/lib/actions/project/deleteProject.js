@@ -3,13 +3,13 @@ import db from "@/lib/db";
 
 export default async function deleteProject(id) {
   try {
-    const exitProject = await db.findFirst({
+    const exitProject = await db.project.findUnique({
       where: { id },
     });
     if (!exitProject) {
-      throw new Error("Project doesn't exit");
+      throw "Project doesn't exit";
     }
-    const data = await db.delete({
+    const data = await db.project.delete({
       where: { id },
     });
     return data;
