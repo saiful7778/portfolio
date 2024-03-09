@@ -1,13 +1,19 @@
-import getBlog from "@/lib/data/getBlog";
+import { getBlogById } from "@/lib/data/getBlog";
 import moment from "moment";
 import Image from "next/image";
 import Button from "@/components/utilities/Button";
 import DeleteBlog from "./DeleteBlog";
 import renderReactComponent from "@/lib/renderReactComponent";
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata({ searchParams }) {
   try {
-    const blogData = await getBlog(params?.slug);
+    if (!searchParams?.blogId) {
+      return {
+        title: "`blogId` is unavailable",
+        description: "There was an error because of `blogId` is unavailable",
+      };
+    }
+    const blogData = await getBlogById(searchParams?.blogId);
     const { title } = blogData;
     return {
       title: `${title} - blog`,
@@ -21,8 +27,11 @@ export async function generateMetadata({ params }) {
   }
 }
 
-const SingleBlog = async ({ params }) => {
-  const blogData = await getBlog(params?.slug);
+const SingleBlog = async ({ searchParams }) => {
+  if (!searchParams?.blogId) {
+    throw "`blogId` is unavailable";
+  }
+  const blogData = await getBlogById(searchParams?.blogId);
 
   const {
     id,

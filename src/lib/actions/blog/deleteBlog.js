@@ -3,11 +3,11 @@ import db from "@/lib/db";
 
 export default async function deleteBlog(id) {
   try {
-    const existBlog = await db.blog.findFirst({
+    const existBlog = await db.blog.findUnique({
       where: { id },
     });
     if (!existBlog) {
-      throw new Error("Blog doesn't exist");
+      throw "Blog doesn't exist";
     }
     const data = await db.blog.delete({
       where: { id },

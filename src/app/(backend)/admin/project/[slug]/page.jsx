@@ -1,13 +1,19 @@
 import moment from "moment";
 import Image from "next/image";
-import getProject from "@/lib/data/getProject";
+import { getProjectById } from "@/lib/data/getProject";
 import Button from "@/components/utilities/Button";
 import DeleteProject from "./DeleteProject";
 import renderReactComponent from "@/lib/renderReactComponent";
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata({ searchParams }) {
   try {
-    const projectData = await getProject(params?.slug);
+    if (!searchParams?.projectId) {
+      return {
+        title: "`projectId` is unavailable",
+        description: "There was an error because of `projectId` is unavailable",
+      };
+    }
+    const projectData = await getProjectById(searchParams?.projectId);
     const { title, shortDes } = projectData;
     return {
       title: `${title} - project`,
@@ -21,8 +27,11 @@ export async function generateMetadata({ params }) {
   }
 }
 
-const SingleProject = async ({ params }) => {
-  const projectData = await getProject(params?.slug);
+const SingleProject = async ({ searchParams }) => {
+  if (!searchParams?.projectId) {
+    throw "`projectId` is unavailable";
+  }
+  const projectData = await getProjectById(searchParams?.projectId);
 
   const {
     id,

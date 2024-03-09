@@ -1,16 +1,16 @@
-import getProject from "@/lib/data/getProject";
+import { getProjectById } from "@/lib/data/getProject";
 import UpdateProjectForm from "./UpdateProjectForm";
 import Link from "next/link";
 
-export async function generateMetadata({ params, searchParams }) {
+export async function generateMetadata({ searchParams }) {
   try {
-    if (typeof searchParams.projectId === "undefined") {
+    if (!searchParams?.projectId) {
       return {
-        title: "projectId search params is unavailable",
-        description: "There was an error to get this project data",
+        title: "`projectId` is unavailable",
+        description: "There was an error because of `projectId` is unavailable",
       };
     }
-    const projectData = await getProject(params?.slug);
+    const projectData = await getProjectById(searchParams?.projectId);
     const { title, shortDes } = projectData;
     return {
       title: `Update - ${title} - project`,
@@ -24,12 +24,11 @@ export async function generateMetadata({ params, searchParams }) {
   }
 }
 
-const UpdateProject = async ({ params, searchParams }) => {
-  const projectData = await getProject(params?.slug);
-
-  if (typeof searchParams.projectId === "undefined") {
-    throw new Error("projectId search params is unavailable");
+const UpdateProject = async ({ searchParams }) => {
+  if (!searchParams?.projectId) {
+    throw "`projectId` is unavailable";
   }
+  const projectData = await getProjectById(searchParams?.projectId);
 
   return (
     <section className="rounded border border-gray-700 bg-gray-800 p-4 shadow">

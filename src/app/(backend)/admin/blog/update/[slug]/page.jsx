@@ -1,16 +1,16 @@
 import Link from "next/link";
-import getBlog from "@/lib/data/getBlog";
+import { getBlogById } from "@/lib/data/getBlog";
 import UpdateBlogForm from "./UpdateBlogForm";
 
-export async function generateMetadata({ params, searchParams }) {
+export async function generateMetadata({ searchParams }) {
   try {
-    if (typeof searchParams.blogId === "undefined") {
+    if (!searchParams?.blogId) {
       return {
-        title: "blogId search params is unavailable",
-        description: "There was an error to get this blog data",
+        title: "`blogId` is unavailable",
+        description: "There was an error because of `blogId` is unavailable",
       };
     }
-    const blogData = await getBlog(params?.slug);
+    const blogData = await getBlogById(searchParams?.blogId);
     const { title } = blogData;
     return {
       title: `${title} - blog`,
@@ -24,8 +24,11 @@ export async function generateMetadata({ params, searchParams }) {
   }
 }
 
-const UpdateBlog = async ({ params, searchParams }) => {
-  const blogData = await getBlog(params?.slug);
+const UpdateBlog = async ({ searchParams }) => {
+  if (!searchParams?.blogId) {
+    throw "`blogId` is unavailable";
+  }
+  const blogData = await getBlogById(searchParams?.blogId);
 
   if (typeof searchParams.blogId === "undefined") {
     throw new Error("blogId search params is unavailable");

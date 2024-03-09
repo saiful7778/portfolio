@@ -4,13 +4,13 @@ import { hash } from "bcrypt";
 
 export default async function createUser(userData) {
   try {
-    const exist = await db.user.findUnique({
+    const exist = await db.user.findFirst({
       where: {
         email: userData.email,
       },
     });
     if (exist) {
-      throw new Error("user is already exist!");
+      throw "user is already exist!";
     }
     const hashedPassword = await hash(userData.password, 10);
     await db.user.create({

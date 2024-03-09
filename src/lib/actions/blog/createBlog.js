@@ -9,7 +9,7 @@ export default async function createBlog(blogData) {
       },
     });
     if (exist) {
-      throw new Error("Blog is already exist");
+      throw "Blog is already exist";
     }
     const data = await db.blog.create({
       data: blogData,

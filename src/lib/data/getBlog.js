@@ -1,6 +1,6 @@
 import db from "@/lib/db";
 
-export default async function getBlog(slug) {
+export async function getBlogBySlug(slug) {
   try {
     const blog = await db.blog.findFirst({
       where: {
@@ -8,7 +8,23 @@ export default async function getBlog(slug) {
       },
     });
     if (!blog) {
-      throw new Error("No data available");
+      throw "No data available";
+    }
+    return blog;
+  } catch (err) {
+    throw new Error(err);
+  }
+}
+
+export async function getBlogById(id) {
+  try {
+    const blog = await db.blog.findUnique({
+      where: {
+        id,
+      },
+    });
+    if (!blog) {
+      throw "No data available";
     }
     return blog;
   } catch (err) {

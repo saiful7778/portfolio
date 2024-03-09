@@ -3,14 +3,14 @@ import db from "@/lib/db";
 
 export default async function updateProject(id, data) {
   try {
-    const existProject = await db.findFirst({
+    const existProject = await db.project.findUnique({
       where: { id },
     });
     if (!existProject) {
-      throw new Error("No data available");
+      throw "No data available";
     }
 
-    const project = await db.update({
+    const project = await db.project.update({
       where: {
         id,
       },

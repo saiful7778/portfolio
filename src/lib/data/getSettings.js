@@ -2,11 +2,12 @@ import db from "@/lib/db";
 
 export default async function getSettings() {
   try {
-    const settings = await db.settings.findMany();
+    const settingsArray = await db.settings.findMany();
+    const settings = settingsArray[0];
     if (!settings) {
-      throw new Error("No data available");
+      throw "No settings data are available";
     }
-    return settings[0];
+    return settings;
   } catch (err) {
     throw new Error(err);
   }
