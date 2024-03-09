@@ -12,8 +12,8 @@ const ClientAdminLayout = ({ children }) => {
         sidebar ? "md:ml-36" : "md:ml-[43px]",
       )}
     >
-      <main className="mb-10 p-2">{children}</main>
-      <footer className="border-t border-gray-700 bg-gray-800 p-6 text-center text-gray-400">
+      <main className="mb-10 min-h-[calc(100vh-153px)] p-2">{children}</main>
+      <footer className="border-t border-gray-700 bg-gray-800 p-6 text-center text-sm text-gray-400">
         <p>
           © 2023 Saiful Islam. All rights reserved by{" "}
           <Link

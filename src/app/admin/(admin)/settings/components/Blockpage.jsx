@@ -1,5 +1,5 @@
 "use client";
-import CheckboxItem from "@/components/utilities/CheckboxItem";
+import CheckboxItem from "@/components/utilities/formik/CheckboxItem";
 
 const Blockpage = () => {
   const blockPageOptions = [{ value: "registerPage", text: "Register page" }];

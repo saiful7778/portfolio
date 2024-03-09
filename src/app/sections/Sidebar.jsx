@@ -24,63 +24,65 @@ const Sidebar = () => {
         sidebar ? "w-36" : "max-sm:-left-full md:w-[43px]",
       )}
     >
-      <ul className="mt-10 flex w-full flex-col gap-2 p-1.5">
-        <SidebarItem
-          path="/admin/dashboard"
-          textShow={sidebar}
-          icon={<LuLayoutDashboard />}
-        >
-          Deshboard
-        </SidebarItem>
-        <SidebarDropdown
-          path="/admin/project"
-          textShow={sidebar}
-          icon={<GoProjectSymlink />}
-          title="Project"
-        >
-          <SidebarDropdownItem path="/admin/project/add_project">
-            Add Project
-          </SidebarDropdownItem>
-          <SidebarDropdownItem path="/admin/project/all_projects">
-            All Projects
-          </SidebarDropdownItem>
-        </SidebarDropdown>
-        <SidebarDropdown
-          path="/admin/blog"
-          textShow={sidebar}
-          icon={<BsFileEarmarkPostFill />}
-          title="Blog"
-        >
-          <SidebarDropdownItem path="/admin/blog/add_blog">
-            Add Blog
-          </SidebarDropdownItem>
-          <SidebarDropdownItem path="/admin/blog/all_blogs">
-            All Blogs
-          </SidebarDropdownItem>
-        </SidebarDropdown>
-        <SidebarItem
-          path="/admin/assets"
-          textShow={sidebar}
-          icon={<FaRegImages />}
-        >
-          Assets
-        </SidebarItem>
-        <SidebarItem
-          path="/admin/contacts"
-          textShow={sidebar}
-          icon={<IoMailUnreadOutline />}
-        >
-          Contacts
-        </SidebarItem>
-        <hr className="border-gray-700" />
-        <SidebarItem
-          path="/admin/settings"
-          textShow={sidebar}
-          icon={<IoSettingsOutline />}
-        >
-          Settings
-        </SidebarItem>
-      </ul>
+      <nav className="mt-10 p-1.5">
+        <ul className="flex w-full flex-col gap-2">
+          <SidebarItem
+            path="/admin/dashboard"
+            textShow={sidebar}
+            icon={<LuLayoutDashboard />}
+          >
+            Deshboard
+          </SidebarItem>
+          <SidebarDropdown
+            path="/admin/project"
+            textShow={sidebar}
+            icon={<GoProjectSymlink />}
+            title="Project"
+          >
+            <SidebarDropdownItem path="/admin/project/add_project">
+              Add Project
+            </SidebarDropdownItem>
+            <SidebarDropdownItem path="/admin/project/all_projects">
+              All Projects
+            </SidebarDropdownItem>
+          </SidebarDropdown>
+          <SidebarDropdown
+            path="/admin/blog"
+            textShow={sidebar}
+            icon={<BsFileEarmarkPostFill />}
+            title="Blog"
+          >
+            <SidebarDropdownItem path="/admin/blog/add_blog">
+              Add Blog
+            </SidebarDropdownItem>
+            <SidebarDropdownItem path="/admin/blog/all_blogs">
+              All Blogs
+            </SidebarDropdownItem>
+          </SidebarDropdown>
+          <SidebarItem
+            path="/admin/assets"
+            textShow={sidebar}
+            icon={<FaRegImages />}
+          >
+            Assets
+          </SidebarItem>
+          <SidebarItem
+            path="/admin/contacts"
+            textShow={sidebar}
+            icon={<IoMailUnreadOutline />}
+          >
+            Contacts
+          </SidebarItem>
+          <hr className="border-gray-700" />
+          <SidebarItem
+            path="/admin/settings"
+            textShow={sidebar}
+            icon={<IoSettingsOutline />}
+          >
+            Settings
+          </SidebarItem>
+        </ul>
+      </nav>
     </div>
   );
 };

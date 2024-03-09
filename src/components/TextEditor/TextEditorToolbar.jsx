@@ -4,7 +4,7 @@ import { FaLink, FaLinkSlash } from "react-icons/fa6";
 import { useCallback } from "react";
 // others
 import Alert from "@/config/Alert.config";
-import Button from "../utilities/Button";
+import Button from "@/components/utilities/Button";
 import Tool from "./Tool";
 import { TextAlign, TextHtmlFormat, TextList, TextStyle } from "./ToolsComp";
 import ImageUploadTool from "./ImageUploadTool";
@@ -47,7 +47,7 @@ const TextEditorToolbar = ({ editor }) => {
   };
 
   return (
-    <div className="mb-2 flex w-full flex-wrap gap-1 rounded border border-gray-700 bg-gray-900 p-1">
+    <div className="sticky top-4 z-10 mb-2 flex w-full flex-wrap gap-1 rounded border border-gray-700 bg-gray-900 p-1">
       <TextStyle editor={editor} />
       <div className="w-[1px] bg-gray-700"></div>
       <TextAlign editor={editor} />

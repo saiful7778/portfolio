@@ -40,7 +40,7 @@ const TextEditor = ({ name, placeholder = "Write....", content = "" }) => {
     return null;
   }
   return (
-    <>
+    <div>
       <TextEditorToolbar editor={editor} />
       <div className="relative">
         {editor && (
@@ -67,7 +67,7 @@ const TextEditor = ({ name, placeholder = "Write....", content = "" }) => {
         </div>
       </div>
       {error ? <p className="mt-1 text-xs text-red-500">{error}</p> : null}
-    </>
+    </div>
   );
 };
 

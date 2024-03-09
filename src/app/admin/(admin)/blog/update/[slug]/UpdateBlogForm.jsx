@@ -2,8 +2,8 @@
 import Spinner from "@/components/Spinner";
 import TextEditor from "@/components/TextEditor";
 import Button from "@/components/utilities/Button";
-import Input from "@/components/utilities/Input";
-import Select from "@/components/utilities/Select";
+import Input from "@/components/utilities/formik/Input";
+import Select from "@/components/utilities/formik/Select";
 import useStateData from "@/hooks/useStateData";
 import Alert from "@/config/Alert.config";
 import reCaptcha from "@/lib/reCaptcha";
@@ -93,9 +93,15 @@ const UpdateBlogForm = ({ blogData }) => {
           setSpinner(false);
           return;
         }
+        /**
+         * delete previous image
+         */
         await edgestore.portfolioImages.delete({
           url,
         });
+        /**
+         * confirm update a new image
+         */
         await edgestore.portfolioImages.confirmUpload({
           url: thumbnailImg.url,
         });
@@ -109,7 +115,6 @@ const UpdateBlogForm = ({ blogData }) => {
             thumbnail: { url: thumbnailImg.url, alt: thumbnailImg.alt },
           },
           router,
-          reset,
         );
       } else {
         await UpdateBlogData(
@@ -121,7 +126,6 @@ const UpdateBlogForm = ({ blogData }) => {
             des: JSON.parse(e.des),
           },
           router,
-          reset,
         );
       }
     } catch (err) {
@@ -130,6 +134,7 @@ const UpdateBlogForm = ({ blogData }) => {
         icon: "error",
         text: err,
       });
+    } finally {
       reset();
     }
   };
@@ -139,7 +144,7 @@ const UpdateBlogForm = ({ blogData }) => {
       {updateImage ? (
         <ImageUpload size="lg" setImageData={setThumbnailImg} folder="blog" />
       ) : (
-        <div className="my-2 flex flex-col items-center gap-2">
+        <figure className="my-2 flex flex-col items-center gap-2">
           <Image
             className="mx-auto"
             src={url}
@@ -155,7 +160,7 @@ const UpdateBlogForm = ({ blogData }) => {
           >
             Change
           </Button>
-        </div>
+        </figure>
       )}
       <Formik
         initialValues={initialValues}
@@ -204,13 +209,12 @@ const UpdateBlogForm = ({ blogData }) => {
   );
 };
 
-const UpdateBlogData = async (id, userData, router, reset) => {
+const UpdateBlogData = async (id, userData, router) => {
   await updateBlog(id, userData);
   Alert.fire({
     icon: "success",
     title: "Blog is updated!",
   });
-  reset();
   revalidate("/admin/blog/all_blogs");
   router.push("/admin/blog/all_blogs");
 };

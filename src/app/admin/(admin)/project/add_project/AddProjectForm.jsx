@@ -7,10 +7,10 @@ import ReCAPTCHA from "react-google-recaptcha";
 import { useRouter } from "next/navigation";
 import useStateData from "@/hooks/useStateData";
 // Components
-import Input from "@/components/utilities/Input";
+import Input from "@/components/utilities/formik/Input";
 import Button from "@/components/utilities/Button";
-import Textarea from "@/components/utilities/Textarea";
-import Select from "@/components/utilities/Select";
+import Textarea from "@/components/utilities/formik/Textarea";
+import Select from "@/components/utilities/formik/Select";
 import ImageUpload from "@/components/ImageUpload";
 import Spinner from "@/components/Spinner";
 import DatePickerComp from "@/components/DatePicker";

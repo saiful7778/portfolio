@@ -42,7 +42,7 @@ const Topbar = () => {
       {status === "loading" ? (
         <Spinner size={15} />
       ) : (
-        <Popover className="relative w-fit">
+        <Popover className="relative h-8 w-fit">
           <Popover.Button className="h-8">
             <Avatar size="sm" photoURL={data?.user?.image} />
           </Popover.Button>

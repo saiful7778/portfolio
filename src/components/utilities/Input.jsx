@@ -1,27 +1,16 @@
+import { focus, input } from "@/lib/styles";
 import cn from "@/lib/utils/cn";
-import { input, focus } from "@/lib/styles";
-import { useField } from "formik";
 
-const Input = ({ className, ...props }) => {
-  const [field, { touched, error }] = useField(props);
-
+const Input = ({ size, value, onChange, placeholder, name, type }) => {
   return (
-    <div className={className}>
-      <input
-        className={cn(
-          input.base,
-          focus.base,
-          error && touched && input.error,
-          error && touched && focus.error,
-          className,
-        )}
-        {...field}
-        {...props}
-      />
-      {error && touched ? (
-        <p className="mt-1 text-xs text-red-500">{error}</p>
-      ) : null}
-    </div>
+    <input
+      type={type}
+      className={cn(input.base, focus.base, size === "sm" && "px-2 py-1")}
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      placeholder={placeholder}
+      name={name}
+    />
   );
 };
 

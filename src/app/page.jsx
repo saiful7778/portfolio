@@ -20,9 +20,6 @@ const HomePage = async () => {
       <main className="my-16 p-2">
         <Skills />
       </main>
-      <footer>
-        <Footer />
-      </footer>
       {session && (
         <div className="fixed bottom-3 right-0 z-50 flex items-center justify-center rounded-l-full border border-gray-700 bg-gray-800 p-2">
           <Link className="block h-8" href="/admin/dashboard">
@@ -30,6 +27,9 @@ const HomePage = async () => {
           </Link>
         </div>
       )}
+      <footer>
+        <Footer />
+      </footer>
     </>
   );
 };

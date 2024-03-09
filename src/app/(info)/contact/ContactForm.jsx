@@ -1,8 +1,8 @@
 "use client";
 import Spinner from "@/components/Spinner";
 import Button from "@/components/utilities/Button";
-import Input from "@/components/utilities/Input";
-import Textarea from "@/components/utilities/Textarea";
+import Input from "@/components/utilities/formik/Input";
+import Textarea from "@/components/utilities/formik/Textarea";
 import useStateData from "@/hooks/useStateData";
 import createContact from "@/lib/actions/contact/createContact";
 import Alert from "@/config/Alert.config";
@@ -77,7 +77,7 @@ const ContactForm = () => {
       validationSchema={contactSchema}
       onSubmit={handleSubmit}
     >
-      <Form className="mx-auto my-36 w-full max-w-4xl space-y-2 rounded-md border border-gray-700 bg-gray-800 p-4 shadow-md">
+      <Form className="relative z-[1] mx-auto mb-36 w-full max-w-4xl space-y-2 rounded-md border border-gray-700 bg-gray-800 p-4 shadow-md">
         <Input type="text" placeholder="Your name" name="fullName" />
         <Input type="email" name="email" placeholder="Your email address" />
         <Input

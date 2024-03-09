@@ -29,7 +29,7 @@ const BlogItem = ({ blogData }) => {
         {title}
       </Link>
       <div className="text-xs">
-        <span className="text-gray-500">Blog posted:</span> {timeAgo}
+        <span className="text-gray-500">Posted:</span> {timeAgo}
       </div>
     </div>
   );

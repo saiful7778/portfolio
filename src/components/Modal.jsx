@@ -1,7 +1,7 @@
 "use client";
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
-import Button from "./utilities/Button";
+import Button from "@/components/utilities/Button";
 import { RxCross2 } from "react-icons/rx";
 
 const Modal = ({ open, title, description, close, children }) => {

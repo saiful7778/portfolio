@@ -10,25 +10,25 @@ const Showcase = async () => {
   }
 
   const allblog = [];
+
   for (let x of blogs) {
     if (x.status === "published") {
       allblog.push(x);
     }
   }
-  const renderAllblogs = allblog.map((blog, idx) => {
-    if (blog.status === "published") {
-      return <BlogItem key={"blog" + idx} blogData={blog} />;
-    }
-  });
 
-  if (renderAllblogs.length < 1) {
+  if (allblog.length < 1) {
     return <EmptyData />;
   }
 
+  const renderAllblogs = allblog.map((blog, idx) => (
+    <BlogItem key={"blog" + idx} blogData={blog} />
+  ));
+
   return (
-    <div className="mx-auto mb-16 grid w-4/5 grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    <section className="mx-auto mb-16 grid w-4/5 grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {renderAllblogs}
-    </div>
+    </section>
   );
 };
 

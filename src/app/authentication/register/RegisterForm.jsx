@@ -9,7 +9,7 @@ import useStateData from "@/hooks/useStateData";
 import Link from "next/link";
 // components
 import Button from "@/components/utilities/Button";
-import Input from "@/components/utilities/Input";
+import Input from "@/components/utilities/formik/Input";
 import ImageUpload from "@/components/ImageUpload";
 import Spinner from "@/components/Spinner";
 import Password from "@/components/utilities/Password";

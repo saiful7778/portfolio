@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FaArrowUpRightFromSquare, FaGithub } from "react-icons/fa6";
-import Button from "./utilities/Button";
+import Button from "@/components/utilities/Button";
 
 const ProjectItem = ({ projectData }) => {
   const {

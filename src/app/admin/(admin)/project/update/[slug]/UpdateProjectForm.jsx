@@ -3,9 +3,9 @@ import DatePickerComp from "@/components/DatePicker";
 import Spinner from "@/components/Spinner";
 import TextEditor from "@/components/TextEditor";
 import Button from "@/components/utilities/Button";
-import Input from "@/components/utilities/Input";
-import Select from "@/components/utilities/Select";
-import Textarea from "@/components/utilities/Textarea";
+import Input from "@/components/utilities/formik/Input";
+import Select from "@/components/utilities/formik/Select";
+import Textarea from "@/components/utilities/formik/Textarea";
 import useStateData from "@/hooks/useStateData";
 import Alert from "@/config/Alert.config";
 import reCaptcha from "@/lib/reCaptcha";
@@ -101,9 +101,15 @@ const UpdateProjectForm = ({ projectData }) => {
           setSpinner(false);
           return;
         }
+        /**
+         * delete previous image
+         */
         await edgestore.portfolioImages.delete({
           url,
         });
+        /**
+         * confirm upload image
+         */
         await edgestore.portfolioImages.confirmUpload({
           url: thumbnailImg.url,
         });
@@ -121,7 +127,6 @@ const UpdateProjectForm = ({ projectData }) => {
             thumbnail: { url: thumbnailImg.url, alt: thumbnailImg.alt },
           },
           router,
-          reset,
         );
       } else {
         await updateProjectData(
@@ -137,7 +142,6 @@ const UpdateProjectForm = ({ projectData }) => {
             projectTime,
           },
           router,
-          reset,
         );
       }
     } catch (err) {
@@ -146,6 +150,7 @@ const UpdateProjectForm = ({ projectData }) => {
         icon: "error",
         text: err,
       });
+    } finally {
       reset();
     }
   };
@@ -159,7 +164,7 @@ const UpdateProjectForm = ({ projectData }) => {
           folder="project"
         />
       ) : (
-        <div className="my-2 flex flex-col items-center gap-2">
+        <figure className="my-2 flex flex-col items-center gap-2">
           <Image
             className="mx-auto"
             src={url}
@@ -175,7 +180,7 @@ const UpdateProjectForm = ({ projectData }) => {
           >
             Change
           </Button>
-        </div>
+        </figure>
       )}
       <Formik
         initialValues={initialValues}
@@ -239,13 +244,12 @@ const UpdateProjectForm = ({ projectData }) => {
   );
 };
 
-const updateProjectData = async (id, userData, router, reset) => {
+const updateProjectData = async (id, userData, router) => {
   await updateProject(id, userData);
   Alert.fire({
     icon: "success",
     title: "Project is updated!",
   });
-  reset();
   revalidate("/admin/project/all_projects");
   router.push("/admin/project/all_projects");
 };

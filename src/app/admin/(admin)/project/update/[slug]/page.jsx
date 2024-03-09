@@ -32,7 +32,7 @@ const UpdateProject = async ({ params, searchParams }) => {
   }
 
   return (
-    <div className="rounded border border-gray-700 bg-gray-800 p-4 shadow">
+    <section className="rounded border border-gray-700 bg-gray-800 p-4 shadow">
       <Link
         href={`/project/${projectData.slug}`}
         className="text-xl font-bold hover:text-blue-600 hover:underline"
@@ -43,7 +43,7 @@ const UpdateProject = async ({ params, searchParams }) => {
       <UpdateProjectForm
         projectData={{ id: searchParams.projectId, ...projectData }}
       />
-    </div>
+    </section>
   );
 };
 

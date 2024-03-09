@@ -11,7 +11,7 @@ import useStateData from "@/hooks/useStateData";
 // components
 import Spinner from "@/components/Spinner";
 import Button from "@/components/utilities/Button";
-import Input from "@/components/utilities/Input";
+import Input from "@/components/utilities/formik/Input";
 import Password from "@/components/utilities/Password";
 // others
 import reCaptcha from "@/lib/reCaptcha";

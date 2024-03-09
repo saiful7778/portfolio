@@ -9,9 +9,9 @@ import useStateData from "@/hooks/useStateData";
 import { useRef, useState } from "react";
 // components
 import Button from "@/components/utilities/Button";
-import Input from "@/components/utilities/Input";
+import Input from "@/components/utilities/formik/Input";
 import Spinner from "@/components/Spinner";
-import Select from "@/components/utilities/Select";
+import Select from "@/components/utilities/formik/Select";
 import ImageUpload from "@/components/ImageUpload";
 import PopOver from "@/components/PopOver";
 import Modal from "@/components/Modal";

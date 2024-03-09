@@ -2,7 +2,7 @@
 import { IoImageOutline } from "react-icons/io5";
 import Tool from "./Tool";
 import { useCallback, useState } from "react";
-import Button from "../utilities/Button";
+import Button from "@/components/utilities/Button";
 import ImageUpload from "../ImageUpload";
 import Modal from "../Modal";
 import { useEdgeStore } from "@/context/EdgeStoreContext";

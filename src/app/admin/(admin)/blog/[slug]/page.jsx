@@ -39,7 +39,7 @@ const SingleBlog = async ({ params }) => {
   const updatedTime = moment(updatedAt).format("Do MMM YY, h:mm a");
 
   return (
-    <div className="mx-auto w-full max-w-4xl space-y-4">
+    <article className="mx-auto w-full max-w-4xl space-y-4">
       <figure>
         <Image
           className="mx-auto"
@@ -78,11 +78,11 @@ const SingleBlog = async ({ params }) => {
           <span className="text-gray-500">Update:</span> {updatedTime}
         </div>
       </div>
-      <div className="paragraph">
+      <section>
         <div className="text-sm text-gray-500">Description:</div>
         {renderReactComponent(des)}
-      </div>
-    </div>
+      </section>
+    </article>
   );
 };
 

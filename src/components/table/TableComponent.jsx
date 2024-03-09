@@ -2,11 +2,11 @@ import cn from "@/lib/utils/cn";
 
 export const TableMain = ({ children }) => {
   return (
-    <div className="w-full overflow-auto border border-gray-700">
+    <section className="w-full overflow-auto border border-gray-700">
       <div className="relative">
         <table className="w-full overflow-auto">{children}</table>
       </div>
-    </div>
+    </section>
   );
 };
 

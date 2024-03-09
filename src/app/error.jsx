@@ -7,7 +7,7 @@ const Error = ({ error, reset }) => {
     console.error(error);
   }, [error]);
   return (
-    <div className="flex h-screen w-full flex-col items-center justify-center gap-4 overflow-hidden">
+    <main className="flex h-screen w-full flex-col items-center justify-center gap-4 overflow-hidden">
       <h2 className="text-2xl font-bold">
         Something went <span className="text-red-600">wrong!</span>
       </h2>
@@ -16,7 +16,7 @@ const Error = ({ error, reset }) => {
           Refrash
         </Button>
       </div>
-    </div>
+    </main>
   );
 };
 

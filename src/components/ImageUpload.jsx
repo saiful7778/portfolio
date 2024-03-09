@@ -1,14 +1,14 @@
 "use client";
 import cn from "@/lib/utils/cn";
 import { IoImageOutline } from "react-icons/io5";
-import Button from "./utilities/Button";
+import Button from "@/components/utilities/Button";
 import Image from "next/image";
 import { useId, useState } from "react";
 import { useEdgeStore } from "@/context/EdgeStoreContext";
 import { EdgeStoreApiClientError } from "@edgestore/react/shared";
 import { GoVerified } from "react-icons/go";
 import Spinner from "./Spinner";
-import { focus, input } from "@/lib/styles";
+import Input from "./utilities/Input";
 
 const style = {
   base: "rounded font-semibold cursor-pointer shadow",
@@ -157,7 +157,7 @@ const ImageUploadComp = ({ size = "md", folder, setImageData }) => {
       <div className="flex flex-col items-center justify-center gap-3 rounded-md border-2 border-dashed border-gray-700 p-4">
         {showImage ? (
           <>
-            <div className="relative overflow-hidden">
+            <figure className="relative overflow-hidden">
               <Image
                 className="aspect-video object-cover object-center"
                 src={showImage}
@@ -176,7 +176,7 @@ const ImageUploadComp = ({ size = "md", folder, setImageData }) => {
                   )}
                 </div>
               </div>
-            </div>
+            </figure>
             {errorStatus && (
               <p className="mt-1 text-xs text-red-500">{errorStatus}</p>
             )}
@@ -222,15 +222,10 @@ const ImageUploadComp = ({ size = "md", folder, setImageData }) => {
               </div>
             ) : (
               <>
-                <input
+                <Input
                   type="text"
-                  className={cn(
-                    input.base,
-                    focus.base,
-                    size === "sm" && "px-2 py-1",
-                  )}
                   value={img.alt}
-                  onChange={(e) => setImg({ ...img, alt: e.target.value })}
+                  onChange={(e) => setImg({ ...img, alt: e })}
                   placeholder="Alt"
                   name="imgAlt"
                 />

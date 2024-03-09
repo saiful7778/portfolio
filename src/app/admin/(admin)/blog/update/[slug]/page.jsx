@@ -32,7 +32,7 @@ const UpdateBlog = async ({ params, searchParams }) => {
   }
 
   return (
-    <div className="rounded border border-gray-700 bg-gray-800 p-4 shadow">
+    <section className="rounded border border-gray-700 bg-gray-800 p-4 shadow">
       <Link
         href={`/blog/${blogData.slug}`}
         className="text-xl font-bold hover:text-blue-600 hover:underline"
@@ -41,7 +41,7 @@ const UpdateBlog = async ({ params, searchParams }) => {
         Update: {blogData.title}
       </Link>
       <UpdateBlogForm blogData={{ id: searchParams.projectId, ...blogData }} />
-    </div>
+    </section>
   );
 };
 

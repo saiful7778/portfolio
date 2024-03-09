@@ -1,7 +1,7 @@
 "use client";
 import { useField } from "formik";
-import CheckboxItem from "./utilities/CheckboxItem";
-import InputRef from "./utilities/InputRef";
+import CheckboxItem from "@/components/utilities/formik/CheckboxItem";
+import InputRef from "@/components/utilities/InputRef";
 import cn from "@/lib/utils/cn";
 
 const EditSlug = ({

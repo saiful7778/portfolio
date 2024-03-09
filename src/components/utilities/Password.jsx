@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
-import Input from "./Input";
+import Input from "./formik/Input";
 
 const Password = ({ placeholder, name }) => {
   const [showPass, setShowPass] = useState(false);

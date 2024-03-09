@@ -42,7 +42,7 @@ const SingleProject = async ({ params }) => {
   const projectCreateTime = moment(projectTime).format("Do MMM YY");
 
   return (
-    <div className="mx-auto w-full max-w-4xl space-y-4">
+    <article className="mx-auto w-full max-w-4xl space-y-4">
       <figure>
         <Image
           className="mx-auto"
@@ -89,11 +89,11 @@ const SingleProject = async ({ params }) => {
         <div className="text-sm text-gray-500">Short description:</div>
         <p>{shortDes}</p>
       </div>
-      <div className="paragraph">
+      <section>
         <div className="text-sm text-gray-500">Description:</div>
         {renderReactComponent(des)}
-      </div>
-    </div>
+      </section>
+    </article>
   );
 };
 

@@ -1,6 +1,6 @@
 "use client";
-import Checkbox from "@/components/utilities/Checkbox";
-import Radio from "@/components/utilities/Radio";
+import Checkbox from "@/components/utilities/formik/Checkbox";
+import Radio from "@/components/utilities/formik/Radio";
 import { useField } from "formik";
 
 const ReCaptcha = () => {
@@ -30,13 +30,11 @@ const ReCaptcha = () => {
       <div>
         <Radio options={options} name="reCaptcha" />
         {reCaptchaOption === "custom" && (
-          <div>
-            <Checkbox
-              options={selectOptions}
-              name="reCaptchaOnPage"
-              label="Select where you want reCaptcha"
-            />
-          </div>
+          <Checkbox
+            options={selectOptions}
+            name="reCaptchaOnPage"
+            label="Select where you want reCaptcha"
+          />
         )}
       </div>
     </div>

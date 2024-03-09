@@ -1,5 +1,6 @@
 import SectionTitle from "@/components/SectionTitle";
 import ContactForm from "./ContactForm";
+import StateProvider from "@/context/StateContext";
 
 export const metadata = {
   title: "Contact me - Saiful Islam Portfolio",
@@ -8,14 +9,14 @@ export const metadata = {
 
 const Blog = () => {
   return (
-    <>
+    <StateProvider>
       <SectionTitle
         title="Contact me"
         text="Fill free to say anything"
         blob={true}
       />
       <ContactForm />
-    </>
+    </StateProvider>
   );
 };
 
