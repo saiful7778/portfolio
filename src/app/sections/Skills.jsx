@@ -10,12 +10,12 @@ import cssLogo from "../../../public/images/css.png";
 import nextjsLogo from "../../../public/images/nextjs.png";
 import githubLogo from "../../../public/images/github.png";
 import reactRouterLogo from "../../../public/images/react-router.png";
-import reduxLogo from "../../../public/images/redux.png";
+import authjsLogo from "../../../public/images/authjs.webp";
 import jsLogo from "../../../public/images/javascript.png";
+import mongooseLogo from "../../../public/images/mongoose.png";
 import reactLogo from "../../../public/images/react.png";
 import tenstackQueryLogo from "../../../public/images/tenstack-query.png";
-import stripeLogo from "../../../public/images/stripe.png";
-import sassLogo from "../../../public/images/sass.png";
+import prismaLogo from "../../../public/images/prisma.png";
 import jwtLogo from "../../../public/images/jwt.png";
 import firebaseLogo from "../../../public/images/firebase.png";
 import tailwindcssLogo from "../../../public/images/tailwindcss.png";
@@ -92,12 +92,11 @@ const data = [
     },
   },
   {
-    image: { width: 70, height: 70, src: reduxLogo, alt: "redux logo" },
+    image: { width: 60, height: 60, src: authjsLogo, alt: "auth.js logo" },
     animate: { x: -400, y: 100, rotate: -40 },
     details: {
-      title: "Redux",
-      description:
-        "Redux is an open-source JavaScript library for managing and centralizing application state.",
+      title: "Auth.js",
+      description: "Auth.js is authentication service for the Web.",
     },
   },
   {
@@ -133,25 +132,25 @@ const data = [
     },
   },
   {
-    image: { width: 70, height: 70, src: stripeLogo, alt: "Stripe logo" },
+    image: { width: 70, height: 50, src: mongooseLogo, alt: "Mongoose logo" },
     animate: { x: 400, y: 0, rotate: 50 },
     details: {
-      title: "Stripe",
+      title: "Mongoose",
       description:
-        "Stripe powers online and in-person payment processing and financial solutions for businesses of all sizes.",
+        "Mongoose is a JavaScript object-oriented programming library that creates a connection between MongoDB and the Node.js JavaScript runtime environment.",
     },
   },
   {
-    image: { width: 30, height: 30, src: sassLogo, alt: "sass logo" },
+    image: { width: 50, height: 40, src: prismaLogo, alt: "prisma logo" },
     animate: { x: -400, y: 400, rotate: -50 },
     details: {
-      title: "Sass",
+      title: "Prisma",
       description:
-        "Sass is a preprocessor scripting language that is interpreted or compiled into Cascading Style Sheets.",
+        "Prisma is an ORM focused on making it easy for Node.js and TypeScript applications to work with databases.",
     },
   },
   {
-    image: { width: 50, height: 50, src: jwtLogo, alt: "jwt logo" },
+    image: { width: 60, height: 60, src: jwtLogo, alt: "jwt logo" },
     animate: { x: -400, y: 400, rotate: -40 },
     details: {
       title: "JWT - Json Web Token",
@@ -160,7 +159,7 @@ const data = [
     },
   },
   {
-    image: { width: 60, height: 60, src: firebaseLogo, alt: "firebase logo" },
+    image: { width: 70, height: 70, src: firebaseLogo, alt: "firebase logo" },
     animate: { x: -300, y: 300, rotate: -30 },
     details: {
       title: "Firebase",
@@ -169,8 +168,8 @@ const data = [
   },
   {
     image: {
-      width: 100,
-      height: 100,
+      width: 120,
+      height: 120,
       src: tailwindcssLogo,
       alt: "tailwindcss logo",
     },

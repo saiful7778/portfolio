@@ -1,5 +1,5 @@
 const style = {
-  base: "rounded font-semibold cursor-pointer shadow duration-200 active:focus-visible:scale-95 disabled:cursor-not-allowed disabled:opacity-50",
+  base: "rounded font-semibold cursor-pointer shadow duration-200 active:focus:scale-95 disabled:cursor-not-allowed disabled:opacity-50",
   primary: "border border-gray-50 bg-gray-50 text-accent-color",
   outline:
     "border border-gray-50 text-white hover:bg-gray-50 hover:text-accent-color",
