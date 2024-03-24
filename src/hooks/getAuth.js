@@ -1,6 +1,6 @@
-import authConfig from "@/config/auth.config";
+import auth from "@/lib/auth";
 import { getServerSession } from "next-auth";
 
 export default async function getAuth() {
-  return getServerSession(authConfig);
+  return getServerSession(auth);
 }
