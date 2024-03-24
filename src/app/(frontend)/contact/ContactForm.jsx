@@ -61,12 +61,13 @@ const ContactForm = () => {
         icon: "success",
         title: "I shall respond very soon!",
       });
-      reset();
     } catch (err) {
       Alert.fire({
         icon: "error",
-        text: err,
+        text: "Something went wrong",
       });
+      console.error(err);
+    } finally {
       reset();
     }
   };

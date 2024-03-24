@@ -105,7 +105,7 @@ const AddBlogForm = () => {
       console.error(err);
       Alert.fire({
         icon: "error",
-        text: err,
+        text: "Something went wrong",
       });
       reset();
     }

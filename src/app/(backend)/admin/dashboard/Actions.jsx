@@ -83,7 +83,6 @@ const Actions = ({ userData }) => {
           });
         }
         await deleteUser(userData.id);
-        revalidate("/admin/dashboard");
         Alert.fire({
           icon: "success",
           title: "User is deleted",
@@ -92,8 +91,10 @@ const Actions = ({ userData }) => {
         console.error(err);
         Alert.fire({
           icon: "error",
-          text: err,
+          text: "Something went wrong",
         });
+      } finally {
+        revalidate("/admin/dashboard");
       }
     }
   };
@@ -137,13 +138,14 @@ const Actions = ({ userData }) => {
       } else {
         await updateUserData(userData.id, userData.email, e);
       }
-      reset();
     } catch (err) {
       console.error(err);
       Alert.fire({
         icon: "error",
-        text: err,
+        text: "Something went wrong",
       });
+    } finally {
+      revalidate("/admin/dashboard");
       reset();
     }
   };
@@ -219,7 +221,6 @@ const updateUserData = async (id, email, data) => {
     icon: "success",
     title: "User is updated!",
   });
-  revalidate("/admin/dashboard");
 };
 
 export default Actions;

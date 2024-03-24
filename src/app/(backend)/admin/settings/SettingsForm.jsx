@@ -22,15 +22,24 @@ const SettingsForm = ({ initialData }) => {
   };
 
   const handleSubmit = async (e) => {
-    setSpinner(true);
-    await setSettings(initialData?.id, e);
-    Alert.fire({
-      icon: "success",
-      title: "Settings is updated",
-    });
-    revalidate("/admin/settings");
-    handleReFetch();
-    setSpinner(false);
+    try {
+      setSpinner(true);
+      await setSettings(initialData?.id, e);
+      Alert.fire({
+        icon: "success",
+        title: "Settings is updated",
+      });
+    } catch (err) {
+      Alert.fire({
+        icon: "error",
+        title: "Something went erong",
+      });
+      console.error(err);
+    } finally {
+      revalidate("/admin/settings");
+      handleReFetch();
+      setSpinner(false);
+    }
   };
 
   return (

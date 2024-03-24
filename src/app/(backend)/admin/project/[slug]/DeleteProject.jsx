@@ -33,14 +33,15 @@ const DeleteProject = ({ projectId, thumbnail }) => {
           icon: "success",
           title: "Project is deleted!",
         });
+        revalidate("/admin/project/all_projects");
+        router.push("/admin/project/all_projects");
       } catch (err) {
         Alert.fire({
           icon: "error",
-          text: err,
+          text: "Something went wrong",
         });
+        console.error(err);
       }
-      revalidate("/admin/project/all_projects");
-      router.push("/admin/project/all_projects");
     }
   };
   return (

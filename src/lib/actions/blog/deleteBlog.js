@@ -3,6 +3,9 @@ import db from "@/lib/db";
 
 export default async function deleteBlog(id) {
   try {
+    if (!id) {
+      throw "Invalid input data";
+    }
     const existBlog = await db.blog.findUnique({
       where: { id },
     });

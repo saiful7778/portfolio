@@ -3,6 +3,9 @@ import db from "@/lib/db";
 
 export default async function deleteProject(id) {
   try {
+    if (!id) {
+      throw "Invalid input data";
+    }
     const exitProject = await db.project.findUnique({
       where: { id },
     });

@@ -33,13 +33,14 @@ const Actions = ({ blogId, thumbnail, slug }) => {
           icon: "success",
           title: "Blog is deleted!",
         });
-        revalidate("/admin/blog/all_blogs");
       } catch (err) {
         console.error(err);
         Alert.fire({
           icon: "error",
-          text: err,
+          text: "Something went wrong",
         });
+      } finally {
+        revalidate("/admin/blog/all_blogs");
       }
     }
   };

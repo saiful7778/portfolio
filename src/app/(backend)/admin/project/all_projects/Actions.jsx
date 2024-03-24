@@ -36,10 +36,12 @@ const Actions = ({ projectId, thumbnail, slug }) => {
       } catch (err) {
         Alert.fire({
           icon: "error",
-          text: err,
+          text: "Something went wrong",
         });
+        console.error(err);
+      } finally {
+        revalidate("/admin/project/all_projects");
       }
-      revalidate("/admin/project/all_projects");
     }
   };
 

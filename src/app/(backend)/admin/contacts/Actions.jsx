@@ -30,10 +30,11 @@ const Actions = ({ contactId }) => {
         console.error(err);
         Alert.fire({
           icon: "error",
-          text: err,
+          text: "Something went wrong",
         });
+      } finally {
+        revalidate("/admin/contacts");
       }
-      revalidate("/admin/contacts");
     }
   };
 

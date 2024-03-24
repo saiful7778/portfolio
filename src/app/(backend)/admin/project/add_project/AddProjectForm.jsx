@@ -122,11 +122,11 @@ const AddProjectForm = () => {
       revalidate("/admin/project/all_projects");
       router.push("/admin/project/all_projects");
     } catch (err) {
-      console.error(err);
       Alert.fire({
         icon: "error",
-        text: err,
+        text: "Something went wrong",
       });
+      console.error(err);
       reset();
     }
   };
