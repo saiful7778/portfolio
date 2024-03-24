@@ -40,14 +40,20 @@ const ProjectItem = ({ projectData }) => {
       >
         {title}
       </Link>
-      <p className="mb-2 mt-1 text-xs text-gray-400">{shortDes}</p>
+      <p className="mb-2 mt-1 text-sm text-gray-400">{shortDes}</p>
       <div className="flex items-center gap-2">
-        <Button href={`/project/${slug}`} variant="primary">
-          View project details
+        <Button href={liveLink} variant="primary-outline" target="_blank">
+          Live site
         </Button>
-        <Link href={githubLink} target="_blank">
+        <Button
+          href={githubLink}
+          variant="primary"
+          shape="icon-text-button"
+          target="_blank"
+        >
+          Github
           <FaGithub size={20} />
-        </Link>
+        </Button>
       </div>
     </div>
   );
