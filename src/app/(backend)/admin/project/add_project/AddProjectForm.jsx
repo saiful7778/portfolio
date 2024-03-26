@@ -24,6 +24,7 @@ import Alert from "@/config/Alert.config";
 import { addProjectSchema } from "@/schemas/project";
 import revalidate from "@/lib/revalidate";
 import { useEdgeStore } from "@/context/EdgeStoreContext";
+import TagInput from "@/components/utilities/formik/TagInput";
 
 const AddProjectForm = () => {
   const router = useRouter();
@@ -59,6 +60,7 @@ const AddProjectForm = () => {
     slug: "",
     githubLink: "",
     liveLink: "",
+    technologies: [],
     shortDes: "",
     des: "",
   };
@@ -109,6 +111,7 @@ const AddProjectForm = () => {
         status: e.status,
         githubLink: e.githubLink,
         liveLink: e.liveLink,
+        technologies: e.technologies,
         shortDes: e.shortDes,
         des: JSON.parse(e.des),
         projectTime,
@@ -170,6 +173,11 @@ const AddProjectForm = () => {
             <Input type="url" placeholder="Github Link" name="githubLink" />
             <Input type="url" placeholder="Project Live Link" name="liveLink" />
           </div>
+          <TagInput
+            type="text"
+            placeholder="Technologies"
+            name="technologies"
+          />
           <Textarea
             className="h-24"
             placeholder="Short Description"

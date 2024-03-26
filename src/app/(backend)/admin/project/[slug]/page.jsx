@@ -40,6 +40,7 @@ const SingleProject = async ({ searchParams }) => {
     updatedAt,
     slug,
     projectTime,
+    technologies,
     shortDes,
     thumbnail: { url, alt },
     des,
@@ -93,6 +94,17 @@ const SingleProject = async ({ searchParams }) => {
         <div>
           <span className="text-gray-500">Update:</span> {updatedTime}
         </div>
+      </div>
+      <div className="flex flex-wrap items-center gap-1 text-sm">
+        <span className="text-gray-500">Technologies:</span>
+        {technologies?.map((ele, idx) => (
+          <span
+            key={`technology_${idx}`}
+            className="select-none rounded-md border border-gray-700 px-1"
+          >
+            {ele}
+          </span>
+        ))}
       </div>
       <div>
         <div className="text-sm text-gray-500">Short description:</div>
