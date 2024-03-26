@@ -41,6 +41,7 @@ const SingleProject = async ({ params }) => {
     thumbnail: { url, alt },
     githubLink,
     liveLink,
+    technologies,
     des,
   } = projectData;
 
@@ -72,6 +73,17 @@ const SingleProject = async ({ params }) => {
           <span className="text-gray-500">Project created time:</span>{" "}
           {projectCreateTime}
         </div>
+      </div>
+      <div className="flex flex-wrap items-center gap-1 text-sm">
+        <span className="text-gray-500">Technologies:</span>
+        {technologies?.map((ele, idx) => (
+          <span
+            key={`technology_${idx}`}
+            className="select-none rounded-md border border-gray-700 px-1"
+          >
+            {ele}
+          </span>
+        ))}
       </div>
       <div className="text-sm">
         <div>

@@ -20,6 +20,7 @@ import EditSlug from "@/components/EditSlug";
 import ImageUpload from "@/components/ImageUpload";
 import revalidate from "@/lib/revalidate";
 import { useEdgeStore } from "@/context/EdgeStoreContext";
+import TagInput from "@/components/utilities/formik/TagInput";
 
 const UpdateProjectForm = ({ projectData }) => {
   const {
@@ -29,6 +30,7 @@ const UpdateProjectForm = ({ projectData }) => {
     slug,
     githubLink,
     liveLink,
+    technologies,
     shortDes,
     des,
     thumbnail: { url, alt },
@@ -63,6 +65,7 @@ const UpdateProjectForm = ({ projectData }) => {
     slug: slug,
     githubLink: githubLink,
     liveLink: liveLink,
+    technologies: technologies,
     shortDes: shortDes,
     des: JSON.stringify(des),
   };
@@ -121,6 +124,7 @@ const UpdateProjectForm = ({ projectData }) => {
             status: e.status,
             githubLink: e.githubLink,
             liveLink: e.liveLink,
+            technologies: e.technologies,
             shortDes: e.shortDes,
             des: JSON.parse(e.des),
             projectTime,
@@ -137,6 +141,7 @@ const UpdateProjectForm = ({ projectData }) => {
             status: e.status,
             githubLink: e.githubLink,
             liveLink: e.liveLink,
+            technologies: e.technologies,
             shortDes: e.shortDes,
             des: JSON.parse(e.des),
             projectTime,
@@ -218,6 +223,11 @@ const UpdateProjectForm = ({ projectData }) => {
             <Input type="url" placeholder="Github Link" name="githubLink" />
             <Input type="url" placeholder="Project Live Link" name="liveLink" />
           </div>
+          <TagInput
+            type="text"
+            placeholder="Technologies"
+            name="technologies"
+          />
           <Textarea
             className="h-24"
             placeholder="Short Description"

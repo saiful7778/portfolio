@@ -33,6 +33,7 @@ const AllProjectsPage = async () => {
         <Table.headCell className="min-w-9 text-center">#NO</Table.headCell>
         <Table.headCell className="min-w-60">Title</Table.headCell>
         <Table.headCell className="min-w-80">Short Description</Table.headCell>
+        <Table.headCell className="min-w-24">Tags</Table.headCell>
         <Table.headCell className="min-w-24">Status</Table.headCell>
         <Table.headCell className="min-w-56">Time</Table.headCell>
         <Table.headCell className="min-w-16">Actions</Table.headCell>
@@ -43,8 +44,17 @@ const AllProjectsPage = async () => {
 };
 
 const TableDataRow = ({ inputData, count }) => {
-  const { id, title, slug, createdAt, updatedAt, thumbnail, shortDes, status } =
-    inputData || {};
+  const {
+    id,
+    title,
+    slug,
+    createdAt,
+    updatedAt,
+    technologies,
+    thumbnail,
+    shortDes,
+    status,
+  } = inputData || {};
 
   const createdTime = moment(createdAt).format("Do MMM YY, h:mm a");
   const updatedTime = moment(updatedAt).format("Do MMM YY, h:mm a");
@@ -67,6 +77,18 @@ const TableDataRow = ({ inputData, count }) => {
             live view
           </Link>
         </p>
+      </Table.cell>
+      <Table.cell>
+        <div className="flex flex-wrap items-center gap-1 text-xs">
+          {technologies?.map((ele, idx) => (
+            <span
+              key={`${id}_technology_${idx}`}
+              className="select-none rounded-md border border-gray-700 px-1"
+            >
+              {ele}
+            </span>
+          ))}
+        </div>
       </Table.cell>
       <Table.cell>
         <div className="flex items-center justify-center">

@@ -1,12 +1,9 @@
 "use server";
 import db from "@/lib/db";
-import { addProjectSchema } from "@/schemas/project";
 
 export default async function updateProject(id, data) {
   try {
-    const isValid = await addProjectSchema.isValid(data);
-
-    if (!isValid || !id) {
+    if (!id) {
       throw "Invalid input data";
     }
 
