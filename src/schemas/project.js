@@ -24,6 +24,10 @@ export const addProjectSchema = yup.object().shape({
     .string()
     .url("Enter a valid URL")
     .required("Live link is required"),
+  technologies: yup
+    .array()
+    .min(1, "Technologies is least 1 or more")
+    .required("Technology is required"),
   shortDes: yup
     .string()
     .max(100, "This is too much long!")

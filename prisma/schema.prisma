@@ -25,18 +25,19 @@ enum Role {
 }
 
 model project {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  thumbnail   Json
-  title       String
-  slug        String   @unique
-  status      String
-  githubLink  String
-  liveLink    String
-  shortDes    String
-  des         Json
-  projectTime DateTime
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  thumbnail    Json
+  title        String
+  slug         String   @unique
+  status       String
+  githubLink   String
+  liveLink     String
+  shortDes     String
+  des          Json
+  technologies String[]
+  projectTime  DateTime
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }
 
 model settings {
