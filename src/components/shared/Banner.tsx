@@ -11,9 +11,9 @@ import bannerProfile from "../../../public/banner_profile.png";
 
 export default function Banner() {
   return (
-    <section className="relative mx-auto flex w-full max-w-7xl flex-col items-center justify-between gap-20 p-2 lg:flex-row">
+    <section className="relative flex flex-col items-center justify-between gap-20 p-2 lg:flex-row">
       <div className="absolute -left-96 top-0 z-0 h-[300px] w-[900px] rotate-45 rounded-full bg-blue-blob blur-[100px] filter" />
-      <div className="relative z-[1] w-full lg:w-1/2">
+      <div className="z-[1] w-full lg:w-1/2">
         <h2 className="text-2xl uppercase tracking-widest">
           Hi, I{`'`}m Saiful Islam
         </h2>

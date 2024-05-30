@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import cn from "@/lib/utils/cn";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,8 +16,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn("selection:bg-primary", inter.className)}>
-        {children}
+      <body className={inter.className}>
+        <div className="relative min-h-screen w-full overflow-x-hidden bg-background text-foreground selection:bg-primary">
+          {children}
+        </div>
       </body>
     </html>
   );
