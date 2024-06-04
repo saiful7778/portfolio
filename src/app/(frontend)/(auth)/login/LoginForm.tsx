@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import ReCAPTCHA from "react-google-recaptcha";
 import { z } from "zod";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import useStateData from "@/hooks/useStateData";
 import { signIn } from "next-auth/react";
 import { defaultLoginRedirect } from "@/lib/routes";
@@ -56,7 +56,6 @@ export default function LoginForm({ callbackUrl }: { callbackUrl?: string }) {
         const captcha = await reCaptcha(recaptchaToken);
         if (!captcha) {
           reset();
-          setSpinner(false);
           return;
         }
       }
