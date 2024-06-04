@@ -1,0 +1,136 @@
+"use client";
+import Button from "@/components/ui/button";
+import Form from "@/components/ui/form";
+import Input from "@/components/ui/input";
+import { LoginSchema } from "@/lib/schemas/auth";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import ReCAPTCHA from "react-google-recaptcha";
+import { z } from "zod";
+import { useRef, useState } from "react";
+import useStateData from "@/hooks/useStateData";
+import { signIn } from "next-auth/react";
+import { defaultLoginRedirect } from "@/lib/routes";
+import reCaptcha from "@/lib/reCaptcha";
+import useToast from "@/hooks/useToast";
+
+export default function LoginForm({ callbackUrl }: { callbackUrl?: string }) {
+  const [spinner, setSpinner] = useState<boolean>(false);
+  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
+  const { toast } = useToast();
+
+  const { showReCaptcha } = useStateData();
+  const showReCaptchaState =
+    showReCaptcha.show === "on" ||
+    (showReCaptcha.show === "custom" && showReCaptcha.page.includes("login"));
+
+  const form = useForm<z.infer<typeof LoginSchema>>({
+    resolver: zodResolver(LoginSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+
+  const handleReset = () => {
+    return () => {
+      form.reset();
+      setSpinner(false);
+    };
+  };
+
+  const handleSubmit = async (e: z.infer<typeof LoginSchema>) => {
+    setSpinner(true);
+    const reset = handleReset();
+    try {
+      if (showReCaptchaState) {
+        if (!recaptchaToken) {
+          toast({
+            variant: "destructive",
+            title: "Please verify the reCAPTCHA!",
+          });
+          setSpinner(false);
+          return;
+        }
+
+        const captcha = await reCaptcha(recaptchaToken);
+        if (!captcha) {
+          reset();
+          setSpinner(false);
+          return;
+        }
+      }
+      await signIn("credentials", {
+        email: e.email,
+        password: e.password,
+        redirect: true,
+        callbackUrl: callbackUrl || defaultLoginRedirect,
+      });
+      toast({
+        title: "You're logged in",
+      });
+    } catch (err) {
+      if (err instanceof Error) {
+        toast({
+          variant: "destructive",
+          title: "Something went wrong!",
+          description: err.message,
+        });
+      }
+    } finally {
+      reset();
+    }
+  };
+
+  return (
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
+        <Form.field
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <Form.item>
+              <Form.label>Email address</Form.label>
+              <Form.control>
+                <Input
+                  type="email"
+                  placeholder="Email address"
+                  {...field}
+                  disabled={spinner}
+                />
+              </Form.control>
+              <Form.message />
+            </Form.item>
+          )}
+        />
+        <Form.field
+          control={form.control}
+          name="password"
+          render={({ field }) => (
+            <Form.item>
+              <Form.label>Password</Form.label>
+              <Form.control>
+                <Input
+                  type="password"
+                  placeholder="Password"
+                  {...field}
+                  disabled={spinner}
+                />
+              </Form.control>
+              <Form.message />
+            </Form.item>
+          )}
+        />
+        {showReCaptchaState && (
+          <ReCAPTCHA
+            onChange={(token) => setRecaptchaToken(token)}
+            sitekey={process.env.NEXT_PUBLIC_SITE_KEY!}
+          />
+        )}
+        <Button className="w-full" size="lg" type="submit" disabled={spinner}>
+          Login
+        </Button>
+      </form>
+    </Form>
+  );
+}
