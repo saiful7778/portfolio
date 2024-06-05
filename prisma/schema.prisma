@@ -8,20 +8,30 @@ datasource db {
 }
 
 model User {
-  id             String   @id @default(auto()) @map("_id") @db.ObjectId
-  name           String
-  email          String   @unique
-  hashedPassword String
-  emailVerified  Boolean  @default(false)
-  role           Role     @default(user)
-  image          Image[]
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  id               String   @id @default(auto()) @map("_id") @db.ObjectId
+  name             String
+  email            String   @unique
+  hashedPassword   String
+  isVerified       Boolean  @default(false)
+  role             Role     @default(user)
+  image            Image[]
+  emailVerifyToken Token[]
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
 }
 
 enum Role {
   user
   admin
+}
+
+model Token {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  token     String   @unique
+  expires   BigInt
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String   @db.ObjectId
 }
 
 model Project {
