@@ -102,13 +102,14 @@ const ToastDescription = forwardRef<
 ));
 ToastDescription.displayName = Description.displayName;
 
+export { ToastAction };
+
 const Toast = Object.assign(ToastMain, {
   provider: Provider,
   title: ToastTitle,
   description: ToastDescription,
   viewport: ToastViewport,
   close: ToastClose,
-  action: ToastAction,
 });
 
 export default Toast;
