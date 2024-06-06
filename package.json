@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@edgestore/react": "^0.1.6",
+    "@edgestore/server": "^0.1.6",
     "@hookform/resolvers": "^3.4.2",
     "@prisma/client": "^5.14.0",
     "@radix-ui/react-avatar": "^1.0.4",
