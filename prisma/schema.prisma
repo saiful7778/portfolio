@@ -14,8 +14,9 @@ model User {
   hashedPassword   String
   isVerified       Boolean  @default(false)
   role             Role     @default(user)
-  image            Image[]
-  emailVerifyToken Token[]
+  access           Boolean  @default(false)
+  image            Image?
+  emailVerifyToken Token?
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
 }
@@ -27,16 +28,16 @@ enum Role {
 
 model Token {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  token     String   @unique
+  token     String
   expires   BigInt
   createdAt DateTime @default(now())
   user      User     @relation(fields: [userId], references: [id])
-  userId    String   @db.ObjectId
+  userId    String   @unique @db.ObjectId
 }
 
 model Project {
   id           String   @id @default(auto()) @map("_id") @db.ObjectId
-  thumbnail    Image[]
+  thumbnail    Image?
   title        String
   slug         String   @unique
   status       String
@@ -52,7 +53,7 @@ model Project {
 
 model Blog {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  thumbnail Image[]
+  thumbnail Image?
   title     String
   slug      String   @unique
   status    String
@@ -68,11 +69,11 @@ model Image {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   project   Project? @relation(fields: [projectId], references: [id])
-  projectId String?  @map("projectID") @db.ObjectId
+  projectId String?  @unique @map("projectID") @db.ObjectId
   blog      Blog?    @relation(fields: [blogId], references: [id])
-  blogId    String?  @map("blogID") @db.ObjectId
+  blogId    String?  @unique @map("blogID") @db.ObjectId
   user      User?    @relation(fields: [userId], references: [id])
-  userId    String?  @map("userID") @db.ObjectId
+  userId    String?  @unique @map("userID") @db.ObjectId
 }
 
 model Settings {
