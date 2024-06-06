@@ -12,7 +12,11 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
         sidebar ? "md:ml-36" : "md:ml-[43px]",
       )}
     >
-      <main className="mb-10 min-h-[calc(100vh-150px)] p-2">{children}</main>
+      <main className="mb-10 min-h-[calc(100vh-150px)] p-2">
+        <div className="rounded border border-border bg-card p-4 shadow">
+          {children}
+        </div>
+      </main>
     </div>
   );
 }

@@ -9,7 +9,7 @@ import Button from "@/components/ui/button";
 import { LuMenuSquare } from "react-icons/lu";
 // assets
 import profileImage from "../../../public/saiful_image.png";
-import moment from "moment";
+// import moment from "moment";
 import UserAuthDropdown from "../UserAuthDropdown";
 
 const Topbar = ({
@@ -24,7 +24,7 @@ const Topbar = ({
   const { handleSidebar } = useStateData();
 
   return (
-    <div className="fixed left-0 top-0 z-[110] flex h-10 w-full items-center justify-between gap-2 border-b border-gray-700 bg-gray-800 p-1">
+    <div className="fixed left-0 top-0 z-[110] flex h-10 w-full items-center justify-between gap-2 border-b border-border bg-card p-1">
       <div className="flex items-center gap-2">
         <Button className="ml-0.5" size="icon" onClick={handleSidebar}>
           <LuMenuSquare size={20} />

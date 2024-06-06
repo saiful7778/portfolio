@@ -17,12 +17,10 @@ import { FaRegImages } from "react-icons/fa";
 const Sidebar = ({ role }: { role: string | undefined }) => {
   const { sidebar } = useStateData();
 
-  console.log(role);
-
   return (
     <aside
       className={cn(
-        "fixed left-0 top-0 z-[100] flex min-h-screen flex-col justify-between whitespace-nowrap border-r border-gray-700 bg-gray-800 shadow duration-300",
+        "fixed left-0 top-0 z-[100] flex min-h-screen flex-col justify-between whitespace-nowrap border-r border-border bg-card shadow duration-300",
         sidebar ? "w-36" : "max-sm:-left-full md:w-[43px]",
       )}
     >
@@ -73,7 +71,7 @@ const Sidebar = ({ role }: { role: string | undefined }) => {
           </SidebarItem>
           {role === "admin" && (
             <>
-              <hr className="border-gray-700" />
+              <hr className="border-border" />
               <SidebarItem
                 path="/settings"
                 textShow={sidebar}
@@ -90,9 +88,9 @@ const Sidebar = ({ role }: { role: string | undefined }) => {
 };
 
 const style = {
-  base: "inline-flex w-full items-center cursor-pointer rounded px-2 py-1 text-sm hover:bg-gray-700 duration-100",
-  active: "bg-gray-700 shadow",
-  inActive: "ring-1 ring-gray-700",
+  base: "inline-flex w-full items-center cursor-pointer rounded px-2 py-1 text-sm hover:bg-border duration-100",
+  active: "bg-border shadow",
+  inActive: "ring-1 ring-border",
 };
 
 const SidebarItem = ({
@@ -176,7 +174,7 @@ const SidebarDropdown = ({
               : "grid-rows-[0fr] opacity-0",
           )}
         >
-          <ul className="divide-y divide-gray-700 overflow-hidden border-b border-gray-700">
+          <ul className="divide-y divide-border overflow-hidden border-b border-border">
             {children}
           </ul>
         </div>
@@ -189,7 +187,7 @@ const SidebarDropdown = ({
               : "invisible opacity-0 group-hover:visible group-hover:opacity-100",
           )}
         >
-          <ul className="divide-y divide-gray-700 border border-gray-700 bg-gray-800">
+          <ul className="divide-y divide-border border border-border bg-card">
             {children}
           </ul>
         </div>
@@ -208,7 +206,7 @@ const SidebarDropdownItem = ({
   return (
     <li>
       <Link
-        className="block w-full cursor-pointer px-2 py-1 text-xs hover:bg-gray-700"
+        className="block w-full cursor-pointer px-2 py-1 text-xs hover:bg-border"
         href={path}
       >
         {children}
