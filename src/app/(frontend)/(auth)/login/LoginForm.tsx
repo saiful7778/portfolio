@@ -13,6 +13,10 @@ import { signIn } from "next-auth/react";
 import { defaultLoginRedirect } from "@/lib/routes";
 import reCaptcha from "@/lib/reCaptcha";
 import useToast from "@/hooks/useToast";
+import login from "@/lib/actions/auth/login";
+import { ToastAction } from "@/components/ui/toast";
+import sendVerifyEmail from "@/lib/actions/email/sendVerifyEmail";
+import Spinner from "@/components/Spinner";
 
 export default function LoginForm({ callbackUrl }: { callbackUrl?: string }) {
   const [spinner, setSpinner] = useState<boolean>(false);
@@ -58,6 +62,25 @@ export default function LoginForm({ callbackUrl }: { callbackUrl?: string }) {
           reset();
           return;
         }
+      }
+      const res = await login(e);
+      if (!res.success) {
+        if (res.message === "Email is not verified") {
+          toast({
+            variant: "destructive",
+            title: "Email is not verified",
+            action: (
+              <ToastAction
+                onClick={() => sendVerifyEmail(e.email)}
+                altText="Email verify mail end"
+              >
+                Send verify email
+              </ToastAction>
+            ),
+          });
+          return;
+        }
+        throw new Error(res.message);
       }
       await signIn("credentials", {
         email: e.email,
@@ -127,7 +150,7 @@ export default function LoginForm({ callbackUrl }: { callbackUrl?: string }) {
           />
         )}
         <Button className="w-full" size="lg" type="submit" disabled={spinner}>
-          Login
+          {spinner ? <Spinner /> : "Login"}
         </Button>
       </form>
     </Form>

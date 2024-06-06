@@ -27,6 +27,8 @@ const authConfig: AuthOptions = {
 
           if (!user) return null;
 
+          if (!user.isVerified) return null;
+
           const passwordsMatch = await compare(password, user.hashedPassword);
 
           if (!passwordsMatch) return null;
@@ -46,7 +48,6 @@ const authConfig: AuthOptions = {
   ],
   session: {
     strategy: "jwt",
-    maxAge: 4 * 60 * 60,
   },
   secret: process.env.NEXTAUTH_SECRET,
   debug: process.env.NODE_ENV === "development",
