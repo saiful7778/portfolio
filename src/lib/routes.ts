@@ -1,1 +1,1 @@
-export const defaultLoginRedirect: string = "/admin/dashboard";
+export const defaultLoginRedirect: string = "/dashboard";

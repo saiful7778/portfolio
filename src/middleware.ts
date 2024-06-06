@@ -10,4 +10,4 @@ export default withAuth(function middleware(req) {
   return null;
 });
 
-export const config = { matcher: ["/admin/:path*"] };
+export const config = { matcher: ["/dashboard"] };
