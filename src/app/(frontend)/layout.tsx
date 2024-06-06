@@ -10,7 +10,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import StateContextProvider from "@/context/StateContext";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
@@ -23,7 +22,7 @@ export default async function FrontendLayout({
 }) {
   const session = await getServerSession();
   return (
-    <StateContextProvider>
+    <>
       <header className="container">
         <Navbar />
       </header>
@@ -59,7 +58,7 @@ export default async function FrontendLayout({
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem className="cursor-pointer" asChild>
-                <Link href="/admin/dashboard">Dashboard</Link>
+                <Link href="/dashboard">Dashboard</Link>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <UserLogout />
@@ -68,6 +67,6 @@ export default async function FrontendLayout({
         </div>
       )}
       <Footer />
-    </StateContextProvider>
+    </>
   );
 }

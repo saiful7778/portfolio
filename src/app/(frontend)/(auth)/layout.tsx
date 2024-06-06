@@ -1,3 +1,4 @@
+import StateContextProvider from "@/context/StateContext";
 import { defaultLoginRedirect } from "@/lib/routes";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
@@ -13,8 +14,10 @@ export default async function AuthLayout({
     redirect(defaultLoginRedirect);
   }
   return (
-    <div className="mx-auto my-16 w-full max-w-sm rounded-md border bg-card p-4 text-card-foreground shadow-sm">
-      {children}
-    </div>
+    <StateContextProvider>
+      <div className="mx-auto my-16 w-full max-w-sm rounded-md border bg-card p-4 text-card-foreground shadow-sm">
+        {children}
+      </div>
+    </StateContextProvider>
   );
 }
