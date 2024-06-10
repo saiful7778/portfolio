@@ -1,5 +1,5 @@
 import { AuthOptions } from "next-auth";
-import { LoginSchema } from "@/lib/schemas/auth";
+import { loginSchema } from "@/lib/schemas/auth";
 import Credentials from "next-auth/providers/credentials";
 import db from "@/lib/db";
 import { compare } from "bcrypt";
@@ -12,7 +12,7 @@ const authConfig: AuthOptions = {
         password: { type: "password" },
       },
       async authorize(credentials) {
-        const validatedFields = LoginSchema.safeParse(credentials);
+        const validatedFields = loginSchema.safeParse(credentials);
 
         if (!validatedFields.success) return null;
 
