@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import Button from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
@@ -8,11 +8,13 @@ import Graphic03 from "@/components/graphics/Graphic-03";
 import Graphic04 from "@/components/graphics/Graphic-04";
 import TypingAnimation from "@/components/TypingAnimation";
 import bannerProfile from "../../../public/banner_profile.png";
+import { DestructiveColorBlob, PrimaryColorBlob } from "../GradiantBlob";
 
-export default function Banner() {
+const Banner: FC = () => {
   return (
     <section className="relative flex flex-col items-center justify-between gap-20 p-2 lg:flex-row">
-      <div className="absolute -left-96 top-0 z-0 h-[300px] w-[900px] rotate-45 rounded-full bg-blue-blob blur-[100px] filter" />
+      <PrimaryColorBlob className="-left-96 top-0" />
+      <DestructiveColorBlob className="-right-96 top-28" />
       <div className="z-[1] w-full lg:w-1/2">
         <h2 className="text-2xl uppercase tracking-widest">
           Hi, I{`'`}m Saiful Islam
@@ -60,7 +62,8 @@ export default function Banner() {
           <Graphic04 />
         </span>
       </div>
-      <div className="absolute -right-96 top-28 z-0 h-[300px] w-[900px] -rotate-[20deg] rounded-full bg-red-blob blur-[100px] filter" />
     </section>
   );
-}
+};
+
+export default Banner;
