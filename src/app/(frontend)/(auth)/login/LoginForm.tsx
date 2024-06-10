@@ -17,6 +17,7 @@ import login from "@/lib/actions/auth/login";
 import { ToastAction } from "@/components/ui/toast";
 import sendVerifyEmail from "@/lib/actions/email/sendVerifyEmail";
 import Spinner from "@/components/Spinner";
+import Password from "@/components/Password";
 
 export default function LoginForm({ callbackUrl }: { callbackUrl?: string }) {
   const [spinner, setSpinner] = useState<boolean>(false);
@@ -128,20 +129,7 @@ export default function LoginForm({ callbackUrl }: { callbackUrl?: string }) {
         <Form.field
           control={form.control}
           name="password"
-          render={({ field }) => (
-            <Form.item>
-              <Form.label>Password</Form.label>
-              <Form.control>
-                <Input
-                  type="password"
-                  placeholder="Password"
-                  {...field}
-                  disabled={spinner}
-                />
-              </Form.control>
-              <Form.message />
-            </Form.item>
-          )}
+          render={({ field }) => <Password spinner={spinner} {...field} />}
         />
         {showReCaptchaState && (
           <ReCAPTCHA
