@@ -1,13 +1,20 @@
 "use server";
 import db from "@/lib/db";
 import sendMail from "@/lib/sendMail";
-import { getUserByEmail } from "@/lib/utils/getUser";
 import crypto from "crypto";
 
 export default async function sendVerifyEmail(email: string) {
   try {
     const cryptoToken: string = crypto.randomBytes(32).toString("hex");
-    const user = await getUserByEmail(email);
+    const user = await db.user.findFirst({
+      where: {
+        email,
+      },
+      select: {
+        id: true,
+        email: true,
+      },
+    });
     const token = await db.token.create({
       data: {
         expires: BigInt(Date.now() + 2 * 60 * 60 * 1000),

@@ -1,6 +1,6 @@
 "use server";
+import db from "@/lib/db";
 import { loginSchema } from "@/lib/schemas/auth";
-import { getUserByEmail } from "@/lib/utils/getUser";
 import { z } from "zod";
 
 export default async function login(e: z.infer<typeof loginSchema>) {
@@ -14,12 +14,27 @@ export default async function login(e: z.infer<typeof loginSchema>) {
       };
     }
 
-    const user = await getUserByEmail(e.email);
+    const user = await db.user.findFirst({
+      where: {
+        email: e.email,
+      },
+      select: {
+        isVerified: true,
+        access: true,
+      },
+    });
 
     if (!user?.isVerified) {
       return {
         success: false,
         message: "Email is not verified",
+      };
+    }
+
+    if (!user?.access) {
+      return {
+        success: false,
+        message: "You can't access this site",
       };
     }
 

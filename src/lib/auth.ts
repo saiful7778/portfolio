@@ -1,8 +1,8 @@
 import { AuthOptions } from "next-auth";
 import { loginSchema } from "@/lib/schemas/auth";
 import Credentials from "next-auth/providers/credentials";
-import db from "@/lib/db";
 import { compare } from "bcrypt";
+import db from "./db";
 
 const authConfig: AuthOptions = {
   providers: [
@@ -19,7 +19,9 @@ const authConfig: AuthOptions = {
         const { email, password } = validatedFields.data;
         try {
           const user = await db.user.findFirst({
-            where: { email: email },
+            where: {
+              email,
+            },
             include: {
               image: true,
             },
@@ -33,6 +35,9 @@ const authConfig: AuthOptions = {
 
           if (!passwordsMatch) return null;
 
+          if (!user?.isVerified) return null;
+
+          if (!user?.access) return null;
           return {
             id: user.id,
             name: user.name,

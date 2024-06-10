@@ -1,7 +1,7 @@
 import Button from "@/components/ui/button";
-import { getUserById } from "@/lib/utils/getUser";
 import Link from "next/link";
 import VerifyButton from "./VerifyButton";
+import db from "@/lib/db";
 
 export default async function Verify({
   searchParams: { token, id },
@@ -19,7 +19,15 @@ export default async function Verify({
     );
   }
   try {
-    const user = await getUserById(id);
+    const user = await db.user.findUnique({
+      where: {
+        id,
+      },
+      select: {
+        id: true,
+        isVerified: true,
+      },
+    });
 
     if (!user) {
       return (
