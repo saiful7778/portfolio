@@ -2,7 +2,7 @@
 import Button from "@/components/ui/button";
 import Form from "@/components/ui/form";
 import Input from "@/components/ui/input";
-import { LoginSchema } from "@/lib/schemas/auth";
+import { loginSchema } from "@/lib/schemas/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import ReCAPTCHA from "react-google-recaptcha";
@@ -28,8 +28,8 @@ export default function LoginForm({ callbackUrl }: { callbackUrl?: string }) {
     showReCaptcha.show === "on" ||
     (showReCaptcha.show === "custom" && showReCaptcha.page.includes("login"));
 
-  const form = useForm<z.infer<typeof LoginSchema>>({
-    resolver: zodResolver(LoginSchema),
+  const form = useForm<z.infer<typeof loginSchema>>({
+    resolver: zodResolver(loginSchema),
     defaultValues: {
       email: "",
       password: "",
@@ -43,7 +43,7 @@ export default function LoginForm({ callbackUrl }: { callbackUrl?: string }) {
     };
   };
 
-  const handleSubmit = async (e: z.infer<typeof LoginSchema>) => {
+  const handleSubmit = async (e: z.infer<typeof loginSchema>) => {
     setSpinner(true);
     const reset = handleReset();
     try {

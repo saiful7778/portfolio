@@ -15,7 +15,7 @@ export default async function AuthLayout({
   }
   return (
     <StateContextProvider>
-      <div className="mx-auto my-16 w-full max-w-sm rounded-md border bg-card p-4 text-card-foreground shadow-sm">
+      <div className="mx-auto my-16 w-full max-w-sm rounded-md border bg-card p-4 shadow-sm">
         {children}
       </div>
     </StateContextProvider>

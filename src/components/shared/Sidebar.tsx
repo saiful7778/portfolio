@@ -20,7 +20,7 @@ const Sidebar = ({ role }: { role: string | undefined }) => {
   return (
     <aside
       className={cn(
-        "fixed left-0 top-0 z-[100] flex min-h-screen flex-col justify-between whitespace-nowrap border-r border-border bg-card shadow duration-300",
+        "fixed left-0 top-0 z-[100] flex min-h-screen flex-col justify-between whitespace-nowrap border-r bg-card shadow duration-300",
         sidebar ? "w-36" : "max-sm:-left-full md:w-[43px]",
       )}
     >
@@ -71,7 +71,7 @@ const Sidebar = ({ role }: { role: string | undefined }) => {
           </SidebarItem>
           {role === "admin" && (
             <>
-              <hr className="border-border" />
+              <hr className="" />
               <SidebarItem
                 path="/settings"
                 textShow={sidebar}
@@ -88,9 +88,9 @@ const Sidebar = ({ role }: { role: string | undefined }) => {
 };
 
 const style = {
-  base: "inline-flex w-full items-center cursor-pointer rounded px-2 py-1 text-sm hover:bg-border duration-100",
-  active: "bg-border shadow",
-  inActive: "ring-1 ring-border",
+  base: "inline-flex w-full items-center cursor-pointer rounded px-2 py-1 text-sm hover:bg-muted duration-100",
+  active: "bg-muted shadow",
+  inActive: "ring-1 ring-muted",
 };
 
 const SidebarItem = ({
@@ -174,7 +174,7 @@ const SidebarDropdown = ({
               : "grid-rows-[0fr] opacity-0",
           )}
         >
-          <ul className="divide-y divide-border overflow-hidden border-b border-border">
+          <ul className="divide-y divide-border overflow-hidden border-b ">
             {children}
           </ul>
         </div>
@@ -187,9 +187,7 @@ const SidebarDropdown = ({
               : "invisible opacity-0 group-hover:visible group-hover:opacity-100",
           )}
         >
-          <ul className="divide-y divide-border border border-border bg-card">
-            {children}
-          </ul>
+          <ul className="divide-y divide-border border bg-card">{children}</ul>
         </div>
       )}
     </li>

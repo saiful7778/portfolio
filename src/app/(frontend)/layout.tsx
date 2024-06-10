@@ -17,7 +17,7 @@ export default async function FrontendLayout({
       </header>
       <main className="container">{children}</main>
       {session && (
-        <div className="fixed bottom-3 right-0 z-50 flex items-center justify-center rounded-l-full border border-gray-700 bg-gray-800 p-2">
+        <div className="fixed bottom-3 right-0 z-50 flex items-center justify-center rounded-l-full border bg-card p-2">
           <UserAuthDropdown user={session?.user} />
         </div>
       )}
