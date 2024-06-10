@@ -22,7 +22,7 @@ export default async function BackendLayout({
           </header>
           <Sidebar role={session?.user.role} />
           {children}
-          <footer className="border-t border-border bg-card p-6 text-center text-sm text-muted-foreground">
+          <footer className="border-t bg-card p-6 text-center text-sm text-muted-foreground">
             <p>
               © 2023 Saiful Islam. All rights reserved by{" "}
               <Link
