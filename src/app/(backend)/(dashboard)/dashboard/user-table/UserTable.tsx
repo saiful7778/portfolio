@@ -1,32 +1,18 @@
-import db from "@/lib/db";
-import { DataTable } from "./date-table";
+import DataTable from "./date-table";
 import { columns } from "./columns";
-
-async function getUsers() {
-  try {
-    return db.user.findMany({
-      include: {
-        image: {
-          select: {
-            url: true,
-            alt: true,
-          },
-        },
-      },
-    });
-  } catch (err) {
-    if (err instanceof Error) {
-      throw new Error(err.message);
-    }
-  }
-}
+import getUsers from "@/lib/serverData/getUsers";
 
 export default async function UserTable() {
-  const users = await getUsers();
+  const users = await getUsers({
+    include: {
+      image: {
+        select: {
+          url: true,
+          alt: true,
+        },
+      },
+    },
+  });
 
-  return (
-    <div>
-      <DataTable columns={columns} data={users!} />
-    </div>
-  );
+  return <DataTable columns={columns} data={users!} />;
 }

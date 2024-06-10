@@ -3,16 +3,22 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ColumnDef } from "@tanstack/react-table";
 import Image from "next/image";
 import { MoreHorizontal } from "lucide-react";
-
 import Button from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import UpdateUser from "./UpdateUser";
 
 export type User = {
   name: string;
@@ -110,16 +116,30 @@ export const columns: ColumnDef<User>[] = [
 
       return (
         <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="icon">
-              <MoreHorizontal size={18} />
-              <span className="sr-only">Open menu</span>
-            </Button>
-          </DropdownMenuTrigger>
+          <div className="flex justify-center">
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="icon">
+                <MoreHorizontal size={18} />
+                <span className="sr-only">Open user manage menu</span>
+              </Button>
+            </DropdownMenuTrigger>
+          </div>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>User manage</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Delete</DropdownMenuItem>
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button className="w-full justify-start px-2" variant="ghost">
+                  Update user
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="w-full sm:max-w-md">
+                <DialogHeader>
+                  <DialogTitle>Edit user profile</DialogTitle>
+                </DialogHeader>
+                <UpdateUser user={user} />
+              </DialogContent>
+            </Dialog>
           </DropdownMenuContent>
         </DropdownMenu>
       );

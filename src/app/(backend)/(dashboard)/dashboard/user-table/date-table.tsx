@@ -8,7 +8,7 @@ import {
   getFilteredRowModel,
   FilterFn,
 } from "@tanstack/react-table";
-
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import {
   Table,
   TableBody,
@@ -26,7 +26,10 @@ interface DataTableProps<TData> {
   data: TData[];
 }
 
-export function DataTable<TData>({ columns, data }: DataTableProps<TData>) {
+export default function DataTable<TData>({
+  columns,
+  data,
+}: DataTableProps<TData>) {
   const globalFilterFn: FilterFn<User> = (row, columnId, filterValue) => {
     const user = row.original as User;
     return (
@@ -97,19 +100,19 @@ export function DataTable<TData>({ columns, data }: DataTableProps<TData>) {
       <div className="flex items-center justify-end space-x-2 py-4">
         <Button
           variant="outline"
-          size="sm"
-          onClick={() => table.previousPage()}
+          size="icon"
+          onClick={table.previousPage}
           disabled={!table.getCanPreviousPage()}
         >
-          Previous
+          <IoIosArrowBack />
         </Button>
         <Button
           variant="outline"
-          size="sm"
-          onClick={() => table.nextPage()}
+          size="icon"
+          onClick={table.nextPage}
           disabled={!table.getCanNextPage()}
         >
-          Next
+          <IoIosArrowForward />
         </Button>
       </div>
     </div>
