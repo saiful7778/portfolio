@@ -1,11 +1,11 @@
 "use server";
-import { LoginSchema } from "@/lib/schemas/auth";
+import { loginSchema } from "@/lib/schemas/auth";
 import { getUserByEmail } from "@/lib/utils/getUser";
 import { z } from "zod";
 
-export default async function login(e: z.infer<typeof LoginSchema>) {
+export default async function login(e: z.infer<typeof loginSchema>) {
   try {
-    const isValid = LoginSchema.safeParse(e);
+    const isValid = loginSchema.safeParse(e);
 
     if (!isValid.success) {
       return {
