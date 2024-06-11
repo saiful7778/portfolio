@@ -10,7 +10,7 @@ export type ToasterToast = ToastProps & {
 
 export type ToastProps = ComponentPropsWithoutRef<typeof Toast>;
 
-export type ToastActionElement = ReactElement<typeof Toast.action>;
+export type ToastActionElement = ReactElement<typeof Toast>;
 
 export interface State {
   toasts: ToasterToast[];
