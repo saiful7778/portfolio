@@ -1,9 +1,10 @@
 import Hierarchy from "@/components/sections/Hierarchy";
 import Banner from "@/components/shared/Banner";
-import getHierarchyData from "@/lib/getHierarchyData";
+import getHiererchyData from "@/lib/serverData/getHiererchyData";
+import { FC } from "react";
 
-export default function Home() {
-  const appDirData = getHierarchyData();
+const Home: FC = async () => {
+  const appDirData = await getHiererchyData();
 
   return (
     <>
@@ -11,4 +12,6 @@ export default function Home() {
       <Hierarchy hiererchyData={appDirData} />
     </>
   );
-}
+};
+
+export default Home;

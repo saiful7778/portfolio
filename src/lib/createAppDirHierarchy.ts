@@ -83,7 +83,7 @@ function readDirData(pathName: string) {
   return pathData;
 }
 
-export default function getHierarchyData() {
+export default function createAppDirHierarchy() {
   const appPath = path.join(process.cwd(), "/src/app");
   return readDirData(appPath);
 }

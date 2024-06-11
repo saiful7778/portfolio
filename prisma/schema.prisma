@@ -92,3 +92,8 @@ model Contact {
   subject     String
   details     String
 }
+
+model Hiererchy {
+  id            String @id @default(auto()) @map("_id") @db.ObjectId
+  hiererchyData Json[]
+}

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { DefaultSession, DefaultUser } from "next-auth";
 import { DefaultJWT } from "next-auth/jwt";
 

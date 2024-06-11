@@ -2,23 +2,29 @@
 import { File, FolderClosed } from "lucide-react";
 import { MdOutlineArrowRight, MdOutlineArrowDropDown } from "react-icons/md";
 import { FC, useState } from "react";
-import { pathDataType } from "@/lib/getHierarchyData";
 import SectionElement from "@/components/SectionElement";
 import Link from "next/link";
+import { pathDataType } from "@/lib/createAppDirHierarchy";
 
 interface HierarchyProps {
-  hiererchyData: pathDataType[];
+  hiererchyData: pathDataType[] | undefined;
 }
 
 const Hierarchy: FC<HierarchyProps> = ({ hiererchyData }) => {
   return (
     <SectionElement title="Folder structure" text="Structure of this app" blob>
       <div className="mx-auto max-h-96 min-h-fit w-full max-w-3xl overflow-auto rounded-md bg-card p-4">
-        <ol>
-          {hiererchyData.map((node, idx) => (
-            <HierarchyNode key={`hierarchy-node-${idx}`} node={node} />
-          ))}
-        </ol>
+        {hiererchyData ? (
+          <ul>
+            {hiererchyData.map((node, idx) => (
+              <HierarchyNode key={`hierarchy-node-${idx}`} node={node} />
+            ))}
+          </ul>
+        ) : (
+          <div className="text-center text-2xl font-bold text-destructive">
+            Something went wrong
+          </div>
+        )}
       </div>
     </SectionElement>
   );
@@ -76,15 +82,15 @@ const HierarchyNode = ({ node }: { node: pathDataType }) => {
         )}
       </div>
       {showChild && (
-        <ol className="ml-2">
+        <ul className="ml-2">
           {node.children && node.children.length > 0 && (
-            <ol className="ml-2">
+            <ul className="ml-2">
               {node.children.map((child, idx) => (
                 <HierarchyNode key={`hierarchy-child-${idx}`} node={child} />
               ))}
-            </ol>
+            </ul>
           )}
-        </ol>
+        </ul>
       )}
     </li>
   );
