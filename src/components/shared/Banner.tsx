@@ -12,7 +12,7 @@ import { DestructiveColorBlob, PrimaryColorBlob } from "../GradiantBlob";
 
 const Banner: FC = () => {
   return (
-    <section className="relative flex flex-col items-center justify-between gap-20 p-2 lg:flex-row">
+    <section className="relative flex flex-col items-center justify-between gap-20 lg:flex-row">
       <PrimaryColorBlob className="-left-96 top-0" />
       <DestructiveColorBlob className="-right-96 top-28" />
       <div className="z-[1] w-full lg:w-1/2">

@@ -36,6 +36,12 @@
   }
 }
 
+@layer components {
+  .container {
+    @apply p-2;
+  }
+}
+
 .nav-link {
   @apply relative capitalize duration-200;
 }

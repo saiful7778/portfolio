@@ -23,7 +23,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="flex w-full items-center justify-between gap-2 p-4">
+      <nav className="flex w-full items-center justify-between gap-2">
         <Link href="/" className="flex items-center gap-2">
           <Image src={profileImage} width={30} height={30} alt="site logo" />
           <span className="text-2xl font-bold">Saiful Islam</span>

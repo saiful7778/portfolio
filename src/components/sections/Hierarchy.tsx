@@ -70,7 +70,9 @@ const HierarchyNode = ({ node }: { node: pathDataType }) => {
           </span>
         )}
         {node?.comment && (
-          <span className="ml-4 text-slate-700">{"// " + node.comment}</span>
+          <span className="ml-4 text-slate-700 max-sm:hidden">
+            {"// " + node.comment}
+          </span>
         )}
       </div>
       {showChild && (
