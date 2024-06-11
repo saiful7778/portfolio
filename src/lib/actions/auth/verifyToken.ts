@@ -1,5 +1,5 @@
 "use server";
-import db from "../db";
+import db from "../../db";
 
 export default async function verifyToken(token: string, id: string) {
   try {
@@ -25,7 +25,8 @@ export default async function verifyToken(token: string, id: string) {
       }),
       db.token.delete({
         where: {
-          token,
+          userId: id,
+          token: token,
         },
       }),
     ]);

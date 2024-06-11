@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import profileImage from "../../../public/saiful_image.png";
-import { ReactNode, useState } from "react";
+import { FC, ReactNode, useState } from "react";
 import Button from "@/components/ui/button";
 import { usePathname } from "next/navigation";
 import cn from "@/lib/utils/cn";
@@ -10,7 +10,7 @@ import { navLinks } from "@/lib/staticData";
 import { LuMenu } from "react-icons/lu";
 import { RxCross2 } from "react-icons/rx";
 
-export default function Navbar() {
+const Navbar: FC = () => {
   const [menu, setMenu] = useState<boolean>(false);
 
   const renderNavLinks = navLinks.map((nav, idx) => (
@@ -65,7 +65,7 @@ export default function Navbar() {
       </div>
     </>
   );
-}
+};
 
 interface NavLinkProps {
   children: ReactNode;
@@ -92,3 +92,5 @@ function NavLink({ children, path, subPath }: NavLinkProps) {
     </Link>
   );
 }
+
+export default Navbar;

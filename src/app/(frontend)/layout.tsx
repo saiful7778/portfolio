@@ -1,14 +1,11 @@
 import UserAuthDropdown from "@/components/UserAuthDropdown";
 import Footer from "@/components/shared/Footer";
 import Navbar from "@/components/shared/Navbar";
+import { LayoutProps } from "@/types/layoutTypes";
 import { getServerSession } from "next-auth";
-import { ReactNode } from "react";
+import { FC } from "react";
 
-export default async function FrontendLayout({
-  children,
-}: {
-  children: ReactNode;
-}) {
+const FrontendLayout: FC<Readonly<LayoutProps>> = async ({ children }) => {
   const session = await getServerSession();
   return (
     <>
@@ -24,4 +21,6 @@ export default async function FrontendLayout({
       <Footer />
     </>
   );
-}
+};
+
+export default FrontendLayout;

@@ -3,8 +3,9 @@ import Link from "next/link";
 import profileImage from "../../../public/saiful_image.png";
 import { navLinks } from "@/lib/staticData";
 import { FaFacebook, FaLinkedin, FaGithub, FaXTwitter } from "react-icons/fa6";
+import { FC } from "react";
 
-export default function Footer() {
+const Footer: FC = () => {
   return (
     <footer className="bg-gray-800/50">
       <div className="flex flex-col items-center justify-between gap-4 p-14 md:flex-row">
@@ -60,4 +61,6 @@ export default function Footer() {
       </p>
     </footer>
   );
-}
+};
+
+export default Footer;

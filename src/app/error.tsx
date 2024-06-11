@@ -4,8 +4,10 @@ import {
   PrimaryColorBlob,
 } from "@/components/GradiantBlob";
 import Button from "@/components/ui/button";
+import { ErrorProps } from "@/types/errorTypes";
+import { FC } from "react";
 
-const Error = ({ reset }: { reset: () => void }) => {
+const Error: FC<ErrorProps> = ({ reset }) => {
   return (
     <section className="relative flex h-screen w-full flex-col items-center justify-center gap-4 overflow-hidden">
       <PrimaryColorBlob className="-left-96 top-0" />

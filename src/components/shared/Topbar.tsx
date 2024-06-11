@@ -11,16 +11,17 @@ import { LuMenuSquare } from "react-icons/lu";
 import profileImage from "../../../public/saiful_image.png";
 // import moment from "moment";
 import UserAuthDropdown from "../UserAuthDropdown";
+import { FC } from "react";
 
-const Topbar = ({
-  user,
-}: {
+interface TopbarProps {
   user?: {
     name?: string | null;
     email?: string | null;
     image?: string | null;
   };
-}) => {
+}
+
+const Topbar: FC<TopbarProps> = ({ user }) => {
   const { handleSidebar } = useStateData();
 
   return (

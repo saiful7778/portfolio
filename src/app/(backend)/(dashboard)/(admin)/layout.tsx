@@ -1,15 +1,15 @@
 import useAuth from "@/hooks/useAuth";
+import { defaultLoginRedirect } from "@/lib/routes";
+import { LayoutProps } from "@/types/layoutTypes";
 import { redirect } from "next/navigation";
-import { ReactNode } from "react";
+import { FC } from "react";
 
-export default async function AdminLayout({
-  children,
-}: {
-  children: ReactNode;
-}) {
+const AdminLayout: FC<Readonly<LayoutProps>> = async ({ children }) => {
   const session = await useAuth();
   if (session?.user.role !== "admin") {
-    redirect("/dashboard");
+    redirect(defaultLoginRedirect);
   }
   return <div>{children}</div>;
-}
+};
+
+export default AdminLayout;

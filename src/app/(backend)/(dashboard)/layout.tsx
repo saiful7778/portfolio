@@ -1,9 +1,10 @@
 "use client";
 import useStateData from "@/hooks/useStateData";
 import cn from "@/lib/utils/cn";
-import { ReactNode } from "react";
+import { LayoutProps } from "@/types/layoutTypes";
+import { FC } from "react";
 
-export default function DashboardLayout({ children }: { children: ReactNode }) {
+const DashboardLayout: FC<Readonly<LayoutProps>> = ({ children }) => {
   const { sidebar } = useStateData();
   return (
     <div
@@ -17,4 +18,6 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
       </main>
     </div>
   );
-}
+};
+
+export default DashboardLayout;

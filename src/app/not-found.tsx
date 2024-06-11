@@ -4,8 +4,9 @@ import {
 } from "@/components/GradiantBlob";
 import Button from "@/components/ui/button";
 import Link from "next/link";
+import { FC } from "react";
 
-export default function NotFound() {
+const NotFound: FC = () => {
   return (
     <main className="relative flex h-screen w-full flex-col items-center justify-center gap-2">
       <PrimaryColorBlob className="-left-96 top-0" />
@@ -18,4 +19,6 @@ export default function NotFound() {
       </Button>
     </main>
   );
-}
+};
+
+export default NotFound;

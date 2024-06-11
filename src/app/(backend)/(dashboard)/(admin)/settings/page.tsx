@@ -1,5 +1,7 @@
-import React from "react";
+import React, { FC } from "react";
 
-export default function SettingsPage() {
+const SettingsPage: FC = () => {
   return <div>SettingsPage</div>;
-}
+};
+
+export default SettingsPage;

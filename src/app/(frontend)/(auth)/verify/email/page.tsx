@@ -2,12 +2,20 @@ import Button from "@/components/ui/button";
 import Link from "next/link";
 import VerifyButton from "./VerifyButton";
 import db from "@/lib/db";
+import { FC } from "react";
+import { Metadata } from "next";
 
-export default async function Verify({
-  searchParams: { token, id },
-}: {
+export const metadata: Metadata = {
+  title: "Verify email - Saiful Islam portfolio",
+  description:
+    "This is user email verify page of Saiful Islam portfolio website.",
+};
+
+interface VerifyProps {
   searchParams: { token?: string; id?: string };
-}) {
+}
+
+const Verify: FC<VerifyProps> = async ({ searchParams: { token, id } }) => {
   if (!token || !id) {
     return (
       <div className="w-full rounded border border-red-600 bg-red-700 p-4 text-center">
@@ -67,4 +75,6 @@ export default async function Verify({
       </div>
     );
   }
-}
+};
+
+export default Verify;

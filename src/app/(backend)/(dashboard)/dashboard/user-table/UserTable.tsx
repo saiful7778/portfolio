@@ -2,7 +2,7 @@ import DataTable from "./date-table";
 import { columns } from "./columns";
 import getUsers from "@/lib/serverData/getUsers";
 
-export default async function UserTable() {
+const UserTable = async () => {
   const users = await getUsers({
     include: {
       image: {
@@ -15,4 +15,6 @@ export default async function UserTable() {
   });
 
   return <DataTable columns={columns} data={users!} />;
-}
+};
+
+export default UserTable;

@@ -12,16 +12,17 @@ import Image from "next/image";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
 import Button from "@/components/ui/button";
+import { FC } from "react";
 
-export default function UserAuthDropdown({
-  user,
-}: {
+interface UserAuthDropdownProps {
   user?: {
     name?: string | null;
     email?: string | null;
     image?: string | null;
   };
-}) {
+}
+
+const UserAuthDropdown: FC<UserAuthDropdownProps> = ({ user }) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -64,4 +65,6 @@ export default function UserAuthDropdown({
       </DropdownMenuContent>
     </DropdownMenu>
   );
-}
+};
+
+export default UserAuthDropdown;

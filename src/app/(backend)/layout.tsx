@@ -4,14 +4,19 @@ import { EdgeStoreProvider } from "@/context/EdgeStoreContext";
 import SessionContextProvider from "@/context/SessionContext";
 import StateContextProvider from "@/context/StateContext";
 import useAuth from "@/hooks/useAuth";
+import { LayoutProps } from "@/types/layoutTypes";
+import { Metadata } from "next";
 import Link from "next/link";
-import { ReactNode } from "react";
+import { FC } from "react";
 
-export default async function BackendLayout({
-  children,
-}: {
-  children: ReactNode;
-}) {
+export const metadata: Metadata = {
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
+
+const BackendLayout: FC<Readonly<LayoutProps>> = async ({ children }) => {
   const session = await useAuth();
   return (
     <EdgeStoreProvider>
@@ -38,4 +43,6 @@ export default async function BackendLayout({
       </StateContextProvider>
     </EdgeStoreProvider>
   );
-}
+};
+
+export default BackendLayout;

@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import ReCAPTCHA from "react-google-recaptcha";
 import { z } from "zod";
-import { useState } from "react";
+import { FC, useState } from "react";
 import useStateData from "@/hooks/useStateData";
 import { signIn } from "next-auth/react";
 import { defaultLoginRedirect } from "@/lib/routes";
@@ -19,7 +19,11 @@ import sendVerifyEmail from "@/lib/actions/email/sendVerifyEmail";
 import Spinner from "@/components/Spinner";
 import Password from "@/components/Password";
 
-export default function LoginForm({ callbackUrl }: { callbackUrl?: string }) {
+interface LoginFormProps {
+  callbackUrl?: string;
+}
+
+const LoginForm: FC<LoginFormProps> = ({ callbackUrl }) => {
   const [spinner, setSpinner] = useState<boolean>(false);
   const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
   const { toast } = useToast();
@@ -143,4 +147,6 @@ export default function LoginForm({ callbackUrl }: { callbackUrl?: string }) {
       </form>
     </Form>
   );
-}
+};
+
+export default LoginForm;

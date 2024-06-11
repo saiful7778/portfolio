@@ -26,10 +26,7 @@ interface DataTableProps<TData> {
   data: TData[];
 }
 
-export default function DataTable<TData>({
-  columns,
-  data,
-}: DataTableProps<TData>) {
+const DataTable = <TData,>({ columns, data }: DataTableProps<TData>) => {
   const globalFilterFn: FilterFn<User> = (row, columnId, filterValue) => {
     const user = row.original as User;
     return (
@@ -117,4 +114,6 @@ export default function DataTable<TData>({
       </div>
     </div>
   );
-}
+};
+
+export default DataTable;

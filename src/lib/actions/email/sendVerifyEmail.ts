@@ -26,7 +26,7 @@ export default async function sendVerifyEmail(email: string) {
     await sendMail({
       email: String(user?.email),
       subject: "Email verification",
-      body: `<p>Click <a href="${process.env.NEXT_PUBLIC_DOMAIN}/verify?token=${token.token}&id=${user?.id}">here</a> to verify your email</p>`,
+      body: `<p>Click <a href="${process.env.NEXT_PUBLIC_DOMAIN}/verify/email?token=${token.token}&id=${user?.id}">here</a> to verify your email</p>`,
     });
   } catch (err) {
     if (err instanceof Error) {

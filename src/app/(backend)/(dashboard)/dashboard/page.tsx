@@ -1,11 +1,11 @@
 import Link from "next/link";
 import useAuth from "@/hooks/useAuth";
-import UserTable from "./user-table/UserTable";
 import { Metadata } from "next";
 import { getBlogsCount, getLastBlog } from "@/lib/serverData/getBlogs";
 import { getLastProject, getProjectsCount } from "@/lib/serverData/getProjects";
+import { FC } from "react";
+import UserTable from "./user-table/UserTable";
 
-export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Dashboard - Portfolio Saiful",
   authors: [
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     "This is the dashboard page of Saiful Islam personal portfolio website.",
 };
 
-export default async function DashBoard() {
+const DashBoard: FC = async () => {
   const lastProject = await getLastProject({
     select: {
       id: true,
@@ -85,4 +85,6 @@ export default async function DashBoard() {
       {session?.user.role === "admin" && <UserTable />}
     </>
   );
-}
+};
+
+export default DashBoard;

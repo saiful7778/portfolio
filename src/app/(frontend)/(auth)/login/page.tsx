@@ -1,15 +1,17 @@
+import { FC } from "react";
 import LoginForm from "./LoginForm";
+import { Metadata } from "next";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Login - Saiful Islam portfolio",
   description: "This is login page of Saiful Islam portfolio website.",
 };
 
-export default function Login({
-  searchParams: { error },
-}: {
+interface LoginProps {
   searchParams: { error?: string };
-}) {
+}
+
+const Login: FC<LoginProps> = ({ searchParams: { error } }) => {
   return (
     <>
       <h3 className="text-center text-3xl font-bold">Login</h3>
@@ -22,4 +24,6 @@ export default function Login({
       <LoginForm />
     </>
   );
-}
+};
+
+export default Login;

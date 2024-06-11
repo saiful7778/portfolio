@@ -2,7 +2,7 @@
 import Spinner from "@/components/Spinner";
 import Button from "@/components/ui/button";
 import useToast from "@/hooks/useToast";
-import verifyToken from "@/lib/actions/verifyToken";
+import verifyToken from "@/lib/actions/auth/verifyToken";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -25,7 +25,7 @@ export default function VerifyButton({
         toast({
           title: "Email is verified",
         });
-        router.push("/login");
+        router.replace("/login");
       }
     } catch (err) {
       if (err instanceof Error) {

@@ -1,14 +1,19 @@
 import StateContextProvider from "@/context/StateContext";
 import { defaultLoginRedirect } from "@/lib/routes";
+import { LayoutProps } from "@/types/layoutTypes";
+import { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import { ReactNode } from "react";
+import { FC } from "react";
 
-export default async function AuthLayout({
-  children,
-}: {
-  children: ReactNode;
-}) {
+export const metadata: Metadata = {
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
+
+const AuthLayout: FC<Readonly<LayoutProps>> = async ({ children }) => {
   const session = await getServerSession();
   if (!!session?.user) {
     redirect(defaultLoginRedirect);
@@ -20,4 +25,6 @@ export default async function AuthLayout({
       </div>
     </StateContextProvider>
   );
-}
+};
+
+export default AuthLayout;

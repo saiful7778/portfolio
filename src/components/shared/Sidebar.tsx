@@ -4,7 +4,7 @@ import cn from "@/lib/utils/cn";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 // hooks
-import { ReactNode, useState } from "react";
+import { FC, ReactNode, useState } from "react";
 import useStateData from "@/hooks/useStateData";
 // icons
 import { IoSettingsOutline, IoMailUnreadOutline } from "react-icons/io5";
@@ -14,7 +14,11 @@ import { IoIosArrowDown } from "react-icons/io";
 import { BsFileEarmarkPostFill } from "react-icons/bs";
 import { FaRegImages } from "react-icons/fa";
 
-const Sidebar = ({ role }: { role: string | undefined }) => {
+interface SidebarProps {
+  role?: "user" | "admin";
+}
+
+const Sidebar: FC<SidebarProps> = ({ role }) => {
   const { sidebar } = useStateData();
 
   return (
@@ -93,16 +97,18 @@ const style = {
   inActive: "ring-1 ring-muted",
 };
 
-const SidebarItem = ({
-  children,
-  path,
-  icon,
-  textShow,
-}: {
+interface SidebarItemProps {
   children: string;
   path: string;
   icon: ReactNode;
   textShow: boolean;
+}
+
+const SidebarItem: FC<SidebarItemProps> = ({
+  children,
+  path,
+  icon,
+  textShow,
 }) => {
   const pathName = usePathname();
   return (
@@ -124,22 +130,25 @@ const SidebarItem = ({
   );
 };
 
-const SidebarDropdown = ({
-  children,
-  path,
-  title,
-  icon,
-  textShow,
-}: {
+interface SidebarDropdownProps {
   children: ReactNode;
   path: string;
   title: string;
   icon: ReactNode;
   textShow: boolean;
+}
+
+const SidebarDropdown: FC<SidebarDropdownProps> = ({
+  children,
+  path,
+  title,
+  icon,
+  textShow,
 }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const pathName = usePathname();
   const isActive = pathName.startsWith(path);
+
   return (
     <li className="group relative">
       <div
@@ -194,12 +203,14 @@ const SidebarDropdown = ({
   );
 };
 
-const SidebarDropdownItem = ({
-  path,
-  children,
-}: {
+interface SidebarDropdownItemProps {
   path: string;
   children: string;
+}
+
+const SidebarDropdownItem: FC<SidebarDropdownItemProps> = ({
+  path,
+  children,
 }) => {
   return (
     <li>
