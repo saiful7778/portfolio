@@ -3,13 +3,7 @@ import Spinner from "@/components/Spinner";
 import Button from "@/components/ui/button";
 import Form from "@/components/ui/form";
 import Input from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import Select from "@/components/ui/select";
 import Switch from "@/components/ui/switch";
 import revalidate from "@/lib/actions/revalidate";
 import updateUser from "@/lib/actions/user/updateUser";
@@ -124,14 +118,14 @@ const UpdateUser: FC<UpdateUserProps> = ({ user }) => {
                   defaultValue={field.value}
                 >
                   <Form.control>
-                    <SelectTrigger className="col-span-3" disabled={loading}>
-                      <SelectValue placeholder="Select user role" />
-                    </SelectTrigger>
+                    <Select.trigger className="col-span-3" disabled={loading}>
+                      <Select.value placeholder="Select user role" />
+                    </Select.trigger>
                   </Form.control>
-                  <SelectContent>
-                    <SelectItem value="user">user</SelectItem>
-                    <SelectItem value="admin">admin</SelectItem>
-                  </SelectContent>
+                  <Select.content>
+                    <Select.item value="user">user</Select.item>
+                    <Select.item value="admin">admin</Select.item>
+                  </Select.content>
                 </Select>
                 <Form.message />
               </Form.item>

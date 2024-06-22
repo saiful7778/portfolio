@@ -37,6 +37,8 @@ export const autoTypingText: (string | number)[] = [
   2000,
 ];
 
+export const tableRowPerPage = [5, 10, 15, 20];
+
 export type pathDataType = {
   name: string;
   type: "folder" | "file";

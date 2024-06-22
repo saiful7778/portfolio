@@ -66,6 +66,7 @@ const HierarchyNode = ({ node }: { node: pathDataType }) => {
                 setShowChild((prop) => !prop);
               }
             }}
+            role="button"
             className="cursor-pointer hover:underline"
           >
             {node.name}
