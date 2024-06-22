@@ -4,19 +4,15 @@ import { MdOutlineArrowRight, MdOutlineArrowDropDown } from "react-icons/md";
 import { FC, useState } from "react";
 import SectionElement from "@/components/SectionElement";
 import Link from "next/link";
-import { pathDataType } from "@/lib/createAppDirHierarchy";
+import { hierarchyData, type pathDataType } from "@/lib/staticData";
 
-interface HierarchyProps {
-  hiererchyData: pathDataType[] | undefined;
-}
-
-const Hierarchy: FC<HierarchyProps> = ({ hiererchyData }) => {
+const Hierarchy: FC = () => {
   return (
     <SectionElement title="Folder structure" text="Structure of this app" blob>
       <div className="mx-auto max-h-96 min-h-fit w-full max-w-3xl overflow-auto rounded-md bg-card p-4">
-        {hiererchyData ? (
+        {hierarchyData ? (
           <ul>
-            {hiererchyData.map((node, idx) => (
+            {hierarchyData.map((node, idx) => (
               <HierarchyNode key={`hierarchy-node-${idx}`} node={node} />
             ))}
           </ul>

@@ -1,13 +1,6 @@
 import fs from "fs";
 import path from "path";
-
-export type pathDataType = {
-  name: string;
-  type: "folder" | "file";
-  children?: pathDataType[];
-  comment?: string;
-  link?: string;
-};
+import type { pathDataType } from "./staticData";
 
 function readDirData(pathName: string) {
   const pathDir = fs.readdirSync(pathName);

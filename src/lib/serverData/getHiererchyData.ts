@@ -1,5 +1,5 @@
 import db from "@/lib/db";
-import { pathDataType } from "@/lib/createAppDirHierarchy";
+import type { pathDataType } from "@/lib/staticData";
 
 export default async function getHiererchyData() {
   try {
@@ -7,10 +7,7 @@ export default async function getHiererchyData() {
     if (!hiererchyData) {
       throw new Error("Hiererchy data not found");
     }
-    const data: pathDataType[] | undefined = hiererchyData?.hiererchyData as
-      | pathDataType[]
-      | undefined;
-
+    const data = hiererchyData?.hiererchyData as pathDataType[];
     return data;
   } catch (err) {
     if (err instanceof Error) {

@@ -93,7 +93,7 @@ model Contact {
   details     String
 }
 
-model Hiererchy {
+model Hierarchy {
   id            String @id @default(auto()) @map("_id") @db.ObjectId
-  hiererchyData Json[]
+  hierarchyData Json[]
 }

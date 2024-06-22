@@ -27,7 +27,7 @@ interface DataTableProps<TData> {
 }
 
 const DataTable = <TData,>({ columns, data }: DataTableProps<TData>) => {
-  const globalFilterFn: FilterFn<User> = (row, columnId, filterValue) => {
+  const globalFilterFn: FilterFn<User> = (row, _, filterValue) => {
     const user = row.original as User;
     return (
       user.name.toLowerCase().includes(filterValue.toLowerCase()) ||
