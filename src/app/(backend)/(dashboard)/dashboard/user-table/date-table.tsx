@@ -33,7 +33,7 @@ interface DataTableProps<TData> {
   data: TData[];
 }
 
-const DataTable = <TData,>({ columns, data }: DataTableProps<TData>) => {
+const UserTable = <TData,>({ columns, data }: DataTableProps<TData>) => {
   const globalFilterFn: FilterFn<User> = (row, _, filterValue) => {
     const user = row.original as User;
     return (
@@ -42,7 +42,7 @@ const DataTable = <TData,>({ columns, data }: DataTableProps<TData>) => {
     );
   };
 
-  const table = useReactTable<TData>({
+  const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
@@ -167,4 +167,4 @@ const DataTable = <TData,>({ columns, data }: DataTableProps<TData>) => {
   );
 };
 
-export default DataTable;
+export default UserTable;

@@ -46,7 +46,7 @@ const Sidebar: FC<SidebarProps> = ({ role }) => {
             <SidebarDropdownItem path="/project/add_project">
               Add Project
             </SidebarDropdownItem>
-            <SidebarDropdownItem path="/project/all_projects">
+            <SidebarDropdownItem path="/project">
               All Projects
             </SidebarDropdownItem>
           </SidebarDropdown>
