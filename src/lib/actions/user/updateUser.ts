@@ -1,6 +1,7 @@
 "use server";
 import db from "@/lib/db";
 import { updateUserSchema } from "@/lib/schemas/auth";
+import { revalidatePath } from "next/cache";
 import { z } from "zod";
 
 export default async function updateUser(e: z.infer<typeof updateUserSchema>) {
@@ -21,6 +22,10 @@ export default async function updateUser(e: z.infer<typeof updateUserSchema>) {
     if (!user) {
       throw new Error("User not found");
     }
+
+    revalidatePath("/dashboard");
+
+    return true;
   } catch (err) {
     if (err instanceof Error) {
       throw new Error(err.message);

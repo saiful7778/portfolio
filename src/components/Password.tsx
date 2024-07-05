@@ -1,27 +1,34 @@
 "use client";
 import { forwardRef, useState } from "react";
-import Form from "@/components/ui/form";
-import Input, { InputProps } from "@/components/ui/input";
+import {
+  FormControl,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import Input from "@/components/ui/input";
 import Button from "./ui/button";
 import { Eye, EyeOff } from "lucide-react";
+import type { InputProps } from "@/types/types";
 
 interface InputFieldProps extends InputProps {
-  spinner: boolean;
+  loading: boolean;
 }
 
 const Password = forwardRef<HTMLInputElement, InputFieldProps>(
-  ({ spinner, ...props }, ref) => {
+  ({ loading, ...props }, ref) => {
     const [showPass, setShowPass] = useState<boolean>(false);
+
     return (
-      <Form.item>
-        <Form.label>Password</Form.label>
-        <Form.control>
+      <FormItem>
+        <FormLabel>Password</FormLabel>
+        <FormControl>
           <div className="relative">
             <Input
               ref={ref}
               type={showPass ? "text" : "password"}
               placeholder="Password"
-              disabled={spinner}
+              disabled={loading}
               {...props}
             />
             <div className="absolute right-2 top-[15%]">
@@ -29,15 +36,16 @@ const Password = forwardRef<HTMLInputElement, InputFieldProps>(
                 type="button"
                 onClick={() => setShowPass((prop) => !prop)}
                 variant="ghost"
+                disabled={loading}
                 size="icon"
               >
                 {showPass ? <Eye /> : <EyeOff />}
               </Button>
             </div>
           </div>
-        </Form.control>
-        <Form.message />
-      </Form.item>
+        </FormControl>
+        <FormMessage />
+      </FormItem>
     );
   },
 );

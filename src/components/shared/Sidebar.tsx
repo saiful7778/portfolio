@@ -43,7 +43,7 @@ const Sidebar: FC<SidebarProps> = ({ role }) => {
             icon={<GoProjectSymlink />}
             title="Project"
           >
-            <SidebarDropdownItem path="/project/add_project">
+            <SidebarDropdownItem path="/project/add">
               Add Project
             </SidebarDropdownItem>
             <SidebarDropdownItem path="/project">

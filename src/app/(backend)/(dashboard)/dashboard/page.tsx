@@ -1,10 +1,8 @@
 import Link from "next/link";
-import useAuth from "@/hooks/useAuth";
 import { Metadata } from "next";
 import { getBlogsCount, getLastBlog } from "@/lib/serverData/getBlogs";
 import { getLastProject, getProjectsCount } from "@/lib/serverData/getProjects";
 import { FC } from "react";
-import UserTable from "./user-table/UserTable";
 
 export const metadata: Metadata = {
   title: "Dashboard - Portfolio Saiful",
@@ -35,7 +33,6 @@ const DashBoard: FC = async () => {
       title: true,
     },
   });
-  const session = await useAuth();
 
   return (
     <>
@@ -82,7 +79,6 @@ const DashBoard: FC = async () => {
           </div>
         </div>
       </div>
-      {session?.user.role === "admin" && <UserTable />}
     </>
   );
 };

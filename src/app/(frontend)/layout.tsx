@@ -1,7 +1,7 @@
 import UserAuthDropdown from "@/components/UserAuthDropdown";
 import Footer from "@/components/shared/Footer";
 import Navbar from "@/components/shared/Navbar";
-import { LayoutProps } from "@/types/layoutTypes";
+import type { LayoutProps } from "@/types/types";
 import { getServerSession } from "next-auth";
 import { FC } from "react";
 

@@ -1,8 +1,7 @@
-import DataTable from "./date-table";
-import { columns } from "./columns";
+import UserTable from "@/components/table/user-table/UserTable";
 import getUsers from "@/lib/serverData/getUsers";
 
-const UserTable = async () => {
+const UserTablePage = async () => {
   const users = await getUsers({
     include: {
       image: {
@@ -14,7 +13,7 @@ const UserTable = async () => {
     },
   });
 
-  return <DataTable columns={columns} data={users!} />;
+  return <UserTable data={users!} />;
 };
 
-export default UserTable;
+export default UserTablePage;

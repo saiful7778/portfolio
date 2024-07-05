@@ -4,7 +4,7 @@ import {
   PrimaryColorBlob,
 } from "@/components/GradiantBlob";
 import Button from "@/components/ui/button";
-import { ErrorProps } from "@/types/errorTypes";
+import type { ErrorProps } from "@/types/types";
 import { FC } from "react";
 
 const Error: FC<ErrorProps> = ({ reset }) => {

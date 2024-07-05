@@ -5,5 +5,5 @@ export default async function revalidate(
   originalPath: string,
   type: "layout" | "page" = "page",
 ) {
-  revalidatePath(originalPath, type);
+  return revalidatePath(originalPath, type);
 }

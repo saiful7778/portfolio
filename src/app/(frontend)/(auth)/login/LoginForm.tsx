@@ -1,7 +1,6 @@
 "use client";
 import Button from "@/components/ui/button";
-import Form from "@/components/ui/form";
-import Input from "@/components/ui/input";
+import { Form, FormField } from "@/components/ui/form";
 import { loginSchema } from "@/lib/schemas/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -18,13 +17,14 @@ import { ToastAction } from "@/components/ui/toast";
 import sendVerifyEmail from "@/lib/actions/email/sendVerifyEmail";
 import Spinner from "@/components/Spinner";
 import Password from "@/components/Password";
+import InputField from "@/components/InputField";
 
 interface LoginFormProps {
   callbackUrl?: string;
 }
 
 const LoginForm: FC<LoginFormProps> = ({ callbackUrl }) => {
-  const [spinner, setSpinner] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
   const { toast } = useToast();
 
@@ -44,12 +44,12 @@ const LoginForm: FC<LoginFormProps> = ({ callbackUrl }) => {
   const handleReset = () => {
     return () => {
       form.reset();
-      setSpinner(false);
+      setLoading(false);
     };
   };
 
   const handleSubmit = async (e: z.infer<typeof loginSchema>) => {
-    setSpinner(true);
+    setLoading(true);
     const reset = handleReset();
     try {
       if (showReCaptchaState) {
@@ -58,7 +58,7 @@ const LoginForm: FC<LoginFormProps> = ({ callbackUrl }) => {
             variant: "destructive",
             title: "Please verify the reCAPTCHA!",
           });
-          setSpinner(false);
+          setLoading(false);
           return;
         }
 
@@ -112,28 +112,23 @@ const LoginForm: FC<LoginFormProps> = ({ callbackUrl }) => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
-        <Form.field
+        <FormField
           control={form.control}
           name="email"
           render={({ field }) => (
-            <Form.item>
-              <Form.label>Email address</Form.label>
-              <Form.control>
-                <Input
-                  type="email"
-                  placeholder="Email address"
-                  {...field}
-                  disabled={spinner}
-                />
-              </Form.control>
-              <Form.message />
-            </Form.item>
+            <InputField
+              label="Email address"
+              type="email"
+              placeholder="Email address"
+              disabled={loading}
+              {...field}
+            />
           )}
         />
-        <Form.field
+        <FormField
           control={form.control}
           name="password"
-          render={({ field }) => <Password spinner={spinner} {...field} />}
+          render={({ field }) => <Password loading={loading} {...field} />}
         />
         {showReCaptchaState && (
           <ReCAPTCHA
@@ -141,8 +136,8 @@ const LoginForm: FC<LoginFormProps> = ({ callbackUrl }) => {
             sitekey={process.env.NEXT_PUBLIC_SITE_KEY!}
           />
         )}
-        <Button className="w-full" size="lg" type="submit" disabled={spinner}>
-          {spinner ? <Spinner /> : "Login"}
+        <Button className="w-full" size="lg" type="submit" disabled={loading}>
+          {loading ? <Spinner size={15} /> : "Login"}
         </Button>
       </form>
     </Form>

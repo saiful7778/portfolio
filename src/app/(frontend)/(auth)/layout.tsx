@@ -1,6 +1,6 @@
 import StateContextProvider from "@/context/StateContext";
 import { defaultLoginRedirect } from "@/lib/routes";
-import { LayoutProps } from "@/types/layoutTypes";
+import type { LayoutProps } from "@/types/types";
 import { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";

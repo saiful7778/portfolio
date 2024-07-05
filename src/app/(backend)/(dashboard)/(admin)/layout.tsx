@@ -1,6 +1,6 @@
 import useAuth from "@/hooks/useAuth";
 import { defaultLoginRedirect } from "@/lib/routes";
-import { LayoutProps } from "@/types/layoutTypes";
+import type { LayoutProps } from "@/types/types";
 import { redirect } from "next/navigation";
 import { FC } from "react";
 

@@ -1,6 +1,6 @@
 "use client";
 import Button from "@/components/ui/button";
-import { ErrorProps } from "@/types/errorTypes";
+import type { ErrorProps } from "@/types/types";
 import { FC, useEffect } from "react";
 
 const Error: FC<ErrorProps> = ({ error, reset }) => {

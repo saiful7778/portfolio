@@ -8,10 +8,11 @@ import {
   FieldValues,
   FormProvider,
 } from "react-hook-form";
-
 import cn from "@/lib/utils/cn";
 import Label from "@/components/ui/label";
 import useFormField from "@/hooks/useFormField";
+
+const Form = FormProvider;
 
 type FormFieldContextValue<
   TFieldValues extends FieldValues = FieldValues,
@@ -53,7 +54,7 @@ const FormItem = React.forwardRef<
 
   return (
     <FormItemContext.Provider value={{ id }}>
-      <fieldset ref={ref} className={className} {...props} />
+      <fieldset ref={ref} className={cn("space-y-1", className)} {...props} />
     </FormItemContext.Provider>
   );
 });
@@ -131,7 +132,7 @@ const FormMessage = React.forwardRef<
     <p
       ref={ref}
       id={formMessageId}
-      className={cn("text-sm font-medium text-destructive", className)}
+      className={cn("text-sm font-normal text-destructive", className)}
       {...props}
     >
       {body}
@@ -140,13 +141,12 @@ const FormMessage = React.forwardRef<
 });
 FormMessage.displayName = "FormMessage";
 
-const Form = Object.assign(FormProvider, {
-  item: FormItem,
-  label: FormLabel,
-  control: FormControl,
-  description: FormDescription,
-  message: FormMessage,
-  field: FormField,
-});
-
-export default Form;
+export {
+  Form,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormDescription,
+  FormMessage,
+  FormField,
+};
