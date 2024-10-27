@@ -53,7 +53,12 @@ function readDirData(pathName: string): hierarchyPathDataType[] {
           .slice(fullPath.indexOf("app") + 4, fullPath.length - 9)
           .replace(/\(.*?\//gi, "");
 
-        link = route.indexOf("(") !== -1 ? "/" : `/${route}`;
+        link =
+          route.indexOf("\\") !== -1
+            ? route.replace(/\(.*?\)/g, "").replace("\\", "/")
+            : "/";
+
+        console.log(link);
 
         comment = `It is a page, route is ${process.env.NEXT_PUBLIC_DOMAIN}${link}`;
       }
