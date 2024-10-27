@@ -11,7 +11,7 @@ export const navLinks: navLinkTypes[] = [
     path: "/projects",
     subPath: "project",
   },
-  { navName: "blog", path: "/blogs", subPath: "blog" },
+  { navName: "blogs", path: "/blogs", subPath: "blog" },
 ];
 
 export const typingAnimationData = [
