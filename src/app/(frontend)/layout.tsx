@@ -1,5 +1,5 @@
 // import UserAuthDropdown from "@/components/UserAuthDropdown";
-// import Footer from "@/components/shared/Footer";
+import Footer from "@/shared/Footer";
 import Navbar from "@/shared/Navbar";
 import type { LayoutProps } from "@/types";
 // import { getServerSession } from "next-auth";
@@ -19,7 +19,7 @@ const FrontendLayout: React.FC<Readonly<LayoutProps>> = async ({
           <UserAuthDropdown user={session?.user} />
         </div>
       )} */}
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 };
