@@ -1,6 +1,6 @@
 import Graphic01 from "@/components/graphics/Graphic-01";
 import Graphic04 from "@/components/graphics/Graphic-04";
-import { DestructiveColorBlob, PrimaryColorBlob } from "./GradiantBlob";
+import { DestructiveColorBlob, PrimaryColorBlob } from "./GradientBlob";
 
 interface SectionElementProps {
   blob?: boolean;

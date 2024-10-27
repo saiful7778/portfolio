@@ -11,7 +11,7 @@ import bannerProfile from "@/assets/banner_profile.png";
 import {
   DestructiveColorBlob,
   PrimaryColorBlob,
-} from "@/components/GradiantBlob";
+} from "@/components/GradientBlob";
 
 const Banner: React.FC = () => {
   return (

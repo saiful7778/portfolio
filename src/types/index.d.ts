@@ -9,3 +9,8 @@ export type hierarchyPathDataType = {
   comment?: string;
   link?: string;
 };
+
+export interface ErrorProps {
+  error: Error & { digest?: string };
+  reset: () => void;
+}
