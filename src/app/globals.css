@@ -40,3 +40,9 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+  .container {
+    @apply p-2;
+  }
+}
