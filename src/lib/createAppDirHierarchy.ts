@@ -49,16 +49,21 @@ function readDirData(pathName: string): hierarchyPathDataType[] {
       let link: string = "";
 
       if (x.indexOf("page") !== -1) {
-        const route = fullPath
+        let route = fullPath
           .slice(fullPath.indexOf("app") + 4, fullPath.length - 9)
           .replace(/\(.*?\//gi, "");
 
-        link =
-          route.indexOf("\\") !== -1
-            ? route.replace(/\(.*?\)/g, "").replace("\\", "/")
-            : "/";
+        route = route.replace(/\\/gi, "/");
+        route = route.replace(/\(.*?\)/g, "");
 
-        comment = `It is a page, route is ${process.env.NEXT_PUBLIC_DOMAIN}${link}`;
+        // link =
+        //   route.indexOf("\\") !== -1
+        //     ? route.replace(/\(.*?\)/g, "").replace("\\", "/")
+        //     : "/";
+
+        link = route;
+
+        comment = `It is a page, route is ${process.env.NEXT_PUBLIC_DOMAIN}${route && "/"}${route || "/"}`;
       }
       if (x.indexOf("favicon") !== -1) {
         comment = "it is favicon";
