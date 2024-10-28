@@ -27,3 +27,5 @@ export interface SidebarNavItem {
     url: string;
   }[];
 }
+
+export type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
