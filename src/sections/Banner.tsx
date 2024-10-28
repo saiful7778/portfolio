@@ -15,7 +15,7 @@ import {
 
 const Banner: React.FC = () => {
   return (
-    <section className="relative h-[calc(100vh-120px)] flex flex-col items-center justify-between gap-20 lg:flex-row">
+    <section className="relative flex h-[calc(100vh-120px)] flex-col items-center justify-between gap-20 lg:flex-row">
       <PrimaryColorBlob className="-left-96 top-0" />
       <DestructiveColorBlob className="-right-96 top-28" />
       <div className="z-[1] w-full lg:w-1/2">

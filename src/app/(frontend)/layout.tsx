@@ -2,14 +2,22 @@
 import Footer from "@/shared/Footer";
 import Navbar from "@/shared/Navbar";
 import type { LayoutProps } from "@/types";
+import type { Metadata } from "next";
 // import { getServerSession } from "next-auth";
+
+export const metadata: Metadata = {
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
 
 const FrontendLayout: React.FC<Readonly<LayoutProps>> = async ({
   children,
 }) => {
   // const session = await getServerSession();
   return (
-    <>
+    <div className="min-h-screen overflow-x-hidden">
       <header className="container">
         <Navbar />
       </header>
@@ -20,7 +28,7 @@ const FrontendLayout: React.FC<Readonly<LayoutProps>> = async ({
         </div>
       )} */}
       <Footer />
-    </>
+    </div>
   );
 };
 

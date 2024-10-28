@@ -1,6 +1,6 @@
 "use client";
 import { typingAnimationData } from "@/lib/staticData";
-import { Variants, motion } from "framer-motion";
+import { type Variants, motion } from "framer-motion";
 import { useEffect, useMemo, useState } from "react";
 
 const TypingAnimation: React.FC = () => {

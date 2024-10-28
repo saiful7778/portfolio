@@ -6,7 +6,11 @@ const Hierarchy: React.FC = () => {
   const hierarchyData = createAppDirHierarchy();
 
   return (
-    <SectionElement title="Folder structure" text="Structure of this app" blob>
+    <SectionElement
+      title="Folder structure"
+      text="Folder structure of this app"
+      blob
+    >
       <div className="mx-auto max-h-96 min-h-fit w-full max-w-3xl overflow-auto rounded-md bg-card p-4">
         {hierarchyData ? (
           <ul>

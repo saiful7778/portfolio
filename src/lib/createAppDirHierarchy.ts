@@ -58,8 +58,6 @@ function readDirData(pathName: string): hierarchyPathDataType[] {
             ? route.replace(/\(.*?\)/g, "").replace("\\", "/")
             : "/";
 
-        console.log(link);
-
         comment = `It is a page, route is ${process.env.NEXT_PUBLIC_DOMAIN}${link}`;
       }
       if (x.indexOf("favicon") !== -1) {
