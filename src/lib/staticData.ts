@@ -52,3 +52,5 @@ export const typingAnimationData = [
     text: "MongoDB",
   },
 ];
+
+export const DEFAULT_LOGIN_REDIRECT: string = "/admin";

@@ -31,16 +31,15 @@ const authConfig: AuthOptions = {
 
           if (!user.isVerified) return null;
 
+          if (!user?.access) return null;
+
           const passwordsMatch = await compare(password, user.hashedPassword);
 
           if (!passwordsMatch) return null;
 
-          if (!user?.isVerified) return null;
-
-          if (!user?.access) return null;
           return {
             id: user.id,
-            name: user.name,
+            name: user.fullName,
             email: user.email,
             role: user.role,
             image: user?.image?.url || null,

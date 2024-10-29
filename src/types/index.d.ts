@@ -35,3 +35,8 @@ export interface userAuth {
   email: string;
   password: string;
 }
+
+export interface PageParams {
+  params: Promise<{ slug: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}

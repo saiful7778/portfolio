@@ -6,8 +6,6 @@ export default withAuth(
     // Access the user's session
     const token = req.nextauth.token;
 
-    console.log(token);
-
     // If there is no token, redirect to the login page
     if (!token) {
       return NextResponse.redirect(new URL("/login", req.url));
