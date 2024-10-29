@@ -29,3 +29,9 @@ export interface SidebarNavItem {
 }
 
 export type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
+
+export interface userAuth {
+  fullName: string;
+  email: string;
+  password: string;
+}

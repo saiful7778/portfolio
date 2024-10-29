@@ -1,4 +1,4 @@
-import { z } from "zod";
+import * as z from "zod";
 
 export const registrationSchema = z
   .object({
@@ -31,3 +31,21 @@ export const registrationSchema = z
     path: ["confirmPassword"],
     message: "Passwords do not match",
   });
+
+export const loginSchema = z.object({
+  email: z
+    .string({ required_error: "Email address is required" })
+    .email({ message: "Email address is required" })
+    .max(50, "Email address is too long"),
+  password: z
+    .string({ required_error: "Password is required" })
+    .min(6, "Password must be at least 6 characters long")
+    .max(10, "Password must not exceed 10 characters")
+    .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
+    .regex(/[a-z]/, "Password must contain at least one lowercase letter")
+    .regex(/\d/, "Password must contain at least one number")
+    .regex(
+      /[@$!%*?&#]/,
+      "Password must contain at least one special character",
+    ),
+});

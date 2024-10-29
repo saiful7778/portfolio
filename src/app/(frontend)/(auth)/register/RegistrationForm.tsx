@@ -9,6 +9,7 @@ import PasswordField from "@/components/form/PasswordField";
 import { useState } from "react";
 import InputField from "@/components/form/InputField";
 import Spinner from "@/components/Spinner";
+import registerAction from "@/lib/actions/auth/registerAction";
 
 const RegistrationForm: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -23,8 +24,24 @@ const RegistrationForm: React.FC = () => {
     },
   });
 
-  const handleSubmit = (values: z.infer<typeof registrationSchema>) => {
-    console.log(values);
+  const handleSubmit = async (values: z.infer<typeof registrationSchema>) => {
+    try {
+      setLoading(true);
+
+      const res = await registerAction(values);
+
+      if (!res.success) {
+        throw new Error(res?.error);
+      }
+      console.log(res.data);
+      form.reset();
+    } catch (err) {
+      if (err instanceof Error) {
+        console.log(err.message);
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

@@ -4,6 +4,7 @@ import StateContextProvider from "@/context/StateContext";
 import Topbar from "@/shared/Topbar";
 import type { LayoutProps } from "@/types";
 import type { Metadata } from "next";
+import SessionContextProvider from "@/context/SessionContext";
 
 export const metadata: Metadata = {
   robots: {
@@ -14,15 +15,17 @@ export const metadata: Metadata = {
 
 const AdminLayout: React.FC<Readonly<LayoutProps>> = ({ children }) => {
   return (
-    <StateContextProvider>
-      <SidebarProvider>
-        <AppSidebar />
-        <SidebarInset>
-          <Topbar />
-          <div className="p-4 pt-0">{children}</div>
-        </SidebarInset>
-      </SidebarProvider>
-    </StateContextProvider>
+    <SessionContextProvider>
+      <StateContextProvider>
+        <SidebarProvider>
+          <AppSidebar />
+          <SidebarInset>
+            <Topbar />
+            <div className="p-4 pt-0">{children}</div>
+          </SidebarInset>
+        </SidebarProvider>
+      </StateContextProvider>
+    </SessionContextProvider>
   );
 };
 
