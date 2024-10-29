@@ -10,9 +10,13 @@ import { useState } from "react";
 import InputField from "@/components/form/InputField";
 import Spinner from "@/components/Spinner";
 import registerAction from "@/lib/actions/auth/registerAction";
+import { useToast } from "@/hooks/use-toast";
+import { useRouter } from "next/navigation";
 
 const RegistrationForm: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
+  const { toast } = useToast();
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof registrationSchema>>({
     resolver: zodResolver(registrationSchema),
@@ -33,14 +37,20 @@ const RegistrationForm: React.FC = () => {
       if (!res.success) {
         throw new Error(res?.error);
       }
-      console.log(res.data);
-      form.reset();
+      toast({
+        title: res?.data,
+      });
+      router.push("/login");
     } catch (err) {
       if (err instanceof Error) {
-        console.log(err.message);
+        toast({
+          title: err.message,
+          variant: "destructive",
+        });
       }
     } finally {
       setLoading(false);
+      form.reset();
     }
   };
 
@@ -55,6 +65,7 @@ const RegistrationForm: React.FC = () => {
           name="fullName"
           render={({ field }) => (
             <InputField
+              required
               type="text"
               label="Full name"
               placeholder="Full name"
@@ -73,6 +84,7 @@ const RegistrationForm: React.FC = () => {
               label="Email address"
               placeholder="Email address"
               autoComplete="email"
+              required
               disabled={loading}
               {...field}
             />
