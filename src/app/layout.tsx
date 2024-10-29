@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import bannerImage from "../../public/saiful-islam-portfolio-banner.png";
 import type { LayoutProps } from "@/types";
 import "@/app/globals.css";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,9 +27,10 @@ const RootLayout: React.FC<Readonly<LayoutProps>> = ({ children }) => {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="bg-background w-full relative text-foreground selection:bg-primary selection:text-foreground">
+        <div className="relative w-full bg-background text-foreground selection:bg-primary selection:text-foreground">
           {children}
         </div>
+        <Toaster />
       </body>
     </html>
   );
