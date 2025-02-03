@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="light" style={{ colorScheme: "light" }}>
       <body
-        className={`${urbanist.variable} font-urbanist antialiased`}
+        className={`${urbanist.variable}`}
         data-new-gr-c-s-check-loaded="14.1220.0"
         data-gr-ext-installed=""
         cz-shortcut-listen="true"
